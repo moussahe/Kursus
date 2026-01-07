@@ -1,0 +1,406 @@
+// Schoolaris - Marketplace de Cours Scolaires
+// Prisma Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============ ENUMS ============
+
+enum Role {
+  PARENT
+  TEACHER
+  ADMIN
+}
+
+enum GradeLevel {
+  CP
+  CE1
+  CE2
+  CM1
+  CM2
+  SIXIEME
+  CINQUIEME
+  QUATRIEME
+  TROISIEME
+  SECONDE
+  PREMIERE
+  TERMINALE
+}
+
+enum Subject {
+  MATHEMATIQUES
+  FRANCAIS
+  HISTOIRE_GEO
+  SCIENCES
+  ANGLAIS
+  PHYSIQUE_CHIMIE
+  SVT
+  PHILOSOPHIE
+  ESPAGNOL
+  ALLEMAND
+  SES
+  NSI
+}
+
+enum ContentType {
+  VIDEO
+  TEXT
+  QUIZ
+  EXERCISE
+  DOCUMENT
+}
+
+enum PurchaseStatus {
+  PENDING
+  COMPLETED
+  REFUNDED
+  FAILED
+}
+
+// ============ AUTH (NextAuth) ============
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============ USERS ============
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          Role      @default(PARENT)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts       Account[]
+  sessions       Session[]
+  children       Child[]          @relation("ParentChildren")
+  teacherProfile TeacherProfile?
+  courses        Course[]         @relation("CourseAuthor")
+  purchases      Purchase[]
+  reviews        Review[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model Child {
+  id         String     @id @default(cuid())
+  firstName  String
+  lastName   String?
+  avatarUrl  String?
+  gradeLevel GradeLevel
+  parentId   String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  // Relations
+  parent    User       @relation("ParentChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  purchases Purchase[]
+  progress  Progress[]
+
+  @@index([parentId])
+  @@index([gradeLevel])
+}
+
+model TeacherProfile {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  slug            String    @unique
+  headline        String?   // "Professeur de Mathematiques - 15 ans d'experience"
+  bio             String?   @db.Text
+  avatarUrl       String?
+  coverImageUrl   String?
+  specialties     Subject[]
+  qualifications  String?   @db.Text
+  yearsExperience Int?
+  isVerified      Boolean   @default(false)
+
+  // Stripe Connect
+  stripeAccountId   String?  @unique
+  stripeOnboarded   Boolean  @default(false)
+
+  // Stats (denormalized for performance)
+  totalStudents     Int      @default(0)
+  totalCourses      Int      @default(0)
+  totalRevenue      Int      @default(0) // in cents
+  averageRating     Float    @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([slug])
+  @@index([isVerified])
+}
+
+// ============ COURSES ============
+
+model Course {
+  id          String      @id @default(cuid())
+  title       String
+  slug        String      @unique
+  subtitle    String?     // Short description for cards
+  description String?     @db.Text
+  imageUrl    String?
+  previewVideoUrl String?
+
+  // Classification
+  gradeLevel  GradeLevel
+  subject     Subject
+
+  // Pricing (marketplace model)
+  price       Int         // in cents (e.g., 2990 = 29.90 EUR)
+
+  // Status
+  isPublished Boolean     @default(false)
+  publishedAt DateTime?
+
+  // Stats (denormalized)
+  totalStudents   Int     @default(0)
+  totalLessons    Int     @default(0)
+  totalDuration   Int     @default(0) // in minutes
+  averageRating   Float   @default(0)
+  reviewCount     Int     @default(0)
+
+  // What students will learn (JSON array of strings)
+  learningOutcomes Json?
+
+  // Requirements (JSON array of strings)
+  requirements Json?
+
+  authorId    String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relations
+  author    User       @relation("CourseAuthor", fields: [authorId], references: [id])
+  chapters  Chapter[]
+  purchases Purchase[]
+  reviews   Review[]
+
+  @@index([slug])
+  @@index([gradeLevel])
+  @@index([subject])
+  @@index([authorId])
+  @@index([isPublished])
+  @@index([price])
+}
+
+model Chapter {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  position    Int
+  courseId    String
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+
+  @@index([courseId])
+  @@index([position])
+}
+
+model Lesson {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  content     String?     @db.Text
+  contentType ContentType @default(TEXT)
+  videoUrl    String?
+  duration    Int?        // in minutes
+  position    Int
+  chapterId   String
+  isPublished Boolean     @default(false)
+  isFreePreview Boolean   @default(false) // Free preview lesson
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  // Relations
+  chapter   Chapter    @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  quizzes   Quiz[]
+  progress  Progress[]
+  resources Resource[]
+
+  @@index([chapterId])
+  @@index([position])
+}
+
+model Resource {
+  id        String   @id @default(cuid())
+  title     String
+  type      String   // pdf, doc, link, etc.
+  url       String
+  lessonId  String
+  createdAt DateTime @default(now())
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([lessonId])
+}
+
+// ============ QUIZZES ============
+
+model Quiz {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  lessonId     String
+  passingScore Int      @default(70)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  lesson    Lesson     @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions Question[]
+
+  @@index([lessonId])
+}
+
+model Question {
+  id          String   @id @default(cuid())
+  quizId      String
+  question    String   @db.Text
+  options     Json     // Array of {id, text, isCorrect}
+  explanation String?  @db.Text
+  points      Int      @default(1)
+  position    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@index([quizId])
+  @@index([position])
+}
+
+// ============ PURCHASES (Marketplace) ============
+
+model Purchase {
+  id                  String         @id @default(cuid())
+  userId              String         // Parent who bought
+  childId             String?        // Child the course is for (optional)
+  courseId            String
+
+  // Pricing at time of purchase
+  amount              Int            // Amount paid in cents
+  platformFee         Int            // 30% commission in cents
+  teacherRevenue      Int            // 70% to teacher in cents
+
+  // Stripe
+  stripePaymentIntentId String?      @unique
+  stripeTransferId      String?      // Transfer to teacher's Stripe account
+
+  status              PurchaseStatus @default(PENDING)
+
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  // Relations
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  child  Child? @relation(fields: [childId], references: [id], onDelete: SetNull)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([childId])
+  @@index([courseId])
+  @@index([status])
+}
+
+// ============ PROGRESS ============
+
+model Progress {
+  id          String   @id @default(cuid())
+  childId     String
+  lessonId    String
+  isCompleted Boolean  @default(false)
+  quizScore   Int?
+  timeSpent   Int      @default(0) // in seconds
+  lastAccessedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  child  Child  @relation(fields: [childId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([childId, lessonId])
+  @@index([childId])
+  @@index([lessonId])
+}
+
+// ============ REVIEWS ============
+
+model Review {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  rating    Int      // 1-5
+  title     String?
+  comment   String?  @db.Text
+  isVerified Boolean @default(false) // Verified purchase
+
+  // Helpful votes
+  helpfulCount Int   @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+  @@index([rating])
+}
