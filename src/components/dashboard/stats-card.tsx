@@ -52,8 +52,8 @@ export function StatsCard({
             </div>
           )}
         </div>
-        <div className="rounded-xl bg-emerald-50 dark:bg-emerald-950 p-3">
-          <Icon className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
+        <div className="rounded-xl bg-emerald-50 p-3">
+          <Icon className="h-6 w-6 text-emerald-600" />
         </div>
       </div>
     </div>

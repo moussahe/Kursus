@@ -121,7 +121,7 @@ export function CourseCard({ course }: CourseCardProps) {
                 className="rounded-full"
               />
             ) : (
-              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-950 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-medium text-emerald-600">
                 {course.author.name?.charAt(0) || "P"}
               </div>
             )}

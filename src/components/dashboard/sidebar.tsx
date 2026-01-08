@@ -74,8 +74,8 @@ export function DashboardSidebar({ items, role }: SidebarProps) {
               className={cn(
                 "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
               )}
             >
               <item.icon
@@ -91,7 +91,7 @@ export function DashboardSidebar({ items, role }: SidebarProps) {
       <div className="border-t p-4">
         <Link
           href="/help"
-          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
         >
           <HelpCircle className="h-5 w-5" />
           Aide & Support

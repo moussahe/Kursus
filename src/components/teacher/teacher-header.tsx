@@ -31,7 +31,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const navigation = [
   {
@@ -145,9 +144,6 @@ export function TeacherHeader({ user }: TeacherHeaderProps) {
 
       {/* Right side */}
       <div className="flex items-center gap-4">
-        {/* Theme Toggle */}
-        <ThemeToggle />
-
         {/* Notifications */}
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5 text-muted-foreground" />

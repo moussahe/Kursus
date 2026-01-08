@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DashboardSidebar, type NavItem } from "./sidebar";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 interface DashboardHeaderProps {
   sidebarItems?: NavItem[];
@@ -72,9 +71,6 @@ export function DashboardHeader({
 
       {/* Right section */}
       <div className="flex items-center gap-2">
-        {/* Theme Toggle */}
-        <ThemeToggle />
-
         {/* Notifications */}
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5 text-muted-foreground" />

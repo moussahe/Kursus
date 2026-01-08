@@ -14,7 +14,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 interface ParentHeaderProps {
   user: {
@@ -40,9 +39,6 @@ export function ParentHeader({ user }: ParentHeaderProps) {
 
       {/* Actions */}
       <div className="flex items-center gap-4">
-        {/* Theme Toggle */}
-        <ThemeToggle />
-
         {/* Notifications */}
         <Button variant="ghost" size="icon" className="relative rounded-xl">
           <Bell className="h-5 w-5 text-muted-foreground" />
@@ -63,7 +59,7 @@ export function ParentHeader({ user }: ParentHeaderProps) {
                   src={user.image ?? undefined}
                   alt={user.name ?? "User"}
                 />
-                <AvatarFallback className="bg-emerald-100 text-emerald-600 dark:bg-emerald-950 dark:text-emerald-400">
+                <AvatarFallback className="bg-emerald-100 text-emerald-600">
                   {user.name?.charAt(0).toUpperCase() ?? "U"}
                 </AvatarFallback>
               </Avatar>
