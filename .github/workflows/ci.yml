@@ -78,11 +78,13 @@ jobs:
         run: pnpm db:push
         env:
           DATABASE_URL: postgresql://test:test@localhost:5432/schoolaris_test
+          DIRECT_URL: postgresql://test:test@localhost:5432/schoolaris_test
 
       - name: Run tests with coverage
         run: pnpm test:run --coverage
         env:
           DATABASE_URL: postgresql://test:test@localhost:5432/schoolaris_test
+          DIRECT_URL: postgresql://test:test@localhost:5432/schoolaris_test
 
       - name: Upload coverage
         uses: codecov/codecov-action@v4
@@ -116,6 +118,7 @@ jobs:
         run: pnpm build
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           SKIP_ENV_VALIDATION: true
 
@@ -158,6 +161,7 @@ jobs:
         run: pnpm test:e2e
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          DIRECT_URL: ${{ secrets.DIRECT_URL }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
 
       - name: Upload Playwright report
