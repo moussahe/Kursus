@@ -29,6 +29,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // typedRoutes: true, // TODO: Enable in iteration 2 after all routes are defined
   images: {
     remotePatterns: [
       {

@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import Link from "next/link";
+import type { Route } from "next";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -486,14 +487,14 @@ export default function TeacherRegisterPage() {
                     En cliquant sur &quot;Creer mon compte&quot;, vous acceptez
                     nos{" "}
                     <Link
-                      href="/conditions"
+                      href={"/conditions" as Route}
                       className="font-medium text-emerald-600 hover:underline"
                     >
                       conditions d&apos;utilisation
                     </Link>{" "}
                     et notre{" "}
                     <Link
-                      href="/confidentialite"
+                      href={"/confidentialite" as Route}
                       className="font-medium text-emerald-600 hover:underline"
                     >
                       politique de confidentialite

@@ -809,3 +809,42 @@
   outline: 2px solid oklch(0.55 0.2 250);
   outline-offset: 2px;
 }
+
+/* =============================================================================
+   REDUCED MOTION - Accessibility
+   Disables animations for users who prefer reduced motion
+============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-fade-in-down,
+  .animate-slide-in-right,
+  .animate-slide-in-left,
+  .animate-scale-in,
+  .animate-bounce-in,
+  .animate-pulse-glow,
+  .animate-float,
+  .animate-shake,
+  .animate-spin-slow {
+    animation: none !important;
+  }
+
+  .stagger-children > * {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .hover-lift:hover,
+  .hover-scale:hover {
+    transform: none !important;
+  }
+}

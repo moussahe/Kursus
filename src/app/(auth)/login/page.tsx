@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from "react";
 import Link from "next/link";
+import type { Route } from "next";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
@@ -149,7 +150,7 @@ function LoginForm() {
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Mot de passe</Label>
                 <Link
-                  href="/forgot-password"
+                  href={"/forgot-password" as Route}
                   className="text-xs text-emerald-600 hover:text-emerald-500"
                 >
                   Mot de passe oublie ?

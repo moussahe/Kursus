@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import type { Route } from "next";
 import {
   BookOpen,
   User,
@@ -30,19 +31,19 @@ export default async function DashboardPage() {
       icon: GraduationCap,
       title: "Mes Cours",
       description: "Acceder a vos cours et lecons",
-      href: "/dashboard/courses",
+      href: "/dashboard/courses" as Route,
     },
     {
       icon: BarChart,
       title: "Ma Progression",
       description: "Voir vos statistiques",
-      href: "/dashboard/progress",
+      href: "/dashboard/progress" as Route,
     },
     {
       icon: Settings,
       title: "Parametres",
       description: "Gerer votre compte",
-      href: "/dashboard/settings",
+      href: "/dashboard/settings" as Route,
     },
   ];
 
