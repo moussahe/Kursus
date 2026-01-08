@@ -287,6 +287,8 @@ export default function HomePage() {
             <button
               className="md:hidden p-2"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -326,7 +328,7 @@ export default function HomePage() {
         )}
       </motion.header>
 
-      <main>
+      <main id="main-content">
         {/* Hero Section */}
         <section
           ref={heroRef}

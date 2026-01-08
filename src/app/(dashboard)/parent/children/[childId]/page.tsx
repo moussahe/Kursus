@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import {
@@ -306,9 +307,11 @@ async function ChildDetail({
               >
                 <div className="flex gap-4">
                   {course.imageUrl ? (
-                    <img
+                    <Image
                       src={course.imageUrl}
                       alt={course.title}
+                      width={96}
+                      height={96}
                       className="h-24 w-24 rounded-xl object-cover"
                     />
                   ) : (

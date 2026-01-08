@@ -12,7 +12,6 @@ import {
   Clock,
   Users,
   BookOpen,
-  PlayCircle,
   CheckCircle,
   GraduationCap,
 } from "lucide-react";

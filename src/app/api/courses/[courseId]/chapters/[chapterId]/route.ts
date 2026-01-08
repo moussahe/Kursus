@@ -133,7 +133,7 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
 // Note: Using POST with action for reordering
 export async function POST(req: NextRequest, { params }: RouteParams) {
   try {
-    const { courseId, chapterId } = await params;
+    const { courseId, chapterId: _chapterId } = await params;
     const session = await auth();
 
     if (!session?.user) {

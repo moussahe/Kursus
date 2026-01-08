@@ -33,13 +33,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -53,8 +46,6 @@ const lessonSchema = z.object({
   isPublished: z.boolean().default(false),
   isFreePreview: z.boolean().default(false),
 });
-
-type LessonFormValues = z.infer<typeof lessonSchema>;
 
 interface Lesson {
   id: string;

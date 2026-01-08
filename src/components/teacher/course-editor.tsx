@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -488,10 +489,12 @@ export function CourseEditor({ initialData }: CourseEditorProps) {
                         <div className="space-y-4">
                           {field.value ? (
                             <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-gray-100">
-                              <img
+                              <Image
                                 src={field.value}
                                 alt="Course preview"
-                                className="h-full w-full object-cover"
+                                fill
+                                className="object-cover"
+                                unoptimized
                               />
                               <Button
                                 type="button"
@@ -657,11 +660,15 @@ export function CourseEditor({ initialData }: CourseEditorProps) {
                 <div className="space-y-4">
                   <div className="flex gap-4">
                     {watchedValues.imageUrl ? (
-                      <img
-                        src={watchedValues.imageUrl}
-                        alt="Preview"
-                        className="h-32 w-48 rounded-xl object-cover"
-                      />
+                      <div className="relative h-32 w-48 overflow-hidden rounded-xl">
+                        <Image
+                          src={watchedValues.imageUrl}
+                          alt="Preview"
+                          fill
+                          className="object-cover"
+                          unoptimized
+                        />
+                      </div>
                     ) : (
                       <div className="flex h-32 w-48 items-center justify-center rounded-xl bg-gray-100">
                         <BookOpen className="h-8 w-8 text-gray-300" />

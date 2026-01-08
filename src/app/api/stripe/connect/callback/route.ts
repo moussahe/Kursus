@@ -7,7 +7,7 @@ import { getConnectAccount } from "@/lib/stripe";
  * GET /api/stripe/connect/callback
  * Handle return from Stripe Connect onboarding
  */
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
 

@@ -62,6 +62,13 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
+        {/* Skip to content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-emerald-600 focus:text-white focus:rounded-md focus:m-2"
+        >
+          Aller au contenu principal
+        </a>
         <Providers>{children}</Providers>
         <Toaster />
       </body>

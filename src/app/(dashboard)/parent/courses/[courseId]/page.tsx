@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import {
@@ -197,9 +198,11 @@ async function CourseViewer({
         <div className="flex flex-col gap-6 lg:flex-row">
           {/* Course Image */}
           {course.imageUrl ? (
-            <img
+            <Image
               src={course.imageUrl}
               alt={course.title}
+              width={192}
+              height={128}
               className="h-48 w-full rounded-xl object-cover lg:h-32 lg:w-48"
             />
           ) : (

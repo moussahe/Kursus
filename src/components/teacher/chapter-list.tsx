@@ -19,7 +19,7 @@ import {
   Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -134,7 +134,7 @@ export function ChapterList({
       setExpandedChapters((prev) => new Set([...prev, newChapter.id]));
       toast.success("Chapitre cree avec succes");
       setIsAddingChapter(false);
-    } catch (error) {
+    } catch {
       toast.error("Erreur lors de la creation du chapitre");
     } finally {
       setIsLoading(false);
@@ -166,7 +166,7 @@ export function ChapterList({
       );
       toast.success("Chapitre mis a jour");
       setEditingChapter(null);
-    } catch (error) {
+    } catch {
       toast.error("Erreur lors de la mise a jour du chapitre");
     } finally {
       setIsLoading(false);
@@ -186,7 +186,7 @@ export function ChapterList({
       setChapters((prev) => prev.filter((c) => c.id !== chapter.id));
       toast.success("Chapitre supprime");
       setDeletingChapter(null);
-    } catch (error) {
+    } catch {
       toast.error("Erreur lors de la suppression du chapitre");
     } finally {
       setIsLoading(false);
@@ -214,7 +214,7 @@ export function ChapterList({
       toast.success(
         chapter.isPublished ? "Chapitre depublie" : "Chapitre publie",
       );
-    } catch (error) {
+    } catch {
       toast.error("Erreur lors de la mise a jour");
     }
   };
@@ -265,7 +265,7 @@ export function ChapterList({
       );
       toast.success("Lecon supprimee");
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error("Erreur lors de la suppression");
     }
   };
@@ -316,7 +316,6 @@ export function ChapterList({
         <div className="space-y-3">
           {chapters.map((chapter, index) => {
             const isExpanded = expandedChapters.has(chapter.id);
-            const Icon = contentTypeIcons.TEXT;
 
             return (
               <Card

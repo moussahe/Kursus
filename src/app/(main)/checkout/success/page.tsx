@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { CheckCircle } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -133,11 +134,12 @@ async function SuccessContent({ sessionId }: { sessionId: string }) {
         <CardContent>
           <div className="flex gap-4">
             {course.imageUrl && (
-              <div className="w-24 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
-                <img
+              <div className="w-24 h-16 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0 relative">
+                <Image
                   src={course.imageUrl}
                   alt={course.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
             )}
