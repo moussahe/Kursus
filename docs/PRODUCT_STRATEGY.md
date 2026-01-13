@@ -166,9 +166,9 @@ Attentes:
 | Feature           | Impact        | Status     |
 | ----------------- | ------------- | ---------- |
 | Mode Examen       | Valeur perçue | ✅ Done    |
+| Certificats       | Valorisation  | ✅ Done    |
 | Live Sessions     | Premium       | ⏳ À faire |
 | Forums communauté | Retention     | ⏳ À faire |
-| Certificats       | Valorisation  | ⏳ À faire |
 
 ---
 

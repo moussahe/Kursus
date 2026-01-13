@@ -18,6 +18,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { CourseCompletionCertificate } from "@/components/certificates/course-completion-certificate";
 
 interface PageProps {
   params: Promise<{
@@ -61,6 +62,16 @@ async function getCourseDetails(courseId: string, childId: string) {
   if (!purchase) return null;
 
   const course = purchase.course;
+
+  // Check for existing certificate
+  const existingCertificate = await prisma.certificate.findUnique({
+    where: {
+      childId_courseId: {
+        childId,
+        courseId,
+      },
+    },
+  });
 
   // Get progress for each lesson
   const chaptersWithProgress = await Promise.all(
@@ -109,6 +120,7 @@ async function getCourseDetails(courseId: string, childId: string) {
     totalLessons,
     completedLessons,
     progress: totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0,
+    existingCertificate,
   };
 }
 
@@ -156,7 +168,13 @@ async function CourseDetail({
     notFound();
   }
 
-  const { course, totalLessons, completedLessons, progress } = data;
+  const {
+    course,
+    totalLessons,
+    completedLessons,
+    progress,
+    existingCertificate,
+  } = data;
 
   return (
     <div className="space-y-6">
@@ -215,6 +233,16 @@ async function CourseDetail({
               )}
             </div>
           </div>
+        </div>
+
+        {/* Certificate Section */}
+        <div className="mt-6 border-t pt-6">
+          <CourseCompletionCertificate
+            courseId={courseId}
+            childId={childId}
+            progress={progress}
+            existingCertificate={existingCertificate}
+          />
         </div>
       </div>
 

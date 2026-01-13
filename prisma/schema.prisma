@@ -157,6 +157,7 @@ model Child {
   weeklyReports    WeeklyReport[]
   exercises        Exercise[]
   exerciseAttempts ExerciseAttempt[]
+  certificates     Certificate[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -235,10 +236,11 @@ model Course {
   updatedAt   DateTime    @updatedAt
 
   // Relations
-  author    User       @relation("CourseAuthor", fields: [authorId], references: [id])
-  chapters  Chapter[]
-  purchases Purchase[]
-  reviews   Review[]
+  author       User          @relation("CourseAuthor", fields: [authorId], references: [id])
+  chapters     Chapter[]
+  purchases    Purchase[]
+  reviews      Review[]
+  certificates Certificate[]
 
   @@index([slug])
   @@index([gradeLevel])
@@ -610,6 +612,48 @@ model ExerciseAttempt {
   @@index([exerciseId])
   @@index([childId])
   @@index([createdAt])
+}
+
+// ============ CERTIFICATES ============
+
+model Certificate {
+  id           String   @id @default(cuid())
+  childId      String
+  courseId     String
+
+  // Certificate details
+  certificateNumber String  @unique // Format: SCH-2024-XXXXXX
+  childName    String          // Snapshot at time of completion
+  courseName   String          // Snapshot at time of completion
+  teacherName  String          // Snapshot at time of completion
+  gradeLevel   GradeLevel
+  subject      Subject
+
+  // Completion stats
+  completionDate DateTime
+  totalLessons   Int
+  lessonsCompleted Int
+  averageQuizScore Float?
+  totalTimeSpent   Int         // in minutes
+
+  // Verification
+  verificationCode String @unique // Unique code for verification
+  verificationUrl  String?        // Public URL to verify certificate
+
+  // PDF Storage
+  pdfUrl       String?           // URL to generated PDF
+
+  createdAt    DateTime @default(now())
+
+  // Relations
+  child  Child  @relation(fields: [childId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([childId, courseId])
+  @@index([childId])
+  @@index([courseId])
+  @@index([certificateNumber])
+  @@index([verificationCode])
 }
 
 // ============ WEEKLY REPORTS ============
