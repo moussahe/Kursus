@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { ProgressBar } from "@/components/parent/progress-bar";
+import { AlertsPanel, type Alert } from "@/components/parent/alerts-panel";
 
 async function getParentStats(userId: string) {
   const [children, purchases, recentProgress] = await Promise.all([
@@ -122,6 +123,154 @@ async function getParentStats(userId: string) {
     recentActivity: recentProgress.slice(0, 5),
     children,
   };
+}
+
+async function generateAlerts(userId: string): Promise<Alert[]> {
+  const alerts: Alert[] = [];
+  const now = new Date();
+  const threeDaysAgo = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000);
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+  // Get children with their recent activity and quiz results
+  const children = await prisma.child.findMany({
+    where: { parentId: userId },
+    include: {
+      progress: {
+        orderBy: { lastAccessedAt: "desc" },
+        include: {
+          lesson: {
+            include: {
+              chapter: { include: { course: true } },
+            },
+          },
+        },
+      },
+      purchases: {
+        where: { status: "COMPLETED" },
+        include: { course: true },
+      },
+    },
+  });
+
+  for (const child of children) {
+    const lastActivity = child.progress[0]?.lastAccessedAt;
+
+    // Alert: Child hasn't studied in 3+ days
+    if (!lastActivity || lastActivity < threeDaysAgo) {
+      const daysSinceStudy = lastActivity
+        ? Math.floor(
+            (now.getTime() - lastActivity.getTime()) / (24 * 60 * 60 * 1000),
+          )
+        : null;
+
+      alerts.push({
+        id: `inactivity-${child.id}`,
+        type: "warning",
+        title: daysSinceStudy
+          ? `Inactif depuis ${daysSinceStudy} jours`
+          : "Aucune activite",
+        message: daysSinceStudy
+          ? "Encouragez-le a reprendre ses cours !"
+          : "N'a pas encore commence a etudier",
+        childName: child.firstName,
+        actionLabel: "Voir le profil",
+        actionHref: `/parent/children/${child.id}`,
+        createdAt: now,
+      });
+    }
+
+    // Alert: Low quiz score (< 50%) - from progress records with quizScore
+    const recentProgressWithQuiz = child.progress.filter(
+      (p) => p.quizScore !== null && p.lastAccessedAt > sevenDaysAgo,
+    );
+    const lowScoreProgress = recentProgressWithQuiz.find(
+      (p) => p.quizScore !== null && p.quizScore < 50,
+    );
+    if (lowScoreProgress) {
+      alerts.push({
+        id: `low-score-${child.id}-${lowScoreProgress.id}`,
+        type: "warning",
+        title: `Score faible en quiz (${lowScoreProgress.quizScore}%)`,
+        message: `Besoin d'aide sur ${lowScoreProgress.lesson.chapter.course.title}`,
+        childName: child.firstName,
+        actionLabel: "Voir les details",
+        actionHref: `/parent/children/${child.id}`,
+        createdAt: lowScoreProgress.lastAccessedAt,
+      });
+    }
+
+    // Alert: High quiz score (>= 90%) - Success!
+    const highScoreProgress = recentProgressWithQuiz.find(
+      (p) => p.quizScore !== null && p.quizScore >= 90,
+    );
+    if (highScoreProgress) {
+      alerts.push({
+        id: `high-score-${child.id}-${highScoreProgress.id}`,
+        type: "success",
+        title: `Excellent score (${highScoreProgress.quizScore}%) !`,
+        message: `Bravo pour ${highScoreProgress.lesson.title}`,
+        childName: child.firstName,
+        createdAt: highScoreProgress.lastAccessedAt,
+      });
+    }
+
+    // Alert: Course completion milestone
+    for (const purchase of child.purchases) {
+      const courseId = purchase.courseId;
+      const [totalLessons, completedLessons] = await Promise.all([
+        prisma.lesson.count({
+          where: {
+            chapter: { courseId, isPublished: true },
+            isPublished: true,
+          },
+        }),
+        prisma.progress.count({
+          where: {
+            childId: child.id,
+            isCompleted: true,
+            lesson: { chapter: { courseId } },
+          },
+        }),
+      ]);
+
+      if (totalLessons > 0) {
+        const progressPercent = Math.round(
+          (completedLessons / totalLessons) * 100,
+        );
+
+        // 50% milestone
+        if (progressPercent >= 50 && progressPercent < 75) {
+          alerts.push({
+            id: `milestone-50-${child.id}-${courseId}`,
+            type: "info",
+            title: "Mi-parcours atteint !",
+            message: `A termine 50% de ${purchase.course.title}`,
+            childName: child.firstName,
+            createdAt: now,
+          });
+        }
+
+        // Course completed
+        if (progressPercent === 100) {
+          alerts.push({
+            id: `completed-${child.id}-${courseId}`,
+            type: "success",
+            title: "Cours termine !",
+            message: `A termine ${purchase.course.title}`,
+            childName: child.firstName,
+            actionLabel: "Voir le certificat",
+            actionHref: `/parent/children/${child.id}`,
+            createdAt: now,
+          });
+        }
+      }
+    }
+  }
+
+  // Sort by date (most recent first) and limit to 5
+  return alerts
+    .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    .slice(0, 5);
 }
 
 function StatsCardSkeleton() {
@@ -375,6 +524,16 @@ async function ChildrenProgress({ userId }: { userId: string }) {
   );
 }
 
+async function AlertsSection({ userId }: { userId: string }) {
+  const alerts = await generateAlerts(userId);
+
+  if (alerts.length === 0) {
+    return null;
+  }
+
+  return <AlertsPanel alerts={alerts} />;
+}
+
 function QuickLinks() {
   const links = [
     {
@@ -492,6 +651,11 @@ export default async function ParentDashboardPage() {
         }
       >
         <StatsCards userId={userId} />
+      </Suspense>
+
+      {/* Alerts */}
+      <Suspense fallback={null}>
+        <AlertsSection userId={userId} />
       </Suspense>
 
       {/* Main Content */}
