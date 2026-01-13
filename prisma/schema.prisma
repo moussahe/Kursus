@@ -407,6 +407,45 @@ model Review {
   @@index([rating])
 }
 
+// ============ PARENT ALERTS ============
+
+enum AlertType {
+  INACTIVITY       // Child hasn't studied for X days
+  LOW_QUIZ_SCORE   // Child scored below threshold on quiz
+  MILESTONE        // Child completed chapter/course
+  STREAK           // Child maintained streak
+  WEEKLY_REPORT    // Weekly progress summary
+  AI_INSIGHT       // AI-generated insight about performance
+}
+
+enum AlertPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Alert {
+  id          String        @id @default(cuid())
+  parentId    String
+  childId     String?
+  type        AlertType
+  priority    AlertPriority @default(MEDIUM)
+  title       String
+  message     String        @db.Text
+  metadata    Json?         // Additional context (courseId, quizScore, etc.)
+  isRead      Boolean       @default(false)
+  isDismissed Boolean       @default(false)
+  actionUrl   String?       // Deep link to relevant page
+  expiresAt   DateTime?     // Auto-dismiss after this date
+  createdAt   DateTime      @default(now())
+
+  @@index([parentId])
+  @@index([childId])
+  @@index([isRead])
+  @@index([type])
+  @@index([createdAt])
+}
+
 // ============ AI TUTOR ============
 
 enum AIMessageRole {

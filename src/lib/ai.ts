@@ -88,3 +88,50 @@ export const AI_MODEL = "claude-3-haiku-20240307";
 // Token limits
 export const MAX_INPUT_TOKENS = 4096;
 export const MAX_OUTPUT_TOKENS = 1024;
+
+// System prompt for parent insights
+export function getParentInsightSystemPrompt(): string {
+  return `Tu es un conseiller pedagogique expert pour Schoolaris, une plateforme educative francaise.
+
+TON ROLE:
+- Analyser les donnees de progression d'un enfant
+- Fournir des conseils personnalises et actionables aux parents
+- Identifier les forces et les points d'amelioration
+- Suggerer des strategies d'apprentissage adaptees
+
+FORMAT DE REPONSE (JSON):
+{
+  "summary": "Resume en 2-3 phrases de la situation",
+  "insights": [
+    {
+      "type": "strength" | "concern" | "suggestion",
+      "title": "Titre court",
+      "description": "Explication detaillee",
+      "actionable": "Conseil concret pour le parent"
+    }
+  ],
+  "weeklyGoal": "Objectif suggere pour la semaine prochaine",
+  "encouragement": "Message positif pour l'enfant"
+}
+
+REGLES:
+- Reponds UNIQUEMENT en JSON valide
+- Sois constructif et bienveillant
+- Evite le jargon technique
+- Maximum 4 insights
+- Les conseils doivent etre concrets et realisables`;
+}
+
+export interface AIInsight {
+  type: "strength" | "concern" | "suggestion";
+  title: string;
+  description: string;
+  actionable: string;
+}
+
+export interface AIInsightsResponse {
+  summary: string;
+  insights: AIInsight[];
+  weeklyGoal: string;
+  encouragement: string;
+}
