@@ -128,6 +128,9 @@ model User {
   reviews        Review[]
   teacherLiveSessions LiveSession[] @relation("TeacherSessions")
   parentLiveSessions  LiveSession[] @relation("ParentSessions")
+  forumTopics    ForumTopic[]     @relation("TopicAuthor")
+  forumReplies   ForumReply[]     @relation("ReplyAuthor")
+  forumVotes     ForumVote[]      @relation("UserVotes")
 
   @@index([email])
   @@index([role])
@@ -161,6 +164,8 @@ model Child {
   exerciseAttempts ExerciseAttempt[]
   certificates     Certificate[]
   liveSessions     LiveSession[]
+  forumTopics      ForumTopic[]      @relation("ChildTopics")
+  forumReplies     ForumReply[]      @relation("ChildReplies")
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -783,4 +788,117 @@ model WeeklyReport {
   @@index([childId])
   @@index([weekStart])
   @@index([createdAt])
+}
+
+// ============ COMMUNITY FORUMS ============
+
+enum ForumCategory {
+  GENERAL           // Questions generales
+  HOMEWORK_HELP     // Aide aux devoirs
+  STUDY_TIPS        // Conseils d'etude
+  EXAM_PREP         // Preparation examens
+  PARENT_CORNER     // Espace parents
+  TEACHER_LOUNGE    // Espace enseignants
+  ANNOUNCEMENTS     // Annonces officielles
+}
+
+model ForumTopic {
+  id          String         @id @default(cuid())
+  title       String
+  content     String         @db.Text
+  category    ForumCategory
+  subject     Subject?       // Optional: topic can be subject-specific
+  gradeLevel  GradeLevel?    // Optional: topic can be grade-specific
+
+  // Author (can be parent, teacher, or child via parent)
+  authorId    String         // User ID
+  authorType  Role           // PARENT, TEACHER, or ADMIN
+  childId     String?        // If posted on behalf of a child
+
+  // Status
+  isPinned    Boolean        @default(false)
+  isLocked    Boolean        @default(false)  // Prevent new replies
+  isResolved  Boolean        @default(false)  // For help requests
+
+  // Stats (denormalized)
+  replyCount  Int            @default(0)
+  viewCount   Int            @default(0)
+  lastReplyAt DateTime?
+  lastReplyBy String?        // User ID of last replier
+
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  author      User           @relation("TopicAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  child       Child?         @relation("ChildTopics", fields: [childId], references: [id], onDelete: SetNull)
+  replies     ForumReply[]
+  votes       ForumVote[]    @relation("TopicVotes")
+
+  @@index([category])
+  @@index([subject])
+  @@index([gradeLevel])
+  @@index([authorId])
+  @@index([isPinned])
+  @@index([isLocked])
+  @@index([createdAt])
+  @@index([lastReplyAt])
+}
+
+model ForumReply {
+  id          String         @id @default(cuid())
+  topicId     String
+  content     String         @db.Text
+
+  // Author
+  authorId    String         // User ID
+  authorType  Role           // PARENT, TEACHER, or ADMIN
+  childId     String?        // If posted on behalf of a child
+
+  // Parent reply for threading
+  parentReplyId String?
+
+  // Status
+  isAccepted  Boolean        @default(false)  // Marked as best answer
+  isHidden    Boolean        @default(false)  // Hidden by moderator
+
+  // Stats
+  voteScore   Int            @default(0)      // Upvotes - downvotes
+
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  topic       ForumTopic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  author      User           @relation("ReplyAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  child       Child?         @relation("ChildReplies", fields: [childId], references: [id], onDelete: SetNull)
+  parentReply ForumReply?    @relation("ReplyThread", fields: [parentReplyId], references: [id], onDelete: SetNull)
+  childReplies ForumReply[]  @relation("ReplyThread")
+  votes       ForumVote[]    @relation("ReplyVotes")
+
+  @@index([topicId])
+  @@index([authorId])
+  @@index([parentReplyId])
+  @@index([isAccepted])
+  @@index([createdAt])
+}
+
+model ForumVote {
+  id          String         @id @default(cuid())
+  userId      String
+  topicId     String?
+  replyId     String?
+  value       Int            // 1 for upvote, -1 for downvote
+  createdAt   DateTime       @default(now())
+
+  // Relations
+  user        User           @relation("UserVotes", fields: [userId], references: [id], onDelete: Cascade)
+  topic       ForumTopic?    @relation("TopicVotes", fields: [topicId], references: [id], onDelete: Cascade)
+  reply       ForumReply?    @relation("ReplyVotes", fields: [replyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, topicId])
+  @@unique([userId, replyId])
+  @@index([userId])
+  @@index([topicId])
+  @@index([replyId])
 }

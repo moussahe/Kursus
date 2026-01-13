@@ -163,12 +163,12 @@ Attentes:
 
 ### Phase 3: Scale (M7-M12) 🟢 NICE TO HAVE
 
-| Feature           | Impact        | Status     |
-| ----------------- | ------------- | ---------- |
-| Mode Examen       | Valeur perçue | ✅ Done    |
-| Certificats       | Valorisation  | ✅ Done    |
-| Live Sessions     | Premium       | ⏳ À faire |
-| Forums communauté | Retention     | ⏳ À faire |
+| Feature           | Impact        | Status  |
+| ----------------- | ------------- | ------- |
+| Mode Examen       | Valeur perçue | ✅ Done |
+| Certificats       | Valorisation  | ✅ Done |
+| Live Sessions     | Premium       | ✅ Done |
+| Forums communauté | Retention     | ✅ Done |
 
 ---
 
