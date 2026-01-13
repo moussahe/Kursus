@@ -143,22 +143,22 @@ Attentes:
 
 ### Phase 1: MVP (M1-M3) 🔴 CRITIQUE
 
-| Feature             | Impact          | Status      |
-| ------------------- | --------------- | ----------- |
-| Auth + Rôles        | Base            | ✅ Done     |
-| Marketplace Cours   | Core            | ✅ Done     |
-| Dashboard Parent    | Conversion      | 🔄 En cours |
-| Paiement Stripe     | Revenue         | ✅ Done     |
-| **AI Tutor**        | Différenciateur | ⏳ À faire  |
-| **Quiz Adaptatifs** | Engagement      | ⏳ À faire  |
+| Feature             | Impact          | Status  |
+| ------------------- | --------------- | ------- |
+| Auth + Rôles        | Base            | ✅ Done |
+| Marketplace Cours   | Core            | ✅ Done |
+| Dashboard Parent    | Conversion      | ✅ Done |
+| Paiement Stripe     | Revenue         | ✅ Done |
+| **AI Tutor**        | Différenciateur | ✅ Done |
+| **Quiz Adaptatifs** | Engagement      | ✅ Done |
 
 ### Phase 2: Engagement (M4-M6) 🟡 IMPORTANT
 
 | Feature                   | Impact           | Status     |
 | ------------------------- | ---------------- | ---------- |
-| Gamification (XP, badges) | Retention        | ⏳ À faire |
-| Parcours IA personnalisé  | Efficacité       | ⏳ À faire |
-| Rapports hebdo parents    | Satisfaction     | ⏳ À faire |
+| Gamification (XP, badges) | Retention        | ✅ Done    |
+| Parcours IA personnalisé  | Efficacité       | ✅ Done    |
+| Rapports hebdo parents    | Satisfaction     | ✅ Done    |
 | Exercices génératifs IA   | Pratique infinie | ⏳ À faire |
 
 ### Phase 3: Scale (M7-M12) 🟢 NICE TO HAVE
@@ -264,14 +264,16 @@ Pour atteindre 500K€:
 
 ### Cette Semaine
 
-- [ ] Développer AI Tutor (chat contextuel)
-- [ ] Améliorer dashboard parent (alertes)
+- [x] Développer AI Tutor (chat contextuel)
+- [x] Améliorer dashboard parent (alertes)
 - [ ] Créer 3 cours de démo complets
 
 ### Ce Mois
 
-- [ ] Quiz adaptatifs
-- [ ] Gamification basique (XP, streaks)
+- [x] Quiz adaptatifs
+- [x] Gamification basique (XP, streaks)
+- [x] Rapports hebdomadaires parents
+- [ ] Exercices generatifs IA
 - [ ] Beta privée 50 familles
 - [ ] Onboarder 10 profs
 

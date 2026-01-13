@@ -10,5 +10,6 @@ export { ProgressBar } from "./progress-bar";
 export { PurchaseCard } from "./purchase-card";
 export { PurchaseFilters } from "./purchase-filters";
 export { WeeklyReport } from "./weekly-report";
+export { WeeklyReportCard } from "./weekly-report-card";
 export { AIInsights } from "./ai-insights";
 export { AIInsightsPanel } from "./ai-insights-panel";

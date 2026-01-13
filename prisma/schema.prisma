@@ -154,6 +154,7 @@ model Child {
   progress      Progress[]
   conversations AIConversation[]
   badges        ChildBadge[]
+  weeklyReports WeeklyReport[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -542,4 +543,48 @@ model ChildBadge {
   @@index([childId])
   @@index([badgeId])
   @@index([earnedAt])
+}
+
+// ============ WEEKLY REPORTS ============
+
+model WeeklyReport {
+  id           String   @id @default(cuid())
+  childId      String
+  weekStart    DateTime // Monday of the report week
+  weekEnd      DateTime // Sunday of the report week
+
+  // Stats for the week
+  lessonsCompleted   Int      @default(0)
+  quizzesCompleted   Int      @default(0)
+  averageQuizScore   Float?
+  totalTimeSpent     Int      @default(0) // in minutes
+  xpEarned           Int      @default(0)
+  streakDays         Int      @default(0)
+
+  // Comparison with previous week
+  lessonsCompletedDelta Int?   // +/- compared to last week
+  timeSpentDelta        Int?   // +/- compared to last week
+
+  // AI-generated content
+  summary        String?  @db.Text   // AI summary of the week
+  strengths      Json?               // Array of strengths identified
+  areasToImprove Json?               // Array of areas needing attention
+  recommendations Json?              // Array of personalized recommendations
+  encouragement  String?  @db.Text   // Motivational message for the child
+  parentTips     String?  @db.Text   // Tips for the parent
+
+  // Notification tracking
+  emailSent      Boolean  @default(false)
+  sentAt         DateTime?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relations
+  child Child @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@unique([childId, weekStart])
+  @@index([childId])
+  @@index([weekStart])
+  @@index([createdAt])
 }
