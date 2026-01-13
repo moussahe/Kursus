@@ -149,12 +149,14 @@ model Child {
   lastActivityAt DateTime?
 
   // Relations
-  parent        User             @relation("ParentChildren", fields: [parentId], references: [id], onDelete: Cascade)
-  purchases     Purchase[]
-  progress      Progress[]
-  conversations AIConversation[]
-  badges        ChildBadge[]
-  weeklyReports WeeklyReport[]
+  parent           User              @relation("ParentChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  purchases        Purchase[]
+  progress         Progress[]
+  conversations    AIConversation[]
+  badges           ChildBadge[]
+  weeklyReports    WeeklyReport[]
+  exercises        Exercise[]
+  exerciseAttempts ExerciseAttempt[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -284,6 +286,7 @@ model Lesson {
   quizzes   Quiz[]
   progress  Progress[]
   resources Resource[]
+  exercises Exercise[]
 
   @@index([chapterId])
   @@index([position])
@@ -543,6 +546,70 @@ model ChildBadge {
   @@index([childId])
   @@index([badgeId])
   @@index([earnedAt])
+}
+
+// ============ GENERATIVE EXERCISES ============
+
+enum ExerciseType {
+  FILL_IN_BLANK    // Texte a trous
+  MATCHING         // Appariement (relier les elements)
+  ORDERING         // Remettre dans l'ordre
+  SHORT_ANSWER     // Reponse courte
+  TRUE_FALSE       // Vrai ou Faux
+  CALCULATION      // Calcul mathematique
+}
+
+model Exercise {
+  id          String       @id @default(cuid())
+  lessonId    String
+  childId     String
+  type        ExerciseType
+  difficulty  String       @default("medium") // easy, medium, hard
+
+  // Exercise content (JSON)
+  content     Json         // {question, instructions, items, blanks, etc.}
+  solution    Json         // {correctAnswer, steps, etc.}
+
+  // AI generation metadata
+  generatedAt DateTime     @default(now())
+  aiModel     String?      // Which AI model generated this
+
+  // Relations
+  lesson   Lesson           @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  child    Child            @relation(fields: [childId], references: [id], onDelete: Cascade)
+  attempts ExerciseAttempt[]
+
+  @@index([lessonId])
+  @@index([childId])
+  @@index([type])
+  @@index([difficulty])
+  @@index([generatedAt])
+}
+
+model ExerciseAttempt {
+  id          String   @id @default(cuid())
+  exerciseId  String
+  childId     String
+
+  // Attempt data
+  answer      Json     // The child's submitted answer
+  isCorrect   Boolean
+  score       Int      @default(0) // Points earned
+  feedback    String?  @db.Text // AI-generated feedback
+  timeSpent   Int      @default(0) // in seconds
+
+  // XP awarded
+  xpEarned    Int      @default(0)
+
+  createdAt   DateTime @default(now())
+
+  // Relations
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  child    Child    @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([exerciseId])
+  @@index([childId])
+  @@index([createdAt])
 }
 
 // ============ WEEKLY REPORTS ============

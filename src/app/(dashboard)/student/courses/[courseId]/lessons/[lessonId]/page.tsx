@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LessonContent } from "@/components/student/lesson-content";
 import { QuizSection } from "@/components/quiz/quiz-section";
+import { ExerciseSection } from "@/components/exercise";
 import { AITutorPanel } from "@/components/student/ai-tutor-panel";
 
 interface PageProps {
@@ -267,6 +268,14 @@ async function LessonViewer({
           previousScore={quizScore}
         />
       )}
+
+      {/* Generative Exercises Section */}
+      <ExerciseSection
+        lessonId={lesson.id}
+        lessonTitle={lesson.title}
+        subject={course.subject}
+        childId={childId}
+      />
 
       {/* Navigation Footer */}
       <div className="flex items-center justify-between rounded-2xl bg-white p-4 shadow-sm">
