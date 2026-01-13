@@ -56,3 +56,6 @@ export type Subject =
 
 // User roles
 export type UserRole = "STUDENT" | "PARENT" | "TEACHER" | "ADMIN";
+
+// Quiz types
+export * from "./quiz";

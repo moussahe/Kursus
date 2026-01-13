@@ -42,3 +42,6 @@ export {
   useDeleteConversation,
 } from "./use-ai-chat";
 export type { AIMessage, AIConversation } from "./use-ai-chat";
+
+// Quiz hooks
+export { useAdaptiveQuiz } from "./use-adaptive-quiz";
