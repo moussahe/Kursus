@@ -25,6 +25,13 @@
     "db:studio": "prisma studio",
     "db:seed": "tsx prisma/seed.ts",
     "validate": "pnpm lint && pnpm type-check && pnpm test:run && pnpm build",
+    "autodev": "./scripts/autodev.sh",
+    "autodev:advanced": "./scripts/autodev-advanced.sh",
+    "autodev:feature": "./scripts/autodev-advanced.sh -m feature",
+    "autodev:fix": "./scripts/autodev-advanced.sh -m fix",
+    "autodev:test": "./scripts/autodev-advanced.sh -m test",
+    "autodev:optimize": "./scripts/autodev-advanced.sh -m optimize",
+    "autodev:marathon": "./scripts/autodev-10h.sh",
     "prepare": "husky"
   },
   "dependencies": {
