@@ -126,6 +126,8 @@ model User {
   courses        Course[]         @relation("CourseAuthor")
   purchases      Purchase[]
   reviews        Review[]
+  teacherLiveSessions LiveSession[] @relation("TeacherSessions")
+  parentLiveSessions  LiveSession[] @relation("ParentSessions")
 
   @@index([email])
   @@index([role])
@@ -158,6 +160,7 @@ model Child {
   exercises        Exercise[]
   exerciseAttempts ExerciseAttempt[]
   certificates     Certificate[]
+  liveSessions     LiveSession[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -654,6 +657,88 @@ model Certificate {
   @@index([courseId])
   @@index([certificateNumber])
   @@index([verificationCode])
+}
+
+// ============ LIVE SESSIONS ============
+
+enum LiveSessionStatus {
+  SCHEDULED      // Session is booked
+  IN_PROGRESS    // Session is currently happening
+  COMPLETED      // Session has ended
+  CANCELLED      // Session was cancelled
+  NO_SHOW        // Student/parent didn't show up
+}
+
+model TeacherAvailability {
+  id           String   @id @default(cuid())
+  teacherId    String   // User ID of the teacher
+  dayOfWeek    Int      // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  startTime    String   // "09:00" format (24h)
+  endTime      String   // "17:00" format (24h)
+  isActive     Boolean  @default(true)
+  timezone     String   @default("Europe/Paris")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([teacherId, dayOfWeek, startTime])
+  @@index([teacherId])
+  @@index([dayOfWeek])
+  @@index([isActive])
+}
+
+model LiveSession {
+  id               String            @id @default(cuid())
+  teacherId        String            // User ID of the teacher
+  parentId         String            // User ID of the parent who booked
+  childId          String            // Child who will attend
+  subject          Subject
+  gradeLevel       GradeLevel
+
+  // Session details
+  title            String            // e.g., "Aide en Mathematiques - Fractions"
+  description      String?           @db.Text
+  scheduledAt      DateTime          // When the session is scheduled
+  duration         Int               @default(60) // Duration in minutes
+  status           LiveSessionStatus @default(SCHEDULED)
+
+  // Video room
+  roomUrl          String?           // Video room URL (Daily.co, etc.)
+  roomName         String?           @unique // Unique room identifier
+
+  // Pricing
+  price            Int               // Price in cents
+  platformFee      Int               // 30% commission in cents
+  teacherRevenue   Int               // 70% to teacher in cents
+
+  // Stripe
+  stripePaymentIntentId String?      @unique
+  stripeTransferId      String?
+
+  // Session notes (filled after session)
+  teacherNotes     String?           @db.Text // Teacher's notes about the session
+  parentFeedback   String?           @db.Text // Parent's feedback
+  rating           Int?              // 1-5 star rating from parent
+
+  // Timing
+  startedAt        DateTime?
+  endedAt          DateTime?
+  cancelledAt      DateTime?
+  cancellationReason String?
+
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  // Relations
+  teacher          User              @relation("TeacherSessions", fields: [teacherId], references: [id])
+  parent           User              @relation("ParentSessions", fields: [parentId], references: [id])
+  child            Child             @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([teacherId])
+  @@index([parentId])
+  @@index([childId])
+  @@index([scheduledAt])
+  @@index([status])
+  @@index([subject])
 }
 
 // ============ WEEKLY REPORTS ============

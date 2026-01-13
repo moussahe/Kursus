@@ -59,3 +59,6 @@ export type UserRole = "STUDENT" | "PARENT" | "TEACHER" | "ADMIN";
 
 // Quiz types
 export * from "./quiz";
+
+// Live session types
+export * from "./live-session";
