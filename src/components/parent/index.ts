@@ -11,3 +11,4 @@ export { PurchaseCard } from "./purchase-card";
 export { PurchaseFilters } from "./purchase-filters";
 export { WeeklyReport } from "./weekly-report";
 export { AIInsights } from "./ai-insights";
+export { AIInsightsPanel } from "./ai-insights-panel";
