@@ -25,6 +25,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const registered = searchParams.get("registered") === "true";
+  const needsOnboarding = searchParams.get("onboarding") === "true";
 
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +52,12 @@ function LoginForm() {
       if (result?.error) {
         setError("Email ou mot de passe incorrect");
       } else {
-        router.push("/dashboard");
+        // Redirect to onboarding for new parents, otherwise dashboard
+        if (needsOnboarding) {
+          router.push("/onboarding");
+        } else {
+          router.push("/dashboard");
+        }
         router.refresh();
       }
     } catch {

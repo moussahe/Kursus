@@ -67,7 +67,14 @@ function RegisterForm() {
         return;
       }
 
-      router.push("/login?registered=true");
+      const result = await response.json();
+
+      // Redirect based on role
+      if (result.needsOnboarding) {
+        router.push("/login?registered=true&onboarding=true");
+      } else {
+        router.push("/login?registered=true");
+      }
     } catch {
       setError("Une erreur est survenue");
     } finally {

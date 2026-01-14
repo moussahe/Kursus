@@ -46,7 +46,14 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(user, { status: 201 });
+    // Return with onboarding flag for parents
+    return NextResponse.json(
+      {
+        ...user,
+        needsOnboarding: validated.role === "PARENT",
+      },
+      { status: 201 },
+    );
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
