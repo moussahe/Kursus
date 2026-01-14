@@ -514,3 +514,162 @@ export function calculateNextDifficulty(
 
   return currentDifficulty;
 }
+
+// ============================================
+// REAL-TIME SINGLE QUESTION GENERATION
+// ============================================
+
+export interface SingleQuestionContext {
+  subject: string;
+  gradeLevel: string;
+  lessonTitle: string;
+  lessonContent: string;
+  currentDifficulty: Difficulty;
+  weakAreas: string[];
+  previousQuestions: string[]; // To avoid duplicates
+  questionNumber: number;
+}
+
+function getSingleQuestionPrompt(context: SingleQuestionContext): string {
+  const gradeLabel = GRADE_LABELS[context.gradeLevel] || context.gradeLevel;
+  const difficultyDesc = DIFFICULTY_DESCRIPTIONS[context.currentDifficulty];
+
+  const previousQuestionsContext =
+    context.previousQuestions.length > 0
+      ? `\nQUESTIONS DEJA POSEES (NE PAS REPETER):\n${context.previousQuestions.map((q, i) => `${i + 1}. ${q}`).join("\n")}`
+      : "";
+
+  const weakAreasContext =
+    context.weakAreas.length > 0
+      ? `\nPOINTS FAIBLES A CIBLER: ${context.weakAreas.join(", ")}`
+      : "";
+
+  return `Tu es un expert en pedagogie pour Schoolaris. Genere UNE SEULE question de quiz.
+
+CONTEXTE:
+- Matiere: ${context.subject}
+- Niveau scolaire: ${gradeLabel}
+- Lecon: ${context.lessonTitle}
+- Question numero: ${context.questionNumber}
+- Difficulte: ${context.currentDifficulty.toUpperCase()}
+${weakAreasContext}
+${previousQuestionsContext}
+
+CONTENU DE LA LECON:
+${context.lessonContent.slice(0, 2500)}
+
+NIVEAU "${context.currentDifficulty.toUpperCase()}":
+${difficultyDesc}
+
+REGLES:
+1. Exactement 4 options (A, B, C, D)
+2. Une seule reponse correcte
+3. Options incorrectes plausibles
+4. Explication pedagogique adaptee a l'age
+5. Points: easy=1, medium=2, hard=3
+6. NE PAS repeter une question deja posee
+7. Si points faibles identifies, cibler ces domaines
+
+FORMAT JSON STRICT:
+{
+  "question": "La question?",
+  "options": [
+    { "id": "a", "text": "Option A", "isCorrect": false },
+    { "id": "b", "text": "Option B", "isCorrect": true },
+    { "id": "c", "text": "Option C", "isCorrect": false },
+    { "id": "d", "text": "Option D", "isCorrect": false }
+  ],
+  "explanation": "Explication pedagogique",
+  "difficulty": "${context.currentDifficulty}",
+  "points": ${context.currentDifficulty === "easy" ? 1 : context.currentDifficulty === "medium" ? 2 : 3}
+}
+
+Reponds UNIQUEMENT avec le JSON.`;
+}
+
+const singleQuestionSchema = z.object({
+  question: z.string().min(5),
+  options: z.array(optionSchema).length(4),
+  explanation: z.string().min(10),
+  difficulty: z.enum(["easy", "medium", "hard"]),
+  points: z.number().min(1).max(3),
+});
+
+export async function generateSingleAdaptiveQuestion(
+  context: SingleQuestionContext,
+): Promise<GeneratedQuestion> {
+  const client = getAnthropicClient();
+  const prompt = getSingleQuestionPrompt(context);
+
+  try {
+    const response = await client.messages.create({
+      model: QUIZ_AI_MODEL,
+      max_tokens: 1024,
+      messages: [{ role: "user", content: prompt }],
+    });
+
+    const textContent = response.content.find((c) => c.type === "text");
+    if (!textContent || textContent.type !== "text") {
+      throw new Error("No text response from AI");
+    }
+
+    const jsonMatch = textContent.text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      throw new Error("No JSON found in response");
+    }
+
+    const rawParsed = JSON.parse(jsonMatch[0]);
+    const validationResult = singleQuestionSchema.safeParse(rawParsed);
+
+    if (!validationResult.success) {
+      console.error(
+        "Single question validation failed:",
+        validationResult.error.issues,
+      );
+      return getSingleFallbackQuestion(
+        context.currentDifficulty,
+        context.questionNumber,
+      );
+    }
+
+    // Validate exactly one correct answer
+    const correctCount = validationResult.data.options.filter(
+      (o) => o.isCorrect,
+    ).length;
+    if (correctCount !== 1) {
+      console.error(`Invalid question: ${correctCount} correct answers`);
+      return getSingleFallbackQuestion(
+        context.currentDifficulty,
+        context.questionNumber,
+      );
+    }
+
+    return validationResult.data;
+  } catch (error) {
+    console.error("Error generating single question:", error);
+    return getSingleFallbackQuestion(
+      context.currentDifficulty,
+      context.questionNumber,
+    );
+  }
+}
+
+function getSingleFallbackQuestion(
+  difficulty: Difficulty,
+  questionNumber: number,
+): GeneratedQuestion {
+  const points = difficulty === "easy" ? 1 : difficulty === "medium" ? 2 : 3;
+  return {
+    question: `Question ${questionNumber}: Quelle est la notion principale de cette lecon?`,
+    options: [
+      { id: "a", text: "Reponse A", isCorrect: false },
+      { id: "b", text: "La bonne reponse", isCorrect: true },
+      { id: "c", text: "Reponse C", isCorrect: false },
+      { id: "d", text: "Reponse D", isCorrect: false },
+    ],
+    explanation:
+      "Cette question verifie ta comprehension generale de la lecon.",
+    difficulty,
+    points,
+  };
+}
