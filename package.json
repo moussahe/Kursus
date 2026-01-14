@@ -75,6 +75,7 @@
     "sonner": "^2.0.7",
     "stripe": "^20.1.1",
     "tailwind-merge": "^3.4.0",
+    "web-push": "^3.6.7",
     "zod": "^4.3.5",
     "zustand": "^5.0.9"
   },
@@ -88,6 +89,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/web-push": "^3.6.4",
     "@vitejs/plugin-react": "^5.1.2",
     "@vitest/coverage-v8": "^4.0.16",
     "eslint": "^9",

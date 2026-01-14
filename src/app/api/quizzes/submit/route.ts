@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { triggerQuizCompleted } from "@/lib/push-triggers";
 
 // Schema for quiz submission
 const submitQuizSchema = z.object({
@@ -161,7 +162,14 @@ export async function POST(req: NextRequest) {
       }),
     ]);
 
-    // 8. Return result
+    // 8. Send push notification to parent (async, don't block response)
+    triggerQuizCompleted(
+      validated.childId,
+      quiz.lesson.title,
+      percentage,
+    ).catch((err) => console.error("Push notification error:", err));
+
+    // 9. Return result
     return NextResponse.json({
       success: true,
       result: {

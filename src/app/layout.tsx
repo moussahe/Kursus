@@ -36,6 +36,15 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Schoolaris" }],
   creator: "Schoolaris",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Schoolaris",
+  },
+  formatDetection: {
+    telephone: false,
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",

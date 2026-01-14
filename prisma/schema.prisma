@@ -132,6 +132,8 @@ model User {
   forumReplies   ForumReply[]     @relation("ReplyAuthor")
   forumVotes     ForumVote[]      @relation("UserVotes")
   alerts         Alert[]
+  pushSubscriptions PushSubscription[] @relation("UserPushSubscriptions")
+  notificationPreferences NotificationPreferences? @relation("UserNotificationPreferences")
 
   @@index([email])
   @@index([role])
@@ -173,6 +175,7 @@ model Child {
   quizAttempts     QuizAttempt[]
   studyGoals       StudyGoal[]
   adaptiveLearningStates AdaptiveLearningState[]
+  pushSubscriptions PushSubscription[] @relation("ChildPushSubscriptions")
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -1188,4 +1191,126 @@ model ForumVote {
   @@index([userId])
   @@index([topicId])
   @@index([replyId])
+}
+
+// ============ PUSH NOTIFICATIONS ============
+
+enum PushNotificationType {
+  QUIZ_COMPLETED       // Child completed a quiz
+  LESSON_COMPLETED     // Child completed a lesson
+  COURSE_COMPLETED     // Child completed an entire course
+  MILESTONE_REACHED    // Child reached XP/level milestone
+  STREAK_ACHIEVED      // Child achieved streak milestone
+  INACTIVITY_REMINDER  // Child hasn't studied in X days
+  WEEKLY_REPORT_READY  // Weekly report is available
+  NEW_BADGE_EARNED     // Child earned a new badge
+  REVISION_DUE         // Spaced repetition cards due
+  GOAL_COMPLETED       // Study goal achieved
+  GOAL_REMINDER        // Study goal deadline approaching
+  LOW_QUIZ_SCORE       // Child scored below threshold
+  HIGH_QUIZ_SCORE      // Child achieved excellent score
+}
+
+model PushSubscription {
+  id           String   @id @default(cuid())
+  userId       String
+  childId      String?  // Optional: subscription can be child-specific
+
+  // Web Push subscription data
+  endpoint     String   @db.Text
+  p256dh       String   // Public key for encryption
+  auth         String   // Auth secret
+
+  // Device info
+  userAgent    String?  @db.Text
+  deviceType   String?  // mobile, tablet, desktop
+  browserName  String?  // Chrome, Safari, Firefox, etc.
+
+  // Subscription status
+  isActive     Boolean  @default(true)
+  failedCount  Int      @default(0)  // Consecutive failed deliveries
+  lastUsedAt   DateTime @default(now())
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  user         User     @relation("UserPushSubscriptions", fields: [userId], references: [id], onDelete: Cascade)
+  child        Child?   @relation("ChildPushSubscriptions", fields: [childId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, endpoint])
+  @@index([userId])
+  @@index([childId])
+  @@index([isActive])
+}
+
+model NotificationPreferences {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+
+  // Master toggle
+  pushEnabled  Boolean  @default(true)
+  emailEnabled Boolean  @default(true)
+
+  // Per-type preferences (true = enabled)
+  quizCompleted       Boolean @default(true)
+  lessonCompleted     Boolean @default(false)  // Can be noisy
+  courseCompleted     Boolean @default(true)
+  milestoneReached    Boolean @default(true)
+  streakAchieved      Boolean @default(true)
+  inactivityReminder  Boolean @default(true)
+  weeklyReportReady   Boolean @default(true)
+  newBadgeEarned      Boolean @default(true)
+  revisionDue         Boolean @default(true)
+  goalCompleted       Boolean @default(true)
+  goalReminder        Boolean @default(true)
+  lowQuizScore        Boolean @default(true)
+  highQuizScore       Boolean @default(true)
+
+  // Quiet hours (don't send during these times)
+  quietHoursEnabled   Boolean  @default(true)
+  quietHoursStart     String   @default("21:00")  // 9 PM
+  quietHoursEnd       String   @default("08:00")  // 8 AM
+  timezone            String   @default("Europe/Paris")
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  user         User     @relation("UserNotificationPreferences", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model PushNotificationLog {
+  id               String                @id @default(cuid())
+  userId           String
+  childId          String?
+  subscriptionId   String?
+
+  // Notification content
+  type             PushNotificationType
+  title            String
+  body             String                @db.Text
+  url              String?               // Deep link URL
+  imageUrl         String?
+
+  // Delivery status
+  status           String                @default("pending")  // pending, sent, delivered, clicked, failed
+  sentAt           DateTime?
+  deliveredAt      DateTime?
+  clickedAt        DateTime?
+  failedAt         DateTime?
+  errorMessage     String?               @db.Text
+
+  // Metadata
+  metadata         Json?                 // Additional context (courseId, quizScore, etc.)
+
+  createdAt        DateTime              @default(now())
+
+  @@index([userId])
+  @@index([childId])
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
 }
