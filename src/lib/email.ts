@@ -55,3 +55,20 @@ export async function sendEmail(options: SendEmailOptions) {
 }
 
 export { getResendClient as resend };
+
+// Re-export all email templates
+export {
+  baseEmailTemplate,
+  purchaseConfirmationEmail,
+  purchaseConfirmationText,
+  passwordResetEmail,
+  passwordResetText,
+  weeklyReportEmail,
+  weeklyReportText,
+  courseApprovedEmail,
+  courseApprovedText,
+  courseRejectedEmail,
+  courseRejectedText,
+  courseChangesRequestedEmail,
+  courseChangesRequestedText,
+} from "./email/index";

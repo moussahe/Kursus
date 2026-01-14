@@ -9,3 +9,11 @@ export {
   passwordResetText,
 } from "./templates/password-reset";
 export { weeklyReportEmail, weeklyReportText } from "./templates/weekly-report";
+export {
+  courseApprovedEmail,
+  courseApprovedText,
+  courseRejectedEmail,
+  courseRejectedText,
+  courseChangesRequestedEmail,
+  courseChangesRequestedText,
+} from "./templates/course-moderation";

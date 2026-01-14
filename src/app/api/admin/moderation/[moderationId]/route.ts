@@ -2,6 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import {
+  sendEmail,
+  courseApprovedEmail,
+  courseApprovedText,
+  courseRejectedEmail,
+  courseRejectedText,
+  courseChangesRequestedEmail,
+  courseChangesRequestedText,
+} from "@/lib/email";
 
 const updateModerationSchema = z.object({
   action: z.enum(["approve", "reject", "changes"]),
@@ -90,7 +99,47 @@ export async function PATCH(
       return updated;
     });
 
-    // TODO: Send email notification to teacher
+    // Send email notification to teacher
+    if (moderation.course.author.email) {
+      const emailData = {
+        teacherName: moderation.course.author.name || "Professeur",
+        courseName: moderation.course.title,
+        courseId: moderation.courseId,
+        feedback: feedback || undefined,
+      };
+
+      let emailHtml: string;
+      let emailText: string;
+      let subject: string;
+
+      switch (action) {
+        case "approve":
+          emailHtml = courseApprovedEmail(emailData);
+          emailText = courseApprovedText(emailData);
+          subject = `Votre cours "${emailData.courseName}" est publie !`;
+          break;
+        case "reject":
+          emailHtml = courseRejectedEmail(emailData);
+          emailText = courseRejectedText(emailData);
+          subject = `Cours "${emailData.courseName}" - Decision de moderation`;
+          break;
+        case "changes":
+          emailHtml = courseChangesRequestedEmail(emailData);
+          emailText = courseChangesRequestedText(emailData);
+          subject = `Modifications demandees pour "${emailData.courseName}"`;
+          break;
+      }
+
+      // Send email asynchronously (don't block the response)
+      sendEmail({
+        to: moderation.course.author.email,
+        subject,
+        html: emailHtml,
+        text: emailText,
+      }).catch((error) => {
+        console.error("[Moderation] Failed to send email notification:", error);
+      });
+    }
 
     return NextResponse.json(updatedModeration);
   } catch (error) {
