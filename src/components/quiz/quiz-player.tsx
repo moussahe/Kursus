@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { Quiz, QuizResult, AdaptiveQuizState } from "@/types/quiz";
 import { QuizResults } from "./quiz-results";
+import { QuizQuestionHelp } from "./quiz-question-help";
 
 interface QuizPlayerProps {
   quiz: Quiz;
@@ -27,6 +28,10 @@ interface QuizPlayerProps {
   onComplete?: (result: QuizResult) => void;
   showHints?: boolean;
   adaptiveMode?: boolean;
+  // Context for AI help
+  subject?: string;
+  gradeLevel?: string;
+  lessonTitle?: string;
 }
 
 type QuizPhase = "intro" | "playing" | "results";
@@ -38,6 +43,9 @@ export function QuizPlayer({
   onComplete,
   showHints = true,
   adaptiveMode = false,
+  subject,
+  gradeLevel,
+  lessonTitle,
 }: QuizPlayerProps) {
   const [phase, setPhase] = useState<QuizPhase>("intro");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -349,6 +357,19 @@ export function QuizPlayer({
           )}
         </div>
         <div className="flex items-center gap-4">
+          {/* AI Help Button */}
+          {childId && subject && gradeLevel && !isShowingExplanation && (
+            <QuizQuestionHelp
+              questionText={currentQuestion.question}
+              options={currentQuestion.options}
+              subject={subject}
+              gradeLevel={gradeLevel}
+              lessonTitle={lessonTitle || quiz.title}
+              difficulty={currentQuestion.difficulty}
+              childId={childId}
+              variant="button"
+            />
+          )}
           {showHints && !isShowingExplanation && (
             <Button
               variant="ghost"

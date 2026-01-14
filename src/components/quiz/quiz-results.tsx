@@ -13,6 +13,8 @@ import {
   Award,
   Star,
   Sparkles,
+  Bot,
+  MessageCircle,
 } from "lucide-react";
 import type { Quiz, QuizResult, AdaptiveQuizState } from "@/types/quiz";
 
@@ -22,6 +24,7 @@ interface QuizResultsProps {
   selectedAnswers: Record<string, string>;
   onRetry: () => void;
   adaptiveState?: AdaptiveQuizState;
+  onPracticeWithAI?: () => void;
 }
 
 export function QuizResults({
@@ -30,6 +33,7 @@ export function QuizResults({
   selectedAnswers,
   onRetry,
   adaptiveState,
+  onPracticeWithAI,
 }: QuizResultsProps) {
   const { passed, percentage, correctCount, totalQuestions, feedback } = result;
 
@@ -214,6 +218,33 @@ export function QuizResults({
             </h4>
           </div>
           <p className="text-sm text-blue-800">{feedback}</p>
+        </div>
+      )}
+
+      {/* AI Tutor Practice CTA - Show when there are wrong answers */}
+      {totalQuestions - correctCount > 0 && onPracticeWithAI && (
+        <div className="rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50 to-purple-50 p-6">
+          <div className="flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600">
+              <Bot className="h-6 w-6 text-white" />
+            </div>
+            <div className="flex-1">
+              <h4 className="font-semibold text-violet-900">
+                Besoin d&apos;aide pour comprendre ?
+              </h4>
+              <p className="mt-1 text-sm text-violet-700">
+                Ton tuteur IA peut t&apos;expliquer les concepts que tu
+                n&apos;as pas encore maitrises. Pose-lui toutes tes questions !
+              </p>
+              <Button
+                onClick={onPracticeWithAI}
+                className="mt-4 gap-2 bg-violet-600 hover:bg-violet-700"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Discuter avec le tuteur IA
+              </Button>
+            </div>
+          </div>
         </div>
       )}
 

@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { XP_REWARDS } from "@/lib/gamification";
 import { useAdaptiveLearningState } from "@/hooks/use-adaptive-learning-state";
+import { QuizQuestionHelp } from "./quiz-question-help";
 
 type Difficulty = "easy" | "medium" | "hard";
 
@@ -731,18 +732,33 @@ export function AdaptiveQuizPlayer({
             <p className="text-xs text-gray-500">{subject}</p>
           </div>
         </div>
-        <div
-          className={cn(
-            "flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium",
-            currentQuestion.difficulty === "easy"
-              ? "bg-emerald-100 text-emerald-700"
-              : currentQuestion.difficulty === "medium"
-                ? "bg-amber-100 text-amber-700"
-                : "bg-red-100 text-red-700",
+        <div className="flex items-center gap-2">
+          {/* AI Help Button */}
+          {!showExplanation && (
+            <QuizQuestionHelp
+              questionText={currentQuestion.question}
+              options={currentQuestion.options}
+              subject={subject}
+              gradeLevel={gradeLevel}
+              lessonTitle={lessonTitle}
+              difficulty={currentQuestion.difficulty}
+              childId={childId}
+              variant="icon"
+            />
           )}
-        >
-          <difficultyInfo.icon className="h-3 w-3" />
-          {difficultyInfo.label}
+          <div
+            className={cn(
+              "flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium",
+              currentQuestion.difficulty === "easy"
+                ? "bg-emerald-100 text-emerald-700"
+                : currentQuestion.difficulty === "medium"
+                  ? "bg-amber-100 text-amber-700"
+                  : "bg-red-100 text-red-700",
+            )}
+          >
+            <difficultyInfo.icon className="h-3 w-3" />
+            {difficultyInfo.label}
+          </div>
         </div>
       </div>
 

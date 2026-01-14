@@ -176,6 +176,7 @@ model Child {
   studyGoals       StudyGoal[]
   adaptiveLearningStates AdaptiveLearningState[]
   pushSubscriptions PushSubscription[] @relation("ChildPushSubscriptions")
+  quizHelpRequests QuizHelpRequest[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -1312,5 +1313,23 @@ model PushNotificationLog {
   @@index([childId])
   @@index([type])
   @@index([status])
+  @@index([createdAt])
+}
+
+// ============ QUIZ AI HELP ============
+
+model QuizHelpRequest {
+  id           String   @id @default(cuid())
+  childId      String
+  questionText String   @db.Text
+  subject      String
+  lessonTitle  String
+  createdAt    DateTime @default(now())
+
+  // Relations
+  child        Child    @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@index([subject])
   @@index([createdAt])
 }
