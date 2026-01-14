@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { passwordSchema } from "@/lib/validations/password";
 
 // Subject enum validation
 const SubjectEnum = z.enum([
@@ -22,12 +23,7 @@ const SubjectEnum = z.enum([
 const teacherRegisterSchema = z.object({
   name: z.string().min(2, "Minimum 2 caracteres"),
   email: z.string().email("Email invalide"),
-  password: z
-    .string()
-    .min(8, "Minimum 8 caracteres")
-    .regex(/[A-Z]/, "Au moins une majuscule")
-    .regex(/[a-z]/, "Au moins une minuscule")
-    .regex(/[0-9]/, "Au moins un chiffre"),
+  password: passwordSchema,
   headline: z
     .string()
     .min(10, "Minimum 10 caracteres")

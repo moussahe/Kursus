@@ -2,16 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { passwordSchema } from "@/lib/validations/password";
 
 const resetPasswordSchema = z.object({
   email: z.string().email("Email invalide"),
   token: z.string().min(1, "Token requis"),
-  password: z
-    .string()
-    .min(8, "Minimum 8 caracteres")
-    .regex(/[A-Z]/, "Au moins une majuscule")
-    .regex(/[a-z]/, "Au moins une minuscule")
-    .regex(/[0-9]/, "Au moins un chiffre"),
+  password: passwordSchema,
 });
 
 export async function POST(req: NextRequest) {

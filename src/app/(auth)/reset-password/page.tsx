@@ -18,15 +18,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  passwordSchema,
+  PASSWORD_REQUIREMENTS,
+} from "@/lib/validations/password";
 
 const resetPasswordSchema = z
   .object({
-    password: z
-      .string()
-      .min(8, "Minimum 8 caracteres")
-      .regex(/[A-Z]/, "Au moins une majuscule")
-      .regex(/[a-z]/, "Au moins une minuscule")
-      .regex(/[0-9]/, "Au moins un chiffre"),
+    password: passwordSchema,
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -57,12 +56,6 @@ function ResetPasswordForm() {
   });
 
   const password = watch("password", "");
-
-  // Password strength indicators
-  const hasMinLength = password.length >= 8;
-  const hasUppercase = /[A-Z]/.test(password);
-  const hasLowercase = /[a-z]/.test(password);
-  const hasNumber = /[0-9]/.test(password);
 
   useEffect(() => {
     if (!token || !email) {
@@ -179,30 +172,21 @@ function ResetPasswordForm() {
                 <p className="text-xs text-gray-500">
                   Votre mot de passe doit contenir :
                 </p>
-                <div className="grid grid-cols-2 gap-1 text-xs">
-                  <div
-                    className={`flex items-center gap-1 ${hasMinLength ? "text-emerald-600" : "text-gray-400"}`}
-                  >
-                    <CheckCircle className="h-3 w-3" />8 caracteres minimum
-                  </div>
-                  <div
-                    className={`flex items-center gap-1 ${hasUppercase ? "text-emerald-600" : "text-gray-400"}`}
-                  >
-                    <CheckCircle className="h-3 w-3" />
-                    Une majuscule
-                  </div>
-                  <div
-                    className={`flex items-center gap-1 ${hasLowercase ? "text-emerald-600" : "text-gray-400"}`}
-                  >
-                    <CheckCircle className="h-3 w-3" />
-                    Une minuscule
-                  </div>
-                  <div
-                    className={`flex items-center gap-1 ${hasNumber ? "text-emerald-600" : "text-gray-400"}`}
-                  >
-                    <CheckCircle className="h-3 w-3" />
-                    Un chiffre
-                  </div>
+                <div className="space-y-1">
+                  {PASSWORD_REQUIREMENTS.map((req, index) => {
+                    const isValid = req.regex.test(password);
+                    return (
+                      <div
+                        key={index}
+                        className={`flex items-center gap-1 text-xs ${
+                          isValid ? "text-emerald-600" : "text-gray-400"
+                        }`}
+                      >
+                        <CheckCircle className="h-3 w-3" />
+                        {req.label}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

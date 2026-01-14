@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Star, Clock, Users, BookOpen } from "lucide-react";
@@ -58,13 +59,14 @@ const subjectLabels: Record<string, string> = {
   NSI: "NSI",
 };
 
-export function CourseCard({ course }: CourseCardProps) {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("fr-FR", {
-      style: "currency",
-      currency: "EUR",
-    }).format(price / 100);
-  };
+// Memoize the price formatter to avoid recreation
+const priceFormatter = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+});
+
+function CourseCardComponent({ course }: CourseCardProps) {
+  const formatPrice = (price: number) => priceFormatter.format(price / 100);
 
   return (
     <Link href={`/courses/${course.slug}`}>
@@ -163,3 +165,6 @@ export function CourseCard({ course }: CourseCardProps) {
     </Link>
   );
 }
+
+// Memoize to prevent unnecessary re-renders in lists
+export const CourseCard = memo(CourseCardComponent);

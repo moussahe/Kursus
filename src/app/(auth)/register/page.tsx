@@ -6,21 +6,27 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { GraduationCap, Loader2, Users, BookOpen } from "lucide-react";
+import {
+  GraduationCap,
+  Loader2,
+  Users,
+  BookOpen,
+  Check,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
+import {
+  passwordSchema,
+  PASSWORD_REQUIREMENTS,
+} from "@/lib/validations/password";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Minimum 2 caracteres"),
   email: z.string().email("Email invalide"),
-  password: z
-    .string()
-    .min(8, "Minimum 8 caracteres")
-    .regex(/[A-Z]/, "Au moins une majuscule")
-    .regex(/[a-z]/, "Au moins une minuscule")
-    .regex(/[0-9]/, "Au moins un chiffre"),
+  password: passwordSchema,
   role: z.enum(["PARENT", "TEACHER"]),
 });
 
@@ -37,6 +43,7 @@ function RegisterForm() {
   const [selectedRole, setSelectedRole] = useState<"PARENT" | "TEACHER">(
     initialRole,
   );
+  const [passwordValue, setPasswordValue] = useState("");
 
   const {
     register,
@@ -188,16 +195,36 @@ function RegisterForm() {
                 id="password"
                 placeholder="••••••••"
                 className="h-11"
-                {...register("password")}
+                {...register("password", {
+                  onChange: (e) => setPasswordValue(e.target.value),
+                })}
               />
               {errors.password && (
                 <p className="text-sm text-red-600">
                   {errors.password.message}
                 </p>
               )}
-              <p className="text-xs text-gray-500">
-                8 caracteres minimum avec majuscule, minuscule et chiffre
-              </p>
+              {/* Password requirements checklist */}
+              <div className="mt-2 space-y-1">
+                {PASSWORD_REQUIREMENTS.map((req, index) => {
+                  const isValid = req.regex.test(passwordValue);
+                  return (
+                    <div
+                      key={index}
+                      className={`flex items-center gap-2 text-xs ${
+                        isValid ? "text-emerald-600" : "text-gray-400"
+                      }`}
+                    >
+                      {isValid ? (
+                        <Check className="h-3 w-3" />
+                      ) : (
+                        <X className="h-3 w-3" />
+                      )}
+                      <span>{req.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             <Button

@@ -2,11 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { passwordSchema } from "@/lib/validations/password";
 
 const registerSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  password: z.string().min(8).regex(/[A-Z]/).regex(/[a-z]/).regex(/[0-9]/),
+  name: z.string().min(2, "Le nom doit contenir au moins 2 caracteres"),
+  email: z.string().email("Email invalide"),
+  password: passwordSchema,
   role: z.enum(["PARENT", "TEACHER"]),
 });
 
