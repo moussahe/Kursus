@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
-import { triggerQuizCompleted } from "@/lib/push-triggers";
+import { triggerQuizCompleted, triggerBadgeEarned } from "@/lib/push-triggers";
+import {
+  awardXP,
+  XP_REWARDS,
+  checkAndAwardBadges,
+  updateStreak,
+} from "@/lib/gamification";
 
 // Schema for quiz submission
 const submitQuizSchema = z.object({
@@ -112,7 +118,19 @@ export async function POST(req: NextRequest) {
       aiExplanation = `Ne te decourage pas ! Tu as obtenu ${correctCount}/${quiz.questions.length} bonnes reponses. Prends le temps de bien relire la lecon avant de reessayer.`;
     }
 
-    // 7. Save progress and quiz attempt in a transaction
+    // 7. Calculate XP based on performance
+    let xpEarned = 0;
+    const isPerfect = percentage === 100;
+
+    if (isPerfect) {
+      xpEarned = XP_REWARDS.QUIZ_PERFECT;
+    } else if (passed) {
+      xpEarned = XP_REWARDS.QUIZ_PASSED;
+    } else {
+      xpEarned = XP_REWARDS.QUIZ_COMPLETE;
+    }
+
+    // 8. Save progress and quiz attempt in a transaction
     const startedAt = validated.startedAt
       ? new Date(validated.startedAt)
       : new Date(Date.now() - validated.timeSpent * 1000);
@@ -162,14 +180,49 @@ export async function POST(req: NextRequest) {
       }),
     ]);
 
-    // 8. Send push notification to parent (async, don't block response)
+    // 9. Award XP and update streak
+    await awardXP(validated.childId, xpEarned, "Quiz completed");
+    await updateStreak(validated.childId);
+
+    // 10. Check for new badges
+    const newBadges = await checkAndAwardBadges(validated.childId);
+
+    // 11. Send push notifications (async, don't block response)
     triggerQuizCompleted(
       validated.childId,
       quiz.lesson.title,
       percentage,
     ).catch((err) => console.error("Push notification error:", err));
 
-    // 9. Return result
+    // Notify parent about new badges
+    for (const badge of newBadges) {
+      triggerBadgeEarned(validated.childId, badge.name).catch((err) =>
+        console.error("Badge notification error:", err),
+      );
+    }
+
+    // 12. Create alert for parent if score is low
+    if (percentage < 50) {
+      await prisma.alert.create({
+        data: {
+          parentId: session.user.id,
+          childId: validated.childId,
+          type: "LOW_QUIZ_SCORE",
+          priority: "MEDIUM",
+          title: `Score faible au quiz`,
+          message: `${child.firstName} a obtenu ${percentage}% au quiz de la lecon "${quiz.lesson.title}". Un peu de revision pourrait aider!`,
+          metadata: {
+            lessonId: validated.lessonId,
+            lessonTitle: quiz.lesson.title,
+            score: percentage,
+            courseTitle: quiz.lesson.chapter.course.title,
+          },
+          actionUrl: `/parent/children/${validated.childId}`,
+        },
+      });
+    }
+
+    // 13. Return result
     return NextResponse.json({
       success: true,
       result: {
@@ -177,9 +230,12 @@ export async function POST(req: NextRequest) {
         totalPoints,
         percentage,
         passed,
+        isPerfect,
         correctCount,
         totalQuestions: quiz.questions.length,
         answers: answersDetail,
+        xpEarned,
+        newBadges,
       },
       aiExplanation,
     });
