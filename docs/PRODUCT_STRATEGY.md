@@ -301,6 +301,7 @@ Pour atteindre 500K€:
 - [x] Telechargement factures PDF (conformite legale francaise)
 - [x] PWA avec push notifications (engagement mobile +40-60% DAU)
 - [x] Programme de parrainage (referral) - acquisition virale +25-35%
+- [x] Teacher Onboarding Flow avec AI Course Builder - conversion profs +50%
 - [ ] Beta privée 50 familles
 - [ ] Onboarder 10 profs
 
