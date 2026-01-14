@@ -25,6 +25,7 @@ import {
   StreakCounter,
   BadgeDisplay,
   LeaderboardCard,
+  DailyChallengeCard,
 } from "@/components/gamification";
 import { StudyGoalCard } from "@/components/goals";
 
@@ -250,6 +251,9 @@ async function StudentDashboard({ childId }: { childId: string }) {
           <div className="absolute -bottom-8 -right-16 h-32 w-32 rounded-full bg-white/5" />
         </div>
       )}
+
+      {/* Daily Challenges - Featured prominently */}
+      <DailyChallengeCard childId={child.id} />
 
       {/* Gamification Section */}
       <div className="grid gap-4 md:grid-cols-3">

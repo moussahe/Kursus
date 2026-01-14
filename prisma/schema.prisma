@@ -184,6 +184,7 @@ model Child {
   adaptiveLearningStates AdaptiveLearningState[]
   pushSubscriptions PushSubscription[] @relation("ChildPushSubscriptions")
   quizHelpRequests QuizHelpRequest[]
+  dailyChallenges  DailyChallenge[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -1535,6 +1536,62 @@ model ReferralCredit {
 
   @@index([userId])
   @@index([usedAt])
+  @@index([expiresAt])
+}
+
+// ============ DAILY CHALLENGES ============
+
+enum DailyChallengeType {
+  QUIZ           // Complete a quiz with X% score
+  LESSON         // Complete X lesson(s)
+  TIME_SPENT     // Study for X minutes
+  AI_QUESTIONS   // Ask X questions to AI tutor
+  STREAK         // Maintain study streak
+  PERFECT_QUIZ   // Get 100% on a quiz
+  REVIEW         // Complete X spaced repetition reviews
+}
+
+model DailyChallenge {
+  id              String               @id @default(cuid())
+  childId         String
+  date            DateTime             // The day this challenge is for
+
+  // Challenge definition
+  type            DailyChallengeType
+  title           String               // e.g., "Quiz Champion"
+  description     String               // e.g., "Complete 2 quizzes with at least 70%"
+  targetValue     Int                  // e.g., 2 quizzes, 30 minutes, etc.
+  subject         Subject?             // Optional: challenge can be subject-specific
+
+  // Difficulty & rewards
+  difficulty      String               @default("medium") // easy, medium, hard
+  xpReward        Int                  @default(50)       // XP awarded on completion
+  bonusXp         Int                  @default(0)        // Extra XP for early completion
+
+  // Progress tracking
+  currentValue    Int                  @default(0)
+  isCompleted     Boolean              @default(false)
+  completedAt     DateTime?
+  xpAwarded       Boolean              @default(false)
+
+  // Time constraints
+  expiresAt       DateTime             // End of the day (23:59:59)
+
+  // AI-generated encouragement
+  encouragement   String?              // Motivational message
+  completionMessage String?            // Message shown on completion
+
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+
+  // Relations
+  child           Child                @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@unique([childId, date, type])
+  @@index([childId])
+  @@index([date])
+  @@index([isCompleted])
+  @@index([type])
   @@index([expiresAt])
 }
 

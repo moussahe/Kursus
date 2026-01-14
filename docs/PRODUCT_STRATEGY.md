@@ -163,6 +163,7 @@ Attentes:
 | Classement (Leaderboard)  | Compétition       | ✅ Done |
 | Objectifs d'étude         | Engagement +35%   | ✅ Done |
 | **Analyse Predictive IA** | Anticipation +40% | ✅ Done |
+| **Défis du Jour**         | DAU +35-50%       | ✅ Done |
 
 ### Phase 3: Scale (M7-M12) 🟢 NICE TO HAVE
 
