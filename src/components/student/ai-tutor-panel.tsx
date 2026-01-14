@@ -22,6 +22,7 @@ interface Message {
   id?: string;
   role: "user" | "assistant";
   content: string;
+  isStreaming?: boolean;
 }
 
 interface LessonContext {
@@ -108,7 +109,7 @@ export function AITutorPanel({
     }
   };
 
-  // Envoyer un message
+  // Envoyer un message avec streaming
   const sendMessage = async (messageContent?: string) => {
     const content = messageContent || input.trim();
     if (!content || isLoading) return;
@@ -130,9 +131,9 @@ export function AITutorPanel({
         }
       }
 
-      // Envoyer le message
+      // Envoyer le message avec streaming
       const res = await fetch(
-        `/api/ai/conversations/${currentConvId}/messages`,
+        `/api/ai/conversations/${currentConvId}/messages/stream`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -148,33 +149,105 @@ export function AITutorPanel({
         },
       );
 
-      const data = await res.json();
-
       if (!res.ok) {
-        throw new Error(data.error || "Erreur d'envoi");
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Erreur d'envoi");
       }
 
-      setMessages((prev) => {
-        // Remove the optimistic user message and add both from server
-        const withoutLast = prev.slice(0, -1);
-        return [
-          ...withoutLast,
-          {
-            id: data.userMessage.id,
-            role: "user",
-            content: data.userMessage.content,
-          },
-          {
-            id: data.assistantMessage.id,
-            role: "assistant",
-            content: data.assistantMessage.content,
-          },
-        ];
-      });
+      // Traiter le stream SSE
+      const reader = res.body?.getReader();
+      if (!reader) {
+        throw new Error("Stream non disponible");
+      }
+
+      const decoder = new TextDecoder();
+      let assistantMessageId: string | undefined;
+      let userMessageId: string | undefined;
+
+      // Ajouter un message assistant vide pour le streaming
+      setMessages((prev) => [
+        ...prev,
+        { role: "assistant", content: "", isStreaming: true },
+      ]);
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\n");
+
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            try {
+              const data = JSON.parse(line.slice(6));
+
+              if (data.type === "init") {
+                userMessageId = data.userMessageId;
+              } else if (data.type === "text") {
+                // Mettre a jour le dernier message avec le nouveau texte
+                setMessages((prev) => {
+                  const updated = [...prev];
+                  const lastIndex = updated.length - 1;
+                  if (
+                    lastIndex >= 0 &&
+                    updated[lastIndex].role === "assistant"
+                  ) {
+                    updated[lastIndex] = {
+                      ...updated[lastIndex],
+                      content: updated[lastIndex].content + data.text,
+                    };
+                  }
+                  return updated;
+                });
+              } else if (data.type === "done") {
+                assistantMessageId = data.assistantMessageId;
+                // Finaliser les messages avec les IDs
+                setMessages((prev) => {
+                  const updated = [...prev];
+                  // Trouver et mettre a jour le message utilisateur
+                  const userIndex = updated.findIndex(
+                    (m) => m.role === "user" && m.content === content && !m.id,
+                  );
+                  if (userIndex >= 0 && userMessageId) {
+                    updated[userIndex] = {
+                      ...updated[userIndex],
+                      id: userMessageId,
+                    };
+                  }
+                  // Finaliser le message assistant
+                  const lastIndex = updated.length - 1;
+                  if (
+                    lastIndex >= 0 &&
+                    updated[lastIndex].role === "assistant"
+                  ) {
+                    updated[lastIndex] = {
+                      ...updated[lastIndex],
+                      id: assistantMessageId,
+                      isStreaming: false,
+                    };
+                  }
+                  return updated;
+                });
+              } else if (data.type === "error") {
+                throw new Error(data.error);
+              }
+            } catch {
+              // Ignorer les erreurs de parsing JSON pour les lignes vides
+            }
+          }
+        }
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erreur de connexion");
-      // Rollback
-      setMessages((prev) => prev.slice(0, -1));
+      // Rollback - retirer le message utilisateur et le message assistant en streaming
+      setMessages((prev) =>
+        prev.filter(
+          (m) =>
+            !(m.role === "user" && m.content === content && !m.id) &&
+            !m.isStreaming,
+        ),
+      );
     } finally {
       setIsLoading(false);
       textareaRef.current?.focus();
@@ -329,13 +402,16 @@ Pose-moi tes questions ! Je ne te donnerai pas directement les reponses, mais je
                 >
                   <p className="whitespace-pre-wrap text-sm">
                     {message.content}
+                    {message.isStreaming && (
+                      <span className="inline-block w-2 h-4 ml-0.5 bg-violet-500 animate-pulse" />
+                    )}
                   </p>
                 </div>
               </div>
             ))}
 
-            {/* Loading */}
-            {isLoading && (
+            {/* Loading - only show when loading but no streaming message yet */}
+            {isLoading && !messages.some((m) => m.isStreaming) && (
               <div className="flex gap-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-purple-600">
                   <Bot className="h-4 w-4 text-white" />
