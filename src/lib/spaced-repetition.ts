@@ -455,6 +455,76 @@ export async function recordReview(
 }
 
 /**
+ * Calculate the current revision streak for a child
+ * A streak is maintained when the child reviews at least one card per day
+ */
+async function calculateRevisionStreak(childId: string): Promise<number> {
+  // Get all review dates for this child, ordered by most recent first
+  const reviews = await prisma.spacedRepetitionReview.findMany({
+    where: { childId },
+    select: { reviewedAt: true },
+    orderBy: { reviewedAt: "desc" },
+  });
+
+  if (reviews.length === 0) {
+    return 0;
+  }
+
+  // Get unique review dates (normalized to start of day in local timezone)
+  const reviewDates = new Set<string>();
+  for (const review of reviews) {
+    const date = new Date(review.reviewedAt);
+    // Normalize to YYYY-MM-DD format
+    const dateStr = date.toISOString().split("T")[0];
+    reviewDates.add(dateStr);
+  }
+
+  // Convert to sorted array (most recent first)
+  const sortedDates = Array.from(reviewDates).sort().reverse();
+
+  if (sortedDates.length === 0) {
+    return 0;
+  }
+
+  // Check if the streak is still active (reviewed today or yesterday)
+  const today = new Date();
+  const todayStr = today.toISOString().split("T")[0];
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+  const yesterdayStr = yesterday.toISOString().split("T")[0];
+
+  const mostRecentReviewDate = sortedDates[0];
+
+  // If the last review was before yesterday, streak is broken
+  if (
+    mostRecentReviewDate !== todayStr &&
+    mostRecentReviewDate !== yesterdayStr
+  ) {
+    return 0;
+  }
+
+  // Count consecutive days
+  let streak = 1;
+  let currentDate = new Date(sortedDates[0]);
+
+  for (let i = 1; i < sortedDates.length; i++) {
+    const expectedPrevDate = new Date(currentDate);
+    expectedPrevDate.setDate(expectedPrevDate.getDate() - 1);
+    const expectedPrevStr = expectedPrevDate.toISOString().split("T")[0];
+
+    if (sortedDates[i] === expectedPrevStr) {
+      streak++;
+      currentDate = expectedPrevDate;
+    } else {
+      // Streak broken
+      break;
+    }
+  }
+
+  return streak;
+}
+
+/**
  * Get spaced repetition statistics for a child
  */
 export async function getSpacedRepetitionStats(childId: string): Promise<{
@@ -467,10 +537,8 @@ export async function getSpacedRepetitionStats(childId: string): Promise<{
   streakDays: number;
 }> {
   const now = new Date();
-  const startOfDay = new Date(now);
-  startOfDay.setHours(0, 0, 0, 0);
 
-  const [cards, reviews, recentReviewDays] = await Promise.all([
+  const [cards, dueCount, masteredCount, streakDays] = await Promise.all([
     prisma.spacedRepetitionCard.aggregate({
       where: { childId, isActive: true },
       _count: { id: true },
@@ -488,6 +556,7 @@ export async function getSpacedRepetitionStats(childId: string): Promise<{
     prisma.spacedRepetitionCard.count({
       where: { childId, isMastered: true },
     }),
+    calculateRevisionStreak(childId),
   ]);
 
   const totalReviews = cards._sum.totalReviews || 0;
@@ -495,13 +564,13 @@ export async function getSpacedRepetitionStats(childId: string): Promise<{
 
   return {
     totalCards: cards._count.id || 0,
-    masteredCards: recentReviewDays,
-    dueToday: reviews,
+    masteredCards: masteredCount,
+    dueToday: dueCount,
     averageEaseFactor: cards._avg.easeFactor || INITIAL_EASE_FACTOR,
     totalReviews,
     successRate:
       totalReviews > 0 ? (successfulReviews / totalReviews) * 100 : 0,
-    streakDays: 0, // TODO: Calculate from review history
+    streakDays,
   };
 }
 
