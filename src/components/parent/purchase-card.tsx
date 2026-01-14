@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { BookOpen, User, Calendar, Download } from "lucide-react";
+import { BookOpen, User, Calendar, Download, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface PurchaseCardProps {
   purchase: {
@@ -46,11 +48,30 @@ const statusLabels: Record<
 };
 
 export function PurchaseCard({ purchase }: PurchaseCardProps) {
+  const [isDownloading, setIsDownloading] = useState(false);
+
   const formatPrice = (priceInCents: number) => {
     return new Intl.NumberFormat("fr-FR", {
       style: "currency",
       currency: "EUR",
     }).format(priceInCents / 100);
+  };
+
+  const handleDownloadInvoice = async () => {
+    setIsDownloading(true);
+    try {
+      // Open invoice in new tab for printing
+      window.open(`/api/invoices/${purchase.id}`, "_blank");
+      toast.success("Facture ouverte dans un nouvel onglet", {
+        description: "Utilisez Ctrl+P ou Cmd+P pour imprimer en PDF",
+      });
+    } catch {
+      toast.error("Erreur lors du téléchargement", {
+        description: "Veuillez réessayer plus tard",
+      });
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   const statusConfig = statusLabels[purchase.status] || statusLabels.PENDING;
@@ -136,12 +157,15 @@ export function PurchaseCard({ purchase }: PurchaseCardProps) {
                     size="sm"
                     variant="outline"
                     className="rounded-xl"
-                    onClick={() => {
-                      // TODO: Download invoice
-                      console.log("Download invoice:", purchase.id);
-                    }}
+                    onClick={handleDownloadInvoice}
+                    disabled={isDownloading}
+                    title="Télécharger la facture"
                   >
-                    <Download className="h-4 w-4" />
+                    {isDownloading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Download className="h-4 w-4" />
+                    )}
                   </Button>
                 </div>
               </div>
