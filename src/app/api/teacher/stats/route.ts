@@ -153,6 +153,24 @@ export async function GET() {
       },
     });
 
+    // Get per-course revenue using groupBy
+    const courseIds = courses.map((c) => c.id);
+    const courseRevenueData = await prisma.purchase.groupBy({
+      by: ["courseId"],
+      where: {
+        courseId: { in: courseIds },
+        status: "COMPLETED",
+      },
+      _sum: {
+        teacherRevenue: true,
+      },
+    });
+
+    // Create a map for quick lookup
+    const courseRevenueMap = new Map(
+      courseRevenueData.map((r) => [r.courseId, r._sum.teacherRevenue || 0]),
+    );
+
     return NextResponse.json({
       profile: teacherProfile,
       stats: {
@@ -166,7 +184,7 @@ export async function GET() {
       },
       courses: courses.map((course) => ({
         ...course,
-        revenue: 0, // Would need a separate query to get per-course revenue
+        revenue: courseRevenueMap.get(course.id) || 0,
       })),
       recentSales: recentSales.map((sale) => ({
         id: sale.id,

@@ -1456,3 +1456,35 @@ model ContentModeration {
   @@index([reviewerId])
   @@index([submittedAt])
 }
+
+// ============ COURSE ANALYTICS ============
+
+// Track course page views for conversion rate analytics
+model CourseView {
+  id          String   @id @default(cuid())
+  courseId    String
+  viewerId    String?  // Optional: authenticated user ID
+  sessionId   String?  // For anonymous tracking (cookie-based)
+
+  // Referrer info
+  referrer    String?  // Where they came from
+  utmSource   String?  // Marketing campaign source
+  utmMedium   String?  // Marketing campaign medium
+  utmCampaign String?  // Marketing campaign name
+
+  // Device info
+  userAgent   String?  @db.Text
+  deviceType  String?  // mobile, tablet, desktop
+  country     String?  // Geo-location
+
+  // View details
+  duration    Int?     // Time spent on page in seconds
+  scrollDepth Int?     // How far they scrolled (0-100)
+
+  createdAt   DateTime @default(now())
+
+  @@index([courseId])
+  @@index([viewerId])
+  @@index([sessionId])
+  @@index([createdAt])
+}

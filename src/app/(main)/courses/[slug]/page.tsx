@@ -6,6 +6,7 @@ import { CourseCatalogHeader } from "@/components/courses/course-catalog-header"
 import { CourseChapterList } from "@/components/courses/course-chapter-list";
 import { CourseReviews } from "@/components/courses/course-reviews";
 import { CoursePurchaseCard } from "@/components/courses/course-purchase-card";
+import { CourseViewTracker } from "@/components/courses/course-view-tracker";
 import { Badge } from "@/components/ui/badge";
 import {
   Star,
@@ -150,6 +151,7 @@ export default async function CourseDetailPage({
 
   return (
     <div className="min-h-screen bg-gray-50/50">
+      <CourseViewTracker courseId={course.id} />
       <CourseCatalogHeader />
 
       {/* Hero Section */}

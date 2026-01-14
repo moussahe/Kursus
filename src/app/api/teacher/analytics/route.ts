@@ -173,9 +173,25 @@ export async function GET() {
     const totalStudents = teacherProfile?.totalStudents ?? 0;
     const averageRating = teacherProfile?.averageRating ?? 0;
 
-    // Calculate conversion rate (views to purchases - placeholder)
-    // In real app, this would come from analytics tracking
-    const conversionRate = totalStudents > 0 ? 4.2 : 0;
+    // Calculate real conversion rate from course views
+    const courseIds = courses.map((c) => c.id);
+
+    const [totalViews, uniqueViewersResult] = await Promise.all([
+      prisma.courseView.count({
+        where: { courseId: { in: courseIds } },
+      }),
+      prisma.courseView.groupBy({
+        by: ["viewerId", "sessionId"],
+        where: { courseId: { in: courseIds } },
+        _count: true,
+      }),
+    ]);
+
+    const uniqueViewers = uniqueViewersResult.length;
+    const conversionRate =
+      uniqueViewers > 0
+        ? parseFloat(((totalStudents / uniqueViewers) * 100).toFixed(2))
+        : 0;
 
     return NextResponse.json({
       metrics: {
@@ -183,6 +199,8 @@ export async function GET() {
         totalStudents,
         averageRating,
         conversionRate,
+        totalViews,
+        uniqueViewers,
       },
       monthlyRevenue,
       monthlyStudents,
