@@ -8,6 +8,13 @@ import {
   checkAndAwardBadges,
   XP_REWARDS,
 } from "@/lib/gamification";
+import {
+  triggerBadgeEarned,
+  triggerMilestoneReached,
+  triggerStreakAchieved,
+  triggerLessonCompleted,
+  triggerCourseCompleted,
+} from "@/lib/push-triggers";
 
 export async function markLessonComplete(lessonId: string, childId: string) {
   try {
@@ -42,6 +49,12 @@ export async function markLessonComplete(lessonId: string, childId: string) {
       },
     });
 
+    // Get lesson details for notification
+    const lessonDetails = await prisma.lesson.findUnique({
+      where: { id: lessonId },
+      select: { title: true },
+    });
+
     // Award XP for lesson completion
     await addXP(childId, XP_REWARDS.LESSON_COMPLETED, "Lecon terminee");
     totalXpEarned += XP_REWARDS.LESSON_COMPLETED;
@@ -50,6 +63,13 @@ export async function markLessonComplete(lessonId: string, childId: string) {
     if (totalCompletedLessons === 0) {
       await addXP(childId, XP_REWARDS.FIRST_LESSON, "Premiere lecon terminee");
       totalXpEarned += XP_REWARDS.FIRST_LESSON;
+
+      // Notify parent of first lesson completion (milestone!)
+      if (lessonDetails) {
+        triggerLessonCompleted(childId, lessonDetails.title).catch((err) => {
+          console.error("Failed to send first lesson notification:", err);
+        });
+      }
     }
 
     // Update streak
@@ -57,6 +77,19 @@ export async function markLessonComplete(lessonId: string, childId: string) {
     if (streakResult.streakUpdated && streakResult.currentStreak > 1) {
       await addXP(childId, XP_REWARDS.DAILY_STREAK, "Serie journaliere");
       totalXpEarned += XP_REWARDS.DAILY_STREAK;
+    }
+
+    // Send streak milestone notification (3, 7, 14, 30 days)
+    const streakMilestones = [3, 7, 14, 30, 60, 100];
+    if (
+      streakResult.streakUpdated &&
+      streakMilestones.includes(streakResult.currentStreak)
+    ) {
+      triggerStreakAchieved(childId, streakResult.currentStreak).catch(
+        (err) => {
+          console.error("Failed to send streak notification:", err);
+        },
+      );
     }
 
     // Check if course is completed
@@ -96,11 +129,54 @@ export async function markLessonComplete(lessonId: string, childId: string) {
       if (completedCourseLessons === totalCourseLessons) {
         await addXP(childId, XP_REWARDS.COURSE_COMPLETED, "Cours termine");
         totalXpEarned += XP_REWARDS.COURSE_COMPLETED;
+
+        // Send course completion notification to parent
+        triggerCourseCompleted(childId, lesson.chapter.course.title).catch(
+          (err) => {
+            console.error(
+              "Failed to send course completion notification:",
+              err,
+            );
+          },
+        );
       }
     }
 
-    // Check for new badges
-    await checkAndAwardBadges(childId);
+    // Check for new badges and send notifications
+    const newBadges = await checkAndAwardBadges(childId);
+
+    // Send badge notifications to parent
+    for (const badge of newBadges) {
+      triggerBadgeEarned(childId, badge.name).catch((err) => {
+        console.error("Failed to send badge notification:", err);
+      });
+    }
+
+    // Check for level up and send notification
+    const childAfter = await prisma.child.findUnique({
+      where: { id: childId },
+      select: { xp: true, level: true },
+    });
+
+    if (childAfter && totalXpEarned > 0) {
+      // Send milestone notification for XP thresholds
+      const xpMilestones = [500, 1000, 2000, 5000, 10000];
+      for (const milestone of xpMilestones) {
+        if (
+          childAfter.xp >= milestone &&
+          childAfter.xp - totalXpEarned < milestone
+        ) {
+          triggerMilestoneReached(
+            childId,
+            `${milestone} XP atteints!`,
+            childAfter.xp,
+          ).catch((err) => {
+            console.error("Failed to send XP milestone notification:", err);
+          });
+          break;
+        }
+      }
+    }
 
     revalidatePath("/student");
     revalidatePath(`/student/courses`);
@@ -168,8 +244,55 @@ export async function submitQuizScore(
       totalXpEarned += XP_REWARDS.DAILY_STREAK;
     }
 
-    // Check for new badges
-    await checkAndAwardBadges(childId);
+    // Send streak milestone notification (3, 7, 14, 30 days)
+    const streakMilestones = [3, 7, 14, 30, 60, 100];
+    if (
+      streakResult.streakUpdated &&
+      streakMilestones.includes(streakResult.currentStreak)
+    ) {
+      triggerStreakAchieved(childId, streakResult.currentStreak).catch(
+        (err) => {
+          console.error("Failed to send streak notification:", err);
+        },
+      );
+    }
+
+    // Check for new badges and send notifications
+    const newBadges = await checkAndAwardBadges(childId);
+
+    // Send badge notifications to parent
+    for (const badge of newBadges) {
+      triggerBadgeEarned(childId, badge.name).catch((err) => {
+        console.error("Failed to send badge notification:", err);
+      });
+    }
+
+    // Check for XP milestones
+    if (totalXpEarned > 0) {
+      const childAfter = await prisma.child.findUnique({
+        where: { id: childId },
+        select: { xp: true },
+      });
+
+      if (childAfter) {
+        const xpMilestones = [500, 1000, 2000, 5000, 10000];
+        for (const milestone of xpMilestones) {
+          if (
+            childAfter.xp >= milestone &&
+            childAfter.xp - totalXpEarned < milestone
+          ) {
+            triggerMilestoneReached(
+              childId,
+              `${milestone} XP atteints!`,
+              childAfter.xp,
+            ).catch((err) => {
+              console.error("Failed to send XP milestone notification:", err);
+            });
+            break;
+          }
+        }
+      }
+    }
 
     revalidatePath("/student");
     revalidatePath(`/student/courses`);
