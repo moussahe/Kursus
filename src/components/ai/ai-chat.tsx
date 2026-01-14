@@ -1,7 +1,17 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Send, Bot, User, Loader2, Sparkles, X, History } from "lucide-react";
+import {
+  Send,
+  Bot,
+  User,
+  Loader2,
+  Sparkles,
+  X,
+  History,
+  Mic,
+  MicOff,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -11,8 +21,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useStreamingMessage } from "@/hooks/use-ai-chat";
+import { useVoiceInput } from "@/hooks/use-voice-input";
 
 interface Message {
   id?: string;
@@ -64,6 +81,25 @@ export function AIChat({
 
   // Hook for streaming messages
   const { streamMessage } = useStreamingMessage();
+
+  // Hook for voice input
+  const {
+    isListening,
+    isSupported: isVoiceSupported,
+    interimTranscript,
+    error: voiceError,
+    startListening,
+    stopListening,
+  } = useVoiceInput({
+    language: "fr-FR",
+    continuous: false,
+    interimResults: true,
+    onResult: (text, isFinal) => {
+      if (isFinal) {
+        setInput((prev) => prev + text);
+      }
+    },
+  });
 
   // Mode persistence active si childId est fourni
   const persistenceEnabled = !!childId;
@@ -282,10 +318,19 @@ export function AIChat({
     }
   };
 
-  // Message d'accueil
+  // Handle voice button click
+  const handleVoiceToggle = useCallback(() => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  }, [isListening, startListening, stopListening]);
+
+  // Message d'accueil with voice hint for supported browsers
   const welcomeMessage = `Salut ! 👋 Je suis ton assistant pour t'aider avec ${context.subject}${context.lessonTitle ? ` - "${context.lessonTitle}"` : ""}.
 
-Pose-moi tes questions et je te guiderai vers la solution. Je ne te donnerai pas directement les reponses, mais je t'aiderai a comprendre ! 💡`;
+Pose-moi tes questions et je te guiderai vers la solution. Je ne te donnerai pas directement les reponses, mais je t'aiderai a comprendre ! 💡${isVoiceSupported ? "\n\n🎤 Tu peux aussi me parler en cliquant sur le micro !" : ""}`;
 
   if (isInitializing) {
     return (
@@ -424,29 +469,101 @@ Pose-moi tes questions et je te guiderai vers la solution. Je ne te donnerai pas
       </CardContent>
 
       <CardFooter className="flex-shrink-0 border-t p-3">
-        <div className="flex w-full gap-2">
-          <Textarea
-            ref={textareaRef}
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Pose ta question..."
-            className="min-h-[44px] max-h-[120px] resize-none"
-            rows={1}
-            disabled={isLoading || isStreaming}
-          />
-          <Button
-            onClick={sendMessage}
-            disabled={!input.trim() || isLoading || isStreaming}
-            size="icon"
-            className="h-11 w-11 flex-shrink-0 bg-emerald-600 hover:bg-emerald-700"
-          >
-            {isLoading || isStreaming ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Send className="h-4 w-4" />
+        <div className="flex w-full flex-col gap-2">
+          {/* Voice error message */}
+          {voiceError && (
+            <div className="rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-900/20 dark:text-amber-400">
+              {voiceError}
+            </div>
+          )}
+
+          {/* Voice listening indicator */}
+          {isListening && (
+            <div className="flex items-center gap-2 rounded-lg bg-violet-50 px-3 py-2 dark:bg-violet-900/20">
+              <div className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-violet-500" />
+              </div>
+              <span className="text-xs font-medium text-violet-700 dark:text-violet-300">
+                Parle maintenant...
+              </span>
+              {interimTranscript && (
+                <span className="ml-2 text-xs italic text-violet-600 dark:text-violet-400">
+                  &ldquo;{interimTranscript}&rdquo;
+                </span>
+              )}
+            </div>
+          )}
+
+          <div className="flex w-full gap-2">
+            {/* Voice input button */}
+            {isVoiceSupported && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      type="button"
+                      onClick={handleVoiceToggle}
+                      disabled={isLoading || isStreaming}
+                      size="icon"
+                      variant={isListening ? "default" : "outline"}
+                      className={cn(
+                        "h-11 w-11 flex-shrink-0 transition-all",
+                        isListening
+                          ? "bg-violet-600 hover:bg-violet-700 text-white animate-pulse"
+                          : "hover:bg-violet-50 hover:border-violet-300",
+                      )}
+                    >
+                      {isListening ? (
+                        <MicOff className="h-4 w-4" />
+                      ) : (
+                        <Mic className="h-4 w-4 text-violet-600" />
+                      )}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>
+                      {isListening ? "Arreter l'ecoute" : "Parler au micro"}
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             )}
-          </Button>
+
+            <Textarea
+              ref={textareaRef}
+              value={
+                isListening && interimTranscript
+                  ? input + interimTranscript
+                  : input
+              }
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={
+                isListening ? "Parle maintenant..." : "Pose ta question..."
+              }
+              className={cn(
+                "min-h-[44px] max-h-[120px] resize-none",
+                isListening && "border-violet-300 bg-violet-50/50",
+              )}
+              rows={1}
+              disabled={isLoading || isStreaming}
+            />
+            <Button
+              onClick={sendMessage}
+              disabled={
+                !input.trim() || isLoading || isStreaming || isListening
+              }
+              size="icon"
+              className="h-11 w-11 flex-shrink-0 bg-emerald-600 hover:bg-emerald-700"
+            >
+              {isLoading || isStreaming ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
         </div>
       </CardFooter>
     </Card>
