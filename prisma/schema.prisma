@@ -185,6 +185,7 @@ model Child {
   pushSubscriptions PushSubscription[] @relation("ChildPushSubscriptions")
   quizHelpRequests QuizHelpRequest[]
   dailyChallenges  DailyChallenge[]
+  learningPaths    LearningPath[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -1593,6 +1594,49 @@ model DailyChallenge {
   @@index([isCompleted])
   @@index([type])
   @@index([expiresAt])
+}
+
+// ============ AI LEARNING PATHS ============
+
+// Stores AI-generated personalized learning path recommendations
+model LearningPath {
+  id              String     @id @default(cuid())
+  childId         String
+
+  // AI-generated content
+  summary         String     @db.Text           // Summary of the learning plan
+  focusAreas      Json                          // [{subject, reason, priority}]
+  weeklyGoals     Json                          // Array of goal strings
+  suggestedLessons Json                         // [{lessonId, lessonTitle, courseTitle, reason}]
+  motivationalMessage String  @db.Text          // Personalized encouragement
+  estimatedTimePerDay Int     @default(30)      // Minutes per day recommended
+
+  // Performance snapshot at time of generation
+  performanceSnapshot Json?                     // Child's stats when path was generated
+
+  // Validity tracking
+  isActive        Boolean    @default(true)     // Current active path
+  validFrom       DateTime   @default(now())    // When this path became valid
+  validUntil      DateTime                      // When this path expires (usually 1 week)
+
+  // Progress tracking on suggested lessons
+  lessonsCompleted Int       @default(0)        // How many suggested lessons completed
+  goalsAchieved    Int       @default(0)        // How many weekly goals achieved
+
+  // Metadata
+  aiModel         String?                       // Which AI model generated this
+  generationTimeMs Int?                         // How long AI took to generate
+
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  // Relations
+  child           Child      @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@index([isActive])
+  @@index([validUntil])
+  @@index([createdAt])
 }
 
 // ============ COURSE ANALYTICS ============

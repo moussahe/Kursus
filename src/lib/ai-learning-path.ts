@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { anthropic } from "@/lib/anthropic";
+import type { LearningPath } from "@prisma/client";
 
 interface ChildPerformance {
   childId: string;
@@ -291,14 +292,139 @@ function formatGradeLevel(level: string): string {
   return levels[level] || level;
 }
 
-// Store learning path for later retrieval
+// Store learning path in database
 export async function storeLearningPath(
   childId: string,
   recommendation: LearningPathRecommendation,
+  options?: {
+    performanceSnapshot?: ChildPerformance;
+    aiModel?: string;
+    generationTimeMs?: number;
+  },
+): Promise<LearningPath> {
+  // Deactivate any existing active learning paths for this child
+  await prisma.learningPath.updateMany({
+    where: {
+      childId,
+      isActive: true,
+    },
+    data: {
+      isActive: false,
+    },
+  });
+
+  // Calculate validity period (1 week from now)
+  const validUntil = new Date();
+  validUntil.setDate(validUntil.getDate() + 7);
+
+  // Create new learning path
+  const learningPath = await prisma.learningPath.create({
+    data: {
+      childId,
+      summary: recommendation.summary,
+      focusAreas: recommendation.focusAreas,
+      weeklyGoals: recommendation.weeklyGoals,
+      suggestedLessons: recommendation.suggestedLessons,
+      motivationalMessage: recommendation.motivationalMessage,
+      estimatedTimePerDay: recommendation.estimatedTimePerDay,
+      performanceSnapshot: options?.performanceSnapshot
+        ? JSON.parse(JSON.stringify(options.performanceSnapshot))
+        : null,
+      aiModel: options?.aiModel ?? "claude-sonnet-4-20250514",
+      generationTimeMs: options?.generationTimeMs,
+      validUntil,
+      isActive: true,
+    },
+  });
+
+  return learningPath;
+}
+
+// Get the active learning path for a child
+export async function getActiveLearningPath(
+  childId: string,
+): Promise<LearningPath | null> {
+  const now = new Date();
+
+  return prisma.learningPath.findFirst({
+    where: {
+      childId,
+      isActive: true,
+      validUntil: {
+        gte: now,
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
+// Get learning path history for a child
+export async function getLearningPathHistory(
+  childId: string,
+  limit = 10,
+): Promise<LearningPath[]> {
+  return prisma.learningPath.findMany({
+    where: {
+      childId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: limit,
+  });
+}
+
+// Update progress on a learning path when a suggested lesson is completed
+export async function updateLearningPathProgress(
+  childId: string,
+  completedLessonId: string,
 ): Promise<void> {
-  // For now, we'll just log it - in production this would be stored in DB
-  console.log(
-    `[Learning Path] Generated for child ${childId}:`,
-    recommendation,
+  const activePath = await getActiveLearningPath(childId);
+
+  if (!activePath) return;
+
+  // Check if the completed lesson is in the suggested lessons
+  const suggestedLessons = activePath.suggestedLessons as Array<{
+    lessonId: string;
+  }>;
+  const isInSuggestedLessons = suggestedLessons.some(
+    (l) => l.lessonId === completedLessonId,
   );
+
+  if (isInSuggestedLessons) {
+    await prisma.learningPath.update({
+      where: { id: activePath.id },
+      data: {
+        lessonsCompleted: {
+          increment: 1,
+        },
+      },
+    });
+  }
+}
+
+// Generate and store a learning path in one operation
+export async function generateAndStoreLearningPath(
+  childId: string,
+): Promise<LearningPath | null> {
+  const startTime = Date.now();
+
+  // Gather performance data
+  const performance = await gatherChildPerformance(childId);
+  if (!performance) return null;
+
+  // Generate the learning path
+  const recommendation = await generateLearningPath(childId);
+  if (!recommendation) return null;
+
+  const generationTimeMs = Date.now() - startTime;
+
+  // Store in database
+  return storeLearningPath(childId, recommendation, {
+    performanceSnapshot: performance,
+    aiModel: "claude-sonnet-4-20250514",
+    generationTimeMs,
+  });
 }
