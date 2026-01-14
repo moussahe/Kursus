@@ -20,6 +20,7 @@ import { AIInsightsPanel } from "@/components/parent/ai-insights-panel";
 import { WeeklyReportCard } from "@/components/parent/weekly-report-card";
 import { WeakAreasPanel } from "@/components/parent/weak-areas-panel";
 import { CourseRecommendationsPanel } from "@/components/parent/course-recommendations-panel";
+import { GoalsPanel } from "@/components/goals";
 
 async function getParentStats(userId: string) {
   const [children, purchases, recentProgress] = await Promise.all([
@@ -706,6 +707,35 @@ async function CourseRecommendationsSection({ userId }: { userId: string }) {
   );
 }
 
+async function StudyGoalsSection({ userId }: { userId: string }) {
+  // Get children for this parent
+  const children = await prisma.child.findMany({
+    where: { parentId: userId },
+    select: { id: true, firstName: true },
+  });
+
+  if (children.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-lg font-semibold text-gray-900">
+        Objectifs d&apos;Etude
+      </h2>
+      <div className="grid gap-4 lg:grid-cols-2">
+        {children.map((child) => (
+          <GoalsPanel
+            key={child.id}
+            childId={child.id}
+            childName={child.firstName}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function formatRelativeTime(date: Date): string {
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
@@ -794,6 +824,11 @@ export default async function ParentDashboardPage() {
       {/* Course Recommendations */}
       <Suspense fallback={<Skeleton className="h-64 rounded-2xl" />}>
         <CourseRecommendationsSection userId={userId} />
+      </Suspense>
+
+      {/* Study Goals */}
+      <Suspense fallback={<Skeleton className="h-64 rounded-2xl" />}>
+        <StudyGoalsSection userId={userId} />
       </Suspense>
 
       {/* Main Content */}

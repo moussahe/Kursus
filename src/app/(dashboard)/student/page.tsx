@@ -25,6 +25,7 @@ import {
   BadgeDisplay,
   LeaderboardCard,
 } from "@/components/gamification";
+import { StudyGoalCard } from "@/components/goals";
 
 async function getStudentData(childId: string) {
   const [child, recentProgress, purchases] = await Promise.all([
@@ -394,6 +395,9 @@ async function StudentDashboard({ childId }: { childId: string }) {
           compact
         />
       </div>
+
+      {/* Study Goals */}
+      <StudyGoalCard childId={child.id} />
 
       {/* Activity and Leaderboard Row */}
       <div className="grid gap-6 lg:grid-cols-2">

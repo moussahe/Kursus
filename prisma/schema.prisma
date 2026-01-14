@@ -170,6 +170,7 @@ model Child {
   weakAreas        WeakArea[]
   alerts           Alert[]
   quizAttempts     QuizAttempt[]
+  studyGoals       StudyGoal[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -832,6 +833,64 @@ model WeakArea {
   @@index([isResolved])
   @@index([errorCount])
   @@index([lastErrorAt])
+}
+
+// ============ STUDY GOALS ============
+
+enum GoalType {
+  LESSONS_COMPLETED   // Complete X lessons
+  QUIZ_SCORE          // Achieve X% average on quizzes
+  TIME_SPENT          // Study for X minutes
+  STREAK_DAYS         // Maintain streak for X days
+  COURSE_PROGRESS     // Reach X% progress in a course
+}
+
+enum GoalPeriod {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+model StudyGoal {
+  id          String     @id @default(cuid())
+  childId     String
+  createdById String     // Parent who created the goal
+
+  // Goal definition
+  type        GoalType
+  period      GoalPeriod @default(WEEKLY)
+  target      Int        // Target value (e.g., 5 lessons, 80%, 120 minutes)
+  courseId    String?    // Optional: goal can be course-specific
+  subject     Subject?   // Optional: goal can be subject-specific
+
+  // Progress tracking
+  currentValue Int       @default(0)
+  isCompleted  Boolean   @default(false)
+  completedAt  DateTime?
+
+  // Period tracking
+  periodStart  DateTime  // Start of current period
+  periodEnd    DateTime  // End of current period
+
+  // Rewards
+  xpReward     Int       @default(50) // XP awarded on completion
+  xpAwarded    Boolean   @default(false)
+
+  // Status
+  isActive     Boolean   @default(true)
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relations
+  child        Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@index([type])
+  @@index([period])
+  @@index([isCompleted])
+  @@index([isActive])
+  @@index([periodEnd])
 }
 
 // ============ WEEKLY REPORTS ============
