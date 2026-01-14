@@ -83,6 +83,37 @@ export interface AdaptiveQuizState {
   }>;
 }
 
+// Persistent adaptive learning state (stored in DB)
+export interface PersistentAdaptiveState {
+  currentDifficulty: "easy" | "medium" | "hard";
+  consecutiveCorrect: number;
+  consecutiveWrong: number;
+  totalQuestionsAnswered: number;
+  totalCorrect: number;
+  totalWrong: number;
+  difficultyBreakdown: {
+    easy: { total: number; correct: number };
+    medium: { total: number; correct: number };
+    hard: { total: number; correct: number };
+  };
+  currentStreak: number;
+  bestStreak: number;
+  recentHistory: Array<{
+    difficulty: "easy" | "medium" | "hard";
+    correct: boolean;
+    timestamp: string;
+  }>;
+  masteryLevel: number;
+  totalSessions: number;
+  lastSessionAt?: string;
+}
+
+export interface AdaptiveLearningContext {
+  childId: string;
+  subject: string;
+  gradeLevel: string;
+}
+
 export function calculateNextDifficulty(
   state: AdaptiveQuizState,
 ): "easy" | "medium" | "hard" {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -18,8 +18,11 @@ import {
   Brain,
   TrendingUp,
   TrendingDown,
+  Award,
+  Flame,
 } from "lucide-react";
 import { XP_REWARDS } from "@/lib/gamification";
+import { useAdaptiveLearningState } from "@/hooks/use-adaptive-learning-state";
 
 type Difficulty = "easy" | "medium" | "hard";
 
@@ -42,6 +45,7 @@ interface AdaptiveQuizPlayerProps {
   childId: string;
   lessonTitle: string;
   subject: string;
+  gradeLevel: string;
   onComplete?: (result: QuizResult) => void;
 }
 
@@ -79,6 +83,7 @@ export function AdaptiveQuizPlayer({
   childId,
   lessonTitle,
   subject,
+  gradeLevel,
   onComplete,
 }: AdaptiveQuizPlayerProps) {
   const [phase, setPhase] = useState<QuizPhase>("intro");
@@ -97,7 +102,36 @@ export function AdaptiveQuizPlayer({
   const [answeredCorrectly, setAnsweredCorrectly] = useState<
     Record<number, boolean>
   >({});
+  const [sessionAnswers, setSessionAnswers] = useState<
+    Array<{ difficulty: Difficulty; correct: boolean }>
+  >([]);
   const startTimeRef = useRef<number>(0);
+
+  // Persistent adaptive learning state
+  const {
+    state: persistentState,
+    isLoading: isLoadingState,
+    initialDifficulty,
+    masteryLevel,
+    totalSessions,
+    bestStreak: historicalBestStreak,
+    accuracy: historicalAccuracy,
+    saveSessionResults,
+  } = useAdaptiveLearningState({
+    childId,
+    subject,
+    gradeLevel,
+  });
+
+  // Initialize difficulty from persistent state
+  useEffect(() => {
+    if (persistentState && phase === "intro") {
+      setCurrentDifficulty(initialDifficulty);
+      // Restore consecutive counters from previous session
+      setConsecutiveCorrect(persistentState.consecutiveCorrect);
+      setConsecutiveWrong(persistentState.consecutiveWrong);
+    }
+  }, [persistentState, initialDifficulty, phase]);
 
   const currentQuestion = questions[currentIndex];
   const totalQuestions = 5; // Target number of questions
@@ -135,18 +169,22 @@ export function AdaptiveQuizPlayer({
   const handleStart = useCallback(async () => {
     setPhase("loading");
     setError(null);
+    setSessionAnswers([]); // Reset session answers
     startTimeRef.current = Date.now();
 
+    // Use persisted difficulty or default to medium
+    const startDifficulty = initialDifficulty || "medium";
+
     try {
-      const initialQuestions = await fetchQuestions("medium");
+      const initialQuestions = await fetchQuestions(startDifficulty);
       setQuestions(initialQuestions);
-      setCurrentDifficulty("medium");
+      setCurrentDifficulty(startDifficulty);
       setPhase("playing");
     } catch {
       setError("Impossible de charger les questions. Reessayez.");
       setPhase("intro");
     }
-  }, [fetchQuestions]);
+  }, [fetchQuestions, initialDifficulty]);
 
   // Handle answer selection
   const handleSelectAnswer = useCallback(
@@ -171,6 +209,12 @@ export function AdaptiveQuizPlayer({
 
     setAnsweredCorrectly((prev) => ({ ...prev, [currentIndex]: isCorrect }));
     setShowExplanation(true);
+
+    // Track session answer for persistence
+    setSessionAnswers((prev) => [
+      ...prev,
+      { difficulty: currentQuestion.difficulty, correct: isCorrect },
+    ]);
 
     // Update consecutive counters
     if (isCorrect) {
@@ -223,6 +267,20 @@ export function AdaptiveQuizPlayer({
     const percentage =
       totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0;
     const timeSpent = Math.round((Date.now() - startTimeRef.current) / 1000);
+
+    // Save adaptive learning state for persistence across sessions
+    const finalDifficulty = getNextDifficulty();
+    try {
+      await saveSessionResults(
+        sessionAnswers,
+        finalDifficulty,
+        consecutiveCorrect,
+        consecutiveWrong,
+      );
+    } catch (err) {
+      console.error("Failed to save adaptive state:", err);
+      // Continue with quiz submission even if state save fails
+    }
 
     // Submit to server for persistence and XP
     try {
@@ -283,6 +341,11 @@ export function AdaptiveQuizPlayer({
     lessonId,
     childId,
     onComplete,
+    sessionAnswers,
+    consecutiveCorrect,
+    consecutiveWrong,
+    getNextDifficulty,
+    saveSessionResults,
   ]);
 
   // Move to next question or finish
@@ -335,14 +398,25 @@ export function AdaptiveQuizPlayer({
     setSelectedAnswers({});
     setAnsweredCorrectly({});
     setResult(null);
-    setConsecutiveCorrect(0);
-    setConsecutiveWrong(0);
-    setCurrentDifficulty("medium");
+    setSessionAnswers([]);
+    // Keep difficulty from persistent state for continuity
+    if (persistentState) {
+      setConsecutiveCorrect(persistentState.consecutiveCorrect);
+      setConsecutiveWrong(persistentState.consecutiveWrong);
+      setCurrentDifficulty(initialDifficulty);
+    } else {
+      setConsecutiveCorrect(0);
+      setConsecutiveWrong(0);
+      setCurrentDifficulty("medium");
+    }
     setPhase("intro");
-  }, []);
+  }, [persistentState, initialDifficulty]);
 
   // Intro Screen
   if (phase === "intro") {
+    const hasPreviousProgress = totalSessions > 0;
+    const difficultyLabel = DIFFICULTY_CONFIG[initialDifficulty].label;
+
     return (
       <div className="rounded-2xl bg-white p-6 shadow-sm">
         <div className="text-center">
@@ -356,20 +430,70 @@ export function AdaptiveQuizPlayer({
             L&apos;IA ajuste la difficulte en fonction de tes performances
           </p>
 
-          <div className="mt-6 grid grid-cols-3 gap-3 text-sm">
-            <div className="rounded-xl bg-emerald-50 p-3">
-              <Sparkles className="mx-auto h-5 w-5 text-emerald-600" />
-              <p className="mt-1 font-medium text-emerald-700">Personnalise</p>
+          {/* Previous Progress Stats */}
+          {isLoadingState ? (
+            <div className="mt-4 flex items-center justify-center gap-2 text-sm text-gray-400">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Chargement de ta progression...
             </div>
-            <div className="rounded-xl bg-amber-50 p-3">
-              <TrendingUp className="mx-auto h-5 w-5 text-amber-600" />
-              <p className="mt-1 font-medium text-amber-700">Adaptatif</p>
+          ) : hasPreviousProgress ? (
+            <div className="mt-4 rounded-xl border border-violet-200 bg-gradient-to-r from-violet-50 to-purple-50 p-4">
+              <p className="mb-3 text-sm font-medium text-violet-800">
+                Ta progression en {subject}
+              </p>
+              <div className="grid grid-cols-4 gap-2 text-center">
+                <div className="rounded-lg bg-white/80 p-2">
+                  <Award className="mx-auto h-4 w-4 text-amber-500" />
+                  <p className="mt-1 text-lg font-bold text-gray-900">
+                    {masteryLevel}%
+                  </p>
+                  <p className="text-xs text-gray-500">Maitrise</p>
+                </div>
+                <div className="rounded-lg bg-white/80 p-2">
+                  <Target className="mx-auto h-4 w-4 text-violet-500" />
+                  <p className="mt-1 text-lg font-bold text-gray-900">
+                    {historicalAccuracy}%
+                  </p>
+                  <p className="text-xs text-gray-500">Precision</p>
+                </div>
+                <div className="rounded-lg bg-white/80 p-2">
+                  <Flame className="mx-auto h-4 w-4 text-orange-500" />
+                  <p className="mt-1 text-lg font-bold text-gray-900">
+                    {historicalBestStreak}
+                  </p>
+                  <p className="text-xs text-gray-500">Record</p>
+                </div>
+                <div className="rounded-lg bg-white/80 p-2">
+                  <CheckCircle2 className="mx-auto h-4 w-4 text-emerald-500" />
+                  <p className="mt-1 text-lg font-bold text-gray-900">
+                    {totalSessions}
+                  </p>
+                  <p className="text-xs text-gray-500">Sessions</p>
+                </div>
+              </div>
+              <p className="mt-3 text-xs text-violet-600">
+                Niveau recommande:{" "}
+                <span className="font-semibold">{difficultyLabel}</span>
+              </p>
             </div>
-            <div className="rounded-xl bg-violet-50 p-3">
-              <Target className="mx-auto h-5 w-5 text-violet-600" />
-              <p className="mt-1 font-medium text-violet-700">5 questions</p>
+          ) : (
+            <div className="mt-6 grid grid-cols-3 gap-3 text-sm">
+              <div className="rounded-xl bg-emerald-50 p-3">
+                <Sparkles className="mx-auto h-5 w-5 text-emerald-600" />
+                <p className="mt-1 font-medium text-emerald-700">
+                  Personnalise
+                </p>
+              </div>
+              <div className="rounded-xl bg-amber-50 p-3">
+                <TrendingUp className="mx-auto h-5 w-5 text-amber-600" />
+                <p className="mt-1 font-medium text-amber-700">Adaptatif</p>
+              </div>
+              <div className="rounded-xl bg-violet-50 p-3">
+                <Target className="mx-auto h-5 w-5 text-violet-600" />
+                <p className="mt-1 font-medium text-violet-700">5 questions</p>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="mt-4 rounded-lg bg-violet-50 p-3">
             <p className="text-sm text-violet-700">
@@ -390,10 +514,13 @@ export function AdaptiveQuizPlayer({
 
           <Button
             onClick={handleStart}
+            disabled={isLoadingState}
             className="mt-6 gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700"
             size="lg"
           >
-            Commencer le quiz
+            {hasPreviousProgress
+              ? "Continuer l'entrainement"
+              : "Commencer le quiz"}
             <ArrowRight className="h-4 w-4" />
           </Button>
         </div>

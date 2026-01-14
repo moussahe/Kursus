@@ -264,6 +264,7 @@ async function LessonViewer({
           lessonId={lesson.id}
           lessonTitle={lesson.title}
           subject={course.subject}
+          gradeLevel={course.gradeLevel}
           childId={childId}
           previousScore={quizScore}
         />

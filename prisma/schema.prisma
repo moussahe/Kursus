@@ -171,6 +171,7 @@ model Child {
   alerts           Alert[]
   quizAttempts     QuizAttempt[]
   studyGoals       StudyGoal[]
+  adaptiveLearningStates AdaptiveLearningState[]
 
   @@index([parentId])
   @@index([gradeLevel])
@@ -833,6 +834,57 @@ model WeakArea {
   @@index([isResolved])
   @@index([errorCount])
   @@index([lastErrorAt])
+}
+
+// ============ ADAPTIVE LEARNING STATE ============
+
+// Persists the adaptive quiz state for each child per subject
+// This allows the system to remember difficulty levels and performance across sessions
+model AdaptiveLearningState {
+  id              String     @id @default(cuid())
+  childId         String
+  subject         Subject
+  gradeLevel      GradeLevel
+
+  // Current adaptive state
+  currentDifficulty String   @default("medium") // easy, medium, hard
+  consecutiveCorrect Int     @default(0)
+  consecutiveWrong   Int     @default(0)
+
+  // Cumulative performance metrics (across all sessions)
+  totalQuestionsAnswered Int @default(0)
+  totalCorrect          Int  @default(0)
+  totalWrong            Int  @default(0)
+
+  // Performance by difficulty (JSON: {easy: {total, correct}, medium: {...}, hard: {...}})
+  difficultyBreakdown   Json @default("{\"easy\":{\"total\":0,\"correct\":0},\"medium\":{\"total\":0,\"correct\":0},\"hard\":{\"total\":0,\"correct\":0}}")
+
+  // Streak tracking
+  currentStreak   Int       @default(0)
+  bestStreak      Int       @default(0)
+
+  // Recent performance history (last 50 answers for trend analysis)
+  // JSON: [{difficulty: "easy"|"medium"|"hard", correct: boolean, timestamp: string}]
+  recentHistory   Json      @default("[]")
+
+  // Mastery tracking
+  masteryLevel    Int       @default(0) // 0-100, based on sustained performance
+  lastMasteryUpdate DateTime?
+
+  // Session tracking
+  totalSessions   Int       @default(0)
+  lastSessionAt   DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  child           Child     @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@unique([childId, subject, gradeLevel])
+  @@index([childId])
+  @@index([subject])
+  @@index([gradeLevel])
+  @@index([masteryLevel])
 }
 
 // ============ STUDY GOALS ============

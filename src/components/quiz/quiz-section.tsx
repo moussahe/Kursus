@@ -30,6 +30,7 @@ interface QuizSectionProps {
   lessonId: string;
   lessonTitle: string;
   subject: string;
+  gradeLevel: string;
   childId: string;
   previousScore: number | null;
 }
@@ -41,6 +42,7 @@ export function QuizSection({
   lessonId,
   lessonTitle,
   subject,
+  gradeLevel,
   childId,
   previousScore,
 }: QuizSectionProps) {
@@ -163,6 +165,7 @@ export function QuizSection({
           childId={childId}
           lessonTitle={lessonTitle}
           subject={subject}
+          gradeLevel={gradeLevel}
         />
       )}
     </div>
