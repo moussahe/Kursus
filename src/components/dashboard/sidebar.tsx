@@ -11,7 +11,6 @@ import {
   ShoppingBag,
   BarChart3,
   Settings,
-  CreditCard,
   HelpCircle,
   type LucideIcon,
 } from "lucide-react";
