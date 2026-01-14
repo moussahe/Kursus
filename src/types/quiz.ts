@@ -55,6 +55,7 @@ export interface QuizResult {
   answers: QuizAnswer[];
   feedback?: string; // AI-generated feedback
   recommendations?: string[]; // Areas to improve
+  timeExpired?: boolean; // True if quiz was auto-submitted due to time limit
 }
 
 export interface QuizSubmissionRequest {

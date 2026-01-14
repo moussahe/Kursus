@@ -17,6 +17,7 @@ import {
   MessageCircle,
   AlertTriangle,
   RefreshCw,
+  Clock,
 } from "lucide-react";
 import type { Quiz, QuizResult, AdaptiveQuizState } from "@/types/quiz";
 
@@ -41,7 +42,14 @@ export function QuizResults({
   submitError,
   onRetrySubmit,
 }: QuizResultsProps) {
-  const { passed, percentage, correctCount, totalQuestions, feedback } = result;
+  const {
+    passed,
+    percentage,
+    correctCount,
+    totalQuestions,
+    feedback,
+    timeExpired,
+  } = result;
 
   // Calculate performance level
   const getPerformanceLevel = () => {
@@ -65,6 +73,24 @@ export function QuizResults({
 
   return (
     <div className="space-y-6">
+      {/* Time Expired Banner */}
+      {timeExpired && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
+              <Clock className="h-5 w-5 text-amber-600" />
+            </div>
+            <div>
+              <p className="font-medium text-amber-800">Temps ecoule</p>
+              <p className="text-sm text-amber-700">
+                Le quiz a ete automatiquement soumis car le temps imparti etait
+                ecoule. Toutes tes reponses ont ete enregistrees.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Result Header */}
       <div
         className={cn(

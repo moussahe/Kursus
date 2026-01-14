@@ -20,6 +20,7 @@ import {
 import type { Quiz, QuizResult, AdaptiveQuizState } from "@/types/quiz";
 import { QuizResults } from "./quiz-results";
 import { QuizQuestionHelp } from "./quiz-question-help";
+import { QuizTimer } from "./quiz-timer";
 
 interface QuizPlayerProps {
   quiz: Quiz;
@@ -72,6 +73,8 @@ export function QuizPlayer({
     Record<string, boolean>
   >({});
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isTimerActive, setIsTimerActive] = useState(false);
+  const [timeExpired, setTimeExpired] = useState(false);
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
   const totalQuestions = quiz.questions.length;
@@ -88,6 +91,8 @@ export function QuizPlayer({
     setPhase("playing");
     setStartTime(Date.now());
     setQuestionStartTime(Date.now());
+    setIsTimerActive(true);
+    setTimeExpired(false);
   }, []);
 
   const handleSelectAnswer = useCallback(
@@ -195,9 +200,15 @@ export function QuizPlayer({
 
   const handleSubmit = useCallback(async () => {
     setIsSubmitting(true);
+    setIsTimerActive(false); // Stop timer on submit
     setSubmitError(null);
     const quizResult = calculateResults();
     const totalTimeSpent = Math.round((Date.now() - startTime) / 1000);
+
+    // Add time expired flag to result if applicable
+    if (timeExpired) {
+      quizResult.timeExpired = true;
+    }
 
     // Save to API if childId is provided
     if (childId) {
@@ -245,7 +256,22 @@ export function QuizPlayer({
     lessonId,
     selectedAnswers,
     onComplete,
+    timeExpired,
   ]);
+
+  // Handle timer expiration - defined after handleSubmit to avoid circular dependency
+  const handleTimeUp = useCallback(() => {
+    setTimeExpired(true);
+    setIsTimerActive(false);
+    // Auto-submit when time expires - will be called on next render cycle
+  }, []);
+
+  // Effect to auto-submit when time expires
+  useEffect(() => {
+    if (timeExpired && phase === "playing" && !isSubmitting) {
+      handleSubmit();
+    }
+  }, [timeExpired, phase, isSubmitting, handleSubmit]);
 
   const handleRetry = useCallback(() => {
     setSelectedAnswers({});
@@ -255,6 +281,8 @@ export function QuizPlayer({
     setAnsweredCorrectly({});
     setTimePerQuestion({});
     setSubmitError(null);
+    setIsTimerActive(false);
+    setTimeExpired(false);
     setAdaptiveState({
       currentDifficulty: "medium",
       consecutiveCorrect: 0,
@@ -339,6 +367,30 @@ export function QuizPlayer({
           )}
         </div>
 
+        {/* Timer Warning */}
+        {quiz.timeLimit && (
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
+                <Clock className="h-5 w-5 text-amber-600" />
+              </div>
+              <div>
+                <p className="font-medium text-amber-800">Quiz chronometre</p>
+                <p className="text-sm text-amber-700">
+                  Vous avez{" "}
+                  <span className="font-semibold">
+                    {Math.floor(quiz.timeLimit / 60)} minutes
+                    {quiz.timeLimit % 60 > 0 &&
+                      ` et ${quiz.timeLimit % 60} secondes`}
+                  </span>{" "}
+                  pour completer ce quiz. Le quiz sera automatiquement soumis
+                  lorsque le temps sera ecoule.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="rounded-xl border border-gray-200 bg-white p-6">
           <h3 className="font-semibold text-gray-900">Instructions</h3>
           <ul className="mt-3 space-y-2 text-sm text-gray-600">
@@ -352,6 +404,15 @@ export function QuizPlayer({
                 Vous pouvez revenir sur vos reponses avant de terminer
               </span>
             </li>
+            {quiz.timeLimit && (
+              <li className="flex items-start gap-2">
+                <Clock className="mt-0.5 h-4 w-4 text-amber-500" />
+                <span>
+                  Le chronometre demarre des que vous cliquez sur
+                  &quot;Commencer&quot;
+                </span>
+              </li>
+            )}
             {showHints && (
               <li className="flex items-start gap-2">
                 <Lightbulb className="mt-0.5 h-4 w-4 text-amber-500" />
@@ -406,6 +467,17 @@ export function QuizPlayer({
           )}
         </div>
         <div className="flex items-center gap-4">
+          {/* Timer */}
+          {quiz.timeLimit && (
+            <QuizTimer
+              totalSeconds={quiz.timeLimit}
+              onTimeUp={handleTimeUp}
+              isActive={isTimerActive}
+              compact
+              warningThreshold={Math.min(60, Math.floor(quiz.timeLimit * 0.2))}
+              criticalThreshold={Math.min(30, Math.floor(quiz.timeLimit * 0.1))}
+            />
+          )}
           {/* AI Help Button */}
           {childId && subject && gradeLevel && !isShowingExplanation && (
             <QuizQuestionHelp
