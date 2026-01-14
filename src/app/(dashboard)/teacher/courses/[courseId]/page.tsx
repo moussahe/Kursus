@@ -2,13 +2,14 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Eye, Globe, GlobeLock } from "lucide-react";
+import { ArrowLeft, Eye, Globe, GlobeLock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CourseEditForm } from "@/components/teacher/course-edit-form";
 import { ChapterList } from "@/components/teacher/chapter-list";
 import { CoursePublishDialog } from "@/components/teacher/course-publish-dialog";
+import { CourseStudentsTab } from "@/components/teacher/course-students-tab";
 
 interface PageProps {
   params: Promise<{ courseId: string }>;
@@ -123,6 +124,13 @@ export default async function EditCoursePage({ params }: PageProps) {
           <TabsTrigger value="content" className="rounded-lg">
             Contenu
           </TabsTrigger>
+          <TabsTrigger
+            value="students"
+            className="rounded-lg flex items-center gap-1.5"
+          >
+            <Users className="h-4 w-4" />
+            Etudiants
+          </TabsTrigger>
           <TabsTrigger value="settings" className="rounded-lg">
             Parametres
           </TabsTrigger>
@@ -130,6 +138,10 @@ export default async function EditCoursePage({ params }: PageProps) {
 
         <TabsContent value="content" className="space-y-6">
           <ChapterList courseId={course.id} chapters={course.chapters} />
+        </TabsContent>
+
+        <TabsContent value="students">
+          <CourseStudentsTab courseId={course.id} />
         </TabsContent>
 
         <TabsContent value="settings">
