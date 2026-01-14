@@ -23,6 +23,7 @@ import {
   XPProgress,
   StreakCounter,
   BadgeDisplay,
+  LeaderboardCard,
 } from "@/components/gamification";
 
 async function getStudentData(childId: string) {
@@ -313,9 +314,9 @@ async function StudentDashboard({ childId }: { childId: string }) {
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-3">
         {/* Courses */}
-        <div className="rounded-2xl bg-white p-6 shadow-sm">
+        <div className="rounded-2xl bg-white p-6 shadow-sm lg:col-span-2">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-900">Mes Cours</h2>
             <Link
@@ -386,6 +387,16 @@ async function StudentDashboard({ childId }: { childId: string }) {
           )}
         </div>
 
+        {/* Leaderboard */}
+        <LeaderboardCard
+          childId={child.id}
+          gradeLevel={child.gradeLevel}
+          compact
+        />
+      </div>
+
+      {/* Activity and Leaderboard Row */}
+      <div className="grid gap-6 lg:grid-cols-2">
         {/* Recent Activity */}
         <div className="rounded-2xl bg-white p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-gray-900">
