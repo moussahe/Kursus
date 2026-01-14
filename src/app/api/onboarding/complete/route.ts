@@ -32,12 +32,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Enfant non trouve" }, { status: 404 });
     }
 
-    // Store onboarding preferences in user metadata
-    // We'll update the user record with onboarding completion flag
+    // Mark onboarding as completed
     await prisma.user.update({
       where: { id: session.user.id },
       data: {
-        emailVerified: new Date(), // Mark as onboarded (reusing this field)
+        onboardingCompletedAt: new Date(),
       },
     });
 

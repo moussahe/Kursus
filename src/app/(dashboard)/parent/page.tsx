@@ -24,6 +24,26 @@ import { GoalsPanel } from "@/components/goals";
 import { PredictiveAnalyticsPanel } from "@/components/parent/predictive-analytics-panel";
 import { AITutorMonitoringPanel } from "@/components/parent/ai-tutor-monitoring-panel";
 import { ReferralPanel } from "@/components/parent/referral-panel";
+import { OnboardingBanner } from "@/components/parent/onboarding-banner";
+
+async function getOnboardingStatus(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      name: true,
+      onboardingCompletedAt: true,
+      _count: {
+        select: { children: true },
+      },
+    },
+  });
+
+  return {
+    isCompleted: !!user?.onboardingCompletedAt,
+    userName: user?.name?.split(" ")[0] ?? undefined,
+    hasChildren: (user?._count.children ?? 0) > 0,
+  };
+}
 
 async function getParentStats(userId: string) {
   const [children, purchases, recentProgress] = await Promise.all([
@@ -768,6 +788,22 @@ async function PredictiveAnalyticsSection({ userId }: { userId: string }) {
   );
 }
 
+async function OnboardingSection({ userId }: { userId: string }) {
+  const status = await getOnboardingStatus(userId);
+
+  // Don't show if onboarding is completed
+  if (status.isCompleted) {
+    return null;
+  }
+
+  return (
+    <OnboardingBanner
+      userName={status.userName}
+      hasChildren={status.hasChildren}
+    />
+  );
+}
+
 async function AITutorMonitoringSection({ userId }: { userId: string }) {
   // Get children for this parent
   const children = await prisma.child.findMany({
@@ -848,6 +884,11 @@ export default async function ParentDashboardPage() {
           Voici un apercu de l&apos;activite de vos enfants.
         </p>
       </div>
+
+      {/* Onboarding Banner - Show if not completed */}
+      <Suspense fallback={null}>
+        <OnboardingSection userId={userId} />
+      </Suspense>
 
       {/* Stats */}
       <Suspense
