@@ -160,6 +160,7 @@ Attentes:
 | Parcours IA personnalisé  | Efficacité       | ✅ Done |
 | Rapports hebdo parents    | Satisfaction     | ✅ Done |
 | Exercices génératifs IA   | Pratique infinie | ✅ Done |
+| Classement (Leaderboard)  | Compétition      | ✅ Done |
 
 ### Phase 3: Scale (M7-M12) 🟢 NICE TO HAVE
 
