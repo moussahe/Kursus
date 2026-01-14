@@ -149,12 +149,36 @@ export interface ChatContext {
   subject: string;
   courseTitle?: string;
   lessonTitle?: string;
+  lessonContent?: string;
 }
 
 // Fonction pour générer le system prompt avec contexte
 export function getHomeworkHelperPrompt(context: ChatContext): string {
-  return SYSTEM_PROMPTS.HOMEWORK_HELPER.replace("{level}", context.level)
+  let prompt = SYSTEM_PROMPTS.HOMEWORK_HELPER.replace("{level}", context.level)
     .replace("{subject}", context.subject)
     .replace("{courseTitle}", context.courseTitle || "Non spécifié")
     .replace("{lessonTitle}", context.lessonTitle || "Non spécifié");
+
+  // Inject lesson content if available (enables contextual help)
+  if (context.lessonContent) {
+    const truncatedContent =
+      context.lessonContent.length > 4000
+        ? context.lessonContent.substring(0, 4000) + "...[contenu tronqué]"
+        : context.lessonContent;
+
+    prompt += `
+
+## Contenu de la leçon actuelle
+<lesson-content>
+${truncatedContent}
+</lesson-content>
+
+Tu as acces au contenu complet de la lecon ci-dessus. Utilise ces informations pour:
+- Repondre aux questions specifiques sur le cours
+- Donner des exemples tires directement de la lecon
+- Guider l'eleve vers les parties pertinentes du contenu
+- Verifier que tes explications sont coherentes avec ce qui est enseigne`;
+  }
+
+  return prompt;
 }

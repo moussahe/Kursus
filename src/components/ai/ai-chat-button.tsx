@@ -11,6 +11,7 @@ interface ChatContext {
   subject: string;
   courseTitle?: string;
   lessonTitle?: string;
+  lessonContent?: string;
 }
 
 interface AIChatButtonProps {

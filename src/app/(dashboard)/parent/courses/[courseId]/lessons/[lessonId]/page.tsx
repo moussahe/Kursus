@@ -355,13 +355,14 @@ async function LessonViewer({
         )}
       </div>
 
-      {/* AI Assistant Button */}
+      {/* AI Assistant Button - with lesson content for contextual help */}
       <AIChatButton
         context={{
           level: lesson.chapter.course.gradeLevel,
           subject: lesson.chapter.course.subject,
           courseTitle: lesson.chapter.course.title,
           lessonTitle: lesson.title,
+          lessonContent: lesson.content || undefined,
         }}
       />
     </div>

@@ -17,6 +17,7 @@ const chatRequestSchema = z.object({
     subject: z.string(),
     courseTitle: z.string().optional(),
     lessonTitle: z.string().optional(),
+    lessonContent: z.string().optional(),
   }),
 });
 

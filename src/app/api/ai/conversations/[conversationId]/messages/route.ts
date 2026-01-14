@@ -15,6 +15,7 @@ const sendMessageSchema = z.object({
     subject: z.string(),
     courseTitle: z.string().optional(),
     lessonTitle: z.string().optional(),
+    lessonContent: z.string().optional(),
   }),
 });
 
@@ -101,6 +102,40 @@ export async function POST(
       );
     }
 
+    // Fetch lesson content if lessonId is available (for contextual AI help)
+    let lessonData: {
+      content: string | null;
+      title: string;
+      chapter: {
+        course: {
+          title: string;
+          subject: string;
+          gradeLevel: string;
+        };
+      };
+    } | null = null;
+
+    if (conversation.lessonId) {
+      lessonData = await prisma.lesson.findUnique({
+        where: { id: conversation.lessonId },
+        select: {
+          content: true,
+          title: true,
+          chapter: {
+            select: {
+              course: {
+                select: {
+                  title: true,
+                  subject: true,
+                  gradeLevel: true,
+                },
+              },
+            },
+          },
+        },
+      });
+    }
+
     // Sauvegarder le message utilisateur
     const userMessage = await prisma.aIMessage.create({
       data: {
@@ -121,8 +156,24 @@ export async function POST(
       { role: "user" as const, content },
     ];
 
-    // Generer le system prompt
-    const systemPrompt = getHomeworkHelperPrompt(context);
+    // Enrichir le contexte avec le contenu de la lecon si disponible
+    const enrichedContext = { ...context };
+    if (lessonData) {
+      enrichedContext.lessonContent =
+        context.lessonContent || lessonData.content || undefined;
+      enrichedContext.lessonTitle = context.lessonTitle || lessonData.title;
+      if (lessonData.chapter?.course) {
+        enrichedContext.courseTitle =
+          context.courseTitle || lessonData.chapter.course.title;
+        enrichedContext.subject =
+          context.subject || lessonData.chapter.course.subject;
+        enrichedContext.level =
+          context.level || lessonData.chapter.course.gradeLevel;
+      }
+    }
+
+    // Generer le system prompt avec contenu de lecon injecte
+    const systemPrompt = getHomeworkHelperPrompt(enrichedContext);
 
     // Appeler Claude
     const response = await anthropic.messages.create({
