@@ -202,16 +202,34 @@ async function StudentDashboard({ childId }: { childId: string }) {
     (c) => c.progress < 100 && c.nextLesson,
   );
 
+  // Motivational message based on streak
+  const getMotivationalMessage = () => {
+    if (child.currentStreak >= 7) {
+      return `${child.currentStreak} jours d'affilee ! Tu es incroyable !`;
+    } else if (child.currentStreak >= 3) {
+      return `Super serie de ${child.currentStreak} jours ! Continue comme ca !`;
+    } else if (child.currentStreak === 1) {
+      return "Belle journee pour apprendre quelque chose de nouveau !";
+    }
+    return "Pret a apprendre quelque chose de nouveau aujourd'hui ?";
+  };
+
   return (
     <div className="space-y-6">
-      {/* Welcome Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">
-          Salut, {child.firstName} !
-        </h1>
-        <p className="mt-1 text-gray-500">
-          Pret a apprendre quelque chose de nouveau aujourd&apos;hui ?
-        </p>
+      {/* Welcome Header with motivational message */}
+      <div className="flex items-start justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Salut, {child.firstName} !
+          </h1>
+          <p className="mt-1 text-gray-500">{getMotivationalMessage()}</p>
+        </div>
+        {child.currentStreak >= 3 && (
+          <div className="flex items-center gap-2 rounded-full bg-orange-100 px-3 py-1.5 text-sm font-medium text-orange-700">
+            <TrendingUp className="h-4 w-4" />
+            En feu !
+          </div>
+        )}
       </div>
 
       {/* Continue Learning CTA */}

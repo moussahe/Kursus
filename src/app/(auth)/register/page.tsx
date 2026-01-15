@@ -359,12 +359,12 @@ function RegisterForm() {
         </div>
       </div>
 
-      {/* Right side - Image/Gradient */}
+      {/* Right side - Image/Gradient with Social Proof */}
       <div className="relative hidden flex-1 lg:block">
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600">
           <div className="absolute inset-0 bg-grid-pattern opacity-10" />
         </div>
-        <div className="relative flex h-full items-center justify-center p-12">
+        <div className="relative flex h-full flex-col items-center justify-center p-12">
           <div className="max-w-md text-white">
             <h3 className="text-3xl font-bold">
               {selectedRole === "TEACHER"
@@ -376,6 +376,38 @@ function RegisterForm() {
                 ? "Creez des cours de qualite et generez des revenus complementaires. Gardez 70% de chaque vente."
                 : "Achetez des cours crees par de vrais professeurs. Un paiement unique, un acces a vie."}
             </p>
+
+            {/* Social proof stats */}
+            <div className="mt-8 grid grid-cols-3 gap-4">
+              <div className="text-center">
+                <p className="text-2xl font-bold">15K+</p>
+                <p className="text-xs text-emerald-100">Eleves</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold">300+</p>
+                <p className="text-xs text-emerald-100">Professeurs</p>
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-bold">98%</p>
+                <p className="text-xs text-emerald-100">Satisfaction</p>
+              </div>
+            </div>
+
+            {/* Testimonial */}
+            <div className="mt-8 rounded-xl bg-white/10 p-4 backdrop-blur-sm">
+              <p className="text-sm italic text-emerald-50">
+                &quot;
+                {selectedRole === "TEACHER"
+                  ? "J'ai pu partager mes cours avec des centaines d'eleves. La plateforme est intuitive et le support excellent."
+                  : "Mon fils a fait des progres incroyables en maths grace aux cours sur Schoolaris. Je recommande !"}
+                &quot;
+              </p>
+              <p className="mt-2 text-xs text-emerald-200">
+                {selectedRole === "TEACHER"
+                  ? "- Marie D., Professeur de Mathematiques"
+                  : "- Sophie L., Maman de Lucas (CM2)"}
+              </p>
+            </div>
           </div>
         </div>
       </div>

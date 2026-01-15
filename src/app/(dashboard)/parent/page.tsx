@@ -10,6 +10,8 @@ import {
   ArrowRight,
   Clock,
   CheckCircle2,
+  Sparkles,
+  Calendar,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -25,6 +27,7 @@ import { PredictiveAnalyticsPanel } from "@/components/parent/predictive-analyti
 import { AITutorMonitoringPanel } from "@/components/parent/ai-tutor-monitoring-panel";
 import { ReferralPanel } from "@/components/parent/referral-panel";
 import { OnboardingBanner } from "@/components/parent/onboarding-banner";
+import { ChildSelector } from "@/components/parent/child-selector";
 
 async function getOnboardingStatus(userId: string) {
   const user = await prisma.user.findUnique({
@@ -43,6 +46,65 @@ async function getOnboardingStatus(userId: string) {
     userName: user?.name?.split(" ")[0] ?? undefined,
     hasChildren: (user?._count.children ?? 0) > 0,
   };
+}
+
+// Fetch all children ONCE for the entire page (prevents N+1)
+async function getChildrenForSelector(userId: string) {
+  const children = await prisma.child.findMany({
+    where: { parentId: userId },
+    select: {
+      id: true,
+      firstName: true,
+      gradeLevel: true,
+      xp: true,
+      level: true,
+      currentStreak: true,
+    },
+    orderBy: { createdAt: "asc" },
+  });
+
+  // Transform to match ChildSelector interface
+  return children.map((child) => ({
+    ...child,
+    streak: child.currentStreak,
+  }));
+}
+
+// Welcome section with day context
+function WelcomeSection({ userName }: { userName?: string }) {
+  const hour = new Date().getHours();
+  let greeting = "Bonjour";
+  if (hour >= 18) greeting = "Bonsoir";
+  else if (hour < 6) greeting = "Bonne nuit";
+
+  const today = new Date().toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
+
+  return (
+    <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h1 className="text-2xl font-bold text-gray-900">
+          {greeting}, {userName ?? "Parent"} !
+        </h1>
+        <p className="mt-1 text-gray-500 flex items-center gap-2">
+          <Calendar className="h-4 w-4" />
+          {today.charAt(0).toUpperCase() + today.slice(1)}
+        </p>
+      </div>
+      <div className="flex items-center gap-2 mt-2 sm:mt-0">
+        <Link
+          href="/courses"
+          className="inline-flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100 transition-colors"
+        >
+          <Sparkles className="h-4 w-4" />
+          Decouvrir les cours
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 async function getParentStats(userId: string) {
@@ -882,6 +944,12 @@ function formatGradeLevel(level: string): string {
   return levels[level] || level;
 }
 
+// Async wrapper for ChildSelector
+async function ChildSelectorSection({ userId }: { userId: string }) {
+  const childrenData = await getChildrenForSelector(userId);
+  return <ChildSelector childrenList={childrenData} />;
+}
+
 export default async function ParentDashboardPage() {
   const session = await auth();
   const userId = session?.user?.id;
@@ -892,19 +960,17 @@ export default async function ParentDashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Welcome */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">
-          Bonjour, {session.user.name?.split(" ")[0] ?? "Parent"} !
-        </h1>
-        <p className="mt-1 text-gray-500">
-          Voici un apercu de l&apos;activite de vos enfants.
-        </p>
-      </div>
+      {/* Welcome with date */}
+      <WelcomeSection userName={session.user.name?.split(" ")[0]} />
 
       {/* Onboarding Banner - Show if not completed */}
       <Suspense fallback={null}>
         <OnboardingSection userId={userId} />
+      </Suspense>
+
+      {/* Child Selector - Visual cards for each child */}
+      <Suspense fallback={<Skeleton className="h-32 rounded-2xl" />}>
+        <ChildSelectorSection userId={userId} />
       </Suspense>
 
       {/* Stats */}

@@ -153,9 +153,15 @@ function CourseCardComponent({ course }: CourseCardProps) {
 
           {/* Price */}
           <div className="mt-4 flex items-center justify-between border-t pt-4">
-            <span className="text-lg font-bold text-primary">
-              {formatPrice(course.price)}
-            </span>
+            {course.price === 0 ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-700">
+                Gratuit
+              </span>
+            ) : (
+              <span className="text-lg font-bold text-primary">
+                {formatPrice(course.price)}
+              </span>
+            )}
             <span className="text-xs text-muted-foreground">
               {course.totalLessons} lecons
             </span>

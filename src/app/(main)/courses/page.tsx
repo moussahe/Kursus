@@ -4,9 +4,11 @@ import { prisma } from "@/lib/prisma";
 import { CourseCard } from "@/components/courses/course-card";
 import { CourseCatalogFilters } from "@/components/courses/course-filters";
 import { CourseCatalogHeader } from "@/components/courses/course-catalog-header";
+import { ActiveFilterBadges } from "@/components/courses/active-filter-badges";
+import { QuickFilterChips } from "@/components/courses/quick-filter-chips";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles, TrendingUp } from "lucide-react";
 import { GradeLevel, Subject } from "@prisma/client";
 
 const COURSES_PER_PAGE = 12;
@@ -60,15 +62,16 @@ async function getCourses(searchParams: SearchParams) {
     ];
   }
 
-  // Sort order
-  type OrderBy =
+  // Sort order with weighted rating for "note" (rating + review count)
+  type OrderByItem =
     | { publishedAt: "desc" }
     | { price: "asc" }
     | { price: "desc" }
     | { averageRating: "desc" }
+    | { reviewCount: "desc" }
     | { totalStudents: "desc" };
 
-  let orderBy: OrderBy = { publishedAt: "desc" };
+  let orderBy: OrderByItem | OrderByItem[] = { publishedAt: "desc" };
 
   switch (searchParams.tri) {
     case "prix-asc":
@@ -78,7 +81,9 @@ async function getCourses(searchParams: SearchParams) {
       orderBy = { price: "desc" };
       break;
     case "note":
-      orderBy = { averageRating: "desc" };
+      // Compound sort: rating first, then review count as tiebreaker
+      // This ensures 4.8 with 500 reviews beats 5.0 with 1 review
+      orderBy = [{ averageRating: "desc" }, { reviewCount: "desc" }];
       break;
     case "populaire":
       orderBy = { totalStudents: "desc" };
@@ -306,7 +311,7 @@ async function CoursesList({ searchParams }: { searchParams: SearchParams }) {
   if (courses.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 mb-4">
+        <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-emerald-100 to-teal-100 mb-4">
           <svg
             className="h-10 w-10 text-emerald-600"
             fill="none"
@@ -327,16 +332,57 @@ async function CoursesList({ searchParams }: { searchParams: SearchParams }) {
         <p className="mt-2 text-gray-500 max-w-sm">
           Essayez de modifier vos filtres ou effectuez une nouvelle recherche.
         </p>
+
+        {/* Suggestions */}
+        <div className="mt-8 space-y-3">
+          <p className="text-sm font-medium text-gray-700">Suggestions :</p>
+          <div className="flex flex-wrap justify-center gap-2">
+            <Link
+              href="/courses?matiere=MATHEMATIQUES"
+              className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100 transition-colors"
+            >
+              <TrendingUp className="h-4 w-4" />
+              Mathematiques
+            </Link>
+            <Link
+              href="/courses?matiere=FRANCAIS"
+              className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 transition-colors"
+            >
+              Francais
+            </Link>
+            <Link
+              href="/courses?tri=populaire"
+              className="inline-flex items-center gap-1 rounded-full bg-purple-50 px-4 py-2 text-sm font-medium text-purple-700 hover:bg-purple-100 transition-colors"
+            >
+              <Sparkles className="h-4 w-4" />
+              Les plus populaires
+            </Link>
+          </div>
+        </div>
+
+        {/* Clear filters button */}
+        <Link
+          href="/courses"
+          className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-emerald-600 hover:text-emerald-700"
+        >
+          Voir tous les cours
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
-      {/* Results count */}
+    <div className="space-y-6">
+      {/* Active filter badges */}
+      <ActiveFilterBadges />
+
+      {/* Results count with better formatting */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-500">
-          {pagination.totalCount} cours trouves
+        <p className="text-sm text-gray-600">
+          <span className="font-semibold text-gray-900">
+            {pagination.totalCount}
+          </span>{" "}
+          cours trouves
         </p>
         <p className="text-sm text-gray-500">
           Page {pagination.currentPage} sur {pagination.totalPages}
@@ -382,6 +428,11 @@ export default async function CoursesPage({
 
           {/* Course Grid */}
           <main className="flex-1">
+            {/* Quick Filter Chips */}
+            <Suspense fallback={null}>
+              <QuickFilterChips />
+            </Suspense>
+
             <Suspense fallback={<CoursesSkeleton />}>
               <CoursesList searchParams={params} />
             </Suspense>
