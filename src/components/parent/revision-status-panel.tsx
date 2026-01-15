@@ -149,7 +149,7 @@ export function RevisionStatusPanel({
             <p className="text-xl font-bold text-gray-900">
               {Math.round(stats.successRate)}%
             </p>
-            <p className="text-xs text-gray-500">Reussite</p>
+            <p className="text-xs text-gray-500">Réussite</p>
           </div>
         </div>
 

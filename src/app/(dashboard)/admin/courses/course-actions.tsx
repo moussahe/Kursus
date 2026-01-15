@@ -142,7 +142,7 @@ export function CourseActions({ courseId, isPublished }: CourseActionsProps) {
             <AlertDialogTitle>Supprimer le cours ?</AlertDialogTitle>
             <AlertDialogDescription>
               Cette action est irreversible. Le cours et tout son contenu
-              (chapitres, lecons, quiz) seront definitivement supprimes.
+              (chapitres, leçons, quiz) seront definitivement supprimes.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

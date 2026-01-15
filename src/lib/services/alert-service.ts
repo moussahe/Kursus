@@ -71,7 +71,7 @@ export async function checkInactivityAlerts() {
         type: "INACTIVITY",
         priority: "HIGH",
         title: `${child.firstName} n'a pas etudie depuis ${inactivityThresholdDays} jours`,
-        message: `${child.firstName} n'a pas accede a ses cours depuis ${inactivityThresholdDays} jours. Un petit rappel pourrait l'encourager a reprendre ses lecons !`,
+        message: `${child.firstName} n'a pas accede a ses cours depuis ${inactivityThresholdDays} jours. Un petit rappel pourrait l'encourager a reprendre ses leçons !`,
         metadata: {
           daysSinceActivity: inactivityThresholdDays,
           courses: child.purchases.map((p) => p.course.title),
@@ -395,7 +395,7 @@ export async function createWeeklyReportAlerts() {
         : null;
 
     const childrenSummary = stats
-      .map((s) => `${s.childName}: ${s.lessonsCompleted} lecons`)
+      .map((s) => `${s.childName}: ${s.lessonsCompleted} leçons`)
       .join(", ");
 
     await createAlert({
@@ -403,7 +403,7 @@ export async function createWeeklyReportAlerts() {
       type: "WEEKLY_REPORT",
       priority: "MEDIUM",
       title: "Rapport hebdomadaire",
-      message: `Cette semaine: ${totalLessons} lecons completees, ${Math.round(totalTime / 60)} min d'etude${overallAvg ? `, moyenne quiz: ${overallAvg}%` : ""}. (${childrenSummary})`,
+      message: `Cette semaine: ${totalLessons} leçons completees, ${Math.round(totalTime / 60)} min d'etude${overallAvg ? `, moyenne quiz: ${overallAvg}%` : ""}. (${childrenSummary})`,
       metadata: { stats: JSON.parse(JSON.stringify(stats)) },
       actionUrl: "/parent/children",
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Expires in 7 days

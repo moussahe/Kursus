@@ -224,7 +224,7 @@ async function CourseViewer({
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <BookOpen className="h-4 w-4" />
-                {course.totalLessons} lecons
+                {course.totalLessons} leçons
               </div>
               {course.totalDuration > 0 && (
                 <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -253,7 +253,7 @@ async function CourseViewer({
                 size="lg"
               />
               <p className="mt-2 text-xs text-gray-500">
-                {course.completedLessons}/{course.totalLessons} lecons terminees
+                {course.completedLessons}/{course.totalLessons} leçons terminées
               </p>
             </div>
           </div>

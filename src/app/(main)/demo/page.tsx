@@ -60,7 +60,7 @@ const VALUE_PROPOSITIONS = [
     icon: Sparkles,
     title: "IA Pedagogique",
     description:
-      "L'assistant vous guide sans donner les reponses. Methode socratique pour vraiment comprendre.",
+      "L'assistant vous guide sans donner les réponses. Methode socratique pour vraiment comprendre.",
   },
   {
     icon: Clock,
@@ -113,7 +113,7 @@ export default function DemoPage() {
             </h1>
 
             <p className="mx-auto mt-4 max-w-2xl text-lg text-[#1A1A1A]/70">
-              Decouvrez comment notre IA pedagogique aide les eleves a
+              Decouvrez comment notre IA pedagogique aide les élèves a
               comprendre leurs cours. Posez une question dans la matiere de
               votre choix.
             </p>
@@ -346,7 +346,7 @@ export default function DemoPage() {
               <div className="flex items-center justify-center gap-2">
                 <Users className="h-5 w-5 text-[#E8A336]" />
                 <p className="font-semibold text-[#0B2A4C]">
-                  Rejoignez 15,000+ eleves et parents
+                  Rejoignez 15,000+ élèves et parents
                 </p>
               </div>
               <p className="mt-2 text-sm text-[#1A1A1A]/70">

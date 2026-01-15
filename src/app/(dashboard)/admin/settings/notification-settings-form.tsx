@@ -49,7 +49,7 @@ export function NotificationSettingsForm() {
         {/* Parent/Student Notifications */}
         <div className="space-y-4">
           <h4 className="text-sm font-medium text-muted-foreground">
-            Notifications parents/eleves
+            Notifications parents/élèves
           </h4>
 
           <div className="space-y-3">
@@ -107,7 +107,7 @@ export function NotificationSettingsForm() {
 
             <div className="flex items-center justify-between">
               <Label htmlFor="inactivityReminder" className="text-sm">
-                Rappel inactivite
+                Rappel inactivité
               </Label>
               <Switch
                 id="inactivityReminder"

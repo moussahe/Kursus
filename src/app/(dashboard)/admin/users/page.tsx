@@ -330,7 +330,7 @@ async function UsersContent({ searchParams }: { searchParams: SearchParams }) {
                               {user.teacherProfile.totalStudents}
                             </p>
                             <p className="text-xs text-muted-foreground">
-                              Eleves
+                              Élèves
                             </p>
                           </div>
                           <div className="text-center">

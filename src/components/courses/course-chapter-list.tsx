@@ -91,7 +91,7 @@ export function CourseChapterList({ chapters }: CourseChapterListProps) {
                     Chapitre {index + 1}: {chapter.title}
                   </h3>
                   <p className="text-sm text-gray-500">
-                    {chapter.lessons.length} lecons
+                    {chapter.lessons.length} leçons
                     {chapterDuration > 0 &&
                       ` - ${formatDuration(chapterDuration)}`}
                   </p>

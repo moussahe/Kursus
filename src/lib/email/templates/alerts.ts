@@ -183,7 +183,7 @@ export function milestoneAlertEmail(data: MilestoneAlertData): string {
 
     <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
       <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
-      <h2 style="margin: 0 0 8px; color: #10b981;">${data.lessonsCompleted} lecons completees</h2>
+      <h2 style="margin: 0 0 8px; color: #10b981;">${data.lessonsCompleted} leçons completees</h2>
       <p style="margin: 0; color: #374151;">${data.chapterTitle}</p>
     </div>
 
@@ -216,7 +216,7 @@ Bonjour ${data.parentName},
 
 Excellente nouvelle ! ${data.childName} vient de terminer le chapitre "${data.chapterTitle}" du cours "${data.courseTitle}" !
 
-${data.lessonsCompleted} lecons completees
+${data.lessonsCompleted} leçons completees
 
 Conseil: Felicitez ${data.childName} pour ses efforts ! La reconnaissance des progres motive a continuer.
 

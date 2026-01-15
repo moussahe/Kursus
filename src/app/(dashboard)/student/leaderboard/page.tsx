@@ -291,7 +291,7 @@ export default function LeaderboardPage() {
             Classement
           </h1>
           <p className="mt-1 text-gray-500">
-            Compare tes performances avec les autres eleves
+            Compare tes performances avec les autres élèves
           </p>
         </div>
 

@@ -387,7 +387,7 @@ async function CoursesContent({
                             {course.totalStudents}
                           </p>
                           <p className="text-xs text-muted-foreground">
-                            Eleves
+                            Élèves
                           </p>
                         </div>
                         <div className="text-center">

@@ -84,15 +84,15 @@ STATISTIQUES:
 TON ROLE:
 Tu es un conseiller pedagogique experimente qui aide les professeurs a:
 1. Ameliorer le contenu de leurs cours
-2. Creer des lecons engageantes et structurees
+2. Creer des leçons engageantes et structurees
 3. Generer des idees de quiz et exercices
 4. Optimiser la progression pedagogique
-5. Adapter le contenu au niveau des eleves
-6. Augmenter l'engagement des etudiants
+5. Adapter le contenu au niveau des élèves
+6. Augmenter l'engagement des étudiants
 
 CAPACITES SPECIALES:
 - Tu peux generer du contenu de lecon complet en markdown
-- Tu peux suggerer des questions de quiz avec les bonnes reponses
+- Tu peux suggerer des questions de quiz avec les bonnes réponses
 - Tu peux proposer des exercices pratiques adaptes au niveau
 - Tu peux analyser les statistiques et suggerer des ameliorations
 
@@ -100,7 +100,7 @@ REGLES:
 - Reponds TOUJOURS en francais
 - Sois professionnel mais accessible
 - Donne des conseils concrets et actionnables
-- Utilise le markdown pour formater tes reponses (listes, titres, gras)
+- Utilise le markdown pour formater tes réponses (listes, titres, gras)
 - Quand tu generes du contenu de lecon, utilise une structure claire avec des titres
 - Quand tu generes des quiz, utilise ce format:
   **Question X:** [La question]
@@ -278,7 +278,7 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
   } catch (error) {
     console.error("Teacher AI Assistant Error:", error);
     return NextResponse.json(
-      { error: "Erreur lors de la generation de la reponse" },
+      { error: "Erreur lors de la generation de la réponse" },
       { status: 500 },
     );
   }

@@ -228,7 +228,7 @@ export function PredictiveAnalyticsPanel({
             />
           </div>
           <p className="mt-2 text-2xl font-bold text-gray-900">
-            {predictions.predictions.nextWeekLessons.predicted} lecons
+            {predictions.predictions.nextWeekLessons.predicted} leçons
           </p>
           <p className="text-xs text-gray-400">
             {getConfidenceLabel(
@@ -282,7 +282,7 @@ export function PredictiveAnalyticsPanel({
             </div>
           </div>
           <p className="mt-2 text-2xl font-bold text-gray-900">
-            {predictions.predictions.nextMonthProgress.predicted} lecons
+            {predictions.predictions.nextMonthProgress.predicted} leçons
           </p>
           <p className="text-xs text-gray-400">
             {getConfidenceLabel(
@@ -371,7 +371,7 @@ export function PredictiveAnalyticsPanel({
                         )}
                       >
                         {risk.level === "high"
-                          ? "Eleve"
+                          ? "Élève"
                           : risk.level === "medium"
                             ? "Moyen"
                             : "Faible"}

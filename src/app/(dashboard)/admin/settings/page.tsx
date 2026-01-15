@@ -134,7 +134,7 @@ async function SettingsContent() {
               Parametres de la plateforme
             </CardTitle>
             <CardDescription>
-              Configuration generale de Schoolaris
+              Configuration générale de Schoolaris
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -164,7 +164,7 @@ async function SettingsContent() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Bell className="h-5 w-5 text-amber-500" />
-            Notifications systeme
+            Notifications système
           </CardTitle>
           <CardDescription>
             Configuration des alertes et emails automatiques

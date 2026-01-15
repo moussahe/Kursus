@@ -205,7 +205,7 @@ export async function generateLearningPath(
 
 PROFIL DE L'ELEVE:
 - Prenom: ${performance.childName}
-- Lecons completees: ${performance.completedLessons}/${performance.totalLessons}
+- Leçons completees: ${performance.completedLessons}/${performance.totalLessons}
 - Score moyen aux quiz: ${performance.averageQuizScore !== null ? `${performance.averageQuizScore}%` : "Pas encore de quiz"}
 - Serie actuelle: ${performance.currentStreak} jours
 - Temps d'etude cette semaine: ${performance.studyTimeThisWeek} minutes
@@ -236,8 +236,8 @@ Genere un parcours d'apprentissage personnalise pour cette semaine. Reponds en J
 Important:
 - Adapte le contenu au niveau scolaire
 - Sois encourageant et positif
-- Suggere 3-5 lecons maximum
-- Les IDs de lecons doivent correspondre a ceux fournis
+- Suggere 3-5 leçons maximum
+- Les IDs de leçons doivent correspondre a ceux fournis
 - Le temps estime doit etre realiste (15-45 min/jour)`;
 
   try {

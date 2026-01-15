@@ -284,7 +284,7 @@ export function SettingsForm({ user, notificationPrefs }: SettingsFormProps) {
               <Separator />
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium">Alertes d&apos;inactivite</p>
+                  <p className="font-medium">Alertes d&apos;inactivité</p>
                   <p className="text-sm text-gray-500">
                     Notification si un enfant n&apos;etudie pas depuis 3 jours.
                   </p>

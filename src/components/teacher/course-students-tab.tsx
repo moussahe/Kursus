@@ -208,7 +208,7 @@ export function CourseStudentsTab({ courseId }: CourseStudentsTabProps) {
       setIsLoading(true);
       const response = await fetch(`/api/teacher/courses/${courseId}/students`);
       if (!response.ok) {
-        throw new Error("Erreur lors du chargement des etudiants");
+        throw new Error("Erreur lors du chargement des étudiants");
       }
       const data = await response.json();
       setStudents(data.students);
@@ -276,7 +276,7 @@ export function CourseStudentsTab({ courseId }: CourseStudentsTabProps) {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500">Etudiants</p>
+                <p className="text-sm font-medium text-gray-500">Étudiants</p>
                 <p className="text-2xl font-bold">{stats.totalStudents}</p>
               </div>
               <div className="rounded-xl bg-emerald-50 p-3">
@@ -440,7 +440,7 @@ export function CourseStudentsTab({ courseId }: CourseStudentsTabProps) {
                 <Sparkles className="h-12 w-12 text-violet-200" />
                 <p className="mt-4 text-sm text-gray-500">
                   {stats.totalStudents === 0
-                    ? "Inscrivez des etudiants pour obtenir des insights"
+                    ? "Inscrivez des étudiants pour obtenir des insights"
                     : "Generez une analyse IA de votre cours"}
                 </p>
                 <p className="mt-1 text-xs text-gray-400">
@@ -539,16 +539,16 @@ export function CourseStudentsTab({ courseId }: CourseStudentsTabProps) {
         <CardHeader>
           <CardTitle className="text-lg font-semibold flex items-center gap-2">
             <Users className="h-5 w-5" />
-            Etudiants inscrits ({students.length})
+            Étudiants inscrits ({students.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
           {students.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <BookOpen className="h-12 w-12 text-gray-200" />
-              <p className="mt-4 text-gray-500">Aucun etudiant inscrit</p>
+              <p className="mt-4 text-gray-500">Aucun étudiant inscrit</p>
               <p className="mt-1 text-sm text-gray-400">
-                Les etudiants apparaitront ici apres leur inscription
+                Les étudiants apparaitront ici apres leur inscription
               </p>
             </div>
           ) : (
@@ -616,7 +616,7 @@ export function CourseStudentsTab({ courseId }: CourseStudentsTabProps) {
                     />
                     <p className="text-xs text-gray-400 mt-1">
                       {student.progress.completedLessons}/
-                      {student.progress.totalLessons} lecons
+                      {student.progress.totalLessons} leçons
                     </p>
                   </div>
 

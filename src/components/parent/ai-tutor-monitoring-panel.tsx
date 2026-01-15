@@ -165,7 +165,7 @@ export function AITutorMonitoringPanel({
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <Clock className="h-3 w-3" />
             <span>
-              Derniere activite:{" "}
+              Derniere activité:{" "}
               {formatDistanceToNow(new Date(stats.lastActivity), {
                 addSuffix: true,
                 locale: fr,
@@ -191,8 +191,8 @@ export function AITutorMonitoringPanel({
                 {childName} n&apos;a pas encore utilise le tuteur IA
               </p>
               <p className="mt-3 max-w-xs text-xs text-gray-400">
-                L&apos;assistant IA aide les eleves a comprendre leurs cours en
-                posant des questions guidees sans donner les reponses
+                L&apos;assistant IA aide les élèves a comprendre leurs cours en
+                posant des questions guidees sans donner les réponses
                 directement
               </p>
             </div>
@@ -286,7 +286,7 @@ export function AITutorMonitoringPanel({
                           <p className="truncate text-sm font-medium text-gray-900">
                             {topic.courseTitle ||
                               topic.title ||
-                              "Discussion generale"}
+                              "Discussion générale"}
                           </p>
                           {topic.lessonTitle && (
                             <p className="truncate text-xs text-gray-500">
@@ -364,8 +364,8 @@ export function AITutorMonitoringPanel({
                 <p className="text-xs text-violet-700">
                   <Sparkles className="mr-1 inline h-3 w-3" />
                   L&apos;assistant IA utilise la methode socratique : il guide{" "}
-                  {childName} vers la comprehension en posant des questions,
-                  sans donner les reponses directement.
+                  {childName} vers la compréhension en posant des questions,
+                  sans donner les réponses directement.
                 </p>
               </div>
             </div>

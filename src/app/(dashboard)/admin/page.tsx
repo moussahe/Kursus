@@ -301,7 +301,7 @@ async function AdminDashboardContent() {
           iconColor="emerald"
         />
         <MetricCard
-          title="Eleves actifs"
+          title="Élèves actifs"
           value={metrics.totalChildren.toLocaleString()}
           icon={BookOpen}
           iconColor="violet"
@@ -439,12 +439,12 @@ async function AdminDashboardContent() {
             Activite recente
           </CardTitle>
           <CardDescription>
-            Lecons terminees dans les 7 derniers jours
+            Leçons terminées dans les 7 derniers jours
           </CardDescription>
         </CardHeader>
         <CardContent>
           {recentActivity.length === 0 ? (
-            <p className="py-8 text-center text-gray-500">Aucune activite</p>
+            <p className="py-8 text-center text-gray-500">Aucune activité</p>
           ) : (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {recentActivity.map((activity) => (

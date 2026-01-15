@@ -42,7 +42,7 @@ function checkRateLimit(userId: string): boolean {
   return true;
 }
 
-// POST - Envoyer un message et recevoir une reponse en streaming
+// POST - Envoyer un message et recevoir une réponse en streaming
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ conversationId: string }> },
@@ -201,7 +201,7 @@ export async function POST(
       messages: messagesForClaude,
     });
 
-    // Creer un ReadableStream pour la reponse
+    // Creer un ReadableStream pour la réponse
     const encoder = new TextEncoder();
     let fullContent = "";
     let inputTokens = 0;
@@ -244,7 +244,7 @@ export async function POST(
           inputTokens = finalMessage.usage.input_tokens;
           outputTokens = finalMessage.usage.output_tokens;
 
-          // Sauvegarder la reponse complete en base
+          // Sauvegarder la réponse complete en base
           const assistantMessage = await prisma.aIMessage.create({
             data: {
               conversationId,

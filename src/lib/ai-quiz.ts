@@ -40,7 +40,7 @@ const weakAreasResponseSchema = z.object({
       topic: z.string().min(2),
       category: z.enum([
         "calcul",
-        "comprehension",
+        "compréhension",
         "methode",
         "memorisation",
         "application",
@@ -88,9 +88,9 @@ const GRADE_LABELS: Record<string, string> = {
 };
 
 const DIFFICULTY_DESCRIPTIONS: Record<Difficulty, string> = {
-  easy: "Questions simples, definitions de base, concepts fondamentaux. L'eleve doit pouvoir y repondre avec une comprehension minimale.",
+  easy: "Questions simples, definitions de base, concepts fondamentaux. L'eleve doit pouvoir y repondre avec une compréhension minimale.",
   medium:
-    "Questions de niveau intermediaire, application des concepts, quelques liens entre notions. Demande une bonne comprehension.",
+    "Questions de niveau intermediaire, application des concepts, quelques liens entre notions. Demande une bonne compréhension.",
   hard: "Questions avancees, analyse, synthese, cas complexes. Demande une maitrise approfondie du sujet.",
 };
 
@@ -104,18 +104,18 @@ export function getQuizGenerationPrompt(
   if (context.previousPerformance) {
     performanceContext = `
 PERFORMANCE PRECEDENTE:
-- Taux de reussite: ${Math.round(context.previousPerformance.correctRate * 100)}%
+- Taux de réussite: ${Math.round(context.previousPerformance.correctRate * 100)}%
 - Points faibles identifies: ${context.previousPerformance.weakAreas.join(", ") || "Aucun"}
 
 Adapte les questions en fonction de cette performance. Si l'eleve a des points faibles, inclus des questions qui ciblent ces domaines.`;
   }
 
-  return `Tu es un expert en pedagogie et creation de quiz educatifs pour Schoolaris.
+  return `Tu es un expert en pédagogie et creation de quiz educatifs pour Schoolaris.
 
 CONTEXTE:
 - Matiere: ${context.subject}
 - Niveau scolaire: ${gradeLabel}
-- Lecon: ${context.lessonTitle}
+- Leçon: ${context.lessonTitle}
 - Difficulte demandee: ${context.currentDifficulty.toUpperCase()}
 ${performanceContext}
 
@@ -130,11 +130,11 @@ Genere 3 questions de quiz basees sur le contenu de la lecon, au niveau de diffi
 
 REGLES:
 1. Chaque question doit avoir exactement 4 options (A, B, C, D)
-2. Une seule reponse correcte par question
-3. Les options incorrectes doivent etre plausibles (pas de reponses absurdes)
+2. Une seule réponse correcte par question
+3. Les options incorrectes doivent etre plausibles (pas de réponses absurdes)
 4. L'explication doit etre pedagogique et adaptee au niveau de l'eleve
 5. Les points varient: easy=1pt, medium=2pts, hard=3pts
-6. Les questions doivent tester la comprehension, pas juste la memorisation
+6. Les questions doivent tester la compréhension, pas juste la memorisation
 
 FORMAT DE REPONSE (JSON strict):
 {
@@ -147,7 +147,7 @@ FORMAT DE REPONSE (JSON strict):
         { "id": "c", "text": "Option C", "isCorrect": false },
         { "id": "d", "text": "Option D", "isCorrect": false }
       ],
-      "explanation": "Explication pedagogique de la bonne reponse",
+      "explanation": "Explication pedagogique de la bonne réponse",
       "difficulty": "${context.currentDifficulty}",
       "points": ${context.currentDifficulty === "easy" ? 1 : context.currentDifficulty === "medium" ? 2 : 3}
     }
@@ -225,7 +225,7 @@ function getFallbackQuestions(difficulty: Difficulty): GeneratedQuestion[] {
         { id: "d", text: "Concept D", isCorrect: false },
       ],
       explanation:
-        "Cette question teste ta comprehension generale de la lecon.",
+        "Cette question teste ta compréhension générale de la lecon.",
       difficulty,
       points,
     },
@@ -268,7 +268,7 @@ export function getQuizFeedbackPrompt(context: QuizFeedbackContext): string {
             (w, i) =>
               `${i + 1}. Question: "${w.question}"
       - Reponse de l'eleve: "${w.selectedAnswer}"
-      - Bonne reponse: "${w.correctAnswer}"`,
+      - Bonne réponse: "${w.correctAnswer}"`,
           )
           .join("\n")
       : "Aucune erreur!";
@@ -276,10 +276,10 @@ export function getQuizFeedbackPrompt(context: QuizFeedbackContext): string {
   return `Tu es un tuteur bienveillant pour Schoolaris qui donne du feedback sur les quiz.
 
 RESULTATS DU QUIZ:
-- Eleve: ${context.childName}
+- Élève: ${context.childName}
 - Niveau: ${gradeLabel}
 - Matiere: ${context.subject}
-- Lecon: ${context.lessonTitle}
+- Leçon: ${context.lessonTitle}
 - Score: ${context.score}/${context.totalPoints} points (${percentage}%)
 - Questions correctes: ${context.correctCount}/${context.totalQuestions}
 
@@ -381,7 +381,7 @@ export interface WrongAnswer {
 
 export interface ExtractedWeakArea {
   topic: string; // e.g., "fractions", "conjugaison imparfait"
-  category: string; // e.g., "calcul", "comprehension", "methode"
+  category: string; // e.g., "calcul", "compréhension", "methode"
 }
 
 export function getWeakAreaExtractionPrompt(
@@ -394,15 +394,15 @@ export function getWeakAreaExtractionPrompt(
       (w, i) =>
         `${i + 1}. Question: "${w.question}"
    - Reponse de l'eleve: "${w.selectedAnswer}"
-   - Bonne reponse: "${w.correctAnswer}"`,
+   - Bonne réponse: "${w.correctAnswer}"`,
     )
     .join("\n");
 
-  return `Tu es un expert en pedagogie pour Schoolaris. Analyse les erreurs suivantes et identifie les points faibles specifiques.
+  return `Tu es un expert en pédagogie pour Schoolaris. Analyse les erreurs suivantes et identifie les points faibles specifiques.
 
 CONTEXTE:
 - Matiere: ${subject}
-- Lecon: ${lessonTitle}
+- Leçon: ${lessonTitle}
 
 ERREURS DE L'ELEVE:
 ${errorsList}
@@ -412,7 +412,7 @@ Pour chaque erreur, identifie le TOPIC precis (concept/notion) que l'eleve n'a p
 
 REGLES:
 1. Le topic doit etre un concept SPECIFIQUE (pas "mathematiques" mais "fractions", "theoreme de Pythagore", etc.)
-2. La categorie doit etre: "calcul", "comprehension", "methode", "memorisation", "application", ou "analyse"
+2. La categorie doit etre: "calcul", "compréhension", "methode", "memorisation", "application", ou "analyse"
 3. Si plusieurs erreurs concernent le meme topic, ne le liste qu'une fois
 
 FORMAT DE REPONSE (JSON strict):
@@ -436,7 +436,7 @@ function getFallbackWeakAreas(
   return [
     {
       topic: lessonTitle,
-      category: "comprehension" as const,
+      category: "compréhension" as const,
     },
   ].slice(0, Math.min(wrongAnswers.length, 3));
 }
@@ -544,13 +544,13 @@ function getSingleQuestionPrompt(context: SingleQuestionContext): string {
       ? `\nPOINTS FAIBLES A CIBLER: ${context.weakAreas.join(", ")}`
       : "";
 
-  return `Tu es un expert en pedagogie pour Schoolaris. Genere UNE SEULE question de quiz.
+  return `Tu es un expert en pédagogie pour Schoolaris. Genere UNE SEULE question de quiz.
 
 CONTEXTE:
 - Matiere: ${context.subject}
 - Niveau scolaire: ${gradeLabel}
-- Lecon: ${context.lessonTitle}
-- Question numero: ${context.questionNumber}
+- Leçon: ${context.lessonTitle}
+- Question numéro: ${context.questionNumber}
 - Difficulte: ${context.currentDifficulty.toUpperCase()}
 ${weakAreasContext}
 ${previousQuestionsContext}
@@ -563,7 +563,7 @@ ${difficultyDesc}
 
 REGLES:
 1. Exactement 4 options (A, B, C, D)
-2. Une seule reponse correcte
+2. Une seule réponse correcte
 3. Options incorrectes plausibles
 4. Explication pedagogique adaptee a l'age
 5. Points: easy=1, medium=2, hard=3
@@ -663,12 +663,12 @@ function getSingleFallbackQuestion(
     question: `Question ${questionNumber}: Quelle est la notion principale de cette lecon?`,
     options: [
       { id: "a", text: "Reponse A", isCorrect: false },
-      { id: "b", text: "La bonne reponse", isCorrect: true },
+      { id: "b", text: "La bonne réponse", isCorrect: true },
       { id: "c", text: "Reponse C", isCorrect: false },
       { id: "d", text: "Reponse D", isCorrect: false },
     ],
     explanation:
-      "Cette question verifie ta comprehension generale de la lecon.",
+      "Cette question vérifié ta compréhension générale de la lecon.",
     difficulty,
     points,
   };

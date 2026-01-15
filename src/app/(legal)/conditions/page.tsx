@@ -3,7 +3,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Conditions d'utilisation | Schoolaris",
   description:
-    "Conditions generales d'utilisation de la plateforme Schoolaris.",
+    "Conditions générales d'utilisation de la plateforme Schoolaris.",
 };
 
 export default function ConditionsPage() {
@@ -25,7 +25,7 @@ export default function ConditionsPage() {
       <p>
         Schoolaris est une marketplace de cours scolaires mettant en relation
         des enseignants (createurs de contenu) et des familles (parents et
-        eleves).
+        élèves).
       </p>
 
       <h2>2. Acceptation des CGU</h2>
@@ -62,7 +62,7 @@ export default function ConditionsPage() {
       </p>
       <p>
         Vous etes responsable de la confidentialite de vos identifiants de
-        connexion et de toute activite effectuee sous votre compte.
+        connexion et de toute activité effectuee sous votre compte.
       </p>
 
       <h2>5. Tarification</h2>

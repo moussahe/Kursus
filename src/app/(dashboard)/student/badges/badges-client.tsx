@@ -368,7 +368,7 @@ export function BadgesClient({ badges, stats }: BadgesClientProps) {
           <p className="text-2xl font-bold text-emerald-600">
             {stats.lessonsCompleted}
           </p>
-          <p className="text-xs text-emerald-700">Lecons terminees</p>
+          <p className="text-xs text-emerald-700">Leçons terminées</p>
         </div>
         <div className="rounded-xl bg-orange-50 p-4 text-center">
           <p className="text-2xl font-bold text-orange-600">
@@ -402,7 +402,7 @@ export function BadgesClient({ badges, stats }: BadgesClientProps) {
             {filter === "earned"
               ? "Tu n'as pas encore de badges. Continue d'apprendre !"
               : filter === "locked"
-                ? "Tous les badges sont deja debloques. Bravo !"
+                ? "Tous les badges sont déjà debloques. Bravo !"
                 : "Aucun badge dans cette categorie."}
           </p>
         </div>

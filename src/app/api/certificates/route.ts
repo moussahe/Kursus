@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
     const completionRate = (completedLessons / totalLessons) * 100;
     if (completionRate < 80) {
       return badRequest(
-        `Completion insuffisante. ${completedLessons}/${totalLessons} lecons completees (${Math.round(completionRate)}%). Minimum requis: 80%`,
+        `Completion insuffisante. ${completedLessons}/${totalLessons} leçons completees (${Math.round(completionRate)}%). Minimum requis: 80%`,
       );
     }
 

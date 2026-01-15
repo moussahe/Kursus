@@ -165,12 +165,12 @@ async function LessonViewer({
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-500">
           <span>
-            Lecon {currentPosition} sur {totalLessons}
+            Leçon {currentPosition} sur {totalLessons}
           </span>
           {isCompleted && (
             <span className="flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-1 text-xs font-medium text-emerald-700">
               <CheckCircle2 className="h-3 w-3" />
-              Terminee
+              Terminée
             </span>
           )}
         </div>

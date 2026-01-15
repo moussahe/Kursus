@@ -300,7 +300,7 @@ export function ChapterList({
       ),
     );
     setAddingLessonToChapter(null);
-    toast.success("Lecon creee avec succes");
+    toast.success("Leçon creee avec succes");
     router.refresh();
   };
 
@@ -316,7 +316,7 @@ export function ChapterList({
       ),
     );
     setEditingLesson(null);
-    toast.success("Lecon mise a jour");
+    toast.success("Leçon mise a jour");
     router.refresh();
   };
 
@@ -336,7 +336,7 @@ export function ChapterList({
             : c,
         ),
       );
-      toast.success("Lecon supprimee");
+      toast.success("Leçon supprimee");
       router.refresh();
     } catch {
       toast.error("Erreur lors de la suppression");
@@ -649,7 +649,7 @@ export function ChapterList({
             <DialogDescription>
               Etes-vous sur de vouloir supprimer le chapitre &ldquo;
               {deletingChapter?.title}&rdquo;? Cette action est irreversible et
-              supprimera toutes les lecons associees.
+              supprimera toutes les leçons associees.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

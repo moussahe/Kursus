@@ -37,7 +37,7 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
 
     // Can't vote on own replies
     if (reply.authorId === session.user.id) {
-      return badRequest("Vous ne pouvez pas voter pour votre propre reponse");
+      return badRequest("Vous ne pouvez pas voter pour votre propre réponse");
     }
 
     if (validated.value === 0) {

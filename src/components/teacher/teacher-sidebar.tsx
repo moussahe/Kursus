@@ -27,7 +27,7 @@ const navigation = [
     icon: GraduationCap,
   },
   {
-    name: "Mes etudiants",
+    name: "Mes étudiants",
     href: "/teacher/students",
     icon: Users,
   },

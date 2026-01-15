@@ -109,13 +109,13 @@ export async function POST(req: NextRequest) {
     // 6. Generate AI feedback
     let aiExplanation: string;
     if (percentage >= 90) {
-      aiExplanation = `Excellent travail ! Tu maitrises bien ce sujet avec ${correctCount}/${quiz.questions.length} bonnes reponses. Continue comme ca !`;
+      aiExplanation = `Excellent travail ! Tu maitrises bien ce sujet avec ${correctCount}/${quiz.questions.length} bonnes réponses. Continue comme ca !`;
     } else if (percentage >= 70) {
-      aiExplanation = `Tres bien ! Tu as obtenu ${correctCount}/${quiz.questions.length} bonnes reponses. Revois les questions que tu as manquees pour renforcer ta comprehension.`;
+      aiExplanation = `Tres bien ! Tu as obtenu ${correctCount}/${quiz.questions.length} bonnes réponses. Revois les questions que tu as manquees pour renforcer ta compréhension.`;
     } else if (percentage >= 50) {
-      aiExplanation = `Pas mal ! Tu progresses avec ${correctCount}/${quiz.questions.length} bonnes reponses. Je te conseille de relire la lecon et de reessayer le quiz.`;
+      aiExplanation = `Pas mal ! Tu progresses avec ${correctCount}/${quiz.questions.length} bonnes réponses. Je te conseille de relire la lecon et de reessayer le quiz.`;
     } else {
-      aiExplanation = `Ne te decourage pas ! Tu as obtenu ${correctCount}/${quiz.questions.length} bonnes reponses. Prends le temps de bien relire la lecon avant de reessayer.`;
+      aiExplanation = `Ne te decourage pas ! Tu as obtenu ${correctCount}/${quiz.questions.length} bonnes réponses. Prends le temps de bien relire la lecon avant de reessayer.`;
     }
 
     // 7. Calculate XP based on performance

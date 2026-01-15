@@ -184,8 +184,8 @@ async function ExamModeContent({ childId }: { childId: string }) {
           <li className="flex items-start gap-2">
             <Target className="mt-0.5 h-4 w-4 text-emerald-500" />
             <span>
-              <strong>Verifie tes reponses:</strong> Si tu as le temps, relis
-              tes reponses avant de terminer.
+              <strong>Verifie tes réponses:</strong> Si tu as le temps, relis
+              tes réponses avant de terminer.
             </span>
           </li>
         </ul>

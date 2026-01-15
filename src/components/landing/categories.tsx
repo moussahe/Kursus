@@ -37,7 +37,7 @@ const subjects: Subject[] = [
     size: "large",
   },
   {
-    name: "Francais",
+    name: "Français",
     slug: "francais",
     Icon: BookText,
     courseCount: 35,
@@ -250,14 +250,14 @@ export function Categories() {
         >
           <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-1.5 text-sm font-semibold text-emerald-600">
             <Sparkles className="h-4 w-4" />
-            Explorez par Matiere
+            Explorez par Matière
           </span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            Toutes les matieres, un seul objectif
+            Toutes les matières, un seul objectif
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
             Des mathematiques a la philosophie, nos professeurs experts
-            accompagnent votre enfant vers la reussite.
+            accompagnent votre enfant vers la réussite.
           </p>
         </motion.div>
 

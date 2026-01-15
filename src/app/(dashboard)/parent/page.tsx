@@ -281,7 +281,7 @@ async function generateAlerts(userId: string): Promise<Alert[]> {
         type: "warning",
         title: daysSinceStudy
           ? `Inactif depuis ${daysSinceStudy} jours`
-          : "Aucune activite",
+          : "Aucune activité",
         message: daysSinceStudy
           ? "Encouragez-le a reprendre ses cours !"
           : "N'a pas encore commence a etudier",
@@ -478,7 +478,7 @@ async function RecentActivity({ userId }: { userId: string }) {
         <div className="mt-6 flex flex-col items-center justify-center py-8 text-center">
           <Clock className="h-12 w-12 text-gray-300" />
           <p className="mt-4 text-sm text-gray-500">
-            Aucune activite recente. Commencez par ajouter un enfant et acheter
+            Aucune activité recente. Commencez par ajouter un enfant et acheter
             un cours !
           </p>
           <Button asChild className="mt-4 bg-emerald-500 hover:bg-emerald-600">

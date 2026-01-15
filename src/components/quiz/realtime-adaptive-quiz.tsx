@@ -456,7 +456,7 @@ export function RealtimeAdaptiveQuiz({
             Quiz Adaptatif Temps Reel
           </h3>
           <p className="mt-2 text-gray-500">
-            La difficulte s&apos;adapte apres chaque reponse!
+            La difficulte s&apos;adapte apres chaque réponse!
           </p>
 
           {/* Real-time adaptation highlight */}
@@ -672,7 +672,7 @@ export function RealtimeAdaptiveQuiz({
             Calcul de ton score...
           </p>
           <p className="mt-1 text-sm text-gray-500">
-            L&apos;IA analyse tes reponses
+            L&apos;IA analyse tes réponses
           </p>
         </div>
       </div>

@@ -559,7 +559,7 @@ export function AdaptiveQuizPlayer({
             Calcul de ton score...
           </p>
           <p className="mt-1 text-sm text-gray-500">
-            L&apos;IA analyse tes reponses
+            L&apos;IA analyse tes réponses
           </p>
         </div>
       </div>

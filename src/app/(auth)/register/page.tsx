@@ -348,7 +348,7 @@ function RegisterForm() {
           />
 
           <p className="mt-6 text-center text-sm text-gray-600">
-            Deja un compte ?{" "}
+            Déjà un compte ?{" "}
             <Link
               href="/login"
               className="font-medium text-emerald-600 hover:text-emerald-500"
@@ -369,11 +369,11 @@ function RegisterForm() {
             <h3 className="text-3xl font-bold">
               {selectedRole === "TEACHER"
                 ? "Partagez votre savoir"
-                : "Accompagnez la reussite de vos enfants"}
+                : "Accompagnez la réussite de vos enfants"}
             </h3>
             <p className="mt-4 text-lg text-emerald-100">
               {selectedRole === "TEACHER"
-                ? "Creez des cours de qualite et generez des revenus complementaires. Gardez 70% de chaque vente."
+                ? "Creez des cours de qualité et generez des revenus complementaires. Gardez 70% de chaque vente."
                 : "Achetez des cours crees par de vrais professeurs. Un paiement unique, un acces a vie."}
             </p>
 
@@ -381,7 +381,7 @@ function RegisterForm() {
             <div className="mt-8 grid grid-cols-3 gap-4">
               <div className="text-center">
                 <p className="text-2xl font-bold">15K+</p>
-                <p className="text-xs text-emerald-100">Eleves</p>
+                <p className="text-xs text-emerald-100">Élèves</p>
               </div>
               <div className="text-center">
                 <p className="text-2xl font-bold">300+</p>
@@ -398,7 +398,7 @@ function RegisterForm() {
               <p className="text-sm italic text-emerald-50">
                 &quot;
                 {selectedRole === "TEACHER"
-                  ? "J'ai pu partager mes cours avec des centaines d'eleves. La plateforme est intuitive et le support excellent."
+                  ? "J'ai pu partager mes cours avec des centaines d'élèves. La plateforme est intuitive et le support excellent."
                   : "Mon fils a fait des progres incroyables en maths grace aux cours sur Schoolaris. Je recommande !"}
                 &quot;
               </p>

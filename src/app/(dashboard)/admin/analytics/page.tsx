@@ -367,7 +367,7 @@ async function AnalyticsContent() {
             color="bg-cyan-100 text-cyan-600 dark:bg-cyan-900/30 dark:text-cyan-400"
           />
           <MetricCard
-            title="Eleves actifs"
+            title="Élèves actifs"
             value={data.children.active}
             subValue={`Sur ${data.children.total} inscrits`}
             icon={Activity}
@@ -399,7 +399,7 @@ async function AnalyticsContent() {
               <Award className="h-5 w-5 text-amber-500" />
               Top 5 Cours
             </CardTitle>
-            <CardDescription>Par nombre d&apos;eleves inscrits</CardDescription>
+            <CardDescription>Par nombre d&apos;élèves inscrits</CardDescription>
           </CardHeader>
           <CardContent>
             {data.topCourses.length === 0 ? (
@@ -493,7 +493,7 @@ async function AnalyticsContent() {
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {teacher.totalCourses} cours • {teacher.totalStudents}{" "}
-                          eleves
+                          élèves
                         </p>
                       </div>
                     </div>
@@ -531,7 +531,7 @@ async function AnalyticsContent() {
               <p className="text-3xl font-bold">
                 {data.teachers.verified}/{data.teachers.total}
               </p>
-              <p className="text-sm opacity-90">Enseignants verifies</p>
+              <p className="text-sm opacity-90">Enseignants vérifiés</p>
             </div>
             <div className="rounded-xl bg-white/20 p-4">
               <p className="text-3xl font-bold">

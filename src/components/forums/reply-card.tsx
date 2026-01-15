@@ -96,7 +96,7 @@ export function ReplyCard({
 
     if (isAuthor) {
       toast.error("Action non autorisee", {
-        description: "Vous ne pouvez pas voter pour votre propre reponse",
+        description: "Vous ne pouvez pas voter pour votre propre réponse",
       });
       return;
     }
@@ -152,7 +152,7 @@ export function ReplyCard({
         {reply.isAccepted && (
           <div className="flex items-center gap-2 mb-3 text-green-700">
             <CheckCircle2 className="h-5 w-5" />
-            <span className="text-sm font-medium">Meilleure reponse</span>
+            <span className="text-sm font-medium">Meilleure réponse</span>
           </div>
         )}
 

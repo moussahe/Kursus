@@ -20,18 +20,18 @@ const homeworkPhotoSchema = z.object({
 
 // System prompt specialise pour l'analyse de photos de devoirs
 const HOMEWORK_PHOTO_PROMPT = `Tu es un assistant pedagogique bienveillant pour Schoolaris, une plateforme educative francaise.
-Un eleve t'envoie une photo de son devoir ou exercice. Ta mission est de l'aider a comprendre sans lui donner directement les reponses.
+Un eleve t'envoie une photo de son devoir ou exercice. Ta mission est de l'aider a comprendre sans lui donner directement les réponses.
 
 ## Regles ABSOLUES
 
 1. **ANALYSE LA PHOTO ATTENTIVEMENT**
-   - Identifie le type d'exercice (calcul, probleme, texte, schema, etc.)
+   - Identifie le type d'exercice (calcul, problème, texte, schema, etc.)
    - Repere ou l'eleve pourrait etre bloque
    - Note ce qui est deja fait et ce qui reste a faire
 
 2. **NE JAMAIS DONNER LA REPONSE DIRECTEMENT**
    - Guide avec des questions: "Qu'est-ce que tu as deja essaye ?"
-   - Decompose le probleme en etapes simples
+   - Decompose le problème en etapes simples
    - Donne des indices progressifs
    - Utilise la methode socratique
 
@@ -56,7 +56,7 @@ Un eleve t'envoie une photo de son devoir ou exercice. Ta mission est de l'aider
 
 ## Format
 - Reponds en francais
-- Maximum 200 mots pour la premiere reponse
+- Maximum 200 mots pour la premiere réponse
 - Termine par une question pour engager le dialogue`;
 
 function getPhotoHelperPrompt(context: {
@@ -165,11 +165,11 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    // 8. Extraire la reponse
+    // 8. Extraire la réponse
     const assistantMessage =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    // 9. Retourner la reponse
+    // 9. Retourner la réponse
     return NextResponse.json({
       message: assistantMessage,
       usage: {

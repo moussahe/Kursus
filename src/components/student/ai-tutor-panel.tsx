@@ -358,7 +358,7 @@ export function AITutorPanel({
 
   const welcomeMessage = `Salut ! Je suis ton assistant IA pour t'aider avec cette lecon sur "${context.lessonTitle}".
 
-Pose-moi tes questions ! Je ne te donnerai pas directement les reponses, mais je t'aiderai a comprendre par toi-meme.${isVoiceSupported ? "\n\n🎤 Tu peux aussi me parler en cliquant sur le micro !" : ""}`;
+Pose-moi tes questions ! Je ne te donnerai pas directement les réponses, mais je t'aiderai a comprendre par toi-meme.${isVoiceSupported ? "\n\n🎤 Tu peux aussi me parler en cliquant sur le micro !" : ""}`;
 
   // Floating button when closed
   if (!isOpen) {
@@ -725,7 +725,7 @@ Pose-moi tes questions ! Je ne te donnerai pas directement les reponses, mais je
             </div>
           </div>
           <p className="mt-2 text-center text-[10px] text-gray-400">
-            L&apos;IA te guide sans donner les reponses directement
+            L&apos;IA te guide sans donner les réponses directement
           </p>
         </div>
       </div>

@@ -231,7 +231,7 @@ export function RevisionCard({
           {/* Answer comparison */}
           <div className="mt-4 space-y-3">
             <div className="rounded-xl bg-white/50 p-3">
-              <p className="text-xs font-medium text-gray-500">Ta reponse</p>
+              <p className="text-xs font-medium text-gray-500">Ta réponse</p>
               <p className="mt-1 text-gray-700">{answer}</p>
             </div>
             {!isCorrect && questionData && (
@@ -317,7 +317,7 @@ export function RevisionCard({
         {showHint && questionData && (
           <div className="mt-2 rounded-lg bg-amber-50 p-2">
             <p className="text-xs text-amber-700">
-              Indice: La reponse concerne &quot;{weakArea.topic}&quot;...
+              Indice: La réponse concerne &quot;{weakArea.topic}&quot;...
             </p>
           </div>
         )}
@@ -327,7 +327,7 @@ export function RevisionCard({
           <Textarea
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
-            placeholder="Ecris ta reponse ici..."
+            placeholder="Ecris ta réponse ici..."
             className="min-h-[100px] resize-none rounded-xl border-gray-200"
             disabled={state === "submitting"}
           />
@@ -363,7 +363,7 @@ export function RevisionCard({
           ) : (
             <>
               <Send className="mr-2 h-4 w-4" />
-              Envoyer ma reponse
+              Envoyer ma réponse
             </>
           )}
         </Button>

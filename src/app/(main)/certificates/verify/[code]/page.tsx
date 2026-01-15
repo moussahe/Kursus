@@ -135,7 +135,7 @@ export default async function CertificateVerifyPage({ params }: PageProps) {
                 <div className="rounded-xl bg-gray-50 p-4">
                   <div className="flex items-center gap-2 text-gray-500 mb-1">
                     <CheckCircle2 className="h-4 w-4" />
-                    <span className="text-sm">Lecons completees</span>
+                    <span className="text-sm">Leçons completees</span>
                   </div>
                   <p className="font-semibold text-gray-900">
                     {certificate.lessonsCompleted}/{certificate.totalLessons}

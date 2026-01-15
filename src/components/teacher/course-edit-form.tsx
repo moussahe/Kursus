@@ -181,7 +181,7 @@ export function CourseEditForm({ course }: CourseEditFormProps) {
         {/* Basic Info */}
         <Card className="rounded-2xl border-0 bg-white shadow-sm">
           <CardHeader>
-            <CardTitle>Informations generales</CardTitle>
+            <CardTitle>Informations générales</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <FormField

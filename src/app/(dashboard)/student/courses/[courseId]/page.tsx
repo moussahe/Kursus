@@ -216,7 +216,7 @@ async function CourseDetail({
               <div className="flex items-center justify-between text-sm">
                 <span className="text-gray-600">Progression</span>
                 <span className="font-medium text-gray-900">
-                  {completedLessons}/{totalLessons} lecons
+                  {completedLessons}/{totalLessons} leçons
                 </span>
               </div>
               <div className="mt-2 h-3 overflow-hidden rounded-full bg-gray-100">
@@ -275,7 +275,7 @@ async function CourseDetail({
                   </div>
                 </div>
                 <div className="text-sm text-gray-500">
-                  {chapter.completedCount}/{chapter.totalCount} lecons
+                  {chapter.completedCount}/{chapter.totalCount} leçons
                 </div>
               </div>
             </div>

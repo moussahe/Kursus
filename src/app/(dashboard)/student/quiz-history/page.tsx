@@ -219,7 +219,7 @@ async function QuizHistoryContent({ childId }: { childId: string }) {
             <p className="text-2xl font-bold text-gray-900">
               {stats.passRate}%
             </p>
-            <p className="text-sm text-gray-500">Taux reussite</p>
+            <p className="text-sm text-gray-500">Taux réussite</p>
           </div>
         </div>
       </div>
@@ -295,7 +295,7 @@ async function QuizHistoryContent({ childId }: { childId: string }) {
                     <span className="flex items-center gap-1">
                       <Target className="h-3 w-3" />
                       {attempt.correctCount}/{attempt.totalQuestions} bonnes
-                      reponses
+                      réponses
                     </span>
                     <span>
                       {new Date(attempt.completedAt).toLocaleDateString(

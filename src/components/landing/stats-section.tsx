@@ -21,7 +21,7 @@ const stats = [
   },
   {
     value: "15,000+",
-    label: "Eleves accompagnes",
+    label: "Élèves accompagnes",
     icon: GraduationCap,
     description: "Dans toute la France",
     color: "purple",
@@ -133,7 +133,7 @@ export function StatsSection() {
         >
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <div className="h-2 w-2 rounded-full bg-emerald-500" />
-            Paiements securises
+            Paiements sécurisés
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <div className="h-2 w-2 rounded-full bg-emerald-500" />

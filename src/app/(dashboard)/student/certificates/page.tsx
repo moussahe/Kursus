@@ -94,7 +94,7 @@ export default async function StudentCertificatesPage() {
               Comment obtenir un certificat ?
             </p>
             <p className="mt-1 text-sm text-amber-600">
-              Complete au moins 80% des lecons d&apos;un cours pour debloquer
+              Complete au moins 80% des leçons d&apos;un cours pour debloquer
               ton certificat. Les certificats peuvent etre telecharges et
               partages !
             </p>

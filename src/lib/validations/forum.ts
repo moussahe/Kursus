@@ -80,9 +80,9 @@ export const updateTopicSchema = z.object({
 export const createReplySchema = z.object({
   content: z
     .string()
-    .min(5, "La reponse doit contenir au moins 5 caracteres")
-    .max(5000, "La reponse ne peut pas depasser 5000 caracteres"),
-  parentReplyId: z.string().cuid("ID reponse invalide").optional(),
+    .min(5, "La réponse doit contenir au moins 5 caracteres")
+    .max(5000, "La réponse ne peut pas depasser 5000 caracteres"),
+  parentReplyId: z.string().cuid("ID réponse invalide").optional(),
   childId: z.string().cuid("ID enfant invalide").optional(),
 });
 
@@ -90,8 +90,8 @@ export const createReplySchema = z.object({
 export const updateReplySchema = z.object({
   content: z
     .string()
-    .min(5, "La reponse doit contenir au moins 5 caracteres")
-    .max(5000, "La reponse ne peut pas depasser 5000 caracteres")
+    .min(5, "La réponse doit contenir au moins 5 caracteres")
+    .max(5000, "La réponse ne peut pas depasser 5000 caracteres")
     .optional(),
   isAccepted: z.boolean().optional(),
   isHidden: z.boolean().optional(),
@@ -141,7 +141,7 @@ export type RepliesQueryInput = z.infer<typeof repliesQuerySchema>;
 
 // Category labels for UI
 export const FORUM_CATEGORY_LABELS: Record<ForumCategory, string> = {
-  GENERAL: "Questions generales",
+  GENERAL: "Questions générales",
   HOMEWORK_HELP: "Aide aux devoirs",
   STUDY_TIPS: "Conseils d'etude",
   EXAM_PREP: "Preparation examens",
@@ -154,7 +154,7 @@ export const FORUM_CATEGORY_LABELS: Record<ForumCategory, string> = {
 export const FORUM_CATEGORY_DESCRIPTIONS: Record<ForumCategory, string> = {
   GENERAL: "Posez vos questions sur tous les sujets",
   HOMEWORK_HELP: "Demandez de l'aide pour vos devoirs",
-  STUDY_TIPS: "Partagez et decouvrez des methodes d'etude",
+  STUDY_TIPS: "Partagez et découvrez des methodes d'etude",
   EXAM_PREP: "Preparez-vous aux examens ensemble",
   PARENT_CORNER: "Discussions entre parents",
   TEACHER_LOUNGE: "Espace reserve aux enseignants",

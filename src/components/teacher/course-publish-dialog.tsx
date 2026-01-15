@@ -99,7 +99,7 @@ export function CoursePublishDialog({
       status: courseImageUrl ? "pass" : "warning",
       message: courseImageUrl
         ? "Image ajoutee"
-        : "Recommande: ajoutez une image pour attirer plus d'eleves",
+        : "Recommande: ajoutez une image pour attirer plus d'élèves",
     });
 
     // Check learning outcomes
@@ -110,7 +110,7 @@ export function CoursePublishDialog({
       message:
         learningOutcomes.length > 0
           ? `${learningOutcomes.length} objectif(s) defini(s)`
-          : "Recommande: definissez ce que les eleves vont apprendre",
+          : "Recommande: definissez ce que les élèves vont apprendre",
     });
 
     // Check chapters
@@ -134,7 +134,7 @@ export function CoursePublishDialog({
     );
     results.push({
       id: "lessons",
-      label: "Lecons",
+      label: "Leçons",
       status: totalLessons > 0 ? "pass" : "fail",
       message:
         totalLessons > 0
@@ -148,7 +148,7 @@ export function CoursePublishDialog({
         id: "publishedContent",
         label: "Contenu visible",
         status: "warning",
-        message: "Aucune lecon n'est publiee. Les eleves ne verront rien.",
+        message: "Aucune lecon n'est publiee. Les élèves ne verront rien.",
       });
     }
 
@@ -253,7 +253,7 @@ export function CoursePublishDialog({
           </DialogTitle>
           <DialogDescription>
             {isPublished
-              ? "Le cours ne sera plus visible dans le catalogue. Les eleves inscrits garderont leur acces."
+              ? "Le cours ne sera plus visible dans le catalogue. Les élèves inscrits garderont leur acces."
               : "Verifiez que votre cours est pret avant de le publier."}
           </DialogDescription>
         </DialogHeader>

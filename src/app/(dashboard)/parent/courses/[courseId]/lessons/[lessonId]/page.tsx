@@ -234,7 +234,7 @@ async function LessonViewer({
                 </span>
               )}
               <span className="text-sm text-gray-500">
-                Lecon {navigation.current} sur {navigation.total}
+                Leçon {navigation.current} sur {navigation.total}
               </span>
             </div>
           </div>
@@ -320,7 +320,7 @@ async function LessonViewer({
               }`}
             >
               <ArrowLeft className="h-4 w-4" />
-              <span className="hidden sm:inline">Lecon precedente</span>
+              <span className="hidden sm:inline">Leçon precedente</span>
               <span className="sm:hidden">Prec.</span>
             </Link>
           </Button>
@@ -339,7 +339,7 @@ async function LessonViewer({
                 childId ? `?childId=${childId}` : ""
               }`}
             >
-              <span className="hidden sm:inline">Lecon suivante</span>
+              <span className="hidden sm:inline">Leçon suivante</span>
               <span className="sm:hidden">Suiv.</span>
               <ArrowRight className="h-4 w-4" />
             </Link>

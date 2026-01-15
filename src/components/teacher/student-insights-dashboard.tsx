@@ -203,7 +203,7 @@ export function StudentInsightsDashboard() {
 
       const response = await fetch(`/api/teacher/students?${params}`);
       if (!response.ok) {
-        throw new Error("Erreur lors du chargement des etudiants");
+        throw new Error("Erreur lors du chargement des étudiants");
       }
       const data = await response.json();
       setStudents(data.students);
@@ -265,7 +265,7 @@ export function StudentInsightsDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">
-                  Total Etudiants
+                  Total Étudiants
                 </p>
                 <p className="text-2xl font-bold">{stats.totalStudents}</p>
                 <p className="text-xs text-gray-400 mt-1">
@@ -301,7 +301,7 @@ export function StudentInsightsDashboard() {
                 >
                   {stats.studentsNeedingAttention}
                 </p>
-                <p className="text-xs text-gray-400 mt-1">eleves a risque</p>
+                <p className="text-xs text-gray-400 mt-1">élèves a risque</p>
               </div>
               <div
                 className={cn(
@@ -478,7 +478,7 @@ export function StudentInsightsDashboard() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-lg font-semibold flex items-center gap-2">
             <Users className="h-5 w-5" />
-            Mes Etudiants ({filteredStudents.length})
+            Mes Étudiants ({filteredStudents.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -487,7 +487,7 @@ export function StudentInsightsDashboard() {
               <BookOpen className="h-12 w-12 text-gray-200" />
               <p className="mt-4 text-gray-500">
                 {students.length === 0
-                  ? "Aucun etudiant inscrit a vos cours"
+                  ? "Aucun étudiant inscrit a vos cours"
                   : "Aucun resultat pour cette recherche"}
               </p>
             </div>

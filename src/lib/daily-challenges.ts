@@ -17,7 +17,7 @@ const CHALLENGE_TEMPLATES: {
   // EASY challenges
   {
     type: "LESSON",
-    title: "Premiere Lecon",
+    title: "Premiere Leçon",
     description: "Complete 1 lecon aujourd'hui",
     targetValue: 1,
     difficulty: "easy",
@@ -64,14 +64,14 @@ const CHALLENGE_TEMPLATES: {
   // MEDIUM challenges
   {
     type: "LESSON",
-    title: "Double Lecon",
-    description: "Complete 2 lecons aujourd'hui",
+    title: "Double Leçon",
+    description: "Complete 2 leçons aujourd'hui",
     targetValue: 2,
     difficulty: "medium",
     xpReward: 60,
     bonusXp: 20,
-    encouragement: "Deux lecons pour doubler tes connaissances !",
-    completionMessage: "Impressionnant ! Deux lecons en une journee !",
+    encouragement: "Deux leçons pour doubler tes connaissances !",
+    completionMessage: "Impressionnant ! Deux leçons en une journee !",
   },
   {
     type: "QUIZ",
@@ -133,13 +133,13 @@ const CHALLENGE_TEMPLATES: {
   {
     type: "LESSON",
     title: "Marathon d'Apprentissage",
-    description: "Complete 3 lecons aujourd'hui",
+    description: "Complete 3 leçons aujourd'hui",
     targetValue: 3,
     difficulty: "hard",
     xpReward: 120,
     bonusXp: 40,
     encouragement: "Un vrai marathon pour les plus motives !",
-    completionMessage: "Incroyable ! Trois lecons en un jour !",
+    completionMessage: "Incroyable ! Trois leçons en un jour !",
   },
   {
     type: "QUIZ",

@@ -181,7 +181,7 @@ async function CoursesList({ childId }: { childId: string }) {
                         </span>
                       </div>
                       <p className="mt-1 text-xs text-gray-400">
-                        {course.completedLessons}/{course.totalLessons} lecons
+                        {course.completedLessons}/{course.totalLessons} leçons
                       </p>
                     </div>
                   </div>
@@ -302,7 +302,7 @@ export default async function StudentCoursesPage() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Mes Cours</h1>
         <p className="mt-1 text-gray-500">
-          Continue ton apprentissage ou revois des lecons.
+          Continue ton apprentissage ou revois des leçons.
         </p>
       </div>
 

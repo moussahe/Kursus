@@ -105,7 +105,7 @@ export default async function DashboardCoursesPage() {
                       <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                         <div className="flex items-center gap-1">
                           <BookOpen className="h-4 w-4" />
-                          <span>{totalLessons} lecons</span>
+                          <span>{totalLessons} leçons</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="h-4 w-4" />

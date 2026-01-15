@@ -45,14 +45,14 @@ const QUICK_ACTIONS = [
     label: "Quiz",
     icon: HelpCircle,
     prompt:
-      "Genere 5 questions de quiz avec leurs reponses et explications pour ce cours.",
+      "Genere 5 questions de quiz avec leurs réponses et explications pour ce cours.",
   },
   {
     id: "improve-content",
     label: "Ameliorations",
     icon: Lightbulb,
     prompt:
-      "Analyse mon cours et suggere des ameliorations concretes pour augmenter l'engagement des eleves.",
+      "Analyse mon cours et suggere des ameliorations concretes pour augmenter l'engagement des élèves.",
   },
   {
     id: "exercise-ideas",
@@ -218,7 +218,7 @@ export function CourseAIAssistant({ courseId }: CourseAIAssistantProps) {
             </h4>
             <p className="mt-2 text-sm text-gray-500 max-w-md">
               Je suis votre assistant pedagogique. Je peux vous aider a creer
-              des lecons, generer des quiz, et ameliorer votre cours.
+              des leçons, generer des quiz, et ameliorer votre cours.
             </p>
 
             {/* Quick actions */}

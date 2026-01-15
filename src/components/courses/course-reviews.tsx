@@ -64,7 +64,7 @@ export function CourseReviews({
 
   return (
     <div className="rounded-xl border bg-white p-6">
-      <h2 className="text-xl font-bold mb-6">Avis des eleves</h2>
+      <h2 className="text-xl font-bold mb-6">Avis des élèves</h2>
 
       <div className="grid gap-8 md:grid-cols-3 mb-8">
         {/* Average Rating */}

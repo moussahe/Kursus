@@ -407,7 +407,7 @@ async function ModerationContent({
                             {moderation.course.totalStudents}
                           </p>
                           <p className="text-xs text-muted-foreground">
-                            Eleves
+                            Élèves
                           </p>
                         </div>
                         <div className="flex flex-col items-center">

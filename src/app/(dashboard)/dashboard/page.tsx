@@ -40,7 +40,7 @@ export default async function DashboardPage() {
     {
       icon: GraduationCap,
       title: "Mes Cours",
-      description: "Acceder a vos cours et lecons",
+      description: "Acceder a vos cours et leçons",
       href: "/dashboard/courses",
     },
     {
@@ -120,7 +120,7 @@ export default async function DashboardPage() {
           <h2 className="mb-4 text-xl font-semibold">Activite recente</h2>
           <Card>
             <CardContent className="py-8 text-center text-gray-500">
-              Aucune activite recente. Commencez par explorer nos cours !
+              Aucune activité recente. Commencez par explorer nos cours !
             </CardContent>
           </Card>
         </div>

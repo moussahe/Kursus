@@ -22,15 +22,15 @@ const footerLinks = {
     links: [
       { href: "/courses", label: "Tous les cours" },
       { href: "/courses?prix=0", label: "Cours gratuits" },
-      { href: "/courses?matiere=MATHEMATIQUES", label: "Mathematiques" },
-      { href: "/courses?matiere=FRANCAIS", label: "Francais" },
-      { href: "/community", label: "Communaute" },
+      { href: "/courses?matiere=MATHEMATIQUES", label: "Mathématiques" },
+      { href: "/courses?matiere=FRANCAIS", label: "Français" },
+      { href: "/community", label: "Communauté" },
     ],
   },
   teachers: {
     title: "Enseignants",
     links: [
-      { href: "/register/teacher", label: "Devenir createur" },
+      { href: "/register/teacher", label: "Devenir créateur" },
       { href: "/teacher", label: "Espace enseignant" },
       { href: "/teacher/courses", label: "Mes cours" },
       { href: "/teacher/analytics", label: "Statistiques" },
@@ -39,14 +39,14 @@ const footerLinks = {
   parents: {
     title: "Parents",
     links: [
-      { href: "/register", label: "Creer un compte" },
+      { href: "/register", label: "Créer un compte" },
       { href: "/parent", label: "Espace parent" },
       { href: "/parent/children", label: "Mes enfants" },
       { href: "/parent/purchases", label: "Mes achats" },
     ],
   },
   legal: {
-    title: "Legal",
+    title: "Légal",
     links: [
       { href: "/conditions", label: "Conditions d'utilisation" },
       { href: "/confidentialite", label: "Politique de confidentialite" },
@@ -150,7 +150,7 @@ export function Footer() {
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-400">
               La plateforme qui connecte les meilleurs enseignants avec les
-              eleves qui veulent reussir. De la primaire au lycee.
+              élèves qui veulent réussir. De la primaire au lycée.
             </p>
 
             {/* Contact Info */}
@@ -239,7 +239,7 @@ export function Footer() {
 
           {/* Payment Methods */}
           <div className="flex flex-col items-center gap-4 sm:flex-row">
-            <span className="text-sm text-gray-400">Paiements securises</span>
+            <span className="text-sm text-gray-400">Paiements sécurisés</span>
             <div className="flex gap-2">
               {/* Visa */}
               <div className="flex h-8 w-12 items-center justify-center rounded bg-white px-2">
@@ -294,11 +294,11 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-gray-800 pt-8 sm:flex-row">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Schoolaris. Tous droits reserves.
+            &copy; {new Date().getFullYear()} Schoolaris. Tous droits réservés.
           </p>
           <div className="flex items-center gap-6">
             <button className="text-sm text-gray-500 hover:text-white">
-              Francais (FR)
+              Français (FR)
             </button>
             <button className="text-sm text-gray-500 hover:text-white">
               EUR

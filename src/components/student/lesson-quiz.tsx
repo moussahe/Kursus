@@ -270,7 +270,7 @@ export function LessonQuiz({
 
         {/* Review Answers */}
         <div className="mt-8 space-y-4">
-          <h4 className="font-semibold text-gray-900">Revue des reponses</h4>
+          <h4 className="font-semibold text-gray-900">Revue des réponses</h4>
           {quiz.questions.map((q, idx) => {
             const selectedId = selectedAnswers[q.id];
             const correctOption = q.options.find((o) => o.isCorrect);
@@ -298,7 +298,7 @@ export function LessonQuiz({
                   <div className="flex-1">
                     <p className="font-medium text-gray-900">{q.question}</p>
                     <p className="mt-2 text-sm">
-                      <span className="text-gray-500">Ta reponse: </span>
+                      <span className="text-gray-500">Ta réponse: </span>
                       <span
                         className={cn(
                           "font-medium",
@@ -311,7 +311,7 @@ export function LessonQuiz({
                     </p>
                     {!isCorrect && (
                       <p className="text-sm">
-                        <span className="text-gray-500">Bonne reponse: </span>
+                        <span className="text-gray-500">Bonne réponse: </span>
                         <span className="font-medium text-emerald-700">
                           {correctOption?.text}
                         </span>

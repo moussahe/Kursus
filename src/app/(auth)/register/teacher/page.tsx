@@ -551,7 +551,7 @@ export default function TeacherRegisterPage() {
           </form>
 
           <p className="mt-6 text-center text-sm text-gray-600">
-            Deja un compte ?{" "}
+            Déjà un compte ?{" "}
             <Link
               href="/login"
               className="font-medium text-emerald-600 hover:text-emerald-500"
@@ -581,7 +581,7 @@ export default function TeacherRegisterPage() {
           <div className="max-w-md text-white">
             <h3 className="text-3xl font-bold">Partagez votre savoir</h3>
             <p className="mt-4 text-lg text-emerald-100">
-              Creez des cours de qualite et generez des revenus complementaires.
+              Creez des cours de qualité et generez des revenus complementaires.
               Gardez 70% de chaque vente.
             </p>
             <ul className="mt-8 space-y-4 text-emerald-100">
@@ -595,7 +595,7 @@ export default function TeacherRegisterPage() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400/30">
                   <Check className="h-4 w-4 text-white" />
                 </div>
-                Touchez des milliers d&apos;eleves
+                Touchez des milliers d&apos;élèves
               </li>
               <li className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400/30">

@@ -223,7 +223,7 @@ export function AICourseBuilder({
           </DialogTitle>
           <DialogDescription>
             Decrivez votre cours et l&apos;IA generera une structure complete
-            avec chapitres et lecons.
+            avec chapitres et leçons.
           </DialogDescription>
         </DialogHeader>
 
@@ -362,7 +362,7 @@ export function AICourseBuilder({
                     </div>
                     <div className="flex items-center gap-1">
                       <FileText className="h-4 w-4" />
-                      {totalLessons} lecons
+                      {totalLessons} leçons
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock className="h-4 w-4" />~
@@ -415,7 +415,7 @@ export function AICourseBuilder({
                                 {chapter.title}
                               </p>
                               <p className="text-xs text-gray-500">
-                                {chapter.lessons.length} lecons
+                                {chapter.lessons.length} leçons
                               </p>
                             </div>
                           </div>

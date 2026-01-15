@@ -56,7 +56,7 @@ export function weeklyReportEmail(data: WeeklyReportData): string {
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
           <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-            <span style="color: #6b7280;">Lecons completees</span>
+            <span style="color: #6b7280;">Leçons completees</span>
           </td>
           <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; text-align: right; font-weight: 600;">
             ${data.stats.lessonsCompleted}
@@ -158,7 +158,7 @@ Voici le resume de la semaine d'apprentissage de ${data.childName}
 pour la periode du ${data.weekRange}.
 
 STATISTIQUES
-- Lecons completees: ${data.stats.lessonsCompleted}
+- Leçons completees: ${data.stats.lessonsCompleted}
 - Quiz realises: ${data.stats.quizzesCompleted}
 - Score moyen: ${data.stats.averageScore}%
 - Temps d'etude: ${timeSpent}

@@ -87,7 +87,7 @@ function LoginForm() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20">
                   <CheckCircle className="h-5 w-5" />
                 </div>
-                <span>Cours de qualite par des enseignants certifies</span>
+                <span>Cours de qualité par des enseignants certifies</span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20">

@@ -69,7 +69,7 @@ export async function generateCourseStructure(
   const subjectLabel = SUBJECTS[request.subject] || request.subject;
   const targetDuration = request.targetDuration || 10;
 
-  const prompt = `Tu es un expert en pedagogie et en creation de cours pour l'education nationale francaise.
+  const prompt = `Tu es un expert en pédagogie et en creation de cours pour l'education nationale francaise.
 
 CONTEXTE:
 - Sujet du cours: ${request.topic}
@@ -83,12 +83,12 @@ Cree une structure de cours complete et pedagogiquement solide pour ce sujet.
 
 REGLES PEDAGOGIQUES:
 1. Adapte le vocabulaire et la complexite au niveau scolaire
-2. Progresse du simple vers le complexe (pedagogie spiralaire)
+2. Progresse du simple vers le complexe (pédagogie spiralaire)
 3. Alterne theorie et pratique
 4. Inclus des moments d'evaluation formative
-5. Prevois des activites variees (video, lecture, exercices, quiz)
+5. Prevois des activités variees (video, lecture, exercices, quiz)
 6. Chaque chapitre doit etre autonome mais lie au suivant
-7. Les lecons doivent durer entre 10 et 30 minutes maximum
+7. Les leçons doivent durer entre 10 et 30 minutes maximum
 
 STRUCTURE ATTENDUE (JSON):
 {
@@ -117,10 +117,10 @@ STRUCTURE ATTENDUE (JSON):
 
 IMPORTANT:
 - Genere entre 4 et 8 chapitres
-- Chaque chapitre doit avoir entre 3 et 6 lecons
-- Varie les types de lecons (video pour intro, text pour theorie, exercise pour pratique, quiz pour evaluation)
+- Chaque chapitre doit avoir entre 3 et 6 leçons
+- Varie les types de leçons (video pour intro, text pour theorie, exercise pour pratique, quiz pour evaluation)
 - Le dernier chapitre doit etre un bilan/revision
-- Sois creatif dans les titres pour engager les eleves
+- Sois creatif dans les titres pour engager les élèves
 
 Reponds UNIQUEMENT avec le JSON, sans texte avant ou apres.`;
 
@@ -162,14 +162,14 @@ export async function generateChapterContent(
   const gradeLabel = GRADE_LEVELS[gradeLevel] || gradeLevel;
   const subjectLabel = SUBJECTS[subject] || subject;
 
-  const prompt = `Tu es un expert en pedagogie. Genere le contenu detaille pour ce chapitre.
+  const prompt = `Tu es un expert en pédagogie. Genere le contenu detaille pour ce chapitre.
 
 COURS: ${courseTitle}
 CHAPITRE: ${chapterTitle}
 MATIERE: ${subjectLabel}
 NIVEAU: ${gradeLabel}
 
-Genere une structure de chapitre avec 4-6 lecons variees.
+Genere une structure de chapitre avec 4-6 leçons variees.
 Reponds en JSON:
 {
   "title": "${chapterTitle}",
@@ -208,12 +208,12 @@ export async function generateLessonContent(
     video:
       "Ecris un script video pedagogique avec introduction, developpement et conclusion.",
     text: "Ecris un cours structure avec titres, explications claires, exemples et points cles a retenir.",
-    quiz: "Genere 5-10 questions QCM avec 4 options chacune et indique la bonne reponse.",
+    quiz: "Genere 5-10 questions QCM avec 4 options chacune et indique la bonne réponse.",
     exercise:
       "Cree des exercices progressifs avec enonces clairs et solutions detaillees.",
   };
 
-  const prompt = `Tu es un expert en pedagogie pour le niveau ${gradeLabel}.
+  const prompt = `Tu es un expert en pédagogie pour le niveau ${gradeLabel}.
 
 CONTEXTE: ${courseContext}
 LECON: ${lessonTitle}

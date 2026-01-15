@@ -236,7 +236,7 @@ describe("AI Learning Path", () => {
                   priority: "high",
                 },
               ],
-              weeklyGoals: ["Terminer 3 lecons", "Maintenir le streak"],
+              weeklyGoals: ["Terminer 3 leçons", "Maintenir le streak"],
               suggestedLessons: [
                 {
                   lessonId: "lesson1",

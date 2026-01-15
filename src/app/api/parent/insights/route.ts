@@ -192,7 +192,7 @@ export async function GET(req: NextRequest) {
     } catch {
       // If AI didn't return valid JSON, create a fallback response
       insights = {
-        summary: `${child.firstName} a complete ${lessonsThisWeek} lecons cette semaine.`,
+        summary: `${child.firstName} a complete ${lessonsThisWeek} leçons cette semaine.`,
         insights: [
           {
             type: "suggestion",
@@ -202,7 +202,7 @@ export async function GET(req: NextRequest) {
             actionable: "Fixez un horaire d'etude quotidien de 20-30 minutes.",
           },
         ],
-        weeklyGoal: "Completer au moins 3 lecons cette semaine",
+        weeklyGoal: "Completer au moins 3 leçons cette semaine",
         encouragement: `Continue comme ca ${child.firstName} !`,
       };
     }

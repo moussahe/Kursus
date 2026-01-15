@@ -280,7 +280,7 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
   } catch (error) {
     console.error("Teacher students API Error:", error);
     return NextResponse.json(
-      { error: "Erreur lors de la recuperation des etudiants" },
+      { error: "Erreur lors de la recuperation des étudiants" },
       { status: 500 },
     );
   }

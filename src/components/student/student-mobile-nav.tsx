@@ -113,7 +113,7 @@ export function StudentMobileNav({ child }: StudentMobileNavProps) {
                 <p className="text-sm font-medium text-gray-900 truncate">
                   {child.firstName} {child.lastName}
                 </p>
-                <p className="text-xs text-gray-500">Eleve</p>
+                <p className="text-xs text-gray-500">Élève</p>
               </div>
             </div>
 

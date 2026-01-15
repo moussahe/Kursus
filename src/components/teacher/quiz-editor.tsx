@@ -193,7 +193,7 @@ export function QuizEditor({
       (opt) => opt.isCorrect && opt.text.trim(),
     );
     if (!hasCorrect) {
-      errors.push("Une reponse correcte est requise");
+      errors.push("Une réponse correcte est requise");
     }
 
     return errors;
@@ -206,7 +206,7 @@ export function QuizEditor({
         <div className="flex items-center justify-between">
           <div>
             <Label htmlFor="passing-score" className="text-sm font-medium">
-              Score de reussite (%)
+              Score de réussite (%)
             </Label>
             <p className="text-xs text-gray-500">
               Pourcentage minimum pour valider le quiz
@@ -450,7 +450,7 @@ export function QuizEditor({
                             })
                           }
                           disabled={disabled}
-                          placeholder="Explication affichee apres la reponse..."
+                          placeholder="Explication affichee apres la réponse..."
                           className="rounded-xl resize-none"
                           rows={2}
                         />

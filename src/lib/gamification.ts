@@ -174,7 +174,7 @@ export const BADGE_DEFINITIONS = [
   {
     code: "lesson_10",
     name: "Explorateur",
-    description: "A termine 10 lecons",
+    description: "A termine 10 leçons",
     category: BadgeCategory.PROGRESS,
     xpReward: 100,
     requirement: { lessonsCompleted: 10 },
@@ -182,7 +182,7 @@ export const BADGE_DEFINITIONS = [
   {
     code: "lesson_50",
     name: "Aventurier",
-    description: "A termine 50 lecons",
+    description: "A termine 50 leçons",
     category: BadgeCategory.PROGRESS,
     xpReward: 250,
     requirement: { lessonsCompleted: 50 },
@@ -190,7 +190,7 @@ export const BADGE_DEFINITIONS = [
   {
     code: "lesson_100",
     name: "Savant",
-    description: "A termine 100 lecons",
+    description: "A termine 100 leçons",
     category: BadgeCategory.PROGRESS,
     xpReward: 500,
     requirement: { lessonsCompleted: 100 },

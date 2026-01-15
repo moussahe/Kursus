@@ -249,7 +249,7 @@ export default async function TopicPage({
             </span>
             <div className="flex items-center gap-1">
               <MessageSquare className="h-4 w-4" />
-              {topic.replyCount} reponse{topic.replyCount !== 1 ? "s" : ""}
+              {topic.replyCount} réponse{topic.replyCount !== 1 ? "s" : ""}
             </div>
             <div className="flex items-center gap-1">
               <Eye className="h-4 w-4" />
@@ -319,7 +319,7 @@ export default async function TopicPage({
           {topic.isLocked && (
             <div className="bg-muted/50 rounded-lg p-4 text-center text-muted-foreground">
               <Lock className="h-5 w-5 mx-auto mb-2" />
-              Ce sujet est verrouille. Les nouvelles reponses sont desactivees.
+              Ce sujet est verrouille. Les nouvelles réponses sont desactivees.
             </div>
           )}
 
@@ -349,7 +349,7 @@ export default async function TopicPage({
           {topic.replies.length === 0 && (
             <div className="text-center py-12 text-muted-foreground">
               <MessageSquare className="h-12 w-12 mx-auto mb-3 opacity-50" />
-              <p>Aucune reponse pour le moment.</p>
+              <p>Aucune réponse pour le moment.</p>
               <p className="text-sm">Soyez le premier a repondre!</p>
             </div>
           )}

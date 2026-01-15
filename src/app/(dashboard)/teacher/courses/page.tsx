@@ -218,7 +218,7 @@ export default async function TeacherCoursesPage({ searchParams }: PageProps) {
                           {course._count.purchases}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-400">Etudiants</p>
+                      <p className="text-xs text-gray-400">Étudiants</p>
                     </div>
                     <div className="text-center">
                       <div className="flex items-center justify-center gap-1 text-gray-500">

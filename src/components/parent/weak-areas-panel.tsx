@@ -49,7 +49,7 @@ const subjectLabels: Record<string, string> = {
 
 const categoryLabels: Record<string, string> = {
   calcul: "Calcul",
-  comprehension: "Comprehension",
+  compréhension: "Comprehension",
   methode: "Methode",
   memorisation: "Memorisation",
   application: "Application",
@@ -353,7 +353,7 @@ export function WeakAreasPanel({
               <div className="mt-4 rounded-lg bg-gray-50 p-3">
                 <p className="text-xs text-gray-600">
                   <strong>Conseil :</strong> Encouragez {childName} a revoir les
-                  lecons liees a ces points. Les quiz adaptatifs cibleront
+                  leçons liees a ces points. Les quiz adaptatifs cibleront
                   automatiquement ces difficultes.
                 </p>
               </div>

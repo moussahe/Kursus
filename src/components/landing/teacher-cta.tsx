@@ -28,7 +28,7 @@ export function TeacherCta() {
             Gardez <span className="text-amber-300">70%</span> de vos ventes
           </h2>
           <p className="text-lg opacity-90 md:text-xl">
-            Creez vos cours une fois, vendez-les a des milliers d&apos;eleves.
+            Creez vos cours une fois, vendez-les a des milliers d&apos;élèves.
             Notre plateforme gere les paiements, vous gardez 70% de chaque
             vente.
           </p>
@@ -76,7 +76,7 @@ export function TeacherCta() {
             <p className="mt-2 text-6xl font-bold text-emerald-500">1 400€</p>
             <p className="mt-4 text-lg font-medium text-gray-700">
               pour un cours a <span className="font-bold">29€</span> vendu a{" "}
-              <span className="font-bold">70 eleves</span>
+              <span className="font-bold">70 élèves</span>
             </p>
             <div className="mt-4 rounded-xl bg-gray-50 p-3">
               <p className="text-xs text-gray-500">

@@ -212,7 +212,7 @@ export function RevisionDashboard({
                 <p className="text-2xl font-bold text-gray-900">
                   {Math.round(stats.successRate)}%
                 </p>
-                <p className="text-sm text-gray-500">Reussite</p>
+                <p className="text-sm text-gray-500">Réussite</p>
               </div>
             </div>
           </CardContent>
@@ -464,7 +464,7 @@ function SessionComplete({
             <Award className="h-10 w-10" />
           </div>
 
-          <h2 className="mt-6 text-2xl font-bold">Session terminee !</h2>
+          <h2 className="mt-6 text-2xl font-bold">Session terminée !</h2>
 
           <div className="mt-6 grid w-full grid-cols-3 gap-4">
             <div className="rounded-xl bg-white/20 p-3">
@@ -473,7 +473,7 @@ function SessionComplete({
             </div>
             <div className="rounded-xl bg-white/20 p-3">
               <p className="text-2xl font-bold">{accuracy}%</p>
-              <p className="text-xs text-violet-100">Reussite</p>
+              <p className="text-xs text-violet-100">Réussite</p>
             </div>
             <div className="rounded-xl bg-white/20 p-3">
               <p className="text-2xl font-bold">+{stats.xpEarned}</p>

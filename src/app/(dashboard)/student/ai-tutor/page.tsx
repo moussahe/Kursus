@@ -238,7 +238,7 @@ async function AITutorContent({
               <h2 className="text-lg font-semibold">Ton tuteur personnel</h2>
               <p className="text-sm text-violet-100">
                 Je t&apos;aide a comprendre tes cours sans te donner les
-                reponses directement
+                réponses directement
               </p>
             </div>
           </div>
@@ -312,7 +312,7 @@ async function AITutorContent({
                         <p className="truncate text-sm font-medium text-gray-900">
                           {conv.courseTitle ||
                             conv.title ||
-                            "Discussion generale"}
+                            "Discussion générale"}
                         </p>
                         {conv.lessonTitle && (
                           <p className="truncate text-xs text-gray-500">
@@ -370,7 +370,7 @@ async function AITutorContent({
             <ul className="mt-3 space-y-2 text-xs text-gray-600">
               <li className="flex items-start gap-2">
                 <span className="text-violet-500">•</span>
-                <span>Decris ton probleme le plus precisement possible</span>
+                <span>Decris ton problème le plus precisement possible</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-violet-500">•</span>
@@ -381,7 +381,7 @@ async function AITutorContent({
               <li className="flex items-start gap-2">
                 <span className="text-violet-500">•</span>
                 <span>
-                  Je te guide vers la solution, je ne te donne pas la reponse
+                  Je te guide vers la solution, je ne te donne pas la réponse
                 </span>
               </li>
               <li className="flex items-start gap-2">

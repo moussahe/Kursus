@@ -137,7 +137,7 @@ export default async function EditCoursePage({ params }: PageProps) {
             className="rounded-lg flex items-center gap-1.5"
           >
             <Users className="h-4 w-4" />
-            Etudiants
+            Étudiants
           </TabsTrigger>
           <TabsTrigger
             value="ai-assistant"

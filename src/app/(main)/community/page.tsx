@@ -318,7 +318,7 @@ export default async function CommunityPage({
                     : "bg-muted hover:bg-muted/80"
                 }`}
               >
-                Plus de reponses
+                Plus de réponses
               </a>
             </div>
 

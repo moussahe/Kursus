@@ -163,7 +163,7 @@ function CourseCardComponent({ course }: CourseCardProps) {
               </span>
             )}
             <span className="text-xs text-muted-foreground">
-              {course.totalLessons} lecons
+              {course.totalLessons} leçons
             </span>
           </div>
         </CardContent>

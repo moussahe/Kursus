@@ -310,7 +310,7 @@ async function StudentDashboard({ childId }: { childId: string }) {
             <p className="text-2xl font-bold text-gray-900">
               {stats.totalLessonsCompleted}
             </p>
-            <p className="text-sm text-gray-500">Lecons terminees</p>
+            <p className="text-sm text-gray-500">Leçons terminées</p>
           </div>
         </div>
         <div className="flex items-center gap-4 rounded-xl bg-white p-4 shadow-sm">
@@ -397,7 +397,7 @@ async function StudentDashboard({ childId }: { childId: string }) {
                       </span>
                     </div>
                     <p className="mt-1 text-xs text-gray-400">
-                      {course.completedLessons}/{course.totalLessons} lecons
+                      {course.completedLessons}/{course.totalLessons} leçons
                     </p>
                   </div>
                   {course.progress === 100 ? (
@@ -433,10 +433,10 @@ async function StudentDashboard({ childId }: { childId: string }) {
             <div className="mt-6 flex flex-col items-center justify-center py-8 text-center">
               <Target className="h-12 w-12 text-gray-300" />
               <p className="mt-4 text-sm text-gray-500">
-                Aucune activite recente.
+                Aucune activité recente.
               </p>
               <p className="text-xs text-gray-400">
-                Commence une lecon pour voir ton activite !
+                Commence une lecon pour voir ton activité !
               </p>
             </div>
           ) : (

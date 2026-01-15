@@ -481,7 +481,7 @@ export function SettingsDashboard() {
                       Nouveaux avis
                     </Label>
                     <p className="text-sm text-gray-500">
-                      Soyez notifie quand un etudiant laisse un avis sur vos
+                      Soyez notifie quand un étudiant laisse un avis sur vos
                       cours
                     </p>
                   </div>
@@ -505,10 +505,10 @@ export function SettingsDashboard() {
                       htmlFor="emailStudentQuestions"
                       className="text-sm font-medium cursor-pointer"
                     >
-                      Questions des etudiants
+                      Questions des étudiants
                     </Label>
                     <p className="text-sm text-gray-500">
-                      Recevez un email quand un etudiant pose une question sur
+                      Recevez un email quand un étudiant pose une question sur
                       vos cours
                     </p>
                   </div>

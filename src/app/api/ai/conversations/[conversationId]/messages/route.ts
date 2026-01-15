@@ -41,7 +41,7 @@ function checkRateLimit(userId: string): boolean {
   return true;
 }
 
-// POST - Envoyer un message et obtenir une reponse IA
+// POST - Envoyer un message et obtenir une réponse IA
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ conversationId: string }> },
@@ -186,7 +186,7 @@ export async function POST(
     const assistantContent =
       response.content[0].type === "text" ? response.content[0].text : "";
 
-    // Sauvegarder la reponse de l'assistant
+    // Sauvegarder la réponse de l'assistant
     const assistantMessage = await prisma.aIMessage.create({
       data: {
         conversationId,

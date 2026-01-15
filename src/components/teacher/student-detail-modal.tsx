@@ -542,7 +542,7 @@ export function StudentDetailModal({
                         ? "Faible"
                         : insights.insights.riskLevel === "medium"
                           ? "Moyen"
-                          : "Eleve"}
+                          : "Élève"}
                     </h4>
                     <Button
                       onClick={generateInsights}

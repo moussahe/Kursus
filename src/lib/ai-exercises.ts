@@ -35,7 +35,7 @@ const EXERCISE_TYPE_DESCRIPTIONS: Record<ExerciseType, string> = {
   ORDERING:
     "Remise en ordre - l'eleve doit placer des elements dans le bon ordre",
   SHORT_ANSWER:
-    "Reponse courte - l'eleve doit ecrire une reponse en quelques mots",
+    "Reponse courte - l'eleve doit ecrire une réponse en quelques mots",
   TRUE_FALSE:
     "Vrai ou Faux - l'eleve doit determiner si des affirmations sont vraies ou fausses",
   CALCULATION:
@@ -71,19 +71,19 @@ function getExerciseGenerationPrompt(
   if (context.previousPerformance) {
     performanceContext = `
 PERFORMANCE PRECEDENTE:
-- Taux de reussite: ${Math.round(context.previousPerformance.correctRate * 100)}%
+- Taux de réussite: ${Math.round(context.previousPerformance.correctRate * 100)}%
 - Points faibles: ${context.previousPerformance.weakAreas.join(", ") || "Aucun"}
 - Types preferes: ${context.previousPerformance.preferredTypes.join(", ")}
 
 Adapte les exercices pour cibler les points faibles tout en gardant l'eleve engage.`;
   }
 
-  return `Tu es un expert en pedagogie qui cree des exercices interactifs pour Schoolaris.
+  return `Tu es un expert en pédagogie qui cree des exercices interactifs pour Schoolaris.
 
 CONTEXTE:
 - Matiere: ${context.subject}
 - Niveau scolaire: ${gradeLabel}
-- Lecon: ${context.lessonTitle}
+- Leçon: ${context.lessonTitle}
 - Difficulte: ${context.difficulty.toUpperCase()}
 ${performanceContext}
 
@@ -123,7 +123,7 @@ FORMAT DE REPONSE (JSON strict):
         ]
       },
       "solution": {
-        "answers": { "blank_1": "reponse1", "blank_2": "reponse2" },
+        "answers": { "blank_1": "réponse1", "blank_2": "réponse2" },
         "acceptableVariations": { "blank_1": ["variation1", "variation2"] }
       },
       "points": ${DIFFICULTY_CONFIG[context.difficulty].points},
@@ -253,7 +253,7 @@ function getFallbackExercises(difficulty: Difficulty): GeneratedExercise[] {
       type: "TRUE_FALSE",
       difficulty,
       content: {
-        question: "Verification de comprehension",
+        question: "Verification de compréhension",
         instructions: "Indique si cette affirmation est vraie ou fausse",
         statements: [
           { id: "s1", text: "Cette lecon contient des concepts importants" },
@@ -408,7 +408,7 @@ function getExerciseFeedbackPrompt(context: ExerciseFeedbackContext): string {
   return `Tu es un tuteur bienveillant pour Schoolaris qui donne du feedback sur les exercices.
 
 CONTEXTE:
-- Eleve: ${context.childName}
+- Élève: ${context.childName}
 - Niveau: ${gradeLabel}
 - Type d'exercice: ${context.exerciseType}
 - Question: ${context.question}
@@ -422,14 +422,14 @@ Genere un feedback court, encourageant et pedagogique.
 FORMAT DE REPONSE (JSON strict):
 {
   "feedback": "Message de feedback (2-3 phrases max)",
-  "explanation": "Explication de la bonne reponse si incorrect"
+  "explanation": "Explication de la bonne réponse si incorrect"
 }
 
 REGLES:
 - Toujours encourageant, meme si incorrect
 - Adapte le ton a l'age de l'eleve
 - Si correct: felicite brievement
-- Si incorrect: explique sans juger et guide vers la comprehension
+- Si incorrect: explique sans juger et guide vers la compréhension
 
 Reponds UNIQUEMENT avec le JSON.`;
 }
@@ -465,7 +465,7 @@ export async function generateExerciseFeedback(
     console.error("Error generating exercise feedback:", error);
     return {
       feedback: context.isCorrect
-        ? "Bravo! Tu as trouve la bonne reponse!"
+        ? "Bravo! Tu as trouve la bonne réponse!"
         : "Pas tout a fait. Continue, tu vas y arriver!",
       explanation: context.isCorrect
         ? undefined

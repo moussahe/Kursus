@@ -126,7 +126,7 @@ function ResetPasswordForm() {
               Nouveau mot de passe
             </h1>
             <p className="mt-2 text-gray-600">
-              Choisissez un nouveau mot de passe securise pour votre compte.
+              Choisissez un nouveau mot de passe sécurisé pour votre compte.
             </p>
           </div>
 

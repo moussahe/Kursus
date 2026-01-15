@@ -128,14 +128,14 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
     if (validated.isAccepted !== undefined) {
       if (!isTopicAuthor && !isModerator) {
         return forbidden(
-          "Seul l'auteur du sujet peut marquer une reponse comme acceptee",
+          "Seul l'auteur du sujet peut marquer une réponse comme acceptee",
         );
       }
     }
 
     // Only moderators can hide replies
     if (validated.isHidden !== undefined && !isModerator) {
-      return forbidden("Seuls les moderateurs peuvent masquer des reponses");
+      return forbidden("Seuls les moderateurs peuvent masquer des réponses");
     }
 
     // Update the reply
@@ -200,7 +200,7 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     const isAdmin = session.user.role === "ADMIN";
 
     if (!isAuthor && !isAdmin) {
-      return forbidden("Vous ne pouvez pas supprimer cette reponse");
+      return forbidden("Vous ne pouvez pas supprimer cette réponse");
     }
 
     // Delete in a transaction and update reply count

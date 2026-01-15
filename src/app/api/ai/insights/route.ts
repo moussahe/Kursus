@@ -102,7 +102,7 @@ function generateChildSummary(child: ChildData): string {
     .map(([subject, data]) => {
       const percent =
         data.total > 0 ? Math.round((data.completed / data.total) * 100) : 0;
-      return `- ${subject}: ${percent}% complete (${data.completed}/${data.total} lecons)`;
+      return `- ${subject}: ${percent}% complete (${data.completed}/${data.total} leçons)`;
     })
     .join("\n");
 

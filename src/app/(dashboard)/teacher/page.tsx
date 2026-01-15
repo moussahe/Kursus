@@ -101,7 +101,7 @@ export default async function TeacherDashboardPage() {
       trendUp: true,
     },
     {
-      name: "Etudiants",
+      name: "Étudiants",
       value: totalStudents.toString(),
       icon: Users,
       description: "Total inscrits",
@@ -301,7 +301,7 @@ export default async function TeacherDashboardPage() {
                           {course.title}
                         </p>
                         <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <span>{course._count.purchases} etudiants</span>
+                          <span>{course._count.purchases} étudiants</span>
                           <span>-</span>
                           <span>{formatCurrency(course.price)}</span>
                         </div>

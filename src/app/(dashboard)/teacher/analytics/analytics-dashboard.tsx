@@ -269,7 +269,7 @@ export function AnalyticsDashboard() {
           trendUp
         />
         <MetricCard
-          title="Etudiants"
+          title="Étudiants"
           value={data.metrics.totalStudents.toString()}
           description="Total inscrits"
           icon={Users}
@@ -301,7 +301,7 @@ export function AnalyticsDashboard() {
             Revenus
           </TabsTrigger>
           <TabsTrigger value="students" className="rounded-lg">
-            Etudiants
+            Étudiants
           </TabsTrigger>
         </TabsList>
 
@@ -328,7 +328,7 @@ export function AnalyticsDashboard() {
             <CardHeader>
               <CardTitle>Inscriptions mensuelles</CardTitle>
               <CardDescription>
-                Nouveaux etudiants sur les 6 derniers mois
+                Nouveaux étudiants sur les 6 derniers mois
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -371,7 +371,7 @@ export function AnalyticsDashboard() {
                           {course.title}
                         </p>
                         <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <span>{course.students} etudiants</span>
+                          <span>{course.students} étudiants</span>
                           {course.rating > 0 && (
                             <>
                               <span>-</span>

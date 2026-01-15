@@ -57,7 +57,7 @@ export function ReplyForm({
       }
 
       toast.success("Reponse publiee", {
-        description: "Votre reponse a ete envoyee avec succes.",
+        description: "Votre réponse a ete envoyee avec succes.",
       });
       reset();
       onSuccess?.();
@@ -78,7 +78,7 @@ export function ReplyForm({
         <Textarea
           placeholder={
             parentReplyId
-              ? "Ecrivez votre reponse..."
+              ? "Ecrivez votre réponse..."
               : "Participez a la discussion..."
           }
           rows={4}

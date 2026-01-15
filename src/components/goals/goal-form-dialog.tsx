@@ -34,7 +34,7 @@ const goalTypeOptions: {
   label: string;
   defaultTarget: number;
 }[] = [
-  { value: "LESSONS_COMPLETED", label: "Lecons a terminer", defaultTarget: 5 },
+  { value: "LESSONS_COMPLETED", label: "Leçons a terminer", defaultTarget: 5 },
   { value: "QUIZ_SCORE", label: "Score moyen aux quiz (%)", defaultTarget: 80 },
   { value: "TIME_SPENT", label: "Temps d'etude (minutes)", defaultTarget: 60 },
   { value: "STREAK_DAYS", label: "Jours consecutifs", defaultTarget: 5 },
@@ -207,7 +207,7 @@ export function GoalFormDialog({
                   ? "En minutes"
                   : type === "STREAK_DAYS"
                     ? "Nombre de jours consecutifs"
-                    : "Nombre de lecons"}
+                    : "Nombre de leçons"}
             </p>
           </div>
 

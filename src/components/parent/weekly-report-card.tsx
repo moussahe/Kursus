@@ -251,7 +251,7 @@ export function WeeklyReportCard({
                   <p className="mt-2 text-xl font-bold text-gray-900">
                     {currentReport.lessonsCompleted}
                   </p>
-                  <p className="text-xs text-gray-500">Lecons completees</p>
+                  <p className="text-xs text-gray-500">Leçons completees</p>
                   {renderDelta(currentReport.lessonsCompletedDelta, "lecon(s)")}
                 </div>
 

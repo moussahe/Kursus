@@ -196,7 +196,7 @@ export default async function CourseDetailPage({
                 </div>
                 <div className="flex items-center gap-2 text-gray-300">
                   <Users className="h-5 w-5" />
-                  <span>{course.totalStudents} eleves</span>
+                  <span>{course.totalStudents} élèves</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-300">
                   <Clock className="h-5 w-5" />
@@ -204,7 +204,7 @@ export default async function CourseDetailPage({
                 </div>
                 <div className="flex items-center gap-2 text-gray-300">
                   <BookOpen className="h-5 w-5" />
-                  <span>{totalLessons} lecons</span>
+                  <span>{totalLessons} leçons</span>
                 </div>
               </div>
 
@@ -291,7 +291,7 @@ export default async function CourseDetailPage({
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl font-bold">Contenu du cours</h2>
                 <span className="text-sm text-gray-500">
-                  {course.chapters.length} chapitres - {totalLessons} lecons -{" "}
+                  {course.chapters.length} chapitres - {totalLessons} leçons -{" "}
                   {course.totalDuration} min
                 </span>
               </div>
@@ -372,7 +372,7 @@ export default async function CourseDetailPage({
                       <Users className="h-4 w-4" />
                       <span>
                         {course.author.teacherProfile?.totalStudents || 0}{" "}
-                        eleves
+                        élèves
                       </span>
                     </div>
                     <div className="flex items-center gap-1">

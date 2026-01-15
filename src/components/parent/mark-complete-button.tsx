@@ -36,7 +36,7 @@ export function MarkCompleteButton({
           throw new Error(error.error || "Une erreur est survenue");
         }
 
-        toast.success("Lecon marquee comme terminee !");
+        toast.success("Leçon marquee comme terminée !");
         router.refresh();
       } catch (error) {
         toast.error(

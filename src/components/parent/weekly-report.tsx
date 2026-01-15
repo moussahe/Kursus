@@ -124,7 +124,7 @@ export function WeeklyReport() {
                 <p className="text-2xl font-bold text-gray-900">
                   {totalLessons}
                 </p>
-                <p className="text-sm text-gray-500">Lecons cette semaine</p>
+                <p className="text-sm text-gray-500">Leçons cette semaine</p>
               </div>
             </div>
           </CardContent>
@@ -184,7 +184,7 @@ export function WeeklyReport() {
                   <p className="text-xl font-semibold text-gray-900">
                     {childStats.lessonsCompleted}
                   </p>
-                  <p className="text-xs text-gray-500">Lecons</p>
+                  <p className="text-xs text-gray-500">Leçons</p>
                 </div>
                 <div className="text-center">
                   <p className="text-xl font-semibold text-gray-900">
@@ -215,7 +215,7 @@ export function WeeklyReport() {
                           {course.courseTitle}
                         </span>
                         <span className="text-gray-500">
-                          {course.lessonsThisWeek} lecons
+                          {course.lessonsThisWeek} leçons
                         </span>
                       </div>
                       <ProgressBar value={course.progressPercent} size="sm" />

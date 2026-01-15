@@ -1,5 +1,6 @@
 export { Header } from "./header";
 export { Hero } from "./hero";
+export { ProductPreview } from "./product-preview";
 export { StatsSection } from "./stats-section";
 export { Categories } from "./categories";
 export { FeaturedCourses } from "./featured-courses";

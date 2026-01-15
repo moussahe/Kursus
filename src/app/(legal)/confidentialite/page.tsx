@@ -45,7 +45,7 @@ export default function ConfidentialitePage() {
       <p>
         <strong>Note importante</strong> : Nous minimisons la collecte de
         donnees sur les mineurs. Nous ne collectons jamais de photos, adresses
-        postales ou numeros de telephone des enfants.
+        postales ou numéros de telephone des enfants.
       </p>
 
       <h3>3.3 Donnees de paiement</h3>
@@ -60,7 +60,7 @@ export default function ConfidentialitePage() {
         <li>Gerer votre compte et vous authentifier</li>
         <li>Fournir les services educatifs</li>
         <li>Traiter les paiements</li>
-        <li>Suivre la progression des eleves</li>
+        <li>Suivre la progression des élèves</li>
         <li>Ameliorer nos services</li>
         <li>Vous contacter (support, notifications)</li>
       </ul>

@@ -401,7 +401,7 @@ export function QuizPlayer({
             <li className="flex items-start gap-2">
               <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-500" />
               <span>
-                Vous pouvez revenir sur vos reponses avant de terminer
+                Vous pouvez revenir sur vos réponses avant de terminer
               </span>
             </li>
             {quiz.timeLimit && (
@@ -558,7 +558,7 @@ export function QuizPlayer({
           <div>
             <p className="text-sm font-medium text-amber-800">Indice</p>
             <p className="mt-1 text-sm text-amber-700">
-              Reflechissez bien aux options proposees. Une seule reponse est
+              Reflechissez bien aux options proposees. Une seule réponse est
               correcte.
             </p>
           </div>

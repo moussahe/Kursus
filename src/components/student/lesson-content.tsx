@@ -74,7 +74,7 @@ export function LessonContent({
             {isCompleted ? (
               <div className="flex items-center gap-2 text-emerald-600">
                 <CheckCircle2 className="h-5 w-5" />
-                <span className="font-medium">Lecon terminee !</span>
+                <span className="font-medium">Leçon terminée !</span>
               </div>
             ) : (
               <div>
@@ -82,7 +82,7 @@ export function LessonContent({
                   Tu as fini cette lecon ?
                 </p>
                 <p className="text-sm text-gray-500">
-                  Marque-la comme terminee pour gagner{" "}
+                  Marque-la comme terminée pour gagner{" "}
                   <span className="font-medium text-violet-600">
                     +{XP_REWARDS.LESSON_COMPLETED} XP
                   </span>
@@ -102,7 +102,7 @@ export function LessonContent({
               ) : (
                 <>
                   <CheckCircle2 className="h-4 w-4" />
-                  Marquer comme terminee
+                  Marquer comme terminée
                 </>
               )}
             </Button>

@@ -80,7 +80,7 @@ export function OnboardingStep4({
             Parfait ! Voici notre plan
           </h2>
           <p className="text-sm text-gray-600">
-            Base sur vos reponses, voici ce que nous recommandons
+            Base sur vos réponses, voici ce que nous recommandons
           </p>
         </div>
       </div>
@@ -175,7 +175,7 @@ export function OnboardingStep4({
                     </span>
                     <span className="flex items-center gap-1">
                       <Clock className="h-3 w-3" />
-                      {course.totalLessons} lecons
+                      {course.totalLessons} leçons
                     </span>
                   </div>
                 </div>

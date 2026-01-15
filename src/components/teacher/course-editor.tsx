@@ -405,7 +405,7 @@ export function CourseEditor({ initialData }: CourseEditorProps) {
                       <FormLabel>Sous-titre</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Ex: Maitriser les fractions en 10 lecons"
+                          placeholder="Ex: Maitriser les fractions en 10 leçons"
                           className="rounded-xl"
                           {...field}
                         />
@@ -605,10 +605,10 @@ export function CourseEditor({ initialData }: CourseEditorProps) {
                 <div className="space-y-4">
                   <div>
                     <Label className="text-base">
-                      Ce que les eleves vont apprendre *
+                      Ce que les élèves vont apprendre *
                     </Label>
                     <p className="text-sm text-gray-500">
-                      Listez les competences que les eleves acquerront
+                      Listez les competences que les élèves acquerront
                     </p>
                   </div>
 
@@ -662,7 +662,7 @@ export function CourseEditor({ initialData }: CourseEditorProps) {
                   <div>
                     <Label className="text-base">Prerequis</Label>
                     <p className="text-sm text-gray-500">
-                      Ce que les eleves doivent savoir avant de commencer
+                      Ce que les élèves doivent savoir avant de commencer
                     </p>
                   </div>
 

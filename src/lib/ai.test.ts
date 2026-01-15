@@ -146,7 +146,7 @@ describe("AI Library", () => {
     it("instructs not to give direct answers", () => {
       const prompt = getAITutorSystemPrompt(baseContext);
 
-      expect(prompt).toContain("Ne donne JAMAIS les reponses directement");
+      expect(prompt).toContain("Ne donne JAMAIS les réponses directement");
     });
 
     it("includes pedagogical guidelines", () => {

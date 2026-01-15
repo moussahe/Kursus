@@ -101,7 +101,7 @@ const contentTypes = [
     value: "VIDEO",
     label: "Video",
     icon: PlayCircle,
-    description: "Lecon video",
+    description: "Leçon video",
   },
   {
     value: "TEXT",
@@ -203,7 +203,7 @@ export function LessonForm({
             (opt) => opt.isCorrect && opt.text.trim(),
           );
           if (!hasCorrect) {
-            toast.error(`Question ${i + 1}: Une reponse correcte est requise`);
+            toast.error(`Question ${i + 1}: Une réponse correcte est requise`);
             setIsSubmitting(false);
             return;
           }
@@ -478,7 +478,7 @@ export function LessonForm({
                         Publier la lecon
                       </FormLabel>
                       <FormDescription>
-                        La lecon sera visible par les etudiants inscrits
+                        La lecon sera visible par les étudiants inscrits
                       </FormDescription>
                     </div>
                   </FormItem>

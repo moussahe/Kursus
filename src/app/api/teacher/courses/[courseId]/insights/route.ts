@@ -10,11 +10,11 @@ interface RouteParams {
 // System prompt for teacher course insights
 function getTeacherInsightsSystemPrompt(): string {
   return `Tu es un assistant pedagogique expert pour Schoolaris, une plateforme educative francaise.
-Tu analyses les donnees de progression des etudiants d'un cours pour aider le professeur a ameliorer son enseignement.
+Tu analyses les donnees de progression des étudiants d'un cours pour aider le professeur a ameliorer son enseignement.
 
 TON ROLE:
-- Analyser les patterns de performance des etudiants
-- Identifier les lecons/quizzes problematiques ou les plus forts taux d'abandon
+- Analyser les patterns de performance des étudiants
+- Identifier les leçons/quizzes problematiques ou les plus forts taux d'abandon
 - Suggerer des ameliorations pedagogiques concretes
 - Mettre en evidence les succes et les points d'attention
 
@@ -120,11 +120,11 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
 
     if (totalStudents === 0) {
       return NextResponse.json({
-        summary: "Aucun etudiant inscrit pour le moment.",
+        summary: "Aucun étudiant inscrit pour le moment.",
         insights: [],
         topPerformingContent: "Pas encore de donnees disponibles",
         areasNeedingAttention: "Pas encore de donnees disponibles",
-        nextSteps: ["Promouvoir votre cours pour attirer des etudiants"],
+        nextSteps: ["Promouvoir votre cours pour attirer des étudiants"],
       });
     }
 
@@ -293,7 +293,7 @@ Genere une analyse JSON avec des conseils pratiques pour ameliorer mon cours.`,
     // Extract JSON from response
     const jsonMatch = textContent.text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
-      throw new Error("Format de reponse invalide");
+      throw new Error("Format de réponse invalide");
     }
 
     const insights: TeacherInsightsResponse = JSON.parse(jsonMatch[0]);

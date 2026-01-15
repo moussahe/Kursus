@@ -130,7 +130,7 @@ const TARGET_CONFIG: Record<
   { label: string; icon: React.ElementType }
 > = {
   COURSE: { label: "Cours", icon: BookOpen },
-  LESSON: { label: "Lecon", icon: FileText },
+  LESSON: { label: "Leçon", icon: FileText },
   REVIEW: { label: "Avis", icon: MessageSquare },
   FORUM_TOPIC: { label: "Sujet forum", icon: MessageSquare },
   FORUM_REPLY: { label: "Reponse forum", icon: MessageSquare },
@@ -534,7 +534,7 @@ export default async function AdminReportsPage({
           Signalements
         </h1>
         <p className="mt-1 text-muted-foreground">
-          Gerez les signalements de contenu et les problemes de securite
+          Gerez les signalements de contenu et les problèmes de securite
         </p>
       </div>
 

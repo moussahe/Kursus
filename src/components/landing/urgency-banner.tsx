@@ -137,7 +137,7 @@ export function UrgencyBanner() {
               <TrendingUp className="h-4 w-4 text-emerald-400" />
               <span>
                 <strong className="text-emerald-400">{studentsOnline}+</strong>{" "}
-                eleves actifs maintenant
+                élèves actifs maintenant
               </span>
             </div>
 

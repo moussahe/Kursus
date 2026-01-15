@@ -139,7 +139,7 @@ const CURRICULUM_TOPICS: Record<string, Record<ExamSubject, string[]>> = {
       "Genetique et evolution",
       "La Terre, la vie et l'organisation du vivant",
       "Corps humain et sante",
-      "Ecosystemes et services environnementaux",
+      "Ecosystèmes et services environnementaux",
     ],
     PHILOSOPHIE: [
       "La conscience",
@@ -195,7 +195,7 @@ ${examTypeContext}
 NIVEAU: ${gradeLabel}
 MATIERE: ${subjectLabel}
 NOMBRE DE QUESTIONS: ${context.questionCount}
-DIFFICULTE: ${context.difficulty === "challenging" ? "Exigeant (pour eleves avances)" : "Standard (niveau attendu)"}
+DIFFICULTE: ${context.difficulty === "challenging" ? "Exigeant (pour élèves avances)" : "Standard (niveau attendu)"}
 
 PROGRAMME A COUVRIR:
 ${topics}
@@ -207,7 +207,7 @@ Genere ${context.questionCount} questions d'examen variees et realistes.
 TYPES DE QUESTIONS A UTILISER (varier les types):
 1. "mcq" - QCM avec 4 options (1-2 par examen max)
 2. "short_answer" - Reponse courte (definition, calcul simple)
-3. "problem_solving" - Probleme a resoudre avec etapes
+3. "problem_solving" - Problème a resoudre avec etapes
 4. "essay" - Question de reflexion (pour Bac uniquement, 1 max)
 
 REGLES STRICTES:
@@ -215,7 +215,7 @@ REGLES STRICTES:
 2. Progression logique de difficulte
 3. Langage clair et precis
 4. Points proportionnels a la difficulte
-5. Explications pedagogiques pour chaque reponse
+5. Explications pedagogiques pour chaque réponse
 6. Erreurs courantes identifiees pour aider l'eleve
 
 FORMAT JSON STRICT:
@@ -235,7 +235,7 @@ FORMAT JSON STRICT:
       ],
       "solution": {
         "correctAnswer": "b",
-        "explanation": "Explication detaillee de la reponse",
+        "explanation": "Explication detaillee de la réponse",
         "keyPoints": ["Point cle 1", "Point cle 2"],
         "commonMistakes": ["Erreur frequente 1"]
       }
@@ -243,7 +243,7 @@ FORMAT JSON STRICT:
     {
       "id": "q2",
       "type": "short_answer",
-      "question": "Question necessitant une reponse courte",
+      "question": "Question necessitant une réponse courte",
       "points": 3,
       "timeEstimate": 90,
       "solution": {
@@ -256,7 +256,7 @@ FORMAT JSON STRICT:
     {
       "id": "q3",
       "type": "problem_solving",
-      "question": "Enonce complet du probleme avec contexte",
+      "question": "Enonce complet du problème avec contexte",
       "points": 5,
       "timeEstimate": 180,
       "steps": [
@@ -338,7 +338,7 @@ function getFallbackQuestions(context: ExamGenerationContext): ExamQuestion[] {
         },
         {
           id: "b",
-          text: "Le systeme a rencontre une erreur technique",
+          text: "Le système a rencontre une erreur technique",
           isCorrect: false,
         },
         { id: "c", text: "Veuillez reessayer", isCorrect: false },
@@ -347,7 +347,7 @@ function getFallbackQuestions(context: ExamGenerationContext): ExamQuestion[] {
       solution: {
         correctAnswer: "a",
         explanation:
-          "Cette question de secours est affichee car la generation a rencontre un probleme. Veuillez relancer l'examen.",
+          "Cette question de secours est affichee car la generation a rencontre un problème. Veuillez relancer l'examen.",
         keyPoints: ["Question de secours"],
       },
     },
@@ -559,7 +559,7 @@ function getFallbackAnalysis(percentage: number): ExamAnalysis {
         ? "Performance correcte. Quelques points restent a consolider."
         : "Cette session montre des axes de progression. Continue tes efforts!",
     strengths: isGood
-      ? ["Bonne comprehension generale", "Methodologie correcte"]
+      ? ["Bonne compréhension générale", "Methodologie correcte"]
       : ["Efforts fournis", "Certaines notions acquises"],
     weaknesses: isPassing
       ? ["Quelques erreurs d'inattention"]

@@ -49,8 +49,8 @@ const goalTypeConfig: Record<
 > = {
   LESSONS_COMPLETED: {
     icon: BookOpen,
-    label: "Lecons",
-    unit: "lecons",
+    label: "Leçons",
+    unit: "leçons",
     color: "text-emerald-600",
     bgColor: "bg-emerald-100",
   },

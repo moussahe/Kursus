@@ -68,10 +68,10 @@ ${optionsList}
 ${lessonContent ? `EXTRAIT DE LA LECON:\n${lessonContent.slice(0, 1500)}\n` : ""}
 
 MISSION:
-Guide l'eleve vers la bonne reponse SANS lui donner directement la solution. Utilise la methode socratique.
+Guide l'eleve vers la bonne réponse SANS lui donner directement la solution. Utilise la methode socratique.
 
 REGLES:
-1. NE JAMAIS reveler la bonne reponse
+1. NE JAMAIS reveler la bonne réponse
 2. Poser des questions guidees pour faire reflechir
 3. Donner des indices progressifs
 4. Rappeler les concepts cles de la lecon si necessaire

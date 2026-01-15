@@ -382,7 +382,7 @@ async function CoursesList({ searchParams }: { searchParams: SearchParams }) {
           <span className="font-semibold text-gray-900">
             {pagination.totalCount}
           </span>{" "}
-          cours trouves
+          cours trouvés
         </p>
         <p className="text-sm text-gray-500">
           Page {pagination.currentPage} sur {pagination.totalPages}

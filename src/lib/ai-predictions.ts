@@ -12,9 +12,9 @@ TON ROLE:
 
 METHODOLOGIE D'ANALYSE:
 1. Examine les tendances sur les 4 dernieres semaines
-2. Calcule la velocite d'apprentissage (lecons/semaine)
+2. Calcule la velocite d'apprentissage (leçons/semaine)
 3. Identifie les patterns de baisse ou de hausse
-4. Evalue les facteurs de risque (inactivite, scores en baisse, matieres faibles)
+4. Evalue les facteurs de risque (inactivité, scores en baisse, matieres faibles)
 
 FORMAT DE REPONSE (JSON):
 {
@@ -221,7 +221,7 @@ function generateFallbackPredictions(
       level:
         metrics.currentStatus.daysSinceLastActivity > 7 ? "high" : "medium",
       category: "inactivity",
-      title: "Risque d'inactivite",
+      title: "Risque d'inactivité",
       description: `${metrics.childName} n'a pas etudie depuis ${metrics.currentStatus.daysSinceLastActivity} jours`,
       probability: Math.min(
         90,
@@ -250,7 +250,7 @@ function generateFallbackPredictions(
       description: `Score moyen recent de ${Math.round(avgRecentScore)}% en dessous des attentes`,
       probability: 70,
       preventiveAction:
-        "Revoir les lecons difficiles avec l'assistant IA ou envisager des exercices supplementaires",
+        "Revoir les leçons difficiles avec l'assistant IA ou envisager des exercices supplementaires",
     });
   }
 
@@ -318,14 +318,14 @@ function generateFallbackPredictions(
       velocityChange: "steady",
     },
     forecast: {
-      shortTerm: `${metrics.childName} devrait completer environ ${Math.round(avgLessonsRecent)} lecons cette semaine.`,
-      mediumTerm: `Prevision de ${Math.round(avgLessonsRecent * 4)} lecons sur le prochain mois.`,
+      shortTerm: `${metrics.childName} devrait completer environ ${Math.round(avgLessonsRecent)} leçons cette semaine.`,
+      mediumTerm: `Prevision de ${Math.round(avgLessonsRecent * 4)} leçons sur le prochain mois.`,
       keyFactors: ["regularite", "engagement"],
     },
     recommendations: [
       {
         priority: riskIndicators.length > 0 ? "important" : "suggested",
-        action: "Maintenir un rythme regulier de 3-5 lecons par semaine",
+        action: "Maintenir un rythme regulier de 3-5 leçons par semaine",
         expectedImpact: "Progression constante et meilleure retention",
       },
     ],

@@ -141,7 +141,7 @@ export function ReportActions({
       case "resolve":
         return {
           title: "Resoudre le signalement",
-          description: "Indiquez les mesures prises pour resoudre ce probleme.",
+          description: "Indiquez les mesures prises pour resoudre ce problème.",
           buttonLabel: "Marquer comme resolu",
           buttonClass: "bg-emerald-600 hover:bg-emerald-700",
           icon: CheckCircle,

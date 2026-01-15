@@ -175,7 +175,7 @@ export async function DELETE() {
       return NextResponse.json(
         {
           error:
-            "Impossible de supprimer le compte. Vous avez des cours actifs avec des etudiants inscrits.",
+            "Impossible de supprimer le compte. Vous avez des cours actifs avec des étudiants inscrits.",
         },
         { status: 400 },
       );

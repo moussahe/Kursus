@@ -289,7 +289,7 @@ async function ChildDetail({
               <p className="text-2xl font-bold text-gray-900">
                 {child.stats.completedLessons}/{child.stats.totalLessons}
               </p>
-              <p className="text-sm text-gray-500">Lecons terminees</p>
+              <p className="text-sm text-gray-500">Leçons terminées</p>
             </div>
           </div>
         </div>
@@ -381,7 +381,7 @@ async function ChildDetail({
                       <ProgressBar value={course.progress} size="sm" />
                     </div>
                     <p className="mt-1 text-xs text-gray-400">
-                      {course.completedLessons}/{course.totalLessons} lecons
+                      {course.completedLessons}/{course.totalLessons} leçons
                     </p>
                   </div>
                 </div>
@@ -404,7 +404,7 @@ async function ChildDetail({
         </h2>
         {child.recentActivity.length === 0 ? (
           <p className="py-8 text-center text-sm text-gray-500">
-            Aucune activite recente.
+            Aucune activité recente.
           </p>
         ) : (
           <div className="space-y-4">

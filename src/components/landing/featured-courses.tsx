@@ -37,13 +37,13 @@ const sampleCourses: Course[] = [
   },
   {
     id: 2,
-    title: "Francais - Brevet des Colleges",
+    title: "Français - Brevet des Colleges",
     teacher: { name: "Jean Martin", avatarInitial: "J" },
     rating: 4.8,
     reviews: 98,
     price: 39,
     level: "College",
-    subject: "Francais",
+    subject: "Français",
     subjectColor: "bg-red-100 text-red-800",
     thumbnailGradient: "from-red-400 to-orange-500",
   },
@@ -178,8 +178,8 @@ export function FeaturedCourses() {
             Cours Populaires
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
-            Decouvrez les cours les mieux notes et les plus apprecies par notre
-            communaute d&apos;eleves.
+            Découvrez les cours les mieux notes et les plus apprecies par notre
+            communaute d&apos;élèves.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

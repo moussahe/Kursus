@@ -102,7 +102,7 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
 
     if (!enrollment) {
       return NextResponse.json(
-        { error: "Eleve non trouve ou non inscrit a vos cours" },
+        { error: "Élève non trouve ou non inscrit a vos cours" },
         { status: 404 },
       );
     }
@@ -133,7 +133,7 @@ export async function POST(req: NextRequest, { params }: RouteParams) {
     });
 
     if (!child) {
-      return NextResponse.json({ error: "Eleve non trouve" }, { status: 404 });
+      return NextResponse.json({ error: "Élève non trouve" }, { status: 404 });
     }
 
     // Get all enrollments for this child in teacher's courses
@@ -349,7 +349,7 @@ Genere une analyse JSON avec des recommandations concretes.`,
     // Extract JSON from response
     const jsonMatch = textContent.text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
-      throw new Error("Format de reponse invalide");
+      throw new Error("Format de réponse invalide");
     }
 
     const insights: StudentInsightsResponse = JSON.parse(jsonMatch[0]);

@@ -84,7 +84,7 @@ export function QuizResults({
               <p className="font-medium text-amber-800">Temps ecoule</p>
               <p className="text-sm text-amber-700">
                 Le quiz a ete automatiquement soumis car le temps imparti etait
-                ecoule. Toutes tes reponses ont ete enregistrees.
+                ecoule. Toutes tes réponses ont ete enregistrees.
               </p>
             </div>
           </div>
@@ -136,7 +136,7 @@ export function QuizResults({
         <div className="mt-6">
           <div className="text-5xl font-bold text-gray-900">{percentage}%</div>
           <p className="mt-2 text-gray-600">
-            {correctCount} sur {totalQuestions} bonnes reponses
+            {correctCount} sur {totalQuestions} bonnes réponses
           </p>
         </div>
 
@@ -171,7 +171,7 @@ export function QuizResults({
             <AlertTriangle className="h-5 w-5 shrink-0 text-amber-500" />
             <div className="flex-1">
               <p className="font-medium text-amber-800">
-                Probleme de sauvegarde
+                Problème de sauvegarde
               </p>
               <p className="mt-1 text-sm text-amber-700">{submitError}</p>
               {onRetrySubmit && (
@@ -311,7 +311,7 @@ export function QuizResults({
 
       {/* Review Answers */}
       <div className="space-y-4">
-        <h4 className="font-semibold text-gray-900">Revue des reponses</h4>
+        <h4 className="font-semibold text-gray-900">Revue des réponses</h4>
         {quiz.questions.map((question, index) => {
           const selectedOption = selectedAnswers[question.id];
           const correctOption = question.options.find((o) => o.isCorrect);
@@ -366,7 +366,7 @@ export function QuizResults({
                         <span>{option.text}</span>
                         {option.isCorrect && (
                           <span className="ml-auto text-xs font-medium">
-                            Bonne reponse
+                            Bonne réponse
                           </span>
                         )}
                       </div>

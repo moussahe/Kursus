@@ -223,9 +223,9 @@ export async function generateReviewQuestion(
   const prompt = `Tu es un professeur expert en ${subjectLabels[weakArea.subject]} pour le niveau ${gradeLabels[gradeLevel]}.
 
 L'eleve a des difficultes avec ce concept: "${weakArea.topic}"
-Type d'erreur identifie: ${weakArea.category || "comprehension generale"}
+Type d'erreur identifie: ${weakArea.category || "compréhension générale"}
 
-Genere UNE question de revision courte et ciblee pour tester sa comprehension de ce concept.
+Genere UNE question de revision courte et ciblee pour tester sa compréhension de ce concept.
 La question doit etre:
 - Adaptee au niveau ${gradeLabels[gradeLevel]}
 - Claire et precise
@@ -235,7 +235,7 @@ La question doit etre:
 Reponds UNIQUEMENT au format JSON suivant:
 {
   "question": "La question ici",
-  "expectedAnswer": "La reponse attendue (courte et precise)"
+  "expectedAnswer": "La réponse attendue (courte et precise)"
 }`;
 
   try {
@@ -287,20 +287,20 @@ export async function evaluateAnswer(
 ): Promise<{ quality: number; feedback: string; isCorrect: boolean }> {
   const ai = getAnthropicClient();
 
-  const prompt = `Tu es un professeur bienveillant qui evalue la reponse d'un eleve de ${gradeLevel}.
+  const prompt = `Tu es un professeur bienveillant qui evalue la réponse d'un eleve de ${gradeLevel}.
 
 Concept teste: "${weakArea.topic}"
 Question: "${question}"
 Reponse attendue: "${expectedAnswer}"
 Reponse de l'eleve: "${childAnswer}"
 
-Evalue la reponse sur une echelle de 0 a 5:
-- 0: Aucune reponse ou completement faux
+Evalue la réponse sur une echelle de 0 a 5:
+- 0: Aucune réponse ou completement faux
 - 1: Incorrect mais montre une tentative
 - 2: Incorrect mais proche
 - 3: Correct avec difficulte significative
 - 4: Correct avec un peu d'hesitation
-- 5: Parfait, reponse complete et precise
+- 5: Parfait, réponse complete et precise
 
 Reponds UNIQUEMENT au format JSON:
 {
@@ -346,7 +346,7 @@ Reponds UNIQUEMENT au format JSON:
     return {
       quality: isCorrect ? 4 : 2,
       feedback: isCorrect
-        ? "Bonne reponse ! Continue comme ca."
+        ? "Bonne réponse ! Continue comme ca."
         : "Ce n'est pas tout a fait ca. Revise ce concept et reessaie.",
       isCorrect,
     };

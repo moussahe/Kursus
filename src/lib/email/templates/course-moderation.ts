@@ -31,7 +31,7 @@ export function courseApprovedEmail(data: CourseModerationData): string {
     </div>
 
     <p>
-      Les eleves peuvent desormais decouvrir et s'inscrire a votre cours.
+      Les élèves peuvent désormais découvrir et s'inscrire a votre cours.
       N'hesitez pas a le partager sur vos reseaux pour maximiser sa visibilite !
     </p>
 
@@ -60,7 +60,7 @@ Bonjour ${data.teacherName},
 
 Excellente nouvelle ! Votre cours "${data.courseName}" a ete approuve par notre equipe de moderation et est maintenant publie sur Schoolaris.
 
-Les eleves peuvent desormais decouvrir et s'inscrire a votre cours.
+Les élèves peuvent désormais découvrir et s'inscrire a votre cours.
 
 Voir mon cours: ${courseUrl}
 
@@ -186,7 +186,7 @@ export function courseChangesRequestedEmail(
 
     <p class="muted">
       Ces retours visent a garantir la meilleure experience possible pour
-      vos futurs eleves. Merci de votre comprehension !
+      vos futurs élèves. Merci de votre compréhension !
     </p>
   `;
 

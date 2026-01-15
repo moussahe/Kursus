@@ -205,7 +205,7 @@ export function QuizQuestionHelp({
               <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
                 <p className="text-xs text-emerald-700">
                   <span className="font-medium">Conseil:</span> Utilise ces
-                  indices pour trouver la reponse par toi-meme. C&apos;est comme
+                  indices pour trouver la réponse par toi-meme. C&apos;est comme
                   ca que tu apprendras le mieux !
                 </p>
               </div>

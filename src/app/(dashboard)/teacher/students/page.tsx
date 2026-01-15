@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 import { StudentInsightsDashboard } from "@/components/teacher/student-insights-dashboard";
 
 export const metadata = {
-  title: "Mes Etudiants | Schoolaris",
+  title: "Mes Étudiants | Schoolaris",
   description:
-    "Suivez la progression de vos etudiants et obtenez des insights IA personnalises",
+    "Suivez la progression de vos étudiants et obtenez des insights IA personnalises",
 };
 
 export default async function TeacherStudentsPage() {
@@ -23,10 +23,10 @@ export default async function TeacherStudentsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-          Mes Etudiants
+          Mes Étudiants
         </h1>
         <p className="mt-1 text-gray-500">
-          Suivez la progression de vos etudiants et obtenez des insights IA
+          Suivez la progression de vos étudiants et obtenez des insights IA
           personnalises
         </p>
       </div>

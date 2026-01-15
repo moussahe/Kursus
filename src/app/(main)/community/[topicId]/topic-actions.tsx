@@ -79,8 +79,8 @@ export function TopicActions({
 
       toast.success(isLocked ? "Sujet deverrouille" : "Sujet verrouille", {
         description: isLocked
-          ? "Les reponses sont de nouveau autorisees."
-          : "Les nouvelles reponses sont desactivees.",
+          ? "Les réponses sont de nouveau autorisees."
+          : "Les nouvelles réponses sont desactivees.",
       });
       router.refresh();
     } catch {
@@ -173,7 +173,7 @@ export function TopicActions({
           <DialogHeader>
             <DialogTitle>Supprimer ce sujet?</DialogTitle>
             <DialogDescription>
-              Cette action est irreversible. Le sujet et toutes ses reponses
+              Cette action est irreversible. Le sujet et toutes ses réponses
               seront definitivement supprimes.
             </DialogDescription>
           </DialogHeader>

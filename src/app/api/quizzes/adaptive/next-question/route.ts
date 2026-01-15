@@ -208,7 +208,7 @@ function getDifficultyChangeReason(
 
   if (isLevelUp) {
     if (consecutiveCorrect >= 2) {
-      return `${consecutiveCorrect} reponses correctes d'affilee! Tu montes de niveau.`;
+      return `${consecutiveCorrect} réponses correctes d'affilee! Tu montes de niveau.`;
     }
     return "Excellente performance! Passons a un niveau superieur.";
   }

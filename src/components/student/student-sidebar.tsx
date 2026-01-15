@@ -132,7 +132,7 @@ export function StudentSidebar({ child }: StudentSidebarProps) {
             <p className="text-sm font-medium text-foreground truncate">
               {child.firstName} {child.lastName}
             </p>
-            <p className="text-xs text-muted-foreground">Eleve</p>
+            <p className="text-xs text-muted-foreground">Élève</p>
           </div>
         </div>
         {/* Back to Parent Dashboard */}

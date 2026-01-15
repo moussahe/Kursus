@@ -142,7 +142,7 @@ export default async function DashboardProgressPage() {
           <CardContent>
             <div className="text-center py-8 text-gray-500">
               <TrendingUp className="h-12 w-12 mx-auto mb-4 opacity-50" />
-              <p>Votre activite apparaitra ici</p>
+              <p>Votre activité apparaitra ici</p>
               <p className="text-sm">
                 Commencez un cours pour voir votre progression
               </p>
