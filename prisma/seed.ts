@@ -100,7 +100,37 @@ async function main() {
     },
   });
 
-  console.log("Created teachers:", teacherMath.email, teacherFrench.email);
+  // Teacher 3 - Hafca Hechaichi (Math specialist - all levels)
+  const teacherHafca = await prisma.user.create({
+    data: {
+      name: "Hafca Hechaichi",
+      email: "hafca.hechaichi@schoolaris.fr",
+      password: passwordHash,
+      role: Role.TEACHER,
+      emailVerified: new Date(),
+      teacherProfile: {
+        create: {
+          slug: "hafca-hechaichi",
+          headline:
+            "Professeure de Mathématiques - Spécialiste Collège & Lycée",
+          bio: "Diplômée de l'École Normale Supérieure, j'enseigne les mathématiques depuis 10 ans avec passion. Ma méthode pédagogique s'adapte à chaque élève pour transformer les maths en une matière accessible et même amusante. Du calcul mental aux équations complexes, je vous accompagne vers la réussite !",
+          specialties: [Subject.MATHEMATIQUES],
+          yearsExperience: 10,
+          isVerified: true,
+          totalStudents: 892,
+          totalCourses: 4,
+          averageRating: 4.95,
+        },
+      },
+    },
+  });
+
+  console.log(
+    "Created teachers:",
+    teacherMath.email,
+    teacherFrench.email,
+    teacherHafca.email,
+  );
 
   // Parent
   const parent = await prisma.user.create({
@@ -2560,6 +2590,1915 @@ Le coeur est un muscle creux de la taille d'un poing qui bat environ **100 000 f
 
   console.log("Created Course 3: Le Corps Humain 5eme");
 
+  // ============ COURSE 4: MATHS 6EME - NOMBRES RELATIFS (Hafca) ============
+
+  const courseNombresRelatifs = await prisma.course.create({
+    data: {
+      title: "Les Nombres Relatifs - 6ème",
+      slug: "nombres-relatifs-6eme",
+      subtitle: "Maîtriser les nombres positifs et négatifs",
+      description: `Ce cours complet vous permettra de maîtriser les nombres relatifs, une notion fondamentale en mathématiques.
+
+À travers des explications claires et des exercices progressifs, vous apprendrez à :
+- Comprendre la notion de nombre relatif (positif et négatif)
+- Placer des nombres relatifs sur une droite graduée
+- Comparer et ranger des nombres relatifs
+- Additionner et soustraire des nombres relatifs
+- Résoudre des problèmes concrets avec des températures, des altitudes...
+
+Ma méthode s'appuie sur des situations concrètes pour rendre ces concepts abstraits plus accessibles.`,
+      subject: Subject.MATHEMATIQUES,
+      gradeLevel: GradeLevel.SIXIEME,
+      price: 1290, // 12.90€
+      imageUrl:
+        "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800",
+      authorId: teacherHafca.id,
+      isPublished: true,
+      publishedAt: new Date(),
+      totalStudents: 234,
+      learningOutcomes: [
+        "Comprendre la notion de nombre relatif",
+        "Savoir placer des nombres relatifs sur une droite graduée",
+        "Comparer et ranger des nombres relatifs",
+        "Effectuer des additions et soustractions de nombres relatifs",
+        "Résoudre des problèmes concrets",
+      ],
+      requirements: [
+        "Maîtriser les opérations sur les nombres entiers",
+        "Savoir lire une graduation",
+      ],
+    },
+  });
+
+  // Chapter 1: Découverte des nombres relatifs
+  const ch1NR = await prisma.chapter.create({
+    data: {
+      title: "Découvrir les nombres relatifs",
+      description: "Comprendre ce qu'est un nombre relatif et son utilité",
+      position: 1,
+      courseId: courseNombresRelatifs.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Qu'est-ce qu'un nombre relatif ?",
+      description: "Découvrir les nombres positifs et négatifs",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=nombres-relatifs-intro",
+      duration: 15,
+      position: 1,
+      chapterId: ch1NR.id,
+      isPublished: true,
+      isFreePreview: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Les nombres relatifs dans la vie quotidienne",
+      description: "Températures, altitudes, comptes bancaires...",
+      contentType: ContentType.TEXT,
+      content: `# Les nombres relatifs dans la vie quotidienne
+
+## Introduction
+
+Les nombres relatifs sont partout autour de nous ! Ils nous permettent de représenter des quantités qui peuvent être "positives" ou "négatives".
+
+## Les températures
+
+C'est l'exemple le plus courant :
+- **+25°C** : il fait chaud, c'est une température positive
+- **-10°C** : il fait froid, c'est une température négative
+- **0°C** : c'est le point de référence (congélation de l'eau)
+
+## Les altitudes
+
+- **+8848 m** : sommet de l'Everest (au-dessus du niveau de la mer)
+- **-423 m** : Mer Morte (en dessous du niveau de la mer)
+- **0 m** : niveau de la mer (référence)
+
+## Les comptes bancaires
+
+- **+150 €** : tu as de l'argent sur ton compte
+- **-50 €** : tu es à découvert (tu dois de l'argent)
+
+## Le vocabulaire
+
+| Terme | Signification | Exemple |
+|-------|--------------|---------|
+| Nombre positif | Supérieur à zéro | +5, +12, +0.5 |
+| Nombre négatif | Inférieur à zéro | -3, -8, -0.25 |
+| Opposé | Même valeur, signe contraire | L'opposé de +5 est -5 |
+
+## À retenir
+
+Un nombre relatif est composé de :
+- Un **signe** : + (positif) ou - (négatif)
+- Une **valeur absolue** : la distance à zéro (toujours positive)
+
+Exemple : Pour **-7**, le signe est "-" et la valeur absolue est 7.`,
+      duration: 12,
+      position: 2,
+      chapterId: ch1NR.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson1_3_NR = await prisma.lesson.create({
+    data: {
+      title: "La droite graduée",
+      description: "Placer des nombres relatifs sur une droite",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=droite-graduee",
+      duration: 14,
+      position: 3,
+      chapterId: ch1NR.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz1NR = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Découverte des nombres relatifs",
+      description: "Vérifie ta compréhension des bases",
+      lessonId: lesson1_3_NR.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz1NR.id,
+        question: "Quelle température est la plus froide ?",
+        options: [
+          { id: "a", text: "-15°C", isCorrect: true },
+          { id: "b", text: "-5°C", isCorrect: false },
+          { id: "c", text: "+2°C", isCorrect: false },
+          { id: "d", text: "0°C", isCorrect: false },
+        ],
+        explanation:
+          "Plus un nombre négatif est 'grand' en valeur absolue, plus il est petit. -15 < -5 < 0 < +2",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz1NR.id,
+        question: "Quel est l'opposé de +8 ?",
+        options: [
+          { id: "a", text: "+8", isCorrect: false },
+          { id: "b", text: "-8", isCorrect: true },
+          { id: "c", text: "0", isCorrect: false },
+          { id: "d", text: "8", isCorrect: false },
+        ],
+        explanation:
+          "L'opposé d'un nombre a le même chiffre mais le signe contraire. L'opposé de +8 est -8.",
+        points: 1,
+        position: 2,
+      },
+      {
+        quizId: quiz1NR.id,
+        question: "Un sous-marin est à -250 m. Que signifie ce nombre ?",
+        options: [
+          {
+            id: "a",
+            text: "Il est à 250 m au-dessus du niveau de la mer",
+            isCorrect: false,
+          },
+          {
+            id: "b",
+            text: "Il est à 250 m sous le niveau de la mer",
+            isCorrect: true,
+          },
+          { id: "c", text: "Il avance de 250 m", isCorrect: false },
+          { id: "d", text: "Il recule de 250 m", isCorrect: false },
+        ],
+        explanation:
+          "Une altitude négative signifie que l'on est en dessous du niveau de la mer (référence 0).",
+        points: 1,
+        position: 3,
+      },
+    ],
+  });
+
+  // Chapter 2: Comparer et ranger
+  const ch2NR = await prisma.chapter.create({
+    data: {
+      title: "Comparer et ranger des nombres relatifs",
+      description: "Apprendre à ordonner les nombres relatifs",
+      position: 2,
+      courseId: courseNombresRelatifs.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Comparer deux nombres relatifs",
+      description: "Les règles de comparaison",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=comparer-relatifs",
+      duration: 12,
+      position: 1,
+      chapterId: ch2NR.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Ranger dans l'ordre croissant et décroissant",
+      description: "Ordonner une série de nombres relatifs",
+      contentType: ContentType.TEXT,
+      content: `# Ranger des nombres relatifs
+
+## Rappel : ordre croissant et décroissant
+
+- **Ordre croissant** : du plus petit au plus grand (↗)
+- **Ordre décroissant** : du plus grand au plus petit (↘)
+
+## La règle d'or
+
+Sur une droite graduée :
+- **À gauche** = plus petit
+- **À droite** = plus grand
+
+## Les cas de comparaison
+
+### 1. Deux nombres positifs
+On compare normalement : 3 < 7 car 3 est plus petit que 7
+
+### 2. Deux nombres négatifs
+⚠️ Attention ! Plus le chiffre est grand, plus le nombre est PETIT
+- -2 > -5 (car -2 est plus à droite sur la droite)
+- -10 < -3
+
+### 3. Un positif et un négatif
+Tout nombre positif est supérieur à tout nombre négatif
+- +1 > -100
+- -0.5 < +0.5
+
+## Méthode pour ranger
+
+1. Sépare les positifs et les négatifs
+2. Range les négatifs (attention à l'ordre inversé)
+3. Range les positifs
+4. Combine : tous les négatifs, puis 0, puis les positifs
+
+## Exemple
+
+Range dans l'ordre croissant : -3, +5, -7, 0, +2, -1
+
+**Étape 1 - Négatifs** : -7 < -3 < -1
+**Étape 2 - Positifs** : +2 < +5
+**Résultat** : -7 < -3 < -1 < 0 < +2 < +5`,
+      duration: 15,
+      position: 2,
+      chapterId: ch2NR.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson2_3_NR = await prisma.lesson.create({
+    data: {
+      title: "Exercices de comparaison",
+      description: "S'entraîner avec des exercices variés",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-comparaison",
+      duration: 18,
+      position: 3,
+      chapterId: ch2NR.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz2NR = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Comparer et ranger",
+      description: "Teste tes capacités de comparaison",
+      lessonId: lesson2_3_NR.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz2NR.id,
+        question: "Quel symbole complète : -4 ... -9 ?",
+        options: [
+          { id: "a", text: "<", isCorrect: false },
+          { id: "b", text: ">", isCorrect: true },
+          { id: "c", text: "=", isCorrect: false },
+        ],
+        explanation:
+          "-4 est plus grand que -9 car il est plus proche de 0 (plus à droite sur la droite graduée).",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz2NR.id,
+        question: "Range dans l'ordre croissant : -2, +3, -5, 0",
+        options: [
+          { id: "a", text: "-5 < -2 < 0 < +3", isCorrect: true },
+          { id: "b", text: "-2 < -5 < 0 < +3", isCorrect: false },
+          { id: "c", text: "+3 < 0 < -2 < -5", isCorrect: false },
+          { id: "d", text: "0 < -2 < -5 < +3", isCorrect: false },
+        ],
+        explanation:
+          "Ordre croissant = du plus petit au plus grand. -5 est le plus petit, puis -2, puis 0, puis +3.",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  // Chapter 3: Opérations
+  const ch3NR = await prisma.chapter.create({
+    data: {
+      title: "Additionner et soustraire",
+      description: "Les opérations sur les nombres relatifs",
+      position: 3,
+      courseId: courseNombresRelatifs.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Addition de nombres relatifs",
+      description: "Apprendre à additionner des nombres de signes différents",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=addition-relatifs",
+      duration: 16,
+      position: 1,
+      chapterId: ch3NR.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Les règles d'addition",
+      description: "Même signe, signes différents",
+      contentType: ContentType.TEXT,
+      content: `# Les règles d'addition des nombres relatifs
+
+## Règle 1 : Même signe
+
+Quand les deux nombres ont le **même signe** :
+- On **additionne** les valeurs absolues
+- On **garde** le signe commun
+
+### Exemples
+- (+5) + (+3) = +8 (positif + positif = positif)
+- (-4) + (-6) = -10 (négatif + négatif = négatif)
+
+## Règle 2 : Signes différents
+
+Quand les deux nombres ont des **signes différents** :
+- On **soustrait** les valeurs absolues (la plus grande moins la plus petite)
+- On prend le **signe du nombre** qui a la plus grande valeur absolue
+
+### Exemples
+- (+7) + (-3) = +4 (7 > 3, donc signe +)
+- (-8) + (+5) = -3 (8 > 5, donc signe -)
+- (+4) + (-4) = 0 (les opposés s'annulent)
+
+## Astuce : la méthode du "thermomètre"
+
+Imagine un thermomètre :
+- Ajouter un nombre **positif** = monter
+- Ajouter un nombre **négatif** = descendre
+
+Exemple : (-3) + (+7)
+- Je pars de -3
+- Je monte de 7
+- J'arrive à +4
+
+## Tableau récapitulatif
+
+| Opération | Règle | Exemple |
+|-----------|-------|---------|
+| (+) + (+) | Additionne, garde + | (+3) + (+5) = +8 |
+| (-) + (-) | Additionne, garde - | (-3) + (-5) = -8 |
+| (+) + (-) | Soustrais, signe du plus grand | (+7) + (-4) = +3 |
+| (-) + (+) | Soustrais, signe du plus grand | (-7) + (+4) = -3 |`,
+      duration: 20,
+      position: 2,
+      chapterId: ch3NR.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Soustraction de nombres relatifs",
+      description: "Soustraire = additionner l'opposé",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=soustraction-relatifs",
+      duration: 14,
+      position: 3,
+      chapterId: ch3NR.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson3_4_NR = await prisma.lesson.create({
+    data: {
+      title: "Exercices d'opérations",
+      description: "S'entraîner sur les additions et soustractions",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-operations-relatifs",
+      duration: 20,
+      position: 4,
+      chapterId: ch3NR.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz3NR = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Opérations sur les nombres relatifs",
+      description: "Vérifie ta maîtrise des calculs",
+      lessonId: lesson3_4_NR.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz3NR.id,
+        question: "Calcule : (+8) + (-3)",
+        options: [
+          { id: "a", text: "+11", isCorrect: false },
+          { id: "b", text: "+5", isCorrect: true },
+          { id: "c", text: "-5", isCorrect: false },
+          { id: "d", text: "-11", isCorrect: false },
+        ],
+        explanation:
+          "Signes différents : 8 - 3 = 5, et comme 8 > 3, on garde le signe + → +5",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz3NR.id,
+        question: "Calcule : (-6) + (-4)",
+        options: [
+          { id: "a", text: "+10", isCorrect: false },
+          { id: "b", text: "-10", isCorrect: true },
+          { id: "c", text: "+2", isCorrect: false },
+          { id: "d", text: "-2", isCorrect: false },
+        ],
+        explanation:
+          "Même signe (négatif) : on additionne 6 + 4 = 10, et on garde le signe - → -10",
+        points: 1,
+        position: 2,
+      },
+      {
+        quizId: quiz3NR.id,
+        question: "Calcule : (-5) - (-8)",
+        options: [
+          { id: "a", text: "-13", isCorrect: false },
+          { id: "b", text: "+13", isCorrect: false },
+          { id: "c", text: "+3", isCorrect: true },
+          { id: "d", text: "-3", isCorrect: false },
+        ],
+        explanation:
+          "(-5) - (-8) = (-5) + (+8) = +3. Soustraire un négatif = additionner le positif.",
+        points: 2,
+        position: 3,
+      },
+    ],
+  });
+
+  console.log("Created Course 4: Nombres Relatifs 6ème (Hafca)");
+
+  // ============ COURSE 5: MATHS 5EME - PROPORTIONNALITE (Hafca) ============
+
+  const courseProportionnalite = await prisma.course.create({
+    data: {
+      title: "La Proportionnalité - 5ème",
+      slug: "proportionnalite-5eme",
+      subtitle: "Maîtriser les situations de proportionnalité",
+      description: `La proportionnalité est un concept fondamental qui revient tout au long de la scolarité et dans la vie quotidienne.
+
+Dans ce cours complet, vous apprendrez à :
+- Reconnaître une situation de proportionnalité
+- Utiliser le coefficient de proportionnalité
+- Appliquer la règle de trois (produit en croix)
+- Calculer des pourcentages
+- Résoudre des problèmes concrets (recettes, échelles, vitesses...)
+
+Des explications claires et des exercices progressifs pour maîtriser ce chapitre essentiel !`,
+      subject: Subject.MATHEMATIQUES,
+      gradeLevel: GradeLevel.CINQUIEME,
+      price: 1290, // 12.90€
+      imageUrl:
+        "https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=800",
+      authorId: teacherHafca.id,
+      isPublished: true,
+      publishedAt: new Date(),
+      totalStudents: 312,
+      learningOutcomes: [
+        "Reconnaître une situation de proportionnalité",
+        "Calculer un coefficient de proportionnalité",
+        "Utiliser le produit en croix",
+        "Calculer des pourcentages",
+        "Appliquer les échelles",
+      ],
+      requirements: [
+        "Maîtriser les opérations sur les décimaux",
+        "Connaître les fractions",
+      ],
+    },
+  });
+
+  // Chapter 1: Reconnaître la proportionnalité
+  const ch1Prop = await prisma.chapter.create({
+    data: {
+      title: "Reconnaître la proportionnalité",
+      description: "Identifier les situations proportionnelles",
+      position: 1,
+      courseId: courseProportionnalite.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Qu'est-ce que la proportionnalité ?",
+      description: "Définition et exemples de situations proportionnelles",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=proportionnalite-intro",
+      duration: 14,
+      position: 1,
+      chapterId: ch1Prop.id,
+      isPublished: true,
+      isFreePreview: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Tableaux de proportionnalité",
+      description: "Reconnaître et compléter un tableau de proportionnalité",
+      contentType: ContentType.TEXT,
+      content: `# Les tableaux de proportionnalité
+
+## Définition
+
+Deux grandeurs sont **proportionnelles** quand on peut passer de l'une à l'autre en multipliant (ou divisant) toujours par le même nombre.
+
+Ce nombre s'appelle le **coefficient de proportionnalité**.
+
+## Reconnaître un tableau de proportionnalité
+
+Un tableau est de proportionnalité si on peut passer d'une ligne à l'autre en multipliant par le même nombre.
+
+### Exemple : tableau de proportionnalité
+
+| Nombre de croissants | 1 | 2 | 3 | 5 |
+|---------------------|---|---|---|---|
+| Prix (€) | 1,20 | 2,40 | 3,60 | 6,00 |
+
+→ On multiplie par **1,20** pour passer de la 1ère à la 2ème ligne
+→ C'est un tableau de proportionnalité
+
+### Exemple : tableau NON proportionnel
+
+| Âge (années) | 2 | 5 | 10 | 15 |
+|--------------|---|---|----|----|
+| Taille (cm) | 85 | 110 | 140 | 165 |
+
+→ 85 × ? ≠ 110, on ne multiplie pas toujours par le même nombre
+→ Ce n'est PAS un tableau de proportionnalité
+
+## Le coefficient de proportionnalité
+
+C'est le nombre par lequel on multiplie pour passer d'une grandeur à l'autre.
+
+**Comment le trouver ?**
+Coefficient = valeur de la 2ème ligne ÷ valeur de la 1ère ligne
+
+**Exemple :**
+Si 3 croissants coûtent 3,60 €
+Coefficient = 3,60 ÷ 3 = 1,20 €/croissant
+
+## Situations proportionnelles courantes
+
+✅ Proportionnel :
+- Prix et quantité (au même prix unitaire)
+- Distance et temps (à vitesse constante)
+- Recettes de cuisine (en multipliant les quantités)
+
+❌ Non proportionnel :
+- Âge et taille
+- Température et heure
+- Âge et pointure`,
+      duration: 18,
+      position: 2,
+      chapterId: ch1Prop.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson1_3_Prop = await prisma.lesson.create({
+    data: {
+      title: "Exercices : reconnaître la proportionnalité",
+      description: "S'entraîner à identifier les situations proportionnelles",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-reconnaitre-prop",
+      duration: 15,
+      position: 3,
+      chapterId: ch1Prop.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz1Prop = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Reconnaître la proportionnalité",
+      description:
+        "Teste ta capacité à identifier les situations proportionnelles",
+      lessonId: lesson1_3_Prop.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz1Prop.id,
+        question: "Quelle situation est proportionnelle ?",
+        options: [
+          {
+            id: "a",
+            text: "L'âge d'une personne et sa taille",
+            isCorrect: false,
+          },
+          {
+            id: "b",
+            text: "Le prix de pommes à 2€/kg selon le poids",
+            isCorrect: true,
+          },
+          {
+            id: "c",
+            text: "La température pendant une journée",
+            isCorrect: false,
+          },
+          {
+            id: "d",
+            text: "Le nombre de pages lues et la fatigue",
+            isCorrect: false,
+          },
+        ],
+        explanation:
+          "Le prix des pommes est proportionnel au poids : on multiplie toujours le poids par 2€/kg.",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz1Prop.id,
+        question:
+          "Dans un tableau de proportionnalité, 4 correspond à 12. À quoi correspond 7 ?",
+        options: [
+          { id: "a", text: "15", isCorrect: false },
+          { id: "b", text: "19", isCorrect: false },
+          { id: "c", text: "21", isCorrect: true },
+          { id: "d", text: "28", isCorrect: false },
+        ],
+        explanation: "Coefficient = 12 ÷ 4 = 3. Donc 7 × 3 = 21.",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  // Chapter 2: Le produit en croix
+  const ch2Prop = await prisma.chapter.create({
+    data: {
+      title: "Le produit en croix",
+      description: "La méthode pour résoudre les problèmes de proportionnalité",
+      position: 2,
+      courseId: courseProportionnalite.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Le produit en croix expliqué",
+      description: "Comprendre et appliquer la règle de trois",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=produit-en-croix",
+      duration: 16,
+      position: 1,
+      chapterId: ch2Prop.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Méthode du produit en croix",
+      description: "Étape par étape pour ne jamais se tromper",
+      contentType: ContentType.TEXT,
+      content: `# Le produit en croix
+
+## Principe
+
+Dans un tableau de proportionnalité, les **produits en croix sont égaux**.
+
+| a | b |
+|---|---|
+| c | ? |
+
+Pour trouver ?, on utilise : **? = (b × c) ÷ a**
+
+## Exemple détaillé
+
+**Problème :** 3 kg de pommes coûtent 4,50 €. Combien coûtent 5 kg ?
+
+**Étape 1 : Faire le tableau**
+
+| Poids (kg) | Prix (€) |
+|------------|----------|
+| 3 | 4,50 |
+| 5 | ? |
+
+**Étape 2 : Appliquer le produit en croix**
+
+? = (4,50 × 5) ÷ 3
+? = 22,50 ÷ 3
+? = 7,50 €
+
+**Réponse :** 5 kg de pommes coûtent 7,50 €.
+
+## Astuce visuelle
+
+Dessine une croix :
+\`\`\`
+3 -------- 4,50
+    ×
+5 -------- ?
+\`\`\`
+
+Le produit des diagonales doit être égal :
+3 × ? = 4,50 × 5
+? = (4,50 × 5) ÷ 3 = 7,50
+
+## Vérification
+
+Toujours vérifier que le résultat est logique !
+- Plus de kg → prix plus élevé ✓
+- Coefficient : 4,50 ÷ 3 = 1,50 €/kg
+- Vérif : 5 × 1,50 = 7,50 € ✓`,
+      duration: 20,
+      position: 2,
+      chapterId: ch2Prop.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson2_3_Prop = await prisma.lesson.create({
+    data: {
+      title: "Exercices : produit en croix",
+      description: "S'entraîner avec de nombreux exercices",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-produit-croix",
+      duration: 22,
+      position: 3,
+      chapterId: ch2Prop.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz2Prop = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Produit en croix",
+      description: "Maîtrises-tu la règle de trois ?",
+      lessonId: lesson2_3_Prop.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz2Prop.id,
+        question: "8 stylos coûtent 12 €. Combien coûtent 5 stylos ?",
+        options: [
+          { id: "a", text: "7,50 €", isCorrect: true },
+          { id: "b", text: "9,60 €", isCorrect: false },
+          { id: "c", text: "6,25 €", isCorrect: false },
+          { id: "d", text: "8 €", isCorrect: false },
+        ],
+        explanation: "? = (12 × 5) ÷ 8 = 60 ÷ 8 = 7,50 €",
+        points: 2,
+        position: 1,
+      },
+      {
+        quizId: quiz2Prop.id,
+        question:
+          "Une voiture parcourt 150 km en 2h. Quelle distance parcourt-elle en 3h ?",
+        options: [
+          { id: "a", text: "200 km", isCorrect: false },
+          { id: "b", text: "225 km", isCorrect: true },
+          { id: "c", text: "250 km", isCorrect: false },
+          { id: "d", text: "175 km", isCorrect: false },
+        ],
+        explanation: "? = (150 × 3) ÷ 2 = 450 ÷ 2 = 225 km",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  // Chapter 3: Pourcentages
+  const ch3Prop = await prisma.chapter.create({
+    data: {
+      title: "Les pourcentages",
+      description: "Calculer et appliquer des pourcentages",
+      position: 3,
+      courseId: courseProportionnalite.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Comprendre les pourcentages",
+      description: "Un pourcentage, c'est une fraction sur 100",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=comprendre-pourcentages",
+      duration: 14,
+      position: 1,
+      chapterId: ch3Prop.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Calculer un pourcentage",
+      description: "Les différentes méthodes de calcul",
+      contentType: ContentType.TEXT,
+      content: `# Calculer un pourcentage
+
+## Définition
+
+Un pourcentage est une proportion sur 100.
+**25%** signifie "25 pour 100" ou 25/100 ou 0,25
+
+## Calculer le pourcentage d'un nombre
+
+**Formule :** Nombre × (Pourcentage ÷ 100)
+
+### Exemples
+
+**20% de 150 :**
+150 × (20 ÷ 100) = 150 × 0,20 = **30**
+
+**15% de 80 :**
+80 × 0,15 = **12**
+
+## Astuce : les pourcentages courants
+
+| Pourcentage | Équivalent | Pour calculer |
+|-------------|------------|---------------|
+| 50% | La moitié | Diviser par 2 |
+| 25% | Le quart | Diviser par 4 |
+| 10% | Un dixième | Diviser par 10 |
+| 1% | Un centième | Diviser par 100 |
+
+### Application
+
+Pour calculer **35% de 200** :
+- 10% de 200 = 20
+- 30% = 3 × 20 = 60
+- 5% = 20 ÷ 2 = 10
+- 35% = 60 + 10 = **70**
+
+## Augmentation et réduction
+
+**Augmentation de 20% :**
+Prix final = Prix initial × 1,20
+
+**Réduction de 20% :**
+Prix final = Prix initial × 0,80
+
+### Exemple
+
+Un article à 50 € avec 30% de réduction :
+50 × 0,70 = **35 €**
+
+Ou : 30% de 50 = 15 €, donc 50 - 15 = **35 €**`,
+      duration: 18,
+      position: 2,
+      chapterId: ch3Prop.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson3_3_Prop = await prisma.lesson.create({
+    data: {
+      title: "Exercices : pourcentages",
+      description: "Réductions, augmentations et problèmes",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-pourcentages",
+      duration: 20,
+      position: 3,
+      chapterId: ch3Prop.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz3Prop = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Pourcentages",
+      description: "Teste tes compétences en calcul de pourcentages",
+      lessonId: lesson3_3_Prop.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz3Prop.id,
+        question: "Calcule 25% de 80",
+        options: [
+          { id: "a", text: "20", isCorrect: true },
+          { id: "b", text: "25", isCorrect: false },
+          { id: "c", text: "16", isCorrect: false },
+          { id: "d", text: "32", isCorrect: false },
+        ],
+        explanation: "25% = 1/4, donc 80 ÷ 4 = 20. Ou : 80 × 0,25 = 20",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz3Prop.id,
+        question:
+          "Un article à 120 € est soldé à -25%. Quel est son nouveau prix ?",
+        options: [
+          { id: "a", text: "95 €", isCorrect: false },
+          { id: "b", text: "90 €", isCorrect: true },
+          { id: "c", text: "85 €", isCorrect: false },
+          { id: "d", text: "100 €", isCorrect: false },
+        ],
+        explanation:
+          "25% de 120 = 30 €. Nouveau prix = 120 - 30 = 90 €. Ou : 120 × 0,75 = 90 €",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  console.log("Created Course 5: Proportionnalité 5ème (Hafca)");
+
+  // ============ COURSE 6: MATHS 4EME - CALCUL LITTERAL (Hafca) ============
+
+  const courseCalculLitteral = await prisma.course.create({
+    data: {
+      title: "Le Calcul Littéral - 4ème",
+      slug: "calcul-litteral-4eme",
+      subtitle: "Maîtriser les expressions avec des lettres",
+      description: `Le calcul littéral est une étape importante dans l'apprentissage des mathématiques. Ce cours vous donnera toutes les clés pour réussir.
+
+Vous apprendrez à :
+- Comprendre le rôle des lettres en mathématiques
+- Simplifier des expressions littérales
+- Développer et factoriser
+- Résoudre des équations du premier degré
+- Utiliser les identités remarquables
+
+Un cours progressif avec de nombreux exercices pour bien maîtriser ce chapitre essentiel du programme de 4ème.`,
+      subject: Subject.MATHEMATIQUES,
+      gradeLevel: GradeLevel.QUATRIEME,
+      price: 1390, // 13.90€
+      imageUrl:
+        "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800",
+      authorId: teacherHafca.id,
+      isPublished: true,
+      publishedAt: new Date(),
+      totalStudents: 278,
+      learningOutcomes: [
+        "Simplifier des expressions littérales",
+        "Développer des produits",
+        "Factoriser des expressions",
+        "Résoudre des équations du 1er degré",
+        "Utiliser les identités remarquables",
+      ],
+      requirements: [
+        "Maîtriser les opérations sur les nombres relatifs",
+        "Connaître les priorités de calcul",
+      ],
+    },
+  });
+
+  // Chapter 1: Expressions littérales
+  const ch1CL = await prisma.chapter.create({
+    data: {
+      title: "Les expressions littérales",
+      description: "Comprendre et manipuler les expressions avec des lettres",
+      position: 1,
+      courseId: courseCalculLitteral.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Introduction aux expressions littérales",
+      description: "Pourquoi utilise-t-on des lettres en maths ?",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=intro-calcul-litteral",
+      duration: 12,
+      position: 1,
+      chapterId: ch1CL.id,
+      isPublished: true,
+      isFreePreview: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Simplifier une expression",
+      description: "Réduire et ordonner les expressions",
+      contentType: ContentType.TEXT,
+      content: `# Simplifier une expression littérale
+
+## Les règles de base
+
+### 1. On ne peut additionner que des termes semblables
+
+Les **termes semblables** ont la même partie littérale (mêmes lettres avec les mêmes exposants).
+
+✅ On peut simplifier :
+- 3x + 5x = 8x
+- 2a² + 7a² = 9a²
+
+❌ On ne peut pas simplifier :
+- 3x + 5y (lettres différentes)
+- 2x + 3x² (exposants différents)
+
+### 2. Conventions d'écriture
+
+- On n'écrit pas le coefficient 1 : **1x = x**
+- On n'écrit pas le signe × entre un nombre et une lettre : **3 × x = 3x**
+- On écrit le coefficient avant la lettre : **x × 4 = 4x**
+
+## Exemples de simplification
+
+### Exemple 1 :
+**5x + 3 - 2x + 7**
+= 5x - 2x + 3 + 7 (on regroupe)
+= **3x + 10**
+
+### Exemple 2 :
+**4a + 2b - a + 5b**
+= 4a - a + 2b + 5b
+= **3a + 7b**
+
+### Exemple 3 :
+**3x² + 2x + x² - 5x**
+= 3x² + x² + 2x - 5x
+= **4x² - 3x**
+
+## Méthode
+
+1. Identifier les termes semblables
+2. Les regrouper ensemble
+3. Effectuer les additions/soustractions
+4. Ordonner (puissances décroissantes)`,
+      duration: 18,
+      position: 2,
+      chapterId: ch1CL.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson1_3_CL = await prisma.lesson.create({
+    data: {
+      title: "Exercices de simplification",
+      description: "S'entraîner à simplifier des expressions",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-simplification",
+      duration: 16,
+      position: 3,
+      chapterId: ch1CL.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz1CL = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Expressions littérales",
+      description: "Vérifie ta maîtrise des simplifications",
+      lessonId: lesson1_3_CL.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz1CL.id,
+        question: "Simplifie : 7x + 3 - 2x + 5",
+        options: [
+          { id: "a", text: "5x + 8", isCorrect: true },
+          { id: "b", text: "9x + 8", isCorrect: false },
+          { id: "c", text: "5x - 2", isCorrect: false },
+          { id: "d", text: "13x", isCorrect: false },
+        ],
+        explanation: "7x - 2x = 5x et 3 + 5 = 8, donc 5x + 8",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz1CL.id,
+        question: "Simplifie : 3a + 4b - a + 2b",
+        options: [
+          { id: "a", text: "2a + 6b", isCorrect: true },
+          { id: "b", text: "4a + 6b", isCorrect: false },
+          { id: "c", text: "8ab", isCorrect: false },
+          { id: "d", text: "2a + 2b", isCorrect: false },
+        ],
+        explanation: "3a - a = 2a et 4b + 2b = 6b, donc 2a + 6b",
+        points: 1,
+        position: 2,
+      },
+    ],
+  });
+
+  // Chapter 2: Développer
+  const ch2CL = await prisma.chapter.create({
+    data: {
+      title: "Développer une expression",
+      description: "La distributivité simple et double",
+      position: 2,
+      courseId: courseCalculLitteral.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "La distributivité simple",
+      description: "k(a + b) = ka + kb",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=distributivite-simple",
+      duration: 14,
+      position: 1,
+      chapterId: ch2CL.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "La double distributivité",
+      description: "(a + b)(c + d) = ac + ad + bc + bd",
+      contentType: ContentType.TEXT,
+      content: `# La double distributivité
+
+## La règle
+
+Pour développer un produit de deux sommes :
+**(a + b)(c + d) = ac + ad + bc + bd**
+
+Chaque terme de la première parenthèse multiplie chaque terme de la deuxième.
+
+## Méthode visuelle : les flèches
+
+\`\`\`
+(a + b)(c + d)
+ ↘↓  ↙↓
+  ac + ad + bc + bd
+\`\`\`
+
+## Exemples
+
+### Exemple 1 :
+**(x + 3)(x + 2)**
+= x × x + x × 2 + 3 × x + 3 × 2
+= x² + 2x + 3x + 6
+= **x² + 5x + 6**
+
+### Exemple 2 :
+**(2x - 1)(x + 4)**
+= 2x × x + 2x × 4 + (-1) × x + (-1) × 4
+= 2x² + 8x - x - 4
+= **2x² + 7x - 4**
+
+### Exemple 3 :
+**(x - 3)(x - 5)**
+= x² + x×(-5) + (-3)×x + (-3)×(-5)
+= x² - 5x - 3x + 15
+= **x² - 8x + 15**
+
+## Astuce : FOIL (First, Outside, Inside, Last)
+
+Pour (a + b)(c + d) :
+- **F**irst : a × c
+- **O**utside : a × d
+- **I**nside : b × c
+- **L**ast : b × d
+
+## Erreurs fréquentes à éviter
+
+❌ (a + b)² ≠ a² + b²
+✅ (a + b)² = a² + 2ab + b²
+
+❌ Oublier de simplifier à la fin
+✅ Toujours regrouper les termes semblables`,
+      duration: 20,
+      position: 2,
+      chapterId: ch2CL.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson2_3_CL = await prisma.lesson.create({
+    data: {
+      title: "Exercices de développement",
+      description: "S'entraîner à développer des expressions",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-developper",
+      duration: 18,
+      position: 3,
+      chapterId: ch2CL.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz2CL = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Développer",
+      description: "Maîtrises-tu le développement ?",
+      lessonId: lesson2_3_CL.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz2CL.id,
+        question: "Développe : 3(x + 4)",
+        options: [
+          { id: "a", text: "3x + 12", isCorrect: true },
+          { id: "b", text: "3x + 4", isCorrect: false },
+          { id: "c", text: "x + 12", isCorrect: false },
+          { id: "d", text: "7x", isCorrect: false },
+        ],
+        explanation: "3(x + 4) = 3×x + 3×4 = 3x + 12",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz2CL.id,
+        question: "Développe : (x + 2)(x + 3)",
+        options: [
+          { id: "a", text: "x² + 5x + 6", isCorrect: true },
+          { id: "b", text: "x² + 6", isCorrect: false },
+          { id: "c", text: "2x + 6", isCorrect: false },
+          { id: "d", text: "x² + 5x + 5", isCorrect: false },
+        ],
+        explanation: "(x+2)(x+3) = x² + 3x + 2x + 6 = x² + 5x + 6",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  // Chapter 3: Équations
+  const ch3CL = await prisma.chapter.create({
+    data: {
+      title: "Résoudre des équations",
+      description: "Les équations du premier degré",
+      position: 3,
+      courseId: courseCalculLitteral.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Qu'est-ce qu'une équation ?",
+      description: "Comprendre le concept d'équation",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=intro-equations",
+      duration: 12,
+      position: 1,
+      chapterId: ch3CL.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Résoudre une équation du 1er degré",
+      description: "La méthode pas à pas",
+      contentType: ContentType.TEXT,
+      content: `# Résoudre une équation du premier degré
+
+## Objectif
+
+Trouver la valeur de x qui vérifie l'équation.
+
+## Principe fondamental
+
+On peut effectuer la **même opération des deux côtés** de l'égalité sans la modifier.
+
+## La méthode
+
+### Étape 1 : Développer si nécessaire
+### Étape 2 : Regrouper les x d'un côté, les nombres de l'autre
+### Étape 3 : Isoler x
+
+## Exemple détaillé
+
+**Résoudre : 3x + 5 = 2x + 12**
+
+**Étape 1 :** Enlever 2x des deux côtés
+3x + 5 - 2x = 2x + 12 - 2x
+**x + 5 = 12**
+
+**Étape 2 :** Enlever 5 des deux côtés
+x + 5 - 5 = 12 - 5
+**x = 7**
+
+**Vérification :**
+3 × 7 + 5 = 21 + 5 = 26
+2 × 7 + 12 = 14 + 12 = 26 ✓
+
+## Autre exemple
+
+**Résoudre : 4(x - 2) = 3x + 6**
+
+**Étape 1 :** Développer
+4x - 8 = 3x + 6
+
+**Étape 2 :** Regrouper
+4x - 3x = 6 + 8
+**x = 14**
+
+## Règles à retenir
+
+| Ce qu'on fait | Effet |
+|---------------|-------|
+| Ajouter/soustraire le même nombre | L'égalité reste vraie |
+| Multiplier/diviser par le même nombre (≠0) | L'égalité reste vraie |
+| Changer un terme de côté | On change son signe |
+
+## Astuce
+
+Quand un terme "passe de l'autre côté du =", il **change de signe** :
+- +5 devient -5
+- -3x devient +3x`,
+      duration: 22,
+      position: 2,
+      chapterId: ch3CL.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson3_3_CL = await prisma.lesson.create({
+    data: {
+      title: "Exercices : équations",
+      description: "De nombreux exercices progressifs",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-equations",
+      duration: 25,
+      position: 3,
+      chapterId: ch3CL.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz3CL = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Équations",
+      description: "Sais-tu résoudre des équations ?",
+      lessonId: lesson3_3_CL.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz3CL.id,
+        question: "Résous : 2x + 3 = 11",
+        options: [
+          { id: "a", text: "x = 4", isCorrect: true },
+          { id: "b", text: "x = 7", isCorrect: false },
+          { id: "c", text: "x = 5,5", isCorrect: false },
+          { id: "d", text: "x = 14", isCorrect: false },
+        ],
+        explanation: "2x = 11 - 3 = 8, donc x = 8 ÷ 2 = 4",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz3CL.id,
+        question: "Résous : 5x - 4 = 3x + 8",
+        options: [
+          { id: "a", text: "x = 6", isCorrect: true },
+          { id: "b", text: "x = 2", isCorrect: false },
+          { id: "c", text: "x = 4", isCorrect: false },
+          { id: "d", text: "x = 12", isCorrect: false },
+        ],
+        explanation: "5x - 3x = 8 + 4, donc 2x = 12, x = 6",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  console.log("Created Course 6: Calcul Littéral 4ème (Hafca)");
+
+  // ============ COURSE 7: MATHS 3EME - FONCTIONS (Hafca) ============
+
+  const courseFonctions = await prisma.course.create({
+    data: {
+      title: "Les Fonctions - 3ème",
+      slug: "fonctions-3eme",
+      subtitle: "Comprendre les fonctions pour réussir le Brevet",
+      description: `Les fonctions sont un chapitre essentiel du programme de 3ème et du Brevet des collèges.
+
+Ce cours complet vous permettra de :
+- Comprendre la notion de fonction
+- Maîtriser les différentes représentations (tableau, graphique, formule)
+- Étudier les fonctions affines et linéaires
+- Lire et interpréter des graphiques
+- Résoudre des problèmes faisant intervenir des fonctions
+
+Préparez sereinement le Brevet avec ce cours structuré et des exercices type examen !`,
+      subject: Subject.MATHEMATIQUES,
+      gradeLevel: GradeLevel.TROISIEME,
+      price: 1490, // 14.90€
+      imageUrl:
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+      authorId: teacherHafca.id,
+      isPublished: true,
+      publishedAt: new Date(),
+      totalStudents: 189,
+      learningOutcomes: [
+        "Comprendre le concept de fonction",
+        "Calculer des images et des antécédents",
+        "Tracer des fonctions affines",
+        "Lire et interpréter un graphique",
+        "Résoudre des problèmes type Brevet",
+      ],
+      requirements: [
+        "Maîtriser le calcul littéral",
+        "Savoir lire un graphique",
+        "Connaître les équations du premier degré",
+      ],
+    },
+  });
+
+  // Chapter 1: Notion de fonction
+  const ch1Fonc = await prisma.chapter.create({
+    data: {
+      title: "Découvrir les fonctions",
+      description: "Qu'est-ce qu'une fonction ? Images et antécédents",
+      position: 1,
+      courseId: courseFonctions.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Introduction aux fonctions",
+      description: "Comprendre le concept de fonction",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=intro-fonctions",
+      duration: 14,
+      position: 1,
+      chapterId: ch1Fonc.id,
+      isPublished: true,
+      isFreePreview: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Images et antécédents",
+      description: "Le vocabulaire des fonctions",
+      contentType: ContentType.TEXT,
+      content: `# Images et antécédents
+
+## Qu'est-ce qu'une fonction ?
+
+Une **fonction** est une "machine" qui transforme un nombre en un autre.
+
+On note généralement une fonction **f** et on écrit :
+- **f(x)** pour désigner le résultat quand on met x dans la fonction
+- x s'appelle la **variable** ou l'**antécédent**
+- f(x) s'appelle l'**image** de x par f
+
+## Exemple concret
+
+Soit la fonction f définie par **f(x) = 2x + 3**
+
+- Si on met **x = 4** :
+  f(4) = 2 × 4 + 3 = 8 + 3 = **11**
+  → L'image de 4 par f est 11
+
+- Si on met **x = -2** :
+  f(-2) = 2 × (-2) + 3 = -4 + 3 = **-1**
+  → L'image de -2 par f est -1
+
+## Le vocabulaire
+
+| Terme | Signification | Notation |
+|-------|---------------|----------|
+| Image | Le résultat de la fonction | f(x), f(3), y |
+| Antécédent | Le nombre de départ | x, 3, ... |
+| Variable | La lettre qui représente l'antécédent | généralement x |
+
+## Trouver un antécédent
+
+**Problème :** Pour f(x) = 2x + 3, quel nombre a pour image 9 ?
+
+**Méthode :** On résout f(x) = 9
+2x + 3 = 9
+2x = 6
+x = 3
+
+**Réponse :** L'antécédent de 9 est 3 (on vérifie : f(3) = 2×3+3 = 9 ✓)
+
+## Notation importante
+
+Quand on écrit **"f : x → 2x + 3"**, cela signifie :
+- f est le nom de la fonction
+- x est transformé en 2x + 3
+- On lit "f est la fonction qui à x associe 2x + 3"`,
+      duration: 18,
+      position: 2,
+      chapterId: ch1Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson1_3_Fonc = await prisma.lesson.create({
+    data: {
+      title: "Exercices : images et antécédents",
+      description: "S'entraîner à calculer",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-images-antecedents",
+      duration: 16,
+      position: 3,
+      chapterId: ch1Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz1Fonc = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Images et antécédents",
+      description: "Maîtrises-tu le vocabulaire des fonctions ?",
+      lessonId: lesson1_3_Fonc.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz1Fonc.id,
+        question: "Soit f(x) = 3x - 2. Quelle est l'image de 4 ?",
+        options: [
+          { id: "a", text: "10", isCorrect: true },
+          { id: "b", text: "14", isCorrect: false },
+          { id: "c", text: "6", isCorrect: false },
+          { id: "d", text: "2", isCorrect: false },
+        ],
+        explanation: "f(4) = 3 × 4 - 2 = 12 - 2 = 10",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz1Fonc.id,
+        question: "Soit f(x) = 2x + 5. Quel est l'antécédent de 11 ?",
+        options: [
+          { id: "a", text: "3", isCorrect: true },
+          { id: "b", text: "6", isCorrect: false },
+          { id: "c", text: "8", isCorrect: false },
+          { id: "d", text: "27", isCorrect: false },
+        ],
+        explanation: "On résout 2x + 5 = 11, donc 2x = 6, x = 3",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  // Chapter 2: Fonctions affines
+  const ch2Fonc = await prisma.chapter.create({
+    data: {
+      title: "Les fonctions affines",
+      description: "Fonctions de la forme f(x) = ax + b",
+      position: 2,
+      courseId: courseFonctions.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Définition d'une fonction affine",
+      description: "La forme ax + b",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=fonction-affine-def",
+      duration: 15,
+      position: 1,
+      chapterId: ch2Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Tracer une fonction affine",
+      description: "La représentation graphique",
+      contentType: ContentType.TEXT,
+      content: `# Tracer une fonction affine
+
+## Définition
+
+Une fonction **affine** est une fonction de la forme :
+**f(x) = ax + b**
+
+Où :
+- **a** est le **coefficient directeur** (la pente)
+- **b** est l'**ordonnée à l'origine** (où la droite coupe l'axe des y)
+
+## Cas particuliers
+
+| Type | Forme | Exemple |
+|------|-------|---------|
+| Fonction linéaire | f(x) = ax | f(x) = 3x |
+| Fonction constante | f(x) = b | f(x) = 5 |
+| Fonction affine | f(x) = ax + b | f(x) = 2x + 3 |
+
+## Représentation graphique
+
+La représentation graphique d'une fonction affine est une **droite**.
+
+### Méthode pour tracer
+
+1. **Trouver 2 points** en calculant f(x) pour 2 valeurs de x
+2. **Placer ces points** dans un repère
+3. **Tracer la droite** passant par ces 2 points
+
+### Exemple : tracer f(x) = 2x + 1
+
+**Calcul de 2 points :**
+- f(0) = 2×0 + 1 = 1 → Point A(0 ; 1)
+- f(2) = 2×2 + 1 = 5 → Point B(2 ; 5)
+
+On trace la droite passant par A et B.
+
+## Lire le coefficient directeur sur un graphique
+
+Le coefficient directeur **a** indique "de combien monte (ou descend) la droite quand x augmente de 1".
+
+- Si **a > 0** : la droite monte (fonction croissante)
+- Si **a < 0** : la droite descend (fonction décroissante)
+- Si **a = 0** : la droite est horizontale (fonction constante)
+
+## Formule pour calculer a
+
+Si on connaît 2 points A(x₁ ; y₁) et B(x₂ ; y₂) :
+
+**a = (y₂ - y₁) / (x₂ - x₁)**
+
+### Exemple
+Points A(1 ; 3) et B(4 ; 9)
+a = (9 - 3) / (4 - 1) = 6 / 3 = 2`,
+      duration: 22,
+      position: 2,
+      chapterId: ch2Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson2_3_Fonc = await prisma.lesson.create({
+    data: {
+      title: "Exercices : fonctions affines",
+      description: "Tracer et étudier des fonctions affines",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-fonctions-affines",
+      duration: 20,
+      position: 3,
+      chapterId: ch2Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz2Fonc = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Fonctions affines",
+      description: "Teste tes connaissances sur les fonctions affines",
+      lessonId: lesson2_3_Fonc.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz2Fonc.id,
+        question: "Quelle est l'ordonnée à l'origine de f(x) = 3x - 4 ?",
+        options: [
+          { id: "a", text: "-4", isCorrect: true },
+          { id: "b", text: "3", isCorrect: false },
+          { id: "c", text: "4", isCorrect: false },
+          { id: "d", text: "-3", isCorrect: false },
+        ],
+        explanation:
+          "Dans f(x) = ax + b, l'ordonnée à l'origine est b. Ici b = -4.",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz2Fonc.id,
+        question:
+          "Une droite passe par A(0 ; 2) et B(3 ; 8). Quel est son coefficient directeur ?",
+        options: [
+          { id: "a", text: "2", isCorrect: true },
+          { id: "b", text: "3", isCorrect: false },
+          { id: "c", text: "6", isCorrect: false },
+          { id: "d", text: "1", isCorrect: false },
+        ],
+        explanation: "a = (8-2)/(3-0) = 6/3 = 2",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  // Chapter 3: Exercices type Brevet
+  const ch3Fonc = await prisma.chapter.create({
+    data: {
+      title: "Préparation au Brevet",
+      description: "Exercices type examen sur les fonctions",
+      position: 3,
+      courseId: courseFonctions.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Méthode pour le Brevet",
+      description: "Les astuces pour réussir les exercices de fonctions",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=methode-brevet-fonctions",
+      duration: 18,
+      position: 1,
+      chapterId: ch3Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: "Exercice type Brevet corrigé",
+      description: "Un exercice complet avec correction détaillée",
+      contentType: ContentType.TEXT,
+      content: `# Exercice type Brevet - Corrigé
+
+## Énoncé
+
+Un plombier propose deux formules de tarification :
+
+**Formule A :** 25 € de déplacement + 35 € par heure de travail
+**Formule B :** 80 € de déplacement + 20 € par heure de travail
+
+1. Exprimer le prix en fonction du nombre d'heures pour chaque formule
+2. Pour quelle durée les deux formules sont-elles équivalentes ?
+3. Quelle formule choisir pour une intervention de 2h ? De 5h ?
+
+---
+
+## Correction détaillée
+
+### Question 1 : Exprimer les fonctions
+
+**Formule A :** On paie 25 € + 35 € × nombre d'heures
+**f(x) = 35x + 25** où x est le nombre d'heures
+
+**Formule B :** On paie 80 € + 20 € × nombre d'heures
+**g(x) = 20x + 80** où x est le nombre d'heures
+
+### Question 2 : Quand sont-elles équivalentes ?
+
+On cherche quand f(x) = g(x) :
+35x + 25 = 20x + 80
+35x - 20x = 80 - 25
+15x = 55
+**x = 55/15 ≈ 3,67 heures** (soit environ 3h40min)
+
+### Question 3 : Comparaison
+
+**Pour 2 heures :**
+- f(2) = 35 × 2 + 25 = 70 + 25 = **95 €**
+- g(2) = 20 × 2 + 80 = 40 + 80 = **120 €**
+→ **Formule A** est moins chère
+
+**Pour 5 heures :**
+- f(5) = 35 × 5 + 25 = 175 + 25 = **200 €**
+- g(5) = 20 × 5 + 80 = 100 + 80 = **180 €**
+→ **Formule B** est moins chère
+
+### Conclusion
+
+- Pour moins de ≈3h40 : choisir la **Formule A**
+- Pour plus de ≈3h40 : choisir la **Formule B**
+
+---
+
+## Points clés à retenir
+
+1. Toujours bien **identifier les variables** (ici : le temps)
+2. **Construire les fonctions** à partir de l'énoncé
+3. Pour comparer, **égaliser les deux fonctions**
+4. **Vérifier** la cohérence des résultats`,
+      duration: 25,
+      position: 2,
+      chapterId: ch3Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  const lesson3_3_Fonc = await prisma.lesson.create({
+    data: {
+      title: "Exercices d'entraînement Brevet",
+      description: "Plusieurs exercices type Brevet",
+      contentType: ContentType.VIDEO,
+      videoUrl: "https://www.youtube.com/watch?v=exercices-brevet-fonctions",
+      duration: 30,
+      position: 3,
+      chapterId: ch3Fonc.id,
+      isPublished: true,
+    },
+  });
+
+  const quiz3Fonc = await prisma.quiz.create({
+    data: {
+      title: "Quiz : Type Brevet",
+      description: "Es-tu prêt pour le Brevet ?",
+      lessonId: lesson3_3_Fonc.id,
+      passingScore: 70,
+    },
+  });
+
+  await prisma.question.createMany({
+    data: [
+      {
+        quizId: quiz3Fonc.id,
+        question:
+          "Un taxi facture 2,50€ + 1,20€ par km. Quelle fonction représente le prix pour x km ?",
+        options: [
+          { id: "a", text: "f(x) = 1,20x + 2,50", isCorrect: true },
+          { id: "b", text: "f(x) = 2,50x + 1,20", isCorrect: false },
+          { id: "c", text: "f(x) = 3,70x", isCorrect: false },
+          { id: "d", text: "f(x) = 1,20x - 2,50", isCorrect: false },
+        ],
+        explanation: "Prix = base + prix/km × nombre de km = 2,50 + 1,20x",
+        points: 1,
+        position: 1,
+      },
+      {
+        quizId: quiz3Fonc.id,
+        question:
+          "Pour quelle distance les formules f(x)=15+2x et g(x)=5+4x donnent-elles le même prix ?",
+        options: [
+          { id: "a", text: "5 km", isCorrect: true },
+          { id: "b", text: "10 km", isCorrect: false },
+          { id: "c", text: "2,5 km", isCorrect: false },
+          { id: "d", text: "20 km", isCorrect: false },
+        ],
+        explanation: "15 + 2x = 5 + 4x → 10 = 2x → x = 5",
+        points: 2,
+        position: 2,
+      },
+    ],
+  });
+
+  console.log("Created Course 7: Fonctions 3ème (Hafca)");
+
   // ============ CREATE PURCHASES ============
 
   const platformFeePercent = 0.3;
@@ -2756,6 +4695,7 @@ Le coeur est un muscle creux de la taille d'un poing qui bat environ **100 000 f
   console.log("\nTest accounts:");
   console.log("  Teacher 1: sophie.martin@schoolaris.fr / password123");
   console.log("  Teacher 2: pierre.dubois@schoolaris.fr / password123");
+  console.log("  Teacher 3: hafca.hechaichi@schoolaris.fr / password123");
   console.log("  Parent:    parent@schoolaris.fr / password123");
   console.log("  Admin:     admin@schoolaris.fr / password123");
   console.log("\nChildren:");
@@ -2765,6 +4705,18 @@ Le coeur est un muscle creux de la taille d'un poing qui bat environ **100 000 f
   console.log("  1. Les Fractions - CM2 (4 chapters, 12 lessons, 4 quizzes)");
   console.log("  2. Conjugaison - 6eme (4 chapters, 11 lessons, 4 quizzes)");
   console.log("  3. Corps Humain - 5eme (3 chapters, 9 lessons, 3 quizzes)");
+  console.log(
+    "  4. Nombres Relatifs - 6eme (3 chapters, 9 lessons, 3 quizzes) - Hafca",
+  );
+  console.log(
+    "  5. Proportionnalite - 5eme (3 chapters, 9 lessons, 3 quizzes) - Hafca",
+  );
+  console.log(
+    "  6. Calcul Litteral - 4eme (3 chapters, 9 lessons, 3 quizzes) - Hafca",
+  );
+  console.log(
+    "  7. Fonctions - 3eme (3 chapters, 9 lessons, 3 quizzes) - Hafca",
+  );
   console.log("\nBadges: 13 badges created");
   console.log("Progress: Lucas 5 lessons, Emma 3 lessons");
   console.log("Reviews: 2 verified reviews");
