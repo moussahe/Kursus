@@ -18,9 +18,7 @@ export function CourseCatalogHeader() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600">
               <GraduationCap className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold hidden sm:block">
-              Schoolaris
-            </span>
+            <span className="text-xl font-bold hidden sm:block">Kursus</span>
           </Link>
 
           {/* Search Bar - Desktop with Autocomplete */}

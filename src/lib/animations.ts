@@ -1,5 +1,5 @@
 /**
- * SCHOOLARIS Animation Library
+ * KURSUS Animation Library
  * Reusable Framer Motion variants and spring configurations
  */
 

@@ -220,7 +220,7 @@ export async function deleteAccount(formData: FormData): Promise<ActionResult> {
     await prisma.user.update({
       where: { id: userId },
       data: {
-        email: `deleted_${userId}@deleted.schoolaris.fr`,
+        email: `deleted_${userId}@deleted.kursus.fr`,
         name: "Compte supprime",
         image: null,
         password: null,

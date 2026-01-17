@@ -3,28 +3,35 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, Play, Star, Users, BookOpen } from "lucide-react";
+import {
+  ArrowRight,
+  Play,
+  Star,
+  Users,
+  BookOpen,
+  Sparkles,
+} from "lucide-react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: 30, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
       type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
+      stiffness: 80,
+      damping: 20,
     },
   },
 };
@@ -36,10 +43,18 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden bg-gradient-to-b from-emerald-50 via-white to-white py-20 pt-32 md:py-28 md:pt-40"
+      className="relative w-full overflow-hidden bg-[#0a0a0a] py-20 pt-32 md:py-32 md:pt-44"
     >
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        {/* Gradient orbs */}
+        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff6d38] opacity-[0.08] blur-[120px]" />
+        <div className="absolute right-1/4 top-1/2 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-[#c7ff69] opacity-[0.06] blur-[100px]" />
+        <div className="absolute bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-[#7a78ff] opacity-[0.05] blur-[100px]" />
+
+        {/* Grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      </div>
 
       {/* Main Content */}
       <div className="container relative z-10 mx-auto px-4">
@@ -47,134 +62,146 @@ export function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="mx-auto max-w-4xl text-center"
+          className="mx-auto max-w-5xl text-center"
         >
           {/* Badge */}
           <motion.div variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-700">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff6d38]/20 bg-[#ff6d38]/10 px-4 py-2 text-sm font-medium text-[#ff6d38]">
+              <Sparkles className="h-4 w-4" />
               +15 000 élèves nous font confiance
             </span>
           </motion.div>
 
-          {/* Headline - UN titre fort */}
+          {/* Headline - Bold nvg8.io style */}
           <motion.h1
             variants={itemVariants}
-            className="mt-8 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl"
+            className="mt-8 text-5xl font-black tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+            style={{ letterSpacing: "-0.04em" }}
           >
-            Des cours créés par des profs,
+            Des cours créés par
             <br />
-            <span className="text-emerald-600">pas par des algorithmes.</span>
+            <span className="text-gradient">de vrais profs.</span>
           </motion.h1>
 
-          {/* Subheadline - 2 lignes max */}
+          {/* Subheadline */}
           <motion.p
             variants={itemVariants}
-            className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 md:text-xl"
+            className="mx-auto mt-8 max-w-2xl text-lg text-gray-400 md:text-xl"
           >
-            Achetez uniquement les cours dont votre enfant a besoin. Un
-            paiement, un accès à vie. Du CP à la Terminale.
+            Achetez uniquement les cours dont votre enfant a besoin.{" "}
+            <span className="text-white">Un paiement, un accès à vie.</span> Du
+            CP à la Terminale.
           </motion.p>
 
-          {/* UN CTA principal */}
+          {/* CTA Buttons */}
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+            className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
           >
             <Link
               href="/courses"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-600 hover:shadow-xl hover:shadow-emerald-500/30"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ff6d38] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all duration-300 hover:bg-[#ff8c5a] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
             >
               Découvrir les cours
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="/demo"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-4 text-base font-medium text-gray-700 transition-all hover:bg-gray-50"
+              className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-4 text-base font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10"
             >
-              <Play className="h-5 w-5 text-emerald-500" />
+              <Play className="h-5 w-5 text-[#c7ff69]" />
               Voir la démo
             </Link>
           </motion.div>
 
-          {/* Prix exemple */}
+          {/* Price point */}
           <motion.p
             variants={itemVariants}
-            className="mt-6 text-sm text-gray-500"
+            className="mt-8 text-sm text-gray-500"
           >
             À partir de{" "}
-            <span className="font-semibold text-emerald-600">2,99€</span> le
-            cours
+            <span className="font-semibold text-[#c7ff69]">2,99€</span> le cours
             {" • "}
-            70% reversés au professeur
+            <span className="text-gray-400">70% reversés au professeur</span>
           </motion.p>
 
-          {/* Social proof simplifié */}
+          {/* Social proof */}
           <motion.div
             variants={itemVariants}
-            className="mt-12 flex flex-wrap items-center justify-center gap-8"
+            className="mt-16 flex flex-wrap items-center justify-center gap-8 md:gap-12"
           >
-            <div className="flex items-center gap-2">
+            {/* Students */}
+            <div className="flex items-center gap-3">
               <div className="flex -space-x-2">
                 {[
-                  "bg-blue-500",
-                  "bg-purple-500",
-                  "bg-orange-500",
-                  "bg-pink-500",
+                  "bg-[#ff6d38]",
+                  "bg-[#7a78ff]",
+                  "bg-[#c7ff69]",
+                  "bg-[#ff6d38]",
                 ].map((color, i) => (
                   <div
                     key={i}
-                    className={`h-8 w-8 rounded-full ${color} border-2 border-white flex items-center justify-center text-xs font-bold text-white`}
+                    className={`h-10 w-10 rounded-full ${color} border-2 border-[#0a0a0a] flex items-center justify-center text-xs font-bold text-[#0a0a0a]`}
                   >
                     {["E", "L", "M", "S"][i]}
                   </div>
                 ))}
               </div>
               <div className="text-left">
-                <p className="text-sm font-semibold text-gray-900">15 000+</p>
+                <p className="text-lg font-bold text-white">15 000+</p>
                 <p className="text-xs text-gray-500">Élèves actifs</p>
               </div>
             </div>
 
-            <div className="h-8 w-px bg-gray-200 hidden sm:block" />
+            <div className="h-10 w-px bg-white/10 hidden sm:block" />
 
-            <div className="flex items-center gap-2">
+            {/* Rating */}
+            <div className="flex items-center gap-3">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className="h-4 w-4 fill-amber-400 text-amber-400"
+                    className="h-5 w-5 fill-[#ff6d38] text-[#ff6d38]"
                   />
                 ))}
               </div>
               <div className="text-left">
-                <p className="text-sm font-semibold text-gray-900">4.9/5</p>
+                <p className="text-lg font-bold text-white">4.9/5</p>
                 <p className="text-xs text-gray-500">Note moyenne</p>
               </div>
             </div>
 
-            <div className="h-8 w-px bg-gray-200 hidden sm:block" />
+            <div className="h-10 w-px bg-white/10 hidden sm:block" />
 
-            <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-emerald-500" />
+            {/* Teachers */}
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#c7ff69]/10">
+                <Users className="h-5 w-5 text-[#c7ff69]" />
+              </div>
               <div className="text-left">
-                <p className="text-sm font-semibold text-gray-900">300+</p>
+                <p className="text-lg font-bold text-white">300+</p>
                 <p className="text-xs text-gray-500">Profs vérifiés</p>
               </div>
             </div>
 
-            <div className="h-8 w-px bg-gray-200 hidden sm:block" />
+            <div className="h-10 w-px bg-white/10 hidden sm:block" />
 
-            <div className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-emerald-500" />
+            {/* Courses */}
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#7a78ff]/10">
+                <BookOpen className="h-5 w-5 text-[#7a78ff]" />
+              </div>
               <div className="text-left">
-                <p className="text-sm font-semibold text-gray-900">1 200+</p>
+                <p className="text-lg font-bold text-white">1 200+</p>
                 <p className="text-xs text-gray-500">Cours</p>
               </div>
             </div>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0a0a0a] to-transparent" />
     </section>
   );
 }

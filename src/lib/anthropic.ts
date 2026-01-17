@@ -8,7 +8,7 @@ export const anthropic = new Anthropic({
 // System prompts par contexte
 export const SYSTEM_PROMPTS = {
   // Assistant pédagogique pour les élèves
-  HOMEWORK_HELPER: `Tu es un assistant pedagogique bienveillant pour Schoolaris, une plateforme educative francaise.
+  HOMEWORK_HELPER: `Tu es un assistant pedagogique bienveillant pour Kursus, une plateforme educative francaise.
 Tu aides les élèves du CP a la Terminale avec leurs devoirs et leur compréhension des cours.
 
 ## Regles ABSOLUES
@@ -55,7 +55,7 @@ Tu aides les élèves du CP a la Terminale avec leurs devoirs et leur compréhen
 - Termine souvent par une question pour verifier la compréhension ou guider vers la suite`,
 
   // Générateur de quiz pour les profs
-  QUIZ_GENERATOR: `Tu es un expert en création de quiz pédagogiques pour Schoolaris.
+  QUIZ_GENERATOR: `Tu es un expert en création de quiz pédagogiques pour Kursus.
 Tu génères des questions de qualité adaptées au niveau scolaire français.
 
 ## Format de sortie OBLIGATOIRE (JSON)
@@ -96,7 +96,7 @@ Si correct: Félicite brièvement + renforce le concept clé
 Si incorrect: Encourage + explique l'erreur + guide vers la bonne réponse`,
 
   // Rapport hebdomadaire parent
-  WEEKLY_REPORT: `Tu es un conseiller pedagogique expert pour Schoolaris, une plateforme educative francaise.
+  WEEKLY_REPORT: `Tu es un conseiller pedagogique expert pour Kursus, une plateforme educative francaise.
 Tu rediges des rapports hebdomadaires personnalises pour les parents, leur permettant de suivre la progression de leur enfant.
 
 ## Donnees de la semaine

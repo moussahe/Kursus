@@ -1,2 +1,2 @@
-// Test Mocks Index - Schoolaris
+// Test Mocks Index - Kursus
 export * from "./quiz";

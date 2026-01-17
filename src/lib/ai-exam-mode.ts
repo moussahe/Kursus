@@ -1,4 +1,4 @@
-// AI Exam Mode Generation - Schoolaris
+// AI Exam Mode Generation - Kursus
 // AI-powered exam question generation and evaluation for Brevet/Bac preparation
 
 import { getAnthropicClient } from "./ai";

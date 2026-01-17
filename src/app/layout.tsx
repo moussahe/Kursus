@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { Providers } from "@/components/providers";
@@ -7,15 +7,20 @@ import { Toaster } from "@/components/ui/sonner";
 import { SkipLink } from "@/components/a11y/skip-link";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 
-const inter = Inter({
+const geistSans = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-geist-sans",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Schoolaris - Plateforme educative pour scolaires",
-    template: "%s | Schoolaris",
+    default: "Kursus - La plateforme des cours qui cartonnent",
+    template: "%s | Kursus",
   },
   description:
     "Plateforme EdTech francaise #1 pour les scolaires du CP a la Terminale. Cours interactifs, exercices personnalises et assistant IA.",
@@ -34,13 +39,17 @@ export const metadata: Metadata = {
     "francais",
     "IA",
   ],
-  authors: [{ name: "Schoolaris" }],
-  creator: "Schoolaris",
+  authors: [{ name: "Kursus" }],
+  creator: "Kursus",
   manifest: "/manifest.json",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: "/apple-touch-icon.png",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Schoolaris",
+    title: "Kursus",
   },
   formatDetection: {
     telephone: false,
@@ -48,15 +57,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://schoolaris.fr",
-    title: "Schoolaris - Plateforme educative pour scolaires",
+    url: "https://kursus.fr",
+    title: "Kursus - La plateforme des cours qui cartonnent",
     description:
       "Plateforme EdTech francaise #1 pour les scolaires du CP a la Terminale.",
-    siteName: "Schoolaris",
+    siteName: "Kursus",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Schoolaris - Plateforme educative pour scolaires",
+    title: "Kursus - La plateforme des cours qui cartonnent",
     description:
       "Plateforme EdTech francaise #1 pour les scolaires du CP a la Terminale.",
   },
@@ -109,7 +118,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+      >
         <SkipLink />
         <Providers>{children}</Providers>
         <Toaster />

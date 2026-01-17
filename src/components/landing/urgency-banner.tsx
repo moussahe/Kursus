@@ -18,19 +18,19 @@ function getNextExamDate(): ExamInfo {
   // Key exam dates in France (approximate)
   const examDates = [
     {
-      name: "Brevet des colleges",
+      name: "Brevet des collèges",
       date: new Date(currentYear, 5, 24), // Late June
     },
     {
-      name: "Baccalaureat - Philosophie",
+      name: "Baccalauréat - Philosophie",
       date: new Date(currentYear, 5, 12), // Mid June
     },
     {
-      name: "Baccalaureat - Grand Oral",
+      name: "Baccalauréat - Grand Oral",
       date: new Date(currentYear, 5, 20), // Late June
     },
     {
-      name: "Examens de fin d'annee",
+      name: "Examens de fin d'année",
       date: new Date(currentYear, 5, 15), // Mid June
     },
   ];
@@ -43,7 +43,7 @@ function getNextExamDate(): ExamInfo {
   // If no exam this year, show next year's dates
   if (!nextExam) {
     nextExam = {
-      name: "Brevet des colleges",
+      name: "Brevet des collèges",
       date: new Date(currentYear + 1, 5, 24),
     };
   }
@@ -124,17 +124,17 @@ export function UrgencyBanner() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: -100, opacity: 0 }}
-        className="fixed left-0 right-0 top-0 z-[60] bg-gradient-to-r from-[#0B2A4C] to-[#1a4a7c]"
+        className="fixed left-0 right-0 top-0 z-[60] bg-[#0a0a0a] border-b border-white/5"
       >
         <div className="container mx-auto px-4">
           <div className="relative flex flex-wrap items-center justify-center gap-4 py-2.5 text-sm text-white md:gap-6">
             {/* Exam Countdown */}
             {examInfo.daysLeft <= 90 && (
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-[#E8A336]" />
-                <span>
-                  <strong>{examInfo.name}</strong> dans{" "}
-                  <span className="font-bold text-[#E8A336]">
+                <Calendar className="h-4 w-4 text-[#ff6d38]" />
+                <span className="text-gray-300">
+                  <strong className="text-white">{examInfo.name}</strong> dans{" "}
+                  <span className="font-bold text-[#ff6d38]">
                     {examInfo.daysLeft}
                   </span>{" "}
                   jours
@@ -144,30 +144,30 @@ export function UrgencyBanner() {
 
             {/* Separator */}
             {examInfo.daysLeft <= 90 && (
-              <div className="hidden h-4 w-px bg-white/30 md:block" />
+              <div className="hidden h-4 w-px bg-white/10 md:block" />
             )}
 
             {/* Students Online */}
             <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-emerald-400" />
-              <span>
-                <strong className="text-emerald-400">{studentsOnline}+</strong>{" "}
-                eleves actifs maintenant
+              <TrendingUp className="h-4 w-4 text-[#c7ff69]" />
+              <span className="text-gray-300">
+                <strong className="text-[#c7ff69]">{studentsOnline}+</strong>{" "}
+                élèves actifs maintenant
               </span>
             </div>
 
             {/* CTA */}
             <Link
-              href="/demo"
-              className="rounded-full bg-[#E8A336] px-4 py-1.5 text-xs font-bold text-[#0B2A4C] transition-colors hover:bg-[#D4922E]"
+              href="/courses"
+              className="rounded-full bg-[#ff6d38] px-4 py-1.5 text-xs font-bold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_20px_-5px_rgba(255,109,56,0.5)]"
             >
-              Commencer maintenant
+              Découvrir les cours
             </Link>
 
             {/* Close Button */}
             <button
               onClick={handleDismiss}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1 text-white/60 hover:bg-white/10 hover:text-white"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-gray-500 transition-colors hover:bg-white/5 hover:text-white"
               aria-label="Fermer"
             >
               <X className="h-4 w-4" />
@@ -189,7 +189,7 @@ export function LimitedSpotsBadge({ spotsLeft }: { spotsLeft: number }) {
         initial={{ scale: 0.9 }}
         animate={{ scale: [0.9, 1, 0.9] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="flex items-center gap-1 rounded-full bg-red-500 px-2.5 py-1 text-xs font-bold text-white shadow-lg"
+        className="flex items-center gap-1 rounded-full bg-[#ff6d38] px-2.5 py-1 text-xs font-bold text-[#0a0a0a] shadow-lg"
       >
         <Clock className="h-3 w-3" />
         Plus que {spotsLeft} places !
@@ -207,7 +207,7 @@ export function ExamPrepBadge({ examType }: { examType: "brevet" | "bac" }) {
 
   return (
     <div className="absolute right-3 top-3 z-10">
-      <div className="flex items-center gap-1 rounded-full bg-violet-600 px-2.5 py-1 text-xs font-bold text-white shadow-lg">
+      <div className="flex items-center gap-1 rounded-full bg-[#7a78ff] px-2.5 py-1 text-xs font-bold text-white shadow-lg">
         <Calendar className="h-3 w-3" />
         {labels[examType]}
       </div>

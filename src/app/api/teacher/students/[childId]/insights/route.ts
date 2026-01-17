@@ -8,7 +8,7 @@ interface RouteParams {
 }
 
 function getStudentInsightsSystemPrompt(): string {
-  return `Tu es un assistant pedagogique expert pour Schoolaris, une plateforme educative francaise.
+  return `Tu es un assistant pedagogique expert pour Kursus, une plateforme educative francaise.
 Tu analyses les donnees d'un eleve individuel pour aider le professeur a mieux l'accompagner.
 
 TON ROLE:

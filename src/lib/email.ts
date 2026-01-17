@@ -13,8 +13,7 @@ function getResendClient(): Resend | null {
   return resend;
 }
 
-const FROM_EMAIL =
-  process.env.EMAIL_FROM || "Schoolaris <noreply@schoolaris.fr>";
+const FROM_EMAIL = process.env.EMAIL_FROM || "Kursus <noreply@kursus.fr>";
 
 export interface SendEmailOptions {
   to: string | string[];

@@ -1,4 +1,4 @@
-// Base email template with Schoolaris branding
+// Base email template with Kursus branding
 export function baseEmailTemplate(content: string): string {
   return `
 <!DOCTYPE html>
@@ -6,7 +6,7 @@ export function baseEmailTemplate(content: string): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Schoolaris</title>
+  <title>Kursus</title>
   <style>
     body {
       margin: 0;
@@ -104,7 +104,7 @@ export function baseEmailTemplate(content: string): string {
   <div class="container">
     <div class="card">
       <div class="header">
-        <a href="${process.env.NEXTAUTH_URL || "https://schoolaris.fr"}" class="logo">
+        <a href="${process.env.NEXTAUTH_URL || "https://kursus.fr"}" class="logo">
           <div class="logo-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="m4 6 8-4 8 4"/>
@@ -115,7 +115,7 @@ export function baseEmailTemplate(content: string): string {
               <path d="M12 10v12"/>
             </svg>
           </div>
-          <span class="logo-text">Schoolaris</span>
+          <span class="logo-text">Kursus</span>
         </a>
       </div>
       <div class="content">
@@ -123,12 +123,12 @@ export function baseEmailTemplate(content: string): string {
       </div>
       <div class="footer">
         <p>
-          Schoolaris - La plateforme d'apprentissage personnalise<br>
-          <a href="${process.env.NEXTAUTH_URL || "https://schoolaris.fr"}">schoolaris.fr</a>
+          Kursus - La plateforme d'apprentissage personnalise<br>
+          <a href="${process.env.NEXTAUTH_URL || "https://kursus.fr"}">kursus.fr</a>
         </p>
         <p class="muted" style="margin-top: 16px;">
-          Vous recevez cet email car vous etes inscrit sur Schoolaris.<br>
-          <a href="${process.env.NEXTAUTH_URL || "https://schoolaris.fr"}/dashboard/settings">Gerer vos preferences</a>
+          Vous recevez cet email car vous etes inscrit sur Kursus.<br>
+          <a href="${process.env.NEXTAUTH_URL || "https://kursus.fr"}/dashboard/settings">Gerer vos preferences</a>
         </p>
       </div>
     </div>

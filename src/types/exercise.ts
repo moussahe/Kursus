@@ -1,5 +1,5 @@
 // Exercise Types for AI-powered Generative Exercises
-// Schoolaris - Exercices Generatifs IA
+// Kursus - Exercices Generatifs IA
 
 export type ExerciseType =
   | "FILL_IN_BLANK" // Texte a trous

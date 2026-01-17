@@ -30,7 +30,7 @@ import { ModerationFilters } from "./moderation-filters";
 import { ModerationActions } from "./moderation-actions";
 
 export const metadata = {
-  title: "Moderation | Admin Schoolaris",
+  title: "Moderation | Admin Kursus",
   description: "Moderez et validez les cours de la plateforme",
 };
 

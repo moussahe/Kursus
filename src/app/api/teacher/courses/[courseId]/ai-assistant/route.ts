@@ -64,7 +64,7 @@ function getTeacherAssistantSystemPrompt(courseData: {
     })
     .join("\n\n");
 
-  return `Tu es un assistant pedagogique expert pour les enseignants sur Schoolaris, la plateforme EdTech #1 en France.
+  return `Tu es un assistant pedagogique expert pour les enseignants sur Kursus, la plateforme EdTech #1 en France.
 
 INFORMATIONS SUR LE COURS:
 - Titre: ${courseData.title}

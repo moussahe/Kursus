@@ -66,7 +66,7 @@ function getSpeechRecognition(): (new () => SpeechRecognition) | null {
 
 /**
  * Custom hook for voice input using Web Speech API
- * Designed for French language by default (fr-FR) for Schoolaris
+ * Designed for French language by default (fr-FR) for Kursus
  *
  * @example
  * ```tsx
@@ -81,7 +81,7 @@ export function useVoiceInput(
   options: UseVoiceInputOptions = {},
 ): UseVoiceInputReturn {
   const {
-    language = "fr-FR", // French by default for Schoolaris
+    language = "fr-FR", // French by default for Kursus
     continuous = false,
     interimResults = true,
     onResult,

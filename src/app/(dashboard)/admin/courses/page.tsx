@@ -25,8 +25,8 @@ import { CoursesFilters } from "./courses-filters";
 import { CourseActions } from "./course-actions";
 
 export const metadata = {
-  title: "Gestion des cours | Admin Schoolaris",
-  description: "Moderer et valider les cours de la plateforme Schoolaris",
+  title: "Gestion des cours | Admin Kursus",
+  description: "Moderer et valider les cours de la plateforme Kursus",
 };
 
 interface SearchParams {

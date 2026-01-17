@@ -30,7 +30,7 @@ interface UseVoiceOutputReturn {
 
 /**
  * Custom hook for text-to-speech using Web Speech Synthesis API
- * Designed for French language by default (fr-FR) for Schoolaris
+ * Designed for French language by default (fr-FR) for Kursus
  *
  * Perfect for:
  * - Younger students (CP-CE2) who can't read well yet
@@ -52,7 +52,7 @@ export function useVoiceOutput(
   options: UseVoiceOutputOptions = {},
 ): UseVoiceOutputReturn {
   const {
-    language = "fr-FR", // French by default for Schoolaris
+    language = "fr-FR", // French by default for Kursus
     rate = 0.95, // Slightly slower for better comprehension
     pitch = 1.0,
     volume = 1.0,
@@ -327,7 +327,7 @@ function cleanTextForSpeech(text: string): string {
 }
 
 /**
- * Get available French voices for Schoolaris
+ * Get available French voices for Kursus
  */
 export function getFrenchVoices(): SpeechSynthesisVoice[] {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) {

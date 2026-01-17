@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
 const siteConfig = {
-  name: "Schoolaris",
+  name: "Kursus",
   description:
     "Plateforme educative francaise pour les scolaires du CP a la Terminale. Cours en ligne, exercices interactifs et suivi personnalise.",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://schoolaris.fr",
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://kursus.fr",
   ogImage: "/og-image.png",
   keywords: [
     "cours en ligne",
@@ -41,8 +41,8 @@ const siteConfig = {
     "revision bac",
     "revision brevet",
   ],
-  authors: [{ name: "Schoolaris", url: "https://schoolaris.fr" }],
-  creator: "Schoolaris",
+  authors: [{ name: "Kursus", url: "https://kursus.fr" }],
+  creator: "Kursus",
 };
 
 interface GenerateMetadataParams {
@@ -132,7 +132,7 @@ export function generateCourseJsonLd(course: {
     image: course.imageUrl,
     provider: {
       "@type": "Organization",
-      name: "Schoolaris",
+      name: "Kursus",
       sameAs: siteConfig.url,
     },
     offers: {
@@ -159,7 +159,7 @@ export function generateCourseJsonLd(course: {
 export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Schoolaris",
+  name: "Kursus",
   url: siteConfig.url,
   logo: `${siteConfig.url}/logo.png`,
   description: siteConfig.description,
@@ -175,7 +175,7 @@ export const organizationJsonLd = {
 export const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Schoolaris",
+  name: "Kursus",
   url: siteConfig.url,
   description: siteConfig.description,
   potentialAction: {

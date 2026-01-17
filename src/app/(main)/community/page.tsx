@@ -206,7 +206,7 @@ export default async function CommunityPage({
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold">Communaute Schoolaris</h1>
+              <h1 className="text-3xl font-bold">Communaute Kursus</h1>
               <p className="mt-2 text-emerald-100">
                 Posez vos questions, partagez vos connaissances et apprenez
                 ensemble

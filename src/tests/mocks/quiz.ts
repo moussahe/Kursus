@@ -1,4 +1,4 @@
-// Quiz Test Mocks - Schoolaris
+// Quiz Test Mocks - Kursus
 import type { Quiz, QuizQuestion, QuizOption } from "@/types/quiz";
 
 export const mockOption1: QuizOption = {

@@ -397,7 +397,7 @@ function generateCertificateHTML(certificate: CertificateData): string {
 
         <div class="signature-block">
           <div class="signature-line"></div>
-          <div class="signature-label">Schoolaris</div>
+          <div class="signature-label">Kursus</div>
           <div class="signature-label" style="color: #9ca3af; font-size: 10px;">Direction</div>
         </div>
 
@@ -412,7 +412,7 @@ function generateCertificateHTML(certificate: CertificateData): string {
     <div class="seal">
       <span class="seal-text">Certifie</span>
       <span class="seal-icon">🎓</span>
-      <span class="seal-text">Schoolaris</span>
+      <span class="seal-text">Kursus</span>
     </div>
   </div>
 

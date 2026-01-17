@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 import { useState, type ReactNode } from "react";
 import { ServiceWorkerRegister } from "@/components/pwa/service-worker-register";
 
@@ -23,11 +24,13 @@ export function Providers({ children }: ProvidersProps) {
   );
 
   return (
-    <SessionProvider>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <ServiceWorkerRegister />
-      </QueryClientProvider>
-    </SessionProvider>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <SessionProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <ServiceWorkerRegister />
+        </QueryClientProvider>
+      </SessionProvider>
+    </ThemeProvider>
   );
 }

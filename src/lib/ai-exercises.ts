@@ -1,5 +1,5 @@
 // AI Exercise Generation and Evaluation
-// Schoolaris - Exercices Generatifs IA
+// Kursus - Exercices Generatifs IA
 
 import { getAnthropicClient } from "./ai";
 import type {
@@ -78,7 +78,7 @@ PERFORMANCE PRECEDENTE:
 Adapte les exercices pour cibler les points faibles tout en gardant l'eleve engage.`;
   }
 
-  return `Tu es un expert en pédagogie qui cree des exercices interactifs pour Schoolaris.
+  return `Tu es un expert en pédagogie qui cree des exercices interactifs pour Kursus.
 
 CONTEXTE:
 - Matiere: ${context.subject}
@@ -405,7 +405,7 @@ export function evaluateExerciseAnswer(
 function getExerciseFeedbackPrompt(context: ExerciseFeedbackContext): string {
   const gradeLabel = GRADE_LABELS[context.gradeLevel] || context.gradeLevel;
 
-  return `Tu es un tuteur bienveillant pour Schoolaris qui donne du feedback sur les exercices.
+  return `Tu es un tuteur bienveillant pour Kursus qui donne du feedback sur les exercices.
 
 CONTEXTE:
 - Élève: ${context.childName}

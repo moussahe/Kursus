@@ -24,8 +24,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 export const metadata = {
-  title: "Analytiques | Admin Schoolaris",
-  description: "Metriques et KPIs de la plateforme Schoolaris",
+  title: "Analytiques | Admin Kursus",
+  description: "Metriques et KPIs de la plateforme Kursus",
 };
 
 async function getAnalyticsData() {

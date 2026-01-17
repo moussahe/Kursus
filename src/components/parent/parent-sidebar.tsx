@@ -8,12 +8,18 @@ import {
   ShoppingBag,
   Settings,
   BookOpen,
-  GraduationCap,
   Play,
   Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+// Kursus Brand Colors
+const KURSUS = {
+  orange: "#ff6d38",
+  lime: "#c7ff69",
+  purple: "#7a78ff",
+};
 
 interface ParentSidebarProps {
   user: {
@@ -43,13 +49,18 @@ export function ParentSidebar({ user }: ParentSidebarProps) {
   };
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-50 hidden w-72 flex-col border-r bg-card lg:flex">
+    <aside className="fixed inset-y-0 left-0 z-50 hidden w-72 flex-col border-r border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] lg:flex">
       {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b px-6">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500">
-          <GraduationCap className="h-6 w-6 text-white" />
+      <div className="flex h-16 items-center gap-3 border-b border-[var(--kursus-border)] px-6">
+        <div
+          className="flex h-10 w-10 items-center justify-center rounded-xl"
+          style={{ background: KURSUS.orange }}
+        >
+          <Sparkles className="h-5 w-5 text-white" />
         </div>
-        <span className="text-xl font-bold text-foreground">Schoolaris</span>
+        <span className="text-xl font-bold text-[var(--kursus-text)]">
+          Kursus
+        </span>
       </div>
 
       {/* Navigation */}
@@ -63,14 +74,14 @@ export function ParentSidebar({ user }: ParentSidebarProps) {
               className={cn(
                 "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                 active
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  ? "bg-[#ff6d38]/10 text-[#ff6d38]"
+                  : "text-[var(--kursus-text-muted)] hover:bg-[var(--kursus-bg)] hover:text-[var(--kursus-text)]",
               )}
             >
               <item.icon
                 className={cn(
                   "h-5 w-5",
-                  active ? "text-primary" : "text-muted-foreground",
+                  active ? "text-[#ff6d38]" : "text-[var(--kursus-text-muted)]",
                 )}
               />
               {item.name}
@@ -80,13 +91,16 @@ export function ParentSidebar({ user }: ParentSidebarProps) {
       </nav>
 
       {/* Learning Space - Access child interface */}
-      <div className="border-t px-4 py-4">
-        <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+      <div className="border-t border-[var(--kursus-border)] px-4 py-4">
+        <p className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-[var(--kursus-text-muted)]">
           Espace Apprentissage
         </p>
         <Link
           href="/student"
-          className="flex items-center gap-3 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 px-4 py-3 text-sm font-medium text-white shadow-md transition-all hover:shadow-lg hover:from-violet-600 hover:to-purple-700"
+          className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-white shadow-md transition-all hover:shadow-lg"
+          style={{
+            background: `linear-gradient(135deg, ${KURSUS.purple}, ${KURSUS.purple}dd)`,
+          }}
         >
           <Play className="h-5 w-5" />
           Acceder aux cours
@@ -94,7 +108,12 @@ export function ParentSidebar({ user }: ParentSidebarProps) {
         </Link>
         <Link
           href="/courses"
-          className="mt-2 flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-100"
+          className="mt-2 flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition-colors"
+          style={{
+            borderColor: `${KURSUS.orange}30`,
+            background: `${KURSUS.orange}10`,
+            color: KURSUS.orange,
+          }}
         >
           <BookOpen className="h-5 w-5" />
           Acheter des cours
@@ -102,22 +121,25 @@ export function ParentSidebar({ user }: ParentSidebarProps) {
       </div>
 
       {/* User Profile */}
-      <div className="border-t p-4">
-        <div className="flex items-center gap-3 rounded-xl bg-muted p-3">
+      <div className="border-t border-[var(--kursus-border)] p-4">
+        <div className="flex items-center gap-3 rounded-xl bg-[var(--kursus-bg)] p-3">
           <Avatar className="h-10 w-10">
             <AvatarImage
               src={user.image ?? undefined}
               alt={user.name ?? "User"}
             />
-            <AvatarFallback className="bg-primary/10 text-primary">
+            <AvatarFallback
+              className="text-white"
+              style={{ background: KURSUS.purple }}
+            >
               {user.name?.charAt(0).toUpperCase() ?? "U"}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 truncate">
-            <p className="text-sm font-medium text-foreground truncate">
+            <p className="text-sm font-medium text-[var(--kursus-text)] truncate">
               {user.name}
             </p>
-            <p className="text-xs text-muted-foreground truncate">
+            <p className="text-xs text-[var(--kursus-text-muted)] truncate">
               {user.email}
             </p>
           </div>

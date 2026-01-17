@@ -1,5 +1,5 @@
 // AI Quiz Generation and Feedback
-// Schoolaris - Quiz adaptatif avec Claude AI
+// Kursus - Quiz adaptatif avec Claude AI
 
 import { z } from "zod";
 import { getAnthropicClient } from "./ai";
@@ -110,7 +110,7 @@ PERFORMANCE PRECEDENTE:
 Adapte les questions en fonction de cette performance. Si l'eleve a des points faibles, inclus des questions qui ciblent ces domaines.`;
   }
 
-  return `Tu es un expert en pédagogie et creation de quiz educatifs pour Schoolaris.
+  return `Tu es un expert en pédagogie et creation de quiz educatifs pour Kursus.
 
 CONTEXTE:
 - Matiere: ${context.subject}
@@ -273,7 +273,7 @@ export function getQuizFeedbackPrompt(context: QuizFeedbackContext): string {
           .join("\n")
       : "Aucune erreur!";
 
-  return `Tu es un tuteur bienveillant pour Schoolaris qui donne du feedback sur les quiz.
+  return `Tu es un tuteur bienveillant pour Kursus qui donne du feedback sur les quiz.
 
 RESULTATS DU QUIZ:
 - Élève: ${context.childName}
@@ -398,7 +398,7 @@ export function getWeakAreaExtractionPrompt(
     )
     .join("\n");
 
-  return `Tu es un expert en pédagogie pour Schoolaris. Analyse les erreurs suivantes et identifie les points faibles specifiques.
+  return `Tu es un expert en pédagogie pour Kursus. Analyse les erreurs suivantes et identifie les points faibles specifiques.
 
 CONTEXTE:
 - Matiere: ${subject}
@@ -544,7 +544,7 @@ function getSingleQuestionPrompt(context: SingleQuestionContext): string {
       ? `\nPOINTS FAIBLES A CIBLER: ${context.weakAreas.join(", ")}`
       : "";
 
-  return `Tu es un expert en pédagogie pour Schoolaris. Genere UNE SEULE question de quiz.
+  return `Tu es un expert en pédagogie pour Kursus. Genere UNE SEULE question de quiz.
 
 CONTEXTE:
 - Matiere: ${context.subject}

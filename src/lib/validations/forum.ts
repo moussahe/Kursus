@@ -158,5 +158,5 @@ export const FORUM_CATEGORY_DESCRIPTIONS: Record<ForumCategory, string> = {
   EXAM_PREP: "Preparez-vous aux examens ensemble",
   PARENT_CORNER: "Discussions entre parents",
   TEACHER_LOUNGE: "Espace reserve aux enseignants",
-  ANNOUNCEMENTS: "Annonces officielles de Schoolaris",
+  ANNOUNCEMENTS: "Annonces officielles de Kursus",
 };

@@ -124,13 +124,13 @@ function RegisterForm() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600">
                 <GraduationCap className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold">Schoolaris</span>
+              <span className="text-xl font-bold">Kursus</span>
             </Link>
             <h2 className="mt-8 text-2xl font-bold text-gray-900">
               Creer votre compte
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Rejoignez Schoolaris gratuitement
+              Rejoignez Kursus gratuitement
             </p>
           </div>
 
@@ -399,7 +399,7 @@ function RegisterForm() {
                 &quot;
                 {selectedRole === "TEACHER"
                   ? "J'ai pu partager mes cours avec des centaines d'élèves. La plateforme est intuitive et le support excellent."
-                  : "Mon fils a fait des progres incroyables en maths grace aux cours sur Schoolaris. Je recommande !"}
+                  : "Mon fils a fait des progres incroyables en maths grace aux cours sur Kursus. Je recommande !"}
                 &quot;
               </p>
               <p className="mt-2 text-xs text-emerald-200">

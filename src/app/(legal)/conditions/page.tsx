@@ -1,9 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Conditions d'utilisation | Schoolaris",
-  description:
-    "Conditions générales d'utilisation de la plateforme Schoolaris.",
+  title: "Conditions d'utilisation | Kursus",
+  description: "Conditions générales d'utilisation de la plateforme Kursus.",
 };
 
 export default function ConditionsPage() {
@@ -18,14 +17,12 @@ export default function ConditionsPage() {
       <p>
         Les presentes Conditions Generales d&apos;Utilisation (CGU) ont pour
         objet de definir les modalites d&apos;acces et d&apos;utilisation de la
-        plateforme Schoolaris, accessible a l&apos;adresse
-        schoolaris-production.up.railway.app (ci-apres &quot;la
-        Plateforme&quot;).
+        plateforme Kursus, accessible a l&apos;adresse
+        kursus-production.up.railway.app (ci-apres &quot;la Plateforme&quot;).
       </p>
       <p>
-        Schoolaris est une marketplace de cours scolaires mettant en relation
-        des enseignants (createurs de contenu) et des familles (parents et
-        élèves).
+        Kursus est une marketplace de cours scolaires mettant en relation des
+        enseignants (createurs de contenu) et des familles (parents et élèves).
       </p>
 
       <h2>2. Acceptation des CGU</h2>
@@ -87,7 +84,7 @@ export default function ConditionsPage() {
       <h2>6. Propriete intellectuelle</h2>
       <p>
         Les contenus des cours restent la propriete de leurs auteurs. En
-        publiant sur Schoolaris, les enseignants accordent a la plateforme une
+        publiant sur Kursus, les enseignants accordent a la plateforme une
         licence non exclusive pour diffuser leurs contenus.
       </p>
       <p>
@@ -97,21 +94,21 @@ export default function ConditionsPage() {
 
       <h2>7. Protection des mineurs</h2>
       <p>
-        Schoolaris s&apos;engage a proteger les donnees des mineurs conformement
-        au RGPD et aux lois francaises. Les enfants de moins de 15 ans ne
-        peuvent utiliser la plateforme qu&apos;avec le consentement parental.
+        Kursus s&apos;engage a proteger les donnees des mineurs conformement au
+        RGPD et aux lois francaises. Les enfants de moins de 15 ans ne peuvent
+        utiliser la plateforme qu&apos;avec le consentement parental.
       </p>
 
       <h2>8. Responsabilites</h2>
       <p>
-        Schoolaris agit en tant qu&apos;intermediaire et ne peut etre tenu
+        Kursus agit en tant qu&apos;intermediaire et ne peut etre tenu
         responsable du contenu publie par les enseignants. Tout contenu
         inapproprie peut etre signale et sera examine.
       </p>
 
       <h2>9. Modification des CGU</h2>
       <p>
-        Schoolaris se reserve le droit de modifier les presentes CGU. Les
+        Kursus se reserve le droit de modifier les presentes CGU. Les
         utilisateurs seront informes de toute modification substantielle.
       </p>
 
@@ -124,7 +121,7 @@ export default function ConditionsPage() {
       <h2>Contact</h2>
       <p>
         Pour toute question concernant ces CGU, contactez-nous a{" "}
-        <a href="mailto:contact@schoolaris.fr">contact@schoolaris.fr</a>.
+        <a href="mailto:contact@kursus.fr">contact@kursus.fr</a>.
       </p>
     </article>
   );

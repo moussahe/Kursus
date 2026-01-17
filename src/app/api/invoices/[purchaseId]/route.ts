@@ -289,7 +289,7 @@ function generateInvoiceHTML(data: {
     <div class="parties">
       <div class="party">
         <h3>Vendeur</h3>
-        <p class="name">Schoolaris SAS</p>
+        <p class="name">Kursus SAS</p>
         <p>123 Avenue de l'Éducation</p>
         <p>75001 Paris, France</p>
         <p>SIRET : 123 456 789 00001</p>
@@ -347,11 +347,11 @@ function generateInvoiceHTML(data: {
 
     <div class="footer">
       <p>Merci pour votre confiance !</p>
-      <p>Pour toute question : support@schoolaris.fr</p>
+      <p>Pour toute question : support@kursus.fr</p>
 
       <div class="legal">
         <p><strong>Mentions légales :</strong></p>
-        <p>Schoolaris SAS au capital de 10 000 € - RCS Paris 123 456 789</p>
+        <p>Kursus SAS au capital de 10 000 € - RCS Paris 123 456 789</p>
         <p>Cours numérique - Accès à vie après achat</p>
         <p>En cas de litige, le client peut recourir au médiateur de la consommation.</p>
         <p>Conformément à l'article L. 221-28 du Code de la consommation, le droit de rétractation ne s'applique pas aux contenus numériques fournis sur un support immatériel dont l'exécution a commencé avec l'accord du consommateur.</p>
@@ -422,7 +422,7 @@ export async function GET(
         title: purchase.course.title,
         gradeLevel: purchase.course.gradeLevel,
         subject: purchase.course.subject,
-        author: purchase.course.author.name || "Professeur Schoolaris",
+        author: purchase.course.author.name || "Professeur Kursus",
       },
       child: purchase.child,
       amount: purchase.amount,

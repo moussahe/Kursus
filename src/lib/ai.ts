@@ -39,7 +39,7 @@ export function getAITutorSystemPrompt(context: {
 
   const gradeLabel = gradeLabels[context.childGrade] || context.childGrade;
 
-  let prompt = `Tu es un tuteur pedagogique bienveillant et patient pour Schoolaris, une plateforme educative francaise.
+  let prompt = `Tu es un tuteur pedagogique bienveillant et patient pour Kursus, une plateforme educative francaise.
 
 ELEVE:
 - Prenom: ${context.childName}
@@ -91,7 +91,7 @@ export const MAX_OUTPUT_TOKENS = 1024;
 
 // System prompt for parent insights
 export function getParentInsightSystemPrompt(): string {
-  return `Tu es un conseiller pedagogique expert pour Schoolaris, une plateforme educative francaise.
+  return `Tu es un conseiller pedagogique expert pour Kursus, une plateforme educative francaise.
 
 TON ROLE:
 - Analyser les donnees de progression d'un enfant

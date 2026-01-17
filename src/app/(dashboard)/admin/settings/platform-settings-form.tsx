@@ -14,8 +14,8 @@ export function PlatformSettingsForm() {
 
   // Default settings (would normally come from database)
   const [settings, setSettings] = useState({
-    platformName: "Schoolaris",
-    supportEmail: "support@schoolaris.fr",
+    platformName: "Kursus",
+    supportEmail: "support@kursus.fr",
     teacherCommission: 70,
     platformCommission: 30,
     maintenanceMode: false,

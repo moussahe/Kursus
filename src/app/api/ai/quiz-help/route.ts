@@ -1,5 +1,5 @@
 // API endpoint for contextual AI help on quiz questions
-// Schoolaris - Quiz-AI Integration
+// Kursus - Quiz-AI Integration
 
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
@@ -51,7 +51,7 @@ function getQuizHelpPrompt(
   const gradeLabel = GRADE_LABELS[gradeLevel] || gradeLevel;
   const optionsList = options.map((o, i) => `${i + 1}. ${o.text}`).join("\n");
 
-  return `Tu es un tuteur pedagogique bienveillant pour Schoolaris. Un eleve te demande de l'aide sur une question de quiz.
+  return `Tu es un tuteur pedagogique bienveillant pour Kursus. Un eleve te demande de l'aide sur une question de quiz.
 
 CONTEXTE:
 - Niveau scolaire: ${gradeLabel}

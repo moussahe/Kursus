@@ -1,41 +1,13 @@
-# SCHOOLARIS - Vision & Orchestration
+# KURSUS - Development Guidelines
 
 ## Mission
 
-Plateforme EdTech francaise #1 pour les scolaires (CP -> Terminale).
+Plateforme EdTech premium avec AI tutoring, gamification, et marketplace de cours.
 Objectif Y1: 10K utilisateurs, 500K EUR CA.
-
-## BOUCLE PRINCIPALE (EXECUTE EN CONTINU)
-
-A chaque iteration:
-
-1. Consulte @.claude/agents/CTO.md pour les decisions archi
-2. Delegue le dev a @.claude/agents/LEAD_FRONTEND.md et @.claude/agents/LEAD_BACKEND.md
-3. Fais valider par @.claude/agents/QA_ENGINEER.md
-4. Verifie la secu avec @.claude/agents/SECURITY.md
-5. Deploie via @.claude/agents/DEVOPS.md
-6. Itere avec @.claude/workflows/ITERATION_LOOP.md
-
-## REGLE D'OR
-
-JAMAIS de commit sans:
-
-- pnpm lint ✓
-- pnpm type-check ✓
-- pnpm test ✓
-- pnpm build ✓
-
-## Metriques de Succes
-
-- Coverage tests > 80%
-- Lighthouse score > 90
-- Build time < 2min
-- Zero erreurs TypeScript
-- Zero vulnerabilites npm audit
 
 ## Stack Technique
 
-- **Frontend**: Next.js 15, TypeScript strict, TailwindCSS, shadcn/ui
+- **Frontend**: Next.js 16, TypeScript strict, TailwindCSS, shadcn/ui
 - **State**: Zustand (client), React Query (server)
 - **Backend**: Next.js API Routes + Server Actions
 - **DB**: PostgreSQL via Prisma + Supabase
@@ -44,6 +16,83 @@ JAMAIS de commit sans:
 - **IA**: Claude API (Anthropic)
 - **Tests**: Vitest + Playwright
 - **CI/CD**: GitHub Actions + Vercel
+
+---
+
+## Design System
+
+### Direction
+
+- **Style** : Dark premium, futuristic, refined
+- **Inspiration** : nvg8.io, linear.app, vercel.com, raycast.com
+- **Mode par défaut** : Dark
+- **Toggle** : Bouton dark/light mode dans le header
+
+### Couleurs
+
+```css
+/* Dark Mode (défaut) */
+--kursus-bg: #0a0a0a;
+--kursus-bg-elevated: #141414;
+--kursus-border: #2a2a2a;
+--kursus-text: #ffffff;
+--kursus-text-muted: #a1a1a1;
+
+/* Light Mode */
+--kursus-bg: #fafafa;
+--kursus-bg-elevated: #ffffff;
+--kursus-border: #e5e5e5;
+--kursus-text: #0a0a0a;
+--kursus-text-muted: #6b7280;
+
+/* Brand (identiques dans les 2 modes) */
+--kursus-orange: #ff6d38;
+--kursus-lime: #c7ff69;
+--kursus-purple: #7a78ff;
+```
+
+### Theme Toggle
+
+- Utiliser next-themes
+- Bouton dans le header (icône sun/moon)
+- Persister en localStorage
+- Respecter prefers-color-scheme au premier load
+- Transition fluide (300ms)
+
+### Typography
+
+- Headlines : font-black (900), letter-spacing: -0.04em
+- Body : font-normal (400)
+- Fonts : Geist ou Satoshi (PAS Inter/Arial/Roboto)
+
+### Composants
+
+- Cards : bg-elevated, border subtle, glow on hover (dark), shadow (light)
+- Buttons : rounded-full, gradient bg, hover effects
+- Inputs : theme-aware bg, bright border on focus
+
+### Animations
+
+- Easing : cubic-bezier(0.22, 1, 0.36, 1)
+- Page load : stagger reveals
+- Hover : scale, glow, border-radius morph
+- Scroll : fade-in avec Intersection Observer
+
+### Textures
+
+- Gradients : orange→lime, purple→blue
+- Glass : backdrop-blur + transparence
+- Patterns : grid, dots, noise (subtils)
+
+### Anti-patterns (JAMAIS)
+
+- Inter/Arial/Roboto
+- Cards plates sans effets
+- Couleurs timides
+- Templates génériques
+- Thème qui flash au load
+
+---
 
 ## Structure Projet
 
@@ -68,46 +117,51 @@ src/
 └── types/                 # TypeScript types
 ```
 
-## Phases de Developpement
+---
 
-### Phase 1: Foundation
+## Validation
 
-- [x] Setup projet Next.js 15
-- [x] Configuration TypeScript strict
-- [x] Setup Prisma + schema DB
-- [x] Configuration shadcn/ui
-- [ ] Setup tests (Vitest + Playwright)
+### REGLE D'OR - Avant chaque commit
 
-### Phase 2: Auth & Users
+```bash
+pnpm lint && pnpm type-check && pnpm build
+```
 
-- [ ] NextAuth.js v5 setup
-- [ ] Register/Login pages
-- [ ] Roles (STUDENT, PARENT, TEACHER, ADMIN)
-- [ ] Gestion enfants (parent)
+### Après chaque push
 
-### Phase 3: Cours & Contenu
+- Attendre déploiement
+- Tester dark ET light mode
+- Tester sur mobile
 
-- [ ] CRUD Cours
-- [ ] Chapitres & Lecons
-- [ ] Quiz & Exercices
-- [ ] Progression tracking
+### Métriques de Succès
 
-### Phase 4: Paiements
+- Lighthouse score > 90
+- Build time < 2min
+- Zero erreurs TypeScript
+- Zero vulnérabilités npm audit
 
-- [ ] Integration Stripe
-- [ ] Plans d'abonnement
-- [ ] Checkout flow
-- [ ] Webhooks
+---
 
-### Phase 5: IA
+## Conventions
 
-- [ ] Assistant IA Claude
-- [ ] Aide aux devoirs
-- [ ] Generation exercices
+### Commits
 
-### Phase 6: Polish
+- feat: nouvelle fonctionnalité
+- fix: correction de bug
+- style: changement design/CSS
+- refactor: refactoring code
 
-- [ ] Performance optimization
-- [ ] SEO
-- [ ] Analytics
-- [ ] Documentation
+### Structure
+
+- src/app/ → Pages
+- src/components/ → Composants
+- src/lib/ → Utilitaires
+- src/hooks/ → Custom hooks
+
+---
+
+## Rappels
+
+- Dark mode par défaut, light disponible
+- Mobile responsive obligatoire
+- Tester les 2 thèmes avant merge

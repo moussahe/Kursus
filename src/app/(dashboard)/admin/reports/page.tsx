@@ -40,7 +40,7 @@ import { ReportsFilters } from "./reports-filters";
 import { ReportActions } from "./report-actions";
 
 export const metadata = {
-  title: "Signalements | Admin Schoolaris",
+  title: "Signalements | Admin Kursus",
   description: "Gerez les signalements de contenu et utilisateurs",
 };
 

@@ -189,7 +189,7 @@ export default function TeacherRegisterPage() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600">
                 <GraduationCap className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold">Schoolaris</span>
+              <span className="text-xl font-bold">Kursus</span>
             </Link>
             <h2 className="mt-8 text-2xl font-bold text-gray-900">
               Devenir enseignant

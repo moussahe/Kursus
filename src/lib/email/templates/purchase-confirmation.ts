@@ -69,6 +69,6 @@ Acceder au cours: ${data.courseUrl}
 Un recu detaille est disponible dans votre espace "Mes achats" sur la plateforme.
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `.trim();
 }

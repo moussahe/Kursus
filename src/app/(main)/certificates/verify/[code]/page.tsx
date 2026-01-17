@@ -67,7 +67,7 @@ export default async function CertificateVerifyPage({ params }: PageProps) {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-600">
               <GraduationCap className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-900">Schoolaris</span>
+            <span className="text-xl font-bold text-gray-900">Kursus</span>
           </div>
         </div>
       </div>
@@ -179,8 +179,8 @@ export default async function CertificateVerifyPage({ params }: PageProps) {
           {/* Info */}
           <div className="mt-8 text-center text-sm text-gray-500">
             <p>
-              Ce certificat a ete delivre par Schoolaris, plateforme educative
-              en ligne.
+              Ce certificat a ete delivre par Kursus, plateforme educative en
+              ligne.
             </p>
             <p className="mt-1">
               La verification de ce certificat confirme son authenticite.

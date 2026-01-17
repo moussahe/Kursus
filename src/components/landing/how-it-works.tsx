@@ -10,18 +10,21 @@ const steps = [
     title: "Choisissez votre cours",
     description:
       "Parcourez notre catalogue et trouvez le cours parfait pour vos besoins.",
+    color: "#ff6d38",
   },
   {
     icon: Users,
-    title: "Apprenez a votre rythme",
+    title: "Apprenez à votre rythme",
     description:
       "Progressez selon votre emploi du temps avec nos tuteurs experts.",
+    color: "#c7ff69",
   },
   {
     icon: GraduationCap,
-    title: "Reussissez vos examens",
+    title: "Réussissez vos examens",
     description:
-      "Atteignez vos objectifs academiques et excellez dans vos examens.",
+      "Atteignez vos objectifs académiques et excellez dans vos examens.",
+    color: "#7a78ff",
   },
 ];
 
@@ -51,25 +54,38 @@ export function HowItWorks() {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="bg-[#FDFDFD] py-24 sm:py-32">
+    <section
+      ref={ref}
+      className="bg-[#0a0a0a] py-24 sm:py-32 border-t border-[#2a2a2a]"
+    >
       <div className="container mx-auto max-w-5xl px-4">
         {/* Header */}
         <div className="mb-16 text-center">
-          <motion.h2
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
-            className="font-serif text-4xl font-bold text-[#0B2A4C] sm:text-5xl"
           >
-            Comment ca marche?
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#7a78ff]/20 bg-[#7a78ff]/10 px-4 py-2 text-sm font-medium text-[#7a78ff]">
+              Simple et efficace
+            </span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mt-6 text-3xl font-black text-white sm:text-4xl md:text-5xl"
+            style={{ letterSpacing: "-0.04em" }}
+          >
+            Comment ça marche ?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-lg text-[#6B7280]"
+            className="mt-4 text-lg text-gray-400"
           >
-            Trois etapes simples pour transformer votre avenir academique.
+            Trois étapes simples pour transformer votre avenir académique.
           </motion.p>
         </div>
 
@@ -77,12 +93,12 @@ export function HowItWorks() {
         <div className="relative">
           {/* Connecting Line */}
           <div
-            className="absolute left-1/2 top-1/2 hidden h-1 w-2/3 -translate-x-1/2 -translate-y-1/2 border-t-2 border-dashed border-gray-300 lg:block"
+            className="absolute left-1/2 top-1/2 hidden h-px w-2/3 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-transparent via-[#2a2a2a] to-transparent lg:block"
             aria-hidden="true"
           />
 
           <motion.div
-            className="grid grid-cols-1 gap-16 md:grid-cols-3 md:gap-12"
+            className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -95,23 +111,33 @@ export function HowItWorks() {
               >
                 {/* Icon Circle */}
                 <div className="relative mb-8">
-                  <div className="flex h-28 w-28 items-center justify-center rounded-full bg-white shadow-[0px_4px_15px_rgba(0,0,0,0.05)]">
+                  <div
+                    className="flex h-28 w-28 items-center justify-center rounded-2xl border bg-[#1a1a1a] transition-all duration-300 hover:scale-105"
+                    style={{
+                      borderColor: `${step.color}30`,
+                      boxShadow: `0 0 40px -10px ${step.color}30`,
+                    }}
+                  >
                     <step.icon
-                      className="h-14 w-14 text-[#0B2A4C]"
+                      className="h-14 w-14"
+                      style={{ color: step.color }}
                       strokeWidth={1.5}
                     />
                   </div>
                   {/* Number Badge */}
-                  <span className="absolute -right-2 -top-2 flex h-12 w-12 items-center justify-center rounded-full bg-[#E8A336] text-lg font-bold text-white">
+                  <span
+                    className="absolute -right-2 -top-2 flex h-10 w-10 items-center justify-center rounded-full text-base font-bold text-[#0a0a0a]"
+                    style={{ backgroundColor: step.color }}
+                  >
                     0{index + 1}
                   </span>
                 </div>
 
                 {/* Text */}
-                <h3 className="mb-4 text-2xl font-semibold leading-tight text-[#0B2A4C]">
+                <h3 className="mb-4 text-xl font-bold leading-tight text-white">
                   {step.title}
                 </h3>
-                <p className="min-h-[60px] max-w-sm text-lg leading-relaxed text-[#1A1A1A]/80">
+                <p className="max-w-sm text-base leading-relaxed text-gray-400">
                   {step.description}
                 </p>
               </motion.div>

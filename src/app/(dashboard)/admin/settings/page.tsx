@@ -23,8 +23,8 @@ import { SecuritySettingsForm } from "./security-settings-form";
 import { NotificationSettingsForm } from "./notification-settings-form";
 
 export const metadata = {
-  title: "Parametres | Admin Schoolaris",
-  description: "Configuration de la plateforme Schoolaris",
+  title: "Parametres | Admin Kursus",
+  description: "Configuration de la plateforme Kursus",
 };
 
 async function getPlatformStats() {
@@ -133,9 +133,7 @@ async function SettingsContent() {
               <Globe className="h-5 w-5 text-blue-500" />
               Parametres de la plateforme
             </CardTitle>
-            <CardDescription>
-              Configuration générale de Schoolaris
-            </CardDescription>
+            <CardDescription>Configuration générale de Kursus</CardDescription>
           </CardHeader>
           <CardContent>
             <PlatformSettingsForm />

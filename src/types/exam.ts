@@ -1,4 +1,4 @@
-// Exam Mode Types - Schoolaris
+// Exam Mode Types - Kursus
 // Types for the AI-powered exam revision system
 
 export type ExamType = "BREVET" | "BAC" | "CUSTOM";

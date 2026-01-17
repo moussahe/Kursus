@@ -90,7 +90,7 @@ export function TeacherHeader({ user }: TeacherHeaderProps) {
           <SheetContent side="left" className="w-64 p-0">
             <SheetHeader className="flex h-16 items-center gap-2 border-b px-6">
               <BookOpen className="h-8 w-8 text-emerald-500" />
-              <SheetTitle className="text-xl font-bold">Schoolaris</SheetTitle>
+              <SheetTitle className="text-xl font-bold">Kursus</SheetTitle>
             </SheetHeader>
             <nav className="space-y-1 p-4">
               {navigation.map((item) => {
@@ -135,7 +135,7 @@ export function TeacherHeader({ user }: TeacherHeaderProps) {
         </Sheet>
         <Link href="/teacher" className="flex items-center gap-2">
           <BookOpen className="h-6 w-6 text-emerald-500" />
-          <span className="font-bold">Schoolaris</span>
+          <span className="font-bold">Kursus</span>
         </Link>
       </div>
 

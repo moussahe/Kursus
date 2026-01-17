@@ -11,7 +11,7 @@ export function passwordResetEmail(data: PasswordResetData): string {
     <h1>Reinitialisation de votre mot de passe</h1>
     <p>Bonjour ${data.userName},</p>
     <p>
-      Vous avez demande a reinitialiser votre mot de passe sur Schoolaris.
+      Vous avez demande a reinitialiser votre mot de passe sur Kursus.
       Cliquez sur le bouton ci-dessous pour creer un nouveau mot de passe.
     </p>
 
@@ -29,7 +29,7 @@ export function passwordResetEmail(data: PasswordResetData): string {
     <div class="highlight">
       <p style="margin: 0; font-size: 14px;">
         <strong>Conseil securite :</strong> Ne partagez jamais ce lien avec personne.
-        L'equipe Schoolaris ne vous demandera jamais votre mot de passe.
+        L'equipe Kursus ne vous demandera jamais votre mot de passe.
       </p>
     </div>
   `;
@@ -43,7 +43,7 @@ Reinitialisation de votre mot de passe
 
 Bonjour ${data.userName},
 
-Vous avez demande a reinitialiser votre mot de passe sur Schoolaris.
+Vous avez demande a reinitialiser votre mot de passe sur Kursus.
 Cliquez sur le lien ci-dessous pour creer un nouveau mot de passe:
 
 ${data.resetUrl}
@@ -52,9 +52,9 @@ Ce lien expire dans ${data.expiresIn}. Si vous n'avez pas demande cette reinitia
 vous pouvez ignorer cet email en toute securite.
 
 Conseil securite : Ne partagez jamais ce lien avec personne.
-L'equipe Schoolaris ne vous demandera jamais votre mot de passe.
+L'equipe Kursus ne vous demandera jamais votre mot de passe.
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `.trim();
 }

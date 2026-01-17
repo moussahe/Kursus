@@ -25,8 +25,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 export const metadata = {
-  title: "Admin Dashboard | Schoolaris",
-  description: "Tableau de bord d'administration Schoolaris",
+  title: "Admin Dashboard | Kursus",
+  description: "Tableau de bord d'administration Kursus",
 };
 
 async function getAdminStats() {
@@ -280,7 +280,7 @@ async function AdminDashboardContent() {
           Tableau de bord
         </h1>
         <p className="mt-1 text-gray-500">
-          Vue d&apos;ensemble de la plateforme Schoolaris
+          Vue d&apos;ensemble de la plateforme Kursus
         </p>
       </div>
 

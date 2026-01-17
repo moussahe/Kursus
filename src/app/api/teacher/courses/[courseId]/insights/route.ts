@@ -9,7 +9,7 @@ interface RouteParams {
 
 // System prompt for teacher course insights
 function getTeacherInsightsSystemPrompt(): string {
-  return `Tu es un assistant pedagogique expert pour Schoolaris, une plateforme educative francaise.
+  return `Tu es un assistant pedagogique expert pour Kursus, une plateforme educative francaise.
 Tu analyses les donnees de progression des étudiants d'un cours pour aider le professeur a ameliorer son enseignement.
 
 TON ROLE:

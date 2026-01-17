@@ -77,7 +77,7 @@ export function CertificateList({
 
     const shareData = {
       title: `Certificat - ${certificate.courseName}`,
-      text: `${certificate.childName} a obtenu un certificat de completion pour le cours "${certificate.courseName}" sur Schoolaris !`,
+      text: `${certificate.childName} a obtenu un certificat de completion pour le cours "${certificate.courseName}" sur Kursus !`,
       url: shareUrl,
     };
 

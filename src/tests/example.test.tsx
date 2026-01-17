@@ -6,7 +6,7 @@ describe("Example Tests", () => {
   });
 
   it("string concatenation works", () => {
-    expect("Hello, " + "Schoolaris!").toBe("Hello, Schoolaris!");
+    expect("Hello, " + "Kursus!").toBe("Hello, Kursus!");
   });
 
   it("array operations work", () => {

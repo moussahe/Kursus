@@ -44,28 +44,28 @@ const coursExamples = [
     subject: "Maths",
     level: "6ème",
     price: "3,49€",
-    color: "bg-blue-500",
+    color: "#ff6d38",
   },
   {
     title: "Conjugaison passé simple",
     subject: "Français",
     level: "CM2",
     price: "2,99€",
-    color: "bg-purple-500",
+    color: "#7a78ff",
   },
   {
     title: "Équations 1er degré",
     subject: "Maths",
     level: "4ème",
     price: "4,99€",
-    color: "bg-emerald-500",
+    color: "#c7ff69",
   },
   {
     title: "Révisions Brevet Français",
     subject: "Français",
     level: "3ème",
     price: "9,99€",
-    color: "bg-orange-500",
+    color: "#ff6d38",
   },
 ];
 
@@ -110,16 +110,26 @@ function CourseCard({
   return (
     <motion.div
       variants={itemVariants}
-      className="group relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:shadow-md"
+      className="group relative overflow-hidden rounded-2xl border border-[#2a2a2a] bg-[#1a1a1a] p-6 transition-all duration-300 hover:border-white/10"
+      style={{
+        boxShadow: "0 0 0 0 transparent",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = `0 0 40px -10px ${color}30`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
+      }}
     >
       <div className="flex items-start gap-4">
         <div
-          className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl ${color} text-white`}
+          className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl border"
+          style={{ backgroundColor: `${color}15`, borderColor: `${color}30` }}
         >
-          <BookOpen className="h-6 w-6" />
+          <BookOpen className="h-6 w-6" style={{ color }} />
         </div>
         <div className="flex-1 min-w-0">
-          <h4 className="text-base font-semibold leading-tight text-gray-900">
+          <h4 className="text-base font-semibold leading-tight text-white">
             {title}
           </h4>
           <p className="mt-1 text-sm text-gray-500">
@@ -127,9 +137,11 @@ function CourseCard({
           </p>
         </div>
       </div>
-      <div className="mt-5 flex items-center justify-between border-t border-gray-50 pt-4">
-        <span className="text-2xl font-bold text-emerald-600">{price}</span>
-        <span className="text-sm text-gray-400">Accès à vie</span>
+      <div className="mt-5 flex items-center justify-between border-t border-[#2a2a2a] pt-4">
+        <span className="text-2xl font-bold" style={{ color }}>
+          {price}
+        </span>
+        <span className="text-sm text-gray-500">Accès à vie</span>
       </div>
     </motion.div>
   );
@@ -151,26 +163,29 @@ function CarnetCard({
   return (
     <motion.div
       variants={itemVariants}
-      className={`relative min-h-[220px] rounded-2xl border p-8 text-center transition-all ${
+      className={`relative min-h-[220px] rounded-2xl border p-8 text-center transition-all duration-300 ${
         popular
-          ? "border-emerald-200 bg-emerald-50 shadow-md"
-          : "border-gray-100 bg-white shadow-sm hover:shadow-md"
+          ? "border-[#ff6d38]/30 bg-[#ff6d38]/5"
+          : "border-[#2a2a2a] bg-[#1a1a1a] hover:border-white/10"
       }`}
+      style={{
+        boxShadow: popular ? "0 0 60px -15px rgba(255,109,56,0.3)" : "none",
+      }}
     >
       {popular && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-500 px-4 py-1.5 text-sm font-bold text-white">
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[#ff6d38] px-4 py-1.5 text-sm font-bold text-[#0a0a0a]">
             <Sparkles className="h-4 w-4" />
             Meilleur choix
           </span>
         </div>
       )}
-      <h4 className="text-xl font-bold text-gray-900">{name}</h4>
+      <h4 className="text-xl font-bold text-white">{name}</h4>
       <p className="mt-2 text-base text-gray-500">
         Valeur <span className="line-through">{credits}</span>
       </p>
-      <p className="mt-4 text-4xl font-bold text-emerald-600">{price}</p>
-      <span className="mt-3 inline-block rounded-full bg-emerald-100 px-3 py-1 text-sm font-semibold text-emerald-700">
+      <p className="mt-4 text-4xl font-bold text-[#c7ff69]">{price}</p>
+      <span className="mt-3 inline-block rounded-full border border-[#c7ff69]/20 bg-[#c7ff69]/10 px-3 py-1 text-sm font-semibold text-[#c7ff69]">
         {discount}
       </span>
       <p className="mt-4 text-sm text-gray-500">Validité 2 ans</p>
@@ -183,7 +198,7 @@ export function PricingPreview() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="bg-gray-50 py-24">
+    <section ref={ref} className="bg-[#0a0a0a] py-24 border-t border-[#2a2a2a]">
       <div className="container mx-auto max-w-6xl px-4">
         <motion.div
           variants={containerVariants}
@@ -192,16 +207,21 @@ export function PricingPreview() {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center">
-            <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-600">
+            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[#c7ff69]/20 bg-[#c7ff69]/10 px-4 py-2 text-sm font-medium text-[#c7ff69]">
               <ShoppingBag className="h-4 w-4" />
               Achetez uniquement ce dont vous avez besoin
             </div>
 
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
-              Pas d&apos;abonnement qui dort.
+            <h2
+              className="text-3xl font-black tracking-tight text-white md:text-4xl lg:text-5xl"
+              style={{ letterSpacing: "-0.04em" }}
+            >
+              Pas d&apos;abonnement
+              <br />
+              <span className="text-gradient">qui dort.</span>
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
               Des cours de qualité professionnelle à prix accessible. Un
               paiement, un accès à vie.
             </p>
@@ -224,35 +244,30 @@ export function PricingPreview() {
             variants={itemVariants}
             className="mx-auto mt-14 flex flex-wrap items-center justify-center gap-8 text-base"
           >
-            <div className="flex items-center gap-3 text-gray-600">
-              <Check className="h-6 w-6 flex-shrink-0 text-emerald-500" />
-              <span>Pas d&apos;abonnement</span>
-            </div>
-            <div className="flex items-center gap-3 text-gray-600">
-              <Check className="h-6 w-6 flex-shrink-0 text-emerald-500" />
-              <span>Accès illimité à vie</span>
-            </div>
-            <div className="flex items-center gap-3 text-gray-600">
-              <Check className="h-6 w-6 flex-shrink-0 text-emerald-500" />
-              <span>70% reversés au professeur</span>
-            </div>
-            <div className="flex items-center gap-3 text-gray-600">
-              <Check className="h-6 w-6 flex-shrink-0 text-emerald-500" />
-              <span>Satisfait ou remboursé 14j</span>
-            </div>
+            {[
+              "Pas d'abonnement",
+              "Accès illimité à vie",
+              "70% reversés au professeur",
+              "Satisfait ou remboursé 14j",
+            ].map((text) => (
+              <div key={text} className="flex items-center gap-3 text-gray-400">
+                <Check className="h-6 w-6 flex-shrink-0 text-[#c7ff69]" />
+                <span>{text}</span>
+              </div>
+            ))}
           </motion.div>
 
           {/* Carnets de cours */}
           <motion.div
             variants={itemVariants}
-            className="mx-auto mt-20 rounded-3xl border border-emerald-100 bg-white p-8 shadow-sm lg:p-12"
+            className="mx-auto mt-20 rounded-3xl border border-[#2a2a2a] bg-[#141414] p-8 lg:p-12"
           >
             <div className="mb-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100">
-                <GraduationCap className="h-7 w-7 text-emerald-600" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#ff6d38]/20 bg-[#ff6d38]/10">
+                <GraduationCap className="h-7 w-7 text-[#ff6d38]" />
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-2xl font-bold text-gray-900">
+                <h3 className="text-2xl font-bold text-white">
                   Carnet de Cours
                 </h3>
                 <p className="mt-1 text-base text-gray-500">
@@ -276,14 +291,14 @@ export function PricingPreview() {
           {/* Pack Fratrie teaser */}
           <motion.div
             variants={itemVariants}
-            className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 rounded-2xl border border-blue-100 bg-blue-50 p-6 sm:flex-row sm:gap-6"
+            className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 rounded-2xl border border-[#7a78ff]/20 bg-[#7a78ff]/5 p-6 sm:flex-row sm:gap-6"
           >
-            <Users className="h-10 w-10 flex-shrink-0 text-blue-500" />
+            <Users className="h-10 w-10 flex-shrink-0 text-[#7a78ff]" />
             <div className="text-center sm:text-left">
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-lg font-semibold text-white">
                 Plusieurs enfants ?
               </p>
-              <p className="mt-1 text-base leading-relaxed text-gray-600">
+              <p className="mt-1 text-base leading-relaxed text-gray-400">
                 Pack Fratrie : -20% pour le 2ème enfant, -30% pour le 3ème sur
                 le même cours
               </p>
@@ -294,10 +309,10 @@ export function PricingPreview() {
           <motion.div variants={itemVariants} className="mt-12 text-center">
             <Link
               href="/courses"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-8 py-4 text-base font-semibold text-white shadow-sm transition-all hover:bg-emerald-600"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ff6d38] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
             >
               Découvrir les cours
-              <ArrowRight className="h-5 w-5" />
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <p className="mt-4 text-sm text-gray-500">
               Plus de 1 200 cours disponibles • Du CP à la Terminale

@@ -27,8 +27,8 @@ import { cn } from "@/lib/utils";
 import { UsersFilters } from "./users-filters";
 
 export const metadata = {
-  title: "Gestion des utilisateurs | Admin Schoolaris",
-  description: "Gerer les utilisateurs de la plateforme Schoolaris",
+  title: "Gestion des utilisateurs | Admin Kursus",
+  description: "Gerer les utilisateurs de la plateforme Kursus",
 };
 
 interface SearchParams {

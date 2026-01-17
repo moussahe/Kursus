@@ -312,7 +312,7 @@ export default function DemoPage() {
         <section className="border-t bg-white py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-center font-serif text-3xl font-bold text-[#0B2A4C]">
-              Pourquoi choisir Schoolaris ?
+              Pourquoi choisir Kursus ?
             </h2>
 
             <div className="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-3">
@@ -350,7 +350,7 @@ export default function DemoPage() {
                 </p>
               </div>
               <p className="mt-2 text-sm text-[#1A1A1A]/70">
-                qui font confiance a Schoolaris pour reussir
+                qui font confiance a Kursus pour reussir
               </p>
 
               <Link href="/register" className="mt-6 inline-block">

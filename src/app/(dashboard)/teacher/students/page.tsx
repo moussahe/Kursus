@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { StudentInsightsDashboard } from "@/components/teacher/student-insights-dashboard";
 
 export const metadata = {
-  title: "Mes Étudiants | Schoolaris",
+  title: "Mes Étudiants | Kursus",
   description:
     "Suivez la progression de vos étudiants et obtenez des insights IA personnalises",
 };

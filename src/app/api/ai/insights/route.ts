@@ -131,7 +131,7 @@ ${recentProgress
 `;
 }
 
-const INSIGHTS_PROMPT = `Tu es un conseiller pedagogique expert pour Schoolaris, une plateforme educative francaise.
+const INSIGHTS_PROMPT = `Tu es un conseiller pedagogique expert pour Kursus, une plateforme educative francaise.
 Tu analyses les donnees d'apprentissage d'un eleve pour generer des insights personnalises pour ses parents.
 
 ## Ta mission

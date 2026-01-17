@@ -77,7 +77,7 @@ function LoginForm() {
         </div>
         <div className="relative flex h-full items-center justify-center p-12">
           <div className="max-w-md text-white">
-            <h3 className="text-3xl font-bold">Bienvenue sur Schoolaris</h3>
+            <h3 className="text-3xl font-bold">Bienvenue sur Kursus</h3>
             <p className="mt-4 text-lg text-emerald-100">
               La marketplace de cours scolaires creee par de vrais professeurs.
               Achetez une fois, acces a vie.
@@ -114,11 +114,11 @@ function LoginForm() {
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600">
                 <GraduationCap className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold">Schoolaris</span>
+              <span className="text-xl font-bold">Kursus</span>
             </Link>
             <h2 className="mt-8 text-2xl font-bold text-gray-900">Connexion</h2>
             <p className="mt-2 text-sm text-gray-600">
-              Connectez-vous a votre compte Schoolaris
+              Connectez-vous a votre compte Kursus
             </p>
           </div>
 

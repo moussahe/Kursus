@@ -65,7 +65,7 @@ export function StudentMobileNav({ child }: StudentMobileNavProps) {
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600">
           <GraduationCap className="h-5 w-5 text-white" />
         </div>
-        <span className="text-lg font-bold text-foreground">Schoolaris</span>
+        <span className="text-lg font-bold text-foreground">Kursus</span>
       </Link>
 
       {/* Quick Stats */}

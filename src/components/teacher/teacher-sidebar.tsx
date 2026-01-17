@@ -4,16 +4,23 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import {
-  BookOpen,
   LayoutDashboard,
   GraduationCap,
   BarChart3,
   Settings,
   LogOut,
   Users,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+
+// Kursus Brand Colors
+const KURSUS = {
+  orange: "#ff6d38",
+  lime: "#c7ff69",
+  purple: "#7a78ff",
+};
 
 const navigation = [
   {
@@ -27,7 +34,7 @@ const navigation = [
     icon: GraduationCap,
   },
   {
-    name: "Mes étudiants",
+    name: "Mes etudiants",
     href: "/teacher/students",
     icon: Users,
   },
@@ -53,14 +60,21 @@ export function TeacherSidebar({ className }: TeacherSidebarProps) {
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r bg-card",
+        "fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)]",
         className,
       )}
     >
       {/* Logo */}
-      <div className="flex h-16 items-center gap-2 border-b px-6">
-        <BookOpen className="h-8 w-8 text-emerald-500" />
-        <span className="text-xl font-bold text-foreground">Schoolaris</span>
+      <div className="flex h-16 items-center gap-3 border-b border-[var(--kursus-border)] px-6">
+        <div
+          className="flex h-10 w-10 items-center justify-center rounded-xl"
+          style={{ background: KURSUS.orange }}
+        >
+          <Sparkles className="h-5 w-5 text-white" />
+        </div>
+        <span className="text-xl font-bold text-[var(--kursus-text)]">
+          Kursus
+        </span>
       </div>
 
       {/* Navigation */}
@@ -77,14 +91,16 @@ export function TeacherSidebar({ className }: TeacherSidebarProps) {
               className={cn(
                 "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
+                  ? "bg-[#ff6d38]/10 text-[#ff6d38]"
+                  : "text-[var(--kursus-text-muted)] hover:bg-[var(--kursus-bg)] hover:text-[var(--kursus-text)]",
               )}
             >
               <item.icon
                 className={cn(
                   "h-5 w-5",
-                  isActive ? "text-primary" : "text-muted-foreground",
+                  isActive
+                    ? "text-[#ff6d38]"
+                    : "text-[var(--kursus-text-muted)]",
                 )}
               />
               {item.name}
@@ -94,13 +110,13 @@ export function TeacherSidebar({ className }: TeacherSidebarProps) {
       </nav>
 
       {/* Footer */}
-      <div className="border-t p-4">
+      <div className="border-t border-[var(--kursus-border)] p-4">
         <Button
           variant="ghost"
-          className="w-full justify-start gap-3 text-muted-foreground hover:bg-muted hover:text-foreground"
+          className="w-full justify-start gap-3 text-[var(--kursus-text-muted)] hover:bg-[var(--kursus-bg)] hover:text-[var(--kursus-text)]"
           onClick={() => signOut({ callbackUrl: "/" })}
         >
-          <LogOut className="h-5 w-5 text-muted-foreground" />
+          <LogOut className="h-5 w-5" />
           Deconnexion
         </Button>
       </div>

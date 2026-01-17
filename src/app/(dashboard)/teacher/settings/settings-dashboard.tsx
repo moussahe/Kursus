@@ -388,7 +388,7 @@ export function SettingsDashboard() {
             <CardHeader>
               <CardTitle>Informations sur les paiements</CardTitle>
               <CardDescription>
-                Comment fonctionnent les paiements sur Schoolaris
+                Comment fonctionnent les paiements sur Kursus
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -397,7 +397,7 @@ export function SettingsDashboard() {
                   Commission de la plateforme
                 </h4>
                 <p className="mt-1 text-sm text-gray-500">
-                  Schoolaris preleve une commission de 30% sur chaque vente pour
+                  Kursus preleve une commission de 30% sur chaque vente pour
                   couvrir les frais de plateforme, de paiement et de marketing.
                 </p>
               </div>

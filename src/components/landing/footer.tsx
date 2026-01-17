@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  GraduationCap,
+  Sparkles,
   Twitter,
   Github,
   Facebook,
@@ -49,7 +49,7 @@ const footerLinks = {
     title: "Légal",
     links: [
       { href: "/conditions", label: "Conditions d'utilisation" },
-      { href: "/confidentialite", label: "Politique de confidentialite" },
+      { href: "/confidentialite", label: "Politique de confidentialité" },
     ],
   },
 };
@@ -79,16 +79,16 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full bg-gray-900">
+    <footer className="w-full bg-[#0a0a0a]">
       {/* Newsletter Section */}
-      <div className="border-b border-gray-800">
-        <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-6 lg:flex-row">
+      <div className="border-b border-white/5">
+        <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+          <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
             <div className="text-center lg:text-left">
-              <h3 className="text-xl font-bold text-white">
-                Restez informe des nouveautes
+              <h3 className="text-2xl font-bold text-white">
+                Restez informé des nouveautés
               </h3>
-              <p className="mt-1 text-sm text-gray-400">
+              <p className="mt-2 text-gray-400">
                 Recevez nos meilleurs cours et conseils chaque semaine.
               </p>
             </div>
@@ -98,11 +98,11 @@ export function Footer() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex items-center gap-3 rounded-xl bg-emerald-500/10 px-6 py-3"
+                  className="flex items-center gap-3 rounded-full bg-[#c7ff69]/10 px-6 py-3 border border-[#c7ff69]/20"
                 >
-                  <CheckCircle className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm font-medium text-emerald-400">
-                    Merci ! Vous etes inscrit a notre newsletter.
+                  <CheckCircle className="h-5 w-5 text-[#c7ff69]" />
+                  <span className="text-sm font-medium text-[#c7ff69]">
+                    Merci ! Vous êtes inscrit à notre newsletter.
                   </span>
                 </motion.div>
               ) : (
@@ -119,14 +119,14 @@ export function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Votre adresse email"
                     required
-                    className="flex-1 rounded-xl border border-gray-700 bg-gray-800 px-4 py-3 text-sm text-white placeholder:text-gray-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                    className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white placeholder:text-gray-500 focus:border-[#ff6d38]/50 focus:outline-none focus:ring-1 focus:ring-[#ff6d38]/50"
                   />
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-600 disabled:opacity-70"
+                    className="rounded-full bg-[#ff6d38] px-6 py-3 text-sm font-semibold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_30px_-5px_rgba(255,109,56,0.4)] disabled:opacity-70"
                   >
                     {isLoading ? "..." : "S'inscrire"}
                   </motion.button>
@@ -138,15 +138,15 @@ export function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
           {/* Logo & Description */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500">
-                <GraduationCap className="h-6 w-6 text-white" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6d38] to-[#ff8c5a]">
+                <Sparkles className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-white">Schoolaris</span>
+              <span className="text-xl font-bold text-white">Kursus</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-gray-400">
               La plateforme qui connecte les meilleurs enseignants avec les
@@ -154,17 +154,17 @@ export function Footer() {
             </p>
 
             {/* Contact Info */}
-            <div className="mt-6 space-y-2">
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <Mail className="h-4 w-4 text-emerald-500" />
-                contact@schoolaris.fr
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <Mail className="h-4 w-4 text-[#ff6d38]" />
+                contact@kursus.fr
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <Phone className="h-4 w-4 text-emerald-500" />
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <Phone className="h-4 w-4 text-[#ff6d38]" />
                 01 23 45 67 89
               </div>
-              <div className="flex items-center gap-2 text-sm text-gray-400">
-                <MapPin className="h-4 w-4 text-emerald-500" />
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <MapPin className="h-4 w-4 text-[#ff6d38]" />
                 Paris, France
               </div>
             </div>
@@ -175,7 +175,7 @@ export function Footer() {
                 <Link
                   key={social.label}
                   href={social.href}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-800 text-gray-400 transition-colors hover:bg-emerald-500/20 hover:text-emerald-500"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-[#ff6d38]/50 hover:bg-[#ff6d38]/10 hover:text-[#ff6d38]"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -195,7 +195,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-gray-400 transition-colors hover:text-emerald-500"
+                      className="text-sm text-gray-400 transition-colors hover:text-[#ff6d38]"
                     >
                       {link.label}
                     </Link>
@@ -207,14 +207,14 @@ export function Footer() {
         </div>
 
         {/* App Download & Payment */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-8 border-t border-gray-800 pt-8 lg:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-8 border-t border-white/5 pt-12 lg:flex-row">
           {/* App Badges */}
           <div className="flex flex-col items-center gap-4 sm:flex-row">
-            <span className="text-sm text-gray-400">
-              Bientot disponible sur
+            <span className="text-sm text-gray-500">
+              Bientôt disponible sur
             </span>
             <div className="flex gap-3">
-              <div className="flex items-center gap-2 rounded-xl bg-gray-800 px-4 py-2 text-sm text-white">
+              <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
@@ -224,7 +224,7 @@ export function Footer() {
                 </svg>
                 App Store
               </div>
-              <div className="flex items-center gap-2 rounded-xl bg-gray-800 px-4 py-2 text-sm text-white">
+              <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white">
                 <svg
                   className="h-5 w-5"
                   viewBox="0 0 24 24"
@@ -239,11 +239,11 @@ export function Footer() {
 
           {/* Payment Methods */}
           <div className="flex flex-col items-center gap-4 sm:flex-row">
-            <span className="text-sm text-gray-400">Paiements sécurisés</span>
+            <span className="text-sm text-gray-500">Paiements sécurisés</span>
             <div className="flex gap-2">
               {/* Visa */}
-              <div className="flex h-8 w-12 items-center justify-center rounded bg-white px-2">
-                <svg viewBox="0 0 48 32" className="h-5 w-auto">
+              <div className="flex h-8 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 px-2">
+                <svg viewBox="0 0 48 32" className="h-4 w-auto">
                   <path
                     fill="#1A1F71"
                     d="M20.8 22.4l1.9-11.5h3l-1.9 11.5h-3zm12.1-11.2c-.6-.2-1.5-.5-2.7-.5-3 0-5.1 1.5-5.1 3.7 0 1.6 1.5 2.5 2.6 3 1.2.6 1.6.9 1.6 1.4 0 .8-.9 1.1-1.8 1.1-1.2 0-1.9-.2-2.9-.6l-.4-.2-.4 2.5c.7.3 2.1.6 3.5.6 3.2 0 5.3-1.5 5.3-3.8 0-1.3-.8-2.3-2.5-3.1-1-.5-1.7-.9-1.7-1.4 0-.5.5-1 1.7-1 1 0 1.7.2 2.3.4l.3.1.4-2.2zm7.8-.3h-2.3c-.7 0-1.3.2-1.6 1l-4.5 10.5h3.2s.5-1.4.6-1.7h3.9c.1.4.4 1.7.4 1.7h2.8l-2.5-11.5zm-3.7 7.4c.3-.7 1.2-3.3 1.2-3.3s.3-.7.4-1.1l.2 1s.6 2.8.7 3.4h-2.5zM18.6 10.9l-2.8 7.8-.3-1.5c-.5-1.7-2.1-3.6-3.9-4.5l2.7 10.6h3.2l4.8-12.4h-3.7z"
@@ -255,8 +255,8 @@ export function Footer() {
                 </svg>
               </div>
               {/* Mastercard */}
-              <div className="flex h-8 w-12 items-center justify-center rounded bg-white px-2">
-                <svg viewBox="0 0 48 32" className="h-5 w-auto">
+              <div className="flex h-8 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 px-2">
+                <svg viewBox="0 0 48 32" className="h-4 w-auto">
                   <circle cx="18" cy="16" r="10" fill="#EB001B" />
                   <circle cx="30" cy="16" r="10" fill="#F79E1B" />
                   <path
@@ -266,8 +266,8 @@ export function Footer() {
                 </svg>
               </div>
               {/* Stripe */}
-              <div className="flex h-8 w-12 items-center justify-center rounded bg-[#635BFF] px-2">
-                <svg viewBox="0 0 60 25" className="h-4 w-auto">
+              <div className="flex h-8 w-12 items-center justify-center rounded-lg bg-[#635BFF] px-2">
+                <svg viewBox="0 0 60 25" className="h-3 w-auto">
                   <path
                     fill="#fff"
                     d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32c-1.14.58-2.77 1.05-4.55 1.05-4.66 0-7.2-2.93-7.2-7.32 0-4.08 2.48-7.35 6.64-7.35 4.08 0 5.97 3.14 5.97 7.35 0 .49-.03.99-.05 1.35zm-5.92-5.62c-1.33 0-2.31.98-2.51 2.72h4.87c-.03-1.6-.79-2.72-2.36-2.72zm-12.93 11.44h-4.51V6.15h4.51v14zm-9.37 0h-4.51V6.15h4.51v14zm-9.38 0H17.5V.7h4.54v19.4zM12.08 13.6c0 4.08-2.6 6.65-6.38 6.65-1.74 0-3.28-.53-4.4-1.4l.11-3.47c1.08.79 2.28 1.26 3.68 1.26 1.47 0 2.44-.72 2.44-2.15 0-1.47-.97-2.15-2.44-2.15-.95 0-1.87.26-2.68.63l-.11-8.26h8.67v3.45h-4.65l.05 1.86c.32-.05.69-.1 1.08-.1 3.45 0 4.63 2.23 4.63 3.68z"
@@ -275,8 +275,8 @@ export function Footer() {
                 </svg>
               </div>
               {/* PayPal */}
-              <div className="flex h-8 w-12 items-center justify-center rounded bg-white px-2">
-                <svg viewBox="0 0 48 32" className="h-5 w-auto">
+              <div className="flex h-8 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 px-2">
+                <svg viewBox="0 0 48 32" className="h-4 w-auto">
                   <path
                     fill="#253B80"
                     d="M19.5 8h6.2c3.2 0 4.5 1.6 4.3 4-.4 4.4-3.2 6.8-6.8 6.8h-1.7c-.5 0-1 .4-1.1.9l-.9 5.5c-.1.4-.4.7-.8.7H15l3.5-17c.1-.6.5-.9 1-.9z"
@@ -292,15 +292,15 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-gray-800 pt-8 sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 sm:flex-row">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Schoolaris. Tous droits réservés.
+            &copy; {new Date().getFullYear()} Kursus. Tous droits réservés.
           </p>
           <div className="flex items-center gap-6">
-            <button className="text-sm text-gray-500 hover:text-white">
+            <button className="text-sm text-gray-500 transition-colors hover:text-white">
               Français (FR)
             </button>
-            <button className="text-sm text-gray-500 hover:text-white">
+            <button className="text-sm text-gray-500 transition-colors hover:text-white">
               EUR
             </button>
           </div>

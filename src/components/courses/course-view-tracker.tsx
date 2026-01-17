@@ -9,7 +9,7 @@ interface CourseViewTrackerProps {
 function getOrCreateSessionId(): string {
   if (typeof window === "undefined") return "";
 
-  const key = "schoolaris_session_id";
+  const key = "kursus_session_id";
   let sessionId = sessionStorage.getItem(key);
 
   if (!sessionId) {

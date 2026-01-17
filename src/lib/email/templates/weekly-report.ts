@@ -137,7 +137,7 @@ export function weeklyReportEmail(data: WeeklyReportData): string {
     </p>
 
     <p class="muted" style="text-align: center;">
-      Merci de faire confiance a Schoolaris pour l'apprentissage de ${data.childName} !
+      Merci de faire confiance a Kursus pour l'apprentissage de ${data.childName} !
     </p>
   `;
 
@@ -180,6 +180,6 @@ ${data.recommendations.map((r) => `- ${r}`).join("\n")}`
 Voir le tableau de bord: ${data.dashboardUrl}
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `.trim();
 }

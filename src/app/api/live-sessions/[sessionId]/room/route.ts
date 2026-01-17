@@ -19,7 +19,7 @@ function generateRoomUrl(roomName: string): string {
   // In production, this would call Daily.co API to create a room
   // Example: https://api.daily.co/v1/rooms
   // For now, we'll generate a URL that can be used with a video component
-  const baseUrl = process.env.DAILY_DOMAIN || "https://schoolaris.daily.co";
+  const baseUrl = process.env.DAILY_DOMAIN || "https://kursus.daily.co";
   return `${baseUrl}/${roomName}`;
 }
 

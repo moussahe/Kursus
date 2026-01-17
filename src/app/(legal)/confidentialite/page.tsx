@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialite | Schoolaris",
+  title: "Politique de confidentialite | Kursus",
   description:
-    "Politique de confidentialite et protection des donnees de Schoolaris.",
+    "Politique de confidentialite et protection des donnees de Kursus.",
 };
 
 export default function ConfidentialitePage() {
@@ -16,15 +16,15 @@ export default function ConfidentialitePage() {
 
       <h2>1. Introduction</h2>
       <p>
-        Schoolaris s&apos;engage a proteger la vie privee de ses utilisateurs,
-        en particulier celle des mineurs. Cette politique explique comment nous
+        Kursus s&apos;engage a proteger la vie privee de ses utilisateurs, en
+        particulier celle des mineurs. Cette politique explique comment nous
         collectons, utilisons et protegeons vos donnees personnelles.
       </p>
 
       <h2>2. Responsable du traitement</h2>
       <p>
-        Le responsable du traitement des donnees est Schoolaris SAS, dont le
-        siege social est situe en France.
+        Le responsable du traitement des donnees est Kursus SAS, dont le siege
+        social est situe en France.
       </p>
 
       <h2>3. Donnees collectees</h2>
@@ -130,7 +130,7 @@ export default function ConfidentialitePage() {
       </ul>
       <p>
         Pour exercer ces droits, contactez-nous a{" "}
-        <a href="mailto:privacy@schoolaris.fr">privacy@schoolaris.fr</a>.
+        <a href="mailto:privacy@kursus.fr">privacy@kursus.fr</a>.
       </p>
 
       <h2>9. Securite</h2>
@@ -167,7 +167,7 @@ export default function ConfidentialitePage() {
       <h2>13. Contact</h2>
       <p>
         Pour toute question sur cette politique, contactez notre DPO a{" "}
-        <a href="mailto:privacy@schoolaris.fr">privacy@schoolaris.fr</a>.
+        <a href="mailto:privacy@kursus.fr">privacy@kursus.fr</a>.
       </p>
       <p>
         Vous pouvez egalement introduire une reclamation aupres de la CNIL si

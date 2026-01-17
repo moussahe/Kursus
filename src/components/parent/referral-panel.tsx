@@ -97,14 +97,14 @@ export function ReferralPanel({ className }: ReferralPanelProps) {
   const shareVia = (platform: string) => {
     if (!data) return;
 
-    const message = `Je t'invite a découvrir Schoolaris ! Utilise mon code ${data.code} pour obtenir ${formatCurrency(data.rewards.referredReward)} de reduction sur ton premier cours.`;
+    const message = `Je t'invite a découvrir Kursus ! Utilise mon code ${data.code} pour obtenir ${formatCurrency(data.rewards.referredReward)} de reduction sur ton premier cours.`;
     const url = data.link;
 
     const shareUrls: Record<string, string> = {
       whatsapp: `https://wa.me/?text=${encodeURIComponent(`${message}\n${url}`)}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(message)}`,
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(message)}&url=${encodeURIComponent(url)}`,
-      email: `mailto:?subject=${encodeURIComponent("Invitation Schoolaris")}&body=${encodeURIComponent(`${message}\n\n${url}`)}`,
+      email: `mailto:?subject=${encodeURIComponent("Invitation Kursus")}&body=${encodeURIComponent(`${message}\n\n${url}`)}`,
     };
 
     if (shareUrls[platform]) {
@@ -119,8 +119,8 @@ export function ReferralPanel({ className }: ReferralPanelProps) {
 
     try {
       await navigator.share({
-        title: "Invitation Schoolaris",
-        text: `Je t'invite a découvrir Schoolaris ! Utilise mon code ${data.code} pour obtenir ${formatCurrency(data.rewards.referredReward)} de reduction.`,
+        title: "Invitation Kursus",
+        text: `Je t'invite a découvrir Kursus ! Utilise mon code ${data.code} pour obtenir ${formatCurrency(data.rewards.referredReward)} de reduction.`,
         url: data.link,
       });
     } catch {

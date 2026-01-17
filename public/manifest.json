@@ -1,16 +1,22 @@
 {
-  "name": "Schoolaris - Plateforme EdTech",
-  "short_name": "Schoolaris",
-  "description": "La plateforme educative qui combine IA personnalisee, vrais profs, et suivi parental intelligent",
+  "name": "Kursus - La plateforme des cours qui cartonnent",
+  "short_name": "Kursus",
+  "description": "Plateforme EdTech francaise pour les scolaires du CP a la Terminale",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#6366f1",
+  "background_color": "#0a0a0a",
+  "theme_color": "#ff6d38",
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "fr",
   "categories": ["education", "kids", "productivity"],
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/icons/icon-72x72.png",
       "sizes": "72x72",

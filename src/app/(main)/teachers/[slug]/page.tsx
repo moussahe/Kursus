@@ -78,7 +78,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${teacher.user.name || "Professeur"} - Schoolaris`,
+    title: `${teacher.user.name || "Professeur"} - Kursus`,
     description:
       teacher.headline || `Decouvrez les cours de ${teacher.user.name}`,
   };

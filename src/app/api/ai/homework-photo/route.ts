@@ -19,7 +19,7 @@ const homeworkPhotoSchema = z.object({
 });
 
 // System prompt specialise pour l'analyse de photos de devoirs
-const HOMEWORK_PHOTO_PROMPT = `Tu es un assistant pedagogique bienveillant pour Schoolaris, une plateforme educative francaise.
+const HOMEWORK_PHOTO_PROMPT = `Tu es un assistant pedagogique bienveillant pour Kursus, une plateforme educative francaise.
 Un eleve t'envoie une photo de son devoir ou exercice. Ta mission est de l'aider a comprendre sans lui donner directement les réponses.
 
 ## Regles ABSOLUES

@@ -97,7 +97,7 @@ Voir la progression: ${data.dashboardUrl}
 Conseil: Essayez de creer une routine d'apprentissage quotidienne, par exemple apres les devoirs ou avant le diner.
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `.trim();
 }
 
@@ -124,7 +124,7 @@ export function lowQuizScoreAlertEmail(data: LowQuizScoreAlertData): string {
     <div class="highlight" style="background: #f0fdf4; border-left-color: #10b981;">
       <h3 style="margin: 0 0 12px; font-size: 16px; color: #10b981;">Notre solution</h3>
       <p style="margin: 0; color: #374151;">
-        L'<strong>Assistant IA Schoolaris</strong> peut aider ${data.childName} a mieux comprendre
+        L'<strong>Assistant IA Kursus</strong> peut aider ${data.childName} a mieux comprendre
         cette lecon avec des explications personnalisees et des exercices adaptes.
       </p>
     </div>
@@ -160,7 +160,7 @@ CE QUE CELA SIGNIFIE
 ${data.childName} semble avoir des difficultes avec cette lecon. Pas de panique ! C'est tout a fait normal de ne pas tout comprendre du premier coup.
 
 NOTRE SOLUTION
-L'Assistant IA Schoolaris peut aider ${data.childName} a mieux comprendre cette lecon avec des explications personnalisees et des exercices adaptes.
+L'Assistant IA Kursus peut aider ${data.childName} a mieux comprendre cette lecon avec des explications personnalisees et des exercices adaptes.
 
 Utiliser l'Assistant IA: ${data.aiTutorUrl}
 Voir le tableau de bord: ${data.dashboardUrl}
@@ -168,7 +168,7 @@ Voir le tableau de bord: ${data.dashboardUrl}
 L'apprentissage est un processus. Chaque erreur est une opportunite de progresser !
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `.trim();
 }
 
@@ -225,7 +225,7 @@ Voir tous les progres: ${data.dashboardUrl}
 Continuez comme ca, ${data.childName} ! Chaque chapitre termine est une victoire !
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `.trim();
 }
 

@@ -8,15 +8,16 @@ import {
   GraduationCap,
   BarChart,
   Settings,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
+// Kursus Brand Colors
+const KURSUS = {
+  orange: "#ff6d38",
+  lime: "#c7ff69",
+  purple: "#7a78ff",
+};
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -42,34 +43,46 @@ export default async function DashboardPage() {
       title: "Mes Cours",
       description: "Acceder a vos cours et leçons",
       href: "/dashboard/courses",
+      color: KURSUS.orange,
     },
     {
       icon: BarChart,
       title: "Ma Progression",
       description: "Voir vos statistiques",
       href: "/dashboard/progress",
+      color: KURSUS.purple,
     },
     {
       icon: Settings,
       title: "Parametres",
       description: "Gerer votre compte",
       href: "/dashboard/settings",
+      color: KURSUS.lime,
     },
   ] as const;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[var(--kursus-bg)]">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 border-b bg-white">
+      <nav className="sticky top-0 z-50 border-b border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)]">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <BookOpen className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold">Schoolaris</span>
+            <div
+              className="flex h-9 w-9 items-center justify-center rounded-xl"
+              style={{ background: KURSUS.orange }}
+            >
+              <Sparkles className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-xl font-bold text-[var(--kursus-text)]">
+              Kursus
+            </span>
           </Link>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <User className="h-5 w-5 text-gray-500" />
-              <span className="text-sm font-medium">{session.user.name}</span>
+              <User className="h-5 w-5 text-[var(--kursus-text-muted)]" />
+              <span className="text-sm font-medium text-[var(--kursus-text)]">
+                {session.user.name}
+              </span>
             </div>
             <form
               action={async () => {
@@ -78,7 +91,12 @@ export default async function DashboardPage() {
                 await signOut({ redirectTo: "/" });
               }}
             >
-              <Button variant="ghost" size="sm" type="submit">
+              <Button
+                variant="ghost"
+                size="sm"
+                type="submit"
+                className="text-[var(--kursus-text-muted)] hover:bg-[var(--kursus-bg)] hover:text-[var(--kursus-text)]"
+              >
                 <LogOut className="mr-2 h-4 w-4" />
                 Deconnexion
               </Button>
@@ -90,11 +108,17 @@ export default async function DashboardPage() {
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold">
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-[var(--kursus-bg-elevated)] px-3 py-1">
+            <Sparkles className="h-4 w-4" style={{ color: KURSUS.orange }} />
+            <span className="text-sm text-[var(--kursus-text-muted)]">
+              Dashboard Etudiant
+            </span>
+          </div>
+          <h1 className="text-3xl font-black text-[var(--kursus-text)]">
             Bonjour, {session.user.name?.split(" ")[0]} !
           </h1>
-          <p className="text-gray-600">
-            Bienvenue sur votre tableau de bord Schoolaris.
+          <p className="text-[var(--kursus-text-muted)]">
+            Bienvenue sur votre tableau de bord Kursus.
           </p>
         </div>
 
@@ -102,27 +126,45 @@ export default async function DashboardPage() {
         <div className="grid gap-6 md:grid-cols-3">
           {quickActions.map((action) => (
             <Link key={action.title} href={action.href}>
-              <Card className="transition-shadow hover:shadow-lg">
-                <CardHeader>
-                  <action.icon className="mb-2 h-10 w-10 text-blue-600" />
-                  <CardTitle>{action.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{action.description}</CardDescription>
-                </CardContent>
-              </Card>
+              <div className="rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-6 transition-all hover:border-[var(--kursus-text-muted)]/30 hover:shadow-lg">
+                <div
+                  className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                  style={{ background: `${action.color}20` }}
+                >
+                  <action.icon
+                    className="h-6 w-6"
+                    style={{ color: action.color }}
+                  />
+                </div>
+                <h3 className="text-lg font-bold text-[var(--kursus-text)]">
+                  {action.title}
+                </h3>
+                <p className="mt-1 text-sm text-[var(--kursus-text-muted)]">
+                  {action.description}
+                </p>
+              </div>
             </Link>
           ))}
         </div>
 
         {/* Recent Activity placeholder */}
         <div className="mt-8">
-          <h2 className="mb-4 text-xl font-semibold">Activite recente</h2>
-          <Card>
-            <CardContent className="py-8 text-center text-gray-500">
+          <h2 className="mb-4 text-xl font-bold text-[var(--kursus-text)]">
+            Activite recente
+          </h2>
+          <div className="rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-8 text-center">
+            <BookOpen className="mx-auto mb-3 h-12 w-12 text-[var(--kursus-text-muted)]" />
+            <p className="text-[var(--kursus-text-muted)]">
               Aucune activité recente. Commencez par explorer nos cours !
-            </CardContent>
-          </Card>
+            </p>
+            <Button
+              asChild
+              className="mt-4 rounded-xl text-black"
+              style={{ background: KURSUS.orange }}
+            >
+              <Link href="/courses">Explorer les cours</Link>
+            </Button>
+          </div>
         </div>
       </main>
     </div>

@@ -55,7 +55,7 @@ export function DashboardSidebar({ items, role }: SidebarProps) {
         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600">
           <GraduationCap className="h-5 w-5 text-white" />
         </div>
-        <span className="text-xl font-bold">Schoolaris</span>
+        <span className="text-xl font-bold">Kursus</span>
       </div>
 
       {/* Navigation */}
@@ -88,7 +88,7 @@ export function DashboardSidebar({ items, role }: SidebarProps) {
       {/* Help section */}
       <div className="border-t p-4">
         <a
-          href="mailto:support@schoolaris.fr"
+          href="mailto:support@kursus.fr"
           className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 cursor-pointer"
         >
           <HelpCircle className="h-5 w-5" />

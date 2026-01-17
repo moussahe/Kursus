@@ -2,7 +2,7 @@ import { getAnthropicClient } from "./ai";
 
 // System prompt for predictive analytics
 export function getPredictiveAnalyticsSystemPrompt(): string {
-  return `Tu es un analyste de donnees educatives expert pour Schoolaris, une plateforme educative francaise.
+  return `Tu es un analyste de donnees educatives expert pour Kursus, une plateforme educative francaise.
 
 TON ROLE:
 - Analyser les tendances historiques d'apprentissage d'un enfant

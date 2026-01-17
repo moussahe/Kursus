@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { ConversationsClient } from "./conversations-client";
 
 export const metadata = {
-  title: "Conversations IA | Schoolaris",
+  title: "Conversations IA | Kursus",
   description: "Historique des conversations avec l'assistant IA",
 };
 

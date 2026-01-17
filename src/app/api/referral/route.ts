@@ -97,7 +97,7 @@ export async function GET() {
       _sum: { amount: true },
     });
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://schoolaris.fr";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://kursus.fr";
 
     return NextResponse.json({
       code: referral.referrerCode,
@@ -174,7 +174,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://schoolaris.fr";
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://kursus.fr";
 
     return NextResponse.json({
       code: referral.referrerCode,

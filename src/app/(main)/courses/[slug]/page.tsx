@@ -117,7 +117,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${course.title} - Schoolaris`,
+    title: `${course.title} - Kursus`,
     description: course.subtitle || course.description?.slice(0, 160),
   };
 }

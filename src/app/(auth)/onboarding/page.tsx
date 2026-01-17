@@ -269,7 +269,7 @@ export default function OnboardingPage() {
             Personnalisation en cours
           </motion.div>
           <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl">
-            Bienvenue sur Schoolaris, {session.user?.name?.split(" ")[0]}
+            Bienvenue sur Kursus, {session.user?.name?.split(" ")[0]}
           </h1>
           <p className="mt-2 text-gray-600">
             Personnalisons votre experience en quelques etapes

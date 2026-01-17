@@ -1,4 +1,4 @@
-// Quiz Types - Schoolaris
+// Quiz Types - Kursus
 // Types for the adaptive quiz system
 
 export interface QuizOption {

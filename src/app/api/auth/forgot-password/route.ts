@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
     // Send email
     await sendEmail({
       to: email,
-      subject: "Reinitialisation de votre mot de passe - Schoolaris",
+      subject: "Reinitialisation de votre mot de passe - Kursus",
       html: passwordResetEmail({
         userName: user.name || "Utilisateur",
         resetUrl,

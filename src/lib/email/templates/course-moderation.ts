@@ -1,6 +1,6 @@
 import { baseEmailTemplate } from "./base";
 
-const BASE_URL = process.env.NEXTAUTH_URL || "https://schoolaris.fr";
+const BASE_URL = process.env.NEXTAUTH_URL || "https://kursus.fr";
 
 interface CourseModerationData {
   teacherName: string;
@@ -22,7 +22,7 @@ export function courseApprovedEmail(data: CourseModerationData): string {
     <p>
       Excellente nouvelle ! Votre cours <strong>"${data.courseName}"</strong>
       a ete approuve par notre equipe de moderation et est maintenant
-      <strong>publie sur Schoolaris</strong>.
+      <strong>publie sur Kursus</strong>.
     </p>
 
     <div class="highlight" style="background: #f0fdf4; border-left-color: #10b981;">
@@ -58,14 +58,14 @@ Votre cours est approuve !
 
 Bonjour ${data.teacherName},
 
-Excellente nouvelle ! Votre cours "${data.courseName}" a ete approuve par notre equipe de moderation et est maintenant publie sur Schoolaris.
+Excellente nouvelle ! Votre cours "${data.courseName}" a ete approuve par notre equipe de moderation et est maintenant publie sur Kursus.
 
 Les élèves peuvent désormais découvrir et s'inscrire a votre cours.
 
 Voir mon cours: ${courseUrl}
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `.trim();
 }
 
@@ -140,7 +140,7 @@ Nous vous encourageons a revoir votre contenu et a soumettre a nouveau votre cou
 Modifier mon cours: ${editUrl}
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `;
 
   return text.trim();
@@ -217,7 +217,7 @@ Une fois les modifications effectuees, votre cours sera automatiquement resoumis
 Modifier mon cours: ${editUrl}
 
 ---
-Schoolaris - La plateforme d'apprentissage personnalise
+Kursus - La plateforme d'apprentissage personnalise
   `;
 
   return text.trim();
