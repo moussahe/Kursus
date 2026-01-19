@@ -149,9 +149,9 @@ export function UrgencyBanner() {
 
             {/* Students Online */}
             <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-[#c7ff69]" />
+              <TrendingUp className="h-4 w-4 text-[#ff9494]" />
               <span className="text-gray-300">
-                <strong className="text-[#c7ff69]">{studentsOnline}+</strong>{" "}
+                <strong className="text-[#ff9494]">{studentsOnline}+</strong>{" "}
                 élèves actifs maintenant
               </span>
             </div>
@@ -207,7 +207,7 @@ export function ExamPrepBadge({ examType }: { examType: "brevet" | "bac" }) {
 
   return (
     <div className="absolute right-3 top-3 z-10">
-      <div className="flex items-center gap-1 rounded-full bg-[#7a78ff] px-2.5 py-1 text-xs font-bold text-white shadow-lg">
+      <div className="flex items-center gap-1 rounded-full bg-[#ff9494] px-2.5 py-1 text-xs font-bold text-white shadow-lg">
         <Calendar className="h-3 w-3" />
         {labels[examType]}
       </div>

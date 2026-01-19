@@ -30,8 +30,8 @@ import {
 } from "@/lib/validations/password";
 
 const KURSUS = {
-  orange: "#ff9494",
-  purple: "#7a78ff",
+  coral: "#ff9494",
+  coralDark: "#ff7070",
 };
 
 const registerSchema = z
@@ -138,11 +138,11 @@ function RegisterForm() {
         {/* Decorative elements */}
         <div
           className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
-          style={{ background: `${KURSUS.purple}20` }}
+          style={{ background: `${KURSUS.coral}20` }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
-          style={{ background: `${KURSUS.orange}15` }}
+          style={{ background: `${KURSUS.coral}15` }}
         />
 
         {/* Content */}
@@ -158,8 +158,8 @@ function RegisterForm() {
               <div
                 className="flex h-16 w-16 items-center justify-center rounded-2xl"
                 style={{
-                  background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
-                  boxShadow: `0 0 40px -10px ${KURSUS.orange}`,
+                  background: `linear-gradient(135deg, ${KURSUS.coral}, ${KURSUS.coral}dd)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.coral}`,
                 }}
               >
                 <Sparkles className="h-8 w-8 text-white" />
@@ -170,11 +170,11 @@ function RegisterForm() {
               {selectedRole === "TEACHER" ? (
                 <>
                   Partagez votre{" "}
-                  <span style={{ color: KURSUS.purple }}>savoir</span>
+                  <span style={{ color: KURSUS.coral }}>savoir</span>
                 </>
               ) : (
                 <>
-                  Rejoignez <span style={{ color: KURSUS.orange }}>Kursus</span>
+                  Rejoignez <span style={{ color: KURSUS.coral }}>Kursus</span>
                 </>
               )}
             </h2>
@@ -191,34 +191,34 @@ function RegisterForm() {
                     {
                       icon: TrendingUp,
                       text: "Gardez 70% de chaque vente",
-                      color: KURSUS.purple,
+                      color: KURSUS.coral,
                     },
                     {
                       icon: Zap,
                       text: "Outils de création intuitifs avec IA",
-                      color: KURSUS.orange,
+                      color: KURSUS.coral,
                     },
                     {
                       icon: Shield,
                       text: "Support dédié aux enseignants",
-                      color: KURSUS.purple,
+                      color: KURSUS.coral,
                     },
                   ]
                 : [
                     {
                       icon: BookOpen,
                       text: "Cours de qualité par des enseignants certifiés",
-                      color: KURSUS.orange,
+                      color: KURSUS.coral,
                     },
                     {
                       icon: Users,
                       text: "Du CP à la Terminale, toutes les matières",
-                      color: KURSUS.purple,
+                      color: KURSUS.coral,
                     },
                     {
                       icon: Shield,
                       text: "Paiement sécurisé, satisfait ou remboursé",
-                      color: KURSUS.orange,
+                      color: KURSUS.coral,
                     },
                   ]
               ).map((feature, i) => (
@@ -253,7 +253,7 @@ function RegisterForm() {
                 <div key={stat.label}>
                   <div
                     className="text-2xl font-black"
-                    style={{ color: KURSUS.orange }}
+                    style={{ color: KURSUS.coral }}
                   >
                     {stat.value}
                   </div>
@@ -278,7 +278,7 @@ function RegisterForm() {
             <Link href="/" className="flex items-center gap-3">
               <div
                 className="flex h-10 w-10 items-center justify-center rounded-xl"
-                style={{ background: KURSUS.orange }}
+                style={{ background: KURSUS.coral }}
               >
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
@@ -299,13 +299,13 @@ function RegisterForm() {
             <div
               className="mb-6 flex items-center gap-3 rounded-xl p-4"
               style={{
-                background: `${KURSUS.purple}15`,
-                border: `1px solid ${KURSUS.purple}30`,
+                background: `${KURSUS.coral}15`,
+                border: `1px solid ${KURSUS.coral}30`,
               }}
             >
               <div
                 className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
-                style={{ background: `${KURSUS.purple}20` }}
+                style={{ background: `${KURSUS.coral}20` }}
               >
                 <Gift
                   className="h-5 w-5"
@@ -337,11 +337,11 @@ function RegisterForm() {
               style={{
                 borderColor:
                   selectedRole === "PARENT"
-                    ? KURSUS.orange
+                    ? KURSUS.coral
                     : "var(--kursus-border)",
                 background:
                   selectedRole === "PARENT"
-                    ? `${KURSUS.orange}10`
+                    ? `${KURSUS.coral}10`
                     : "transparent",
               }}
             >
@@ -350,7 +350,7 @@ function RegisterForm() {
                 style={{
                   color:
                     selectedRole === "PARENT"
-                      ? KURSUS.orange
+                      ? KURSUS.coral
                       : "var(--kursus-text-muted)",
                 }}
               />
@@ -359,7 +359,7 @@ function RegisterForm() {
                 style={{
                   color:
                     selectedRole === "PARENT"
-                      ? KURSUS.orange
+                      ? KURSUS.coral
                       : "var(--kursus-text-muted)",
                 }}
               >
@@ -373,7 +373,7 @@ function RegisterForm() {
               style={{
                 borderColor:
                   selectedRole === "TEACHER"
-                    ? KURSUS.purple
+                    ? KURSUS.coral
                     : "var(--kursus-border)",
                 background:
                   selectedRole === "TEACHER"
@@ -517,7 +517,7 @@ function RegisterForm() {
                 type="checkbox"
                 id="acceptCGU"
                 className="mt-1 h-4 w-4 rounded border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)]"
-                style={{ accentColor: KURSUS.orange }}
+                style={{ accentColor: KURSUS.coral }}
                 {...register("acceptCGU")}
               />
               <Label
@@ -528,7 +528,7 @@ function RegisterForm() {
                 <Link
                   href="/conditions"
                   className="underline transition-colors hover:opacity-80"
-                  style={{ color: KURSUS.orange }}
+                  style={{ color: KURSUS.coral }}
                   target="_blank"
                 >
                   conditions d&apos;utilisation
@@ -537,7 +537,7 @@ function RegisterForm() {
                 <Link
                   href="/confidentialite"
                   className="underline transition-colors hover:opacity-80"
-                  style={{ color: KURSUS.orange }}
+                  style={{ color: KURSUS.coral }}
                   target="_blank"
                 >
                   politique de confidentialité
@@ -552,8 +552,8 @@ function RegisterForm() {
               type="submit"
               className="h-12 w-full rounded-xl text-base font-semibold text-white transition-all hover:opacity-90"
               style={{
-                background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
-                boxShadow: `0 0 20px -5px ${KURSUS.orange}50`,
+                background: `linear-gradient(135deg, ${KURSUS.coral}, ${KURSUS.coral}dd)`,
+                boxShadow: `0 0 20px -5px ${KURSUS.coral}50`,
               }}
               disabled={isLoading}
             >
@@ -590,7 +590,7 @@ function RegisterForm() {
             <Link
               href="/login"
               className="font-medium transition-colors hover:opacity-80"
-              style={{ color: KURSUS.orange }}
+              style={{ color: KURSUS.coral }}
             >
               Se connecter
             </Link>

@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import {
-  Sparkles,
   Loader2,
   ArrowLeft,
   ArrowRight,
@@ -31,8 +30,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 
 const KURSUS = {
-  orange: "#ff9494",
-  purple: "#7a78ff",
+  coral: "#ff9494",
+  coralDark: "#ff7070",
 };
 
 // Subject enum values with French labels
@@ -212,11 +211,11 @@ export default function TeacherRegisterPage() {
         {/* Decorative elements */}
         <div
           className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
-          style={{ background: `${KURSUS.purple}20` }}
+          style={{ background: `${KURSUS.coral}20` }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
-          style={{ background: `${KURSUS.orange}15` }}
+          style={{ background: `${KURSUS.coralDark}15` }}
         />
 
         {/* Content */}
@@ -229,20 +228,16 @@ export default function TeacherRegisterPage() {
           >
             {/* Logo */}
             <div className="mb-8 flex justify-center">
-              <div
-                className="flex h-16 w-16 items-center justify-center rounded-2xl"
-                style={{
-                  background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
-                  boxShadow: `0 0 40px -10px ${KURSUS.purple}`,
-                }}
+              <span
+                className="text-3xl font-black"
+                style={{ color: KURSUS.coral }}
               >
-                <Sparkles className="h-8 w-8 text-white" />
-              </div>
+                Kursus.
+              </span>
             </div>
 
             <h2 className="text-4xl font-black tracking-tight text-white">
-              Partagez votre{" "}
-              <span style={{ color: KURSUS.purple }}>savoir</span>
+              Partagez votre <span style={{ color: KURSUS.coral }}>savoir</span>
             </h2>
             <p className="mt-4 text-lg text-gray-400">
               Créez des cours de qualité et générez des revenus complémentaires.
@@ -254,17 +249,17 @@ export default function TeacherRegisterPage() {
                 {
                   icon: TrendingUp,
                   text: "Gardez 70% de chaque vente",
-                  color: KURSUS.purple,
+                  color: KURSUS.coral,
                 },
                 {
                   icon: Zap,
                   text: "Outils de création intuitifs avec IA",
-                  color: KURSUS.orange,
+                  color: KURSUS.coralDark,
                 },
                 {
                   icon: Shield,
                   text: "Support dédié aux enseignants",
-                  color: KURSUS.purple,
+                  color: KURSUS.coral,
                 },
               ].map((feature, i) => (
                 <motion.div
@@ -298,7 +293,7 @@ export default function TeacherRegisterPage() {
                 <div key={stat.label}>
                   <div
                     className="text-2xl font-black"
-                    style={{ color: KURSUS.purple }}
+                    style={{ color: KURSUS.coral }}
                   >
                     {stat.value}
                   </div>
@@ -320,15 +315,12 @@ export default function TeacherRegisterPage() {
         >
           {/* Logo mobile */}
           <div className="mb-8">
-            <Link href="/" className="flex items-center gap-3">
-              <div
-                className="flex h-10 w-10 items-center justify-center rounded-xl"
-                style={{ background: KURSUS.orange }}
+            <Link href="/">
+              <span
+                className="text-2xl font-black"
+                style={{ color: KURSUS.coral }}
               >
-                <Sparkles className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-[var(--kursus-text)]">
-                Kursus
+                Kursus.
               </span>
             </Link>
             <h1 className="mt-8 text-2xl font-bold text-[var(--kursus-text)]">
@@ -355,17 +347,17 @@ export default function TeacherRegisterPage() {
                         style={{
                           borderColor:
                             isCompleted || isCurrent
-                              ? KURSUS.purple
+                              ? KURSUS.coral
                               : "var(--kursus-border)",
                           background: isCompleted
-                            ? KURSUS.purple
+                            ? KURSUS.coral
                             : isCurrent
-                              ? "var(--kursus-purple-bg)"
+                              ? "var(--kursus-coral-bg)"
                               : "transparent",
                           color: isCompleted
-                            ? "#0a0a0a"
+                            ? "#ffffff"
                             : isCurrent
-                              ? "var(--kursus-purple-text)"
+                              ? KURSUS.coral
                               : "var(--kursus-text-muted)",
                         }}
                       >
@@ -380,7 +372,7 @@ export default function TeacherRegisterPage() {
                         style={{
                           color:
                             isCurrent || isCompleted
-                              ? "var(--kursus-purple-text)"
+                              ? KURSUS.coral
                               : "var(--kursus-text-muted)",
                         }}
                       >
@@ -392,7 +384,7 @@ export default function TeacherRegisterPage() {
                         className="mx-2 h-0.5 flex-1"
                         style={{
                           background: isCompleted
-                            ? KURSUS.purple
+                            ? KURSUS.coral
                             : "var(--kursus-border)",
                         }}
                       />
@@ -404,7 +396,7 @@ export default function TeacherRegisterPage() {
             <div className="mt-4 h-1 overflow-hidden rounded-full bg-[var(--kursus-border)]">
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: KURSUS.purple }}
+                style={{ background: KURSUS.coral }}
                 initial={{ width: 0 }}
                 animate={{ width: `${progressValue}%` }}
                 transition={{ duration: 0.3 }}
@@ -492,7 +484,7 @@ export default function TeacherRegisterPage() {
                           className="flex items-center gap-2 text-xs"
                           style={{
                             color: isValid
-                              ? "var(--kursus-purple-text)"
+                              ? KURSUS.coral
                               : "var(--kursus-text-muted)",
                           }}
                         >
@@ -573,10 +565,10 @@ export default function TeacherRegisterPage() {
                           className="flex cursor-pointer items-center gap-2 rounded-xl border-2 p-3 transition-all"
                           style={{
                             borderColor: isSelected
-                              ? KURSUS.purple
+                              ? KURSUS.coral
                               : "var(--kursus-border)",
                             background: isSelected
-                              ? "var(--kursus-purple-bg)"
+                              ? `${KURSUS.coral}15`
                               : "transparent",
                           }}
                           onClick={() => handleSpecialtyToggle(subject.value)}
@@ -588,10 +580,10 @@ export default function TeacherRegisterPage() {
                             }
                             style={{
                               borderColor: isSelected
-                                ? KURSUS.purple
+                                ? KURSUS.coral
                                 : "var(--kursus-border)",
                               background: isSelected
-                                ? KURSUS.purple
+                                ? KURSUS.coral
                                 : "transparent",
                             }}
                           />
@@ -599,7 +591,7 @@ export default function TeacherRegisterPage() {
                             className="text-sm"
                             style={{
                               color: isSelected
-                                ? "var(--kursus-purple-text)"
+                                ? KURSUS.coral
                                 : "var(--kursus-text-muted)",
                               fontWeight: isSelected ? 500 : 400,
                             }}
@@ -648,13 +640,13 @@ export default function TeacherRegisterPage() {
                 <div
                   className="rounded-xl p-6"
                   style={{
-                    background: "var(--kursus-purple-bg)",
-                    border: "1px solid var(--kursus-purple-border)",
+                    background: `${KURSUS.coral}10`,
+                    border: `1px solid ${KURSUS.coral}30`,
                   }}
                 >
                   <h3
                     className="flex items-center gap-2 text-lg font-semibold"
-                    style={{ color: "var(--kursus-purple-text)" }}
+                    style={{ color: KURSUS.coral }}
                   >
                     <CheckCircle className="h-5 w-5" />
                     Récapitulatif de votre inscription
@@ -710,8 +702,8 @@ export default function TeacherRegisterPage() {
                             <Badge
                               key={specialty}
                               style={{
-                                background: KURSUS.purple,
-                                color: "#0a0a0a",
+                                background: KURSUS.coral,
+                                color: "#ffffff",
                               }}
                             >
                               {subject?.label || specialty}
@@ -740,7 +732,7 @@ export default function TeacherRegisterPage() {
                     <Link
                       href={"/conditions" as Route}
                       className="font-medium transition-colors hover:opacity-80"
-                      style={{ color: KURSUS.orange }}
+                      style={{ color: KURSUS.coral }}
                     >
                       conditions d&apos;utilisation
                     </Link>{" "}
@@ -748,7 +740,7 @@ export default function TeacherRegisterPage() {
                     <Link
                       href={"/confidentialite" as Route}
                       className="font-medium transition-colors hover:opacity-80"
-                      style={{ color: KURSUS.orange }}
+                      style={{ color: KURSUS.coral }}
                     >
                       politique de confidentialité
                     </Link>
@@ -778,8 +770,8 @@ export default function TeacherRegisterPage() {
                   onClick={nextStep}
                   className="h-12 flex-1 rounded-xl text-base font-semibold transition-all hover:opacity-90"
                   style={{
-                    background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
-                    color: "#0a0a0a",
+                    background: `linear-gradient(135deg, ${KURSUS.coral}, ${KURSUS.coralDark})`,
+                    color: "#ffffff",
                   }}
                 >
                   Continuer
@@ -791,8 +783,8 @@ export default function TeacherRegisterPage() {
                   disabled={isLoading}
                   className="h-12 flex-1 rounded-xl text-base font-semibold transition-all hover:opacity-90"
                   style={{
-                    background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
-                    color: "#0a0a0a",
+                    background: `linear-gradient(135deg, ${KURSUS.coral}, ${KURSUS.coralDark})`,
+                    color: "#ffffff",
                   }}
                 >
                   {isLoading ? (
@@ -816,7 +808,7 @@ export default function TeacherRegisterPage() {
             <Link
               href="/login"
               className="font-medium transition-colors hover:opacity-80"
-              style={{ color: KURSUS.orange }}
+              style={{ color: KURSUS.coral }}
             >
               Se connecter
             </Link>
@@ -827,7 +819,7 @@ export default function TeacherRegisterPage() {
             <Link
               href="/register"
               className="font-medium transition-colors hover:opacity-80"
-              style={{ color: KURSUS.orange }}
+              style={{ color: KURSUS.coral }}
             >
               Inscription parent
             </Link>

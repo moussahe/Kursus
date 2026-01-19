@@ -17,8 +17,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // Kursus Brand Colors
 const KURSUS = {
   orange: "#ff9494",
-  lime: "#c7ff69",
-  purple: "#7a78ff",
+  lime: "#ff9494",
+  purple: "#ff9494",
 };
 
 interface ParentSidebarProps {

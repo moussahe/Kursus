@@ -42,14 +42,14 @@ const colorClasses = {
     border: "border-[#ff9494]/20",
   },
   lime: {
-    bg: "bg-[#c7ff69]/10",
-    icon: "text-[#c7ff69]",
-    border: "border-[#c7ff69]/20",
+    bg: "bg-[#ff9494]/10",
+    icon: "text-[#ff9494]",
+    border: "border-[#ff9494]/20",
   },
   purple: {
-    bg: "bg-[#7a78ff]/10",
-    icon: "text-[#7a78ff]",
-    border: "border-[#7a78ff]/20",
+    bg: "bg-[#ff9494]/10",
+    icon: "text-[#ff9494]",
+    border: "border-[#ff9494]/20",
   },
 };
 
@@ -67,7 +67,7 @@ export function StatsSection() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#c7ff69]/20 bg-[#c7ff69]/10 px-4 py-2 text-sm font-medium text-[#c7ff69]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]">
             Notre Impact
           </span>
           <h2
@@ -145,15 +145,15 @@ export function StatsSection() {
           className="mt-16 flex flex-wrap items-center justify-center gap-8 border-t border-white/5 pt-12"
         >
           <div className="flex items-center gap-2 text-sm text-gray-400">
-            <div className="h-2 w-2 rounded-full bg-[#c7ff69]" />
+            <div className="h-2 w-2 rounded-full bg-[#ff9494]" />
             Paiements sécurisés
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-400">
-            <div className="h-2 w-2 rounded-full bg-[#c7ff69]" />
+            <div className="h-2 w-2 rounded-full bg-[#ff9494]" />
             Données protégées RGPD
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-400">
-            <div className="h-2 w-2 rounded-full bg-[#c7ff69]" />
+            <div className="h-2 w-2 rounded-full bg-[#ff9494]" />
             Support 7j/7
           </div>
         </motion.div>

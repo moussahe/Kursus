@@ -65,11 +65,11 @@
   --kursus-success-bg: rgba(22, 163, 74, 0.1);
   --kursus-success-border: rgba(22, 163, 74, 0.3);
 
-  /* Purple for teacher elements */
-  --kursus-purple: #a78bfa;
-  --kursus-purple-text: #8b5cf6;
-  --kursus-purple-bg: rgba(139, 92, 246, 0.1);
-  --kursus-purple-border: rgba(139, 92, 246, 0.3);
+  /* Purple legacy - now mapped to coral */
+  --kursus-purple: #ff9494;
+  --kursus-purple-text: #ff7070;
+  --kursus-purple-bg: rgba(255, 148, 148, 0.15);
+  --kursus-purple-border: rgba(255, 148, 148, 0.4);
 
   /* Shadcn compatible variables - Light theme */
   --background: 30 100% 95%;
@@ -142,11 +142,11 @@
   --kursus-success-bg: rgba(34, 197, 94, 0.15);
   --kursus-success-border: rgba(34, 197, 94, 0.4);
 
-  /* Purple for dark mode */
-  --kursus-purple: #a78bfa;
-  --kursus-purple-text: #c4b5fd;
-  --kursus-purple-bg: rgba(167, 139, 250, 0.15);
-  --kursus-purple-border: rgba(167, 139, 250, 0.4);
+  /* Purple legacy - now mapped to coral for dark mode */
+  --kursus-purple: #ff9494;
+  --kursus-purple-text: #ffb8b8;
+  --kursus-purple-bg: rgba(255, 148, 148, 0.15);
+  --kursus-purple-border: rgba(255, 148, 148, 0.4);
 
   /* Shadcn compatible variables - Dark theme */
   --background: 0 0% 10%;
@@ -268,7 +268,7 @@
 
   .text-gradient-purple {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, #a78bfa, #8b5cf6);
+    background-image: linear-gradient(to right, #ff9494, #ff7070);
   }
 
   /* Glass effect - soft version */

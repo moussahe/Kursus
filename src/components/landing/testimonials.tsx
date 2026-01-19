@@ -53,7 +53,7 @@ const testimonials: Testimonial[] = [
     name: "Marie Dupont",
     role: "Professeure de Mathématiques",
     type: "teacher",
-    color: "#c7ff69",
+    color: "#ff9494",
     stats: "150+ élèves",
   },
   {
@@ -62,7 +62,7 @@ const testimonials: Testimonial[] = [
     name: "Emma Petit",
     role: "Élève en Terminale",
     type: "student",
-    color: "#7a78ff",
+    color: "#ff9494",
     stats: "Mention TB au Bac",
   },
   {
@@ -80,7 +80,7 @@ const testimonials: Testimonial[] = [
     name: "Laurent Moreau",
     role: "Professeur de Français",
     type: "teacher",
-    color: "#c7ff69",
+    color: "#ff9494",
     stats: "4.9/5 de moyenne",
   },
   {
@@ -89,7 +89,7 @@ const testimonials: Testimonial[] = [
     name: "Hugo Lefebvre",
     role: "Élève en 6ème",
     type: "student",
-    color: "#7a78ff",
+    color: "#ff9494",
     stats: "Top 10 du classement",
   },
 ];
@@ -259,8 +259,8 @@ export function Testimonials() {
             <div className="h-14 w-px bg-[#2a2a2a] hidden sm:block" />
 
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#c7ff69]/20 bg-[#c7ff69]/10">
-                <BookOpen className="h-7 w-7 text-[#c7ff69]" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#ff9494]/20 bg-[#ff9494]/10">
+                <BookOpen className="h-7 w-7 text-[#ff9494]" />
               </div>
               <div>
                 <p className="text-3xl font-bold text-white">300+</p>
@@ -271,8 +271,8 @@ export function Testimonials() {
             <div className="h-14 w-px bg-[#2a2a2a] hidden sm:block" />
 
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#7a78ff]/20 bg-[#7a78ff]/10">
-                <GraduationCap className="h-7 w-7 text-[#7a78ff]" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#ff9494]/20 bg-[#ff9494]/10">
+                <GraduationCap className="h-7 w-7 text-[#ff9494]" />
               </div>
               <div>
                 <p className="text-3xl font-bold text-white">95%</p>

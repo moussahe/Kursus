@@ -80,7 +80,7 @@ export function Header() {
                     className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
-                    <span className="absolute bottom-[-4px] left-0 h-0.5 w-full origin-center scale-x-0 bg-gradient-to-r from-[#ff9494] to-[#c7ff69] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                    <span className="absolute bottom-[-4px] left-0 h-0.5 w-full origin-center scale-x-0 bg-gradient-to-r from-[#ff9494] to-[#ff9494] transition-transform duration-300 ease-out group-hover:scale-x-100" />
                   </Link>
                 ))}
             </nav>

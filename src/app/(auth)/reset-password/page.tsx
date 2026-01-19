@@ -28,8 +28,8 @@ import {
 } from "@/lib/validations/password";
 
 const KURSUS = {
-  orange: "#ff9494",
-  purple: "#7a78ff",
+  coral: "#ff9494",
+  coralDark: "#ff7070",
 };
 
 const resetPasswordSchema = z
@@ -126,7 +126,7 @@ function ResetPasswordForm() {
         <Link
           href="/forgot-password"
           className="mt-6 inline-flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-80"
-          style={{ color: KURSUS.orange }}
+          style={{ color: KURSUS.coral }}
         >
           Demander un nouveau lien
         </Link>
@@ -226,8 +226,8 @@ function ResetPasswordForm() {
               type="submit"
               className="h-12 w-full rounded-xl text-base font-semibold text-white transition-all hover:opacity-90"
               style={{
-                background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
-                boxShadow: `0 0 20px -5px ${KURSUS.orange}50`,
+                background: `linear-gradient(135deg, ${KURSUS.coral}, ${KURSUS.coral}dd)`,
+                boxShadow: `0 0 20px -5px ${KURSUS.coral}50`,
               }}
               disabled={isSubmitting}
             >
@@ -277,7 +277,7 @@ function ResetPasswordForm() {
         <Link
           href="/login"
           className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-80"
-          style={{ color: KURSUS.orange }}
+          style={{ color: KURSUS.coral }}
         >
           <ArrowLeft className="h-4 w-4" />
           Retour à la connexion
@@ -303,11 +303,11 @@ export default function ResetPasswordPage() {
         {/* Decorative elements */}
         <div
           className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
-          style={{ background: `${KURSUS.purple}20` }}
+          style={{ background: `${KURSUS.coral}20` }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
-          style={{ background: `${KURSUS.orange}15` }}
+          style={{ background: `${KURSUS.coral}15` }}
         />
 
         {/* Content */}
@@ -323,8 +323,8 @@ export default function ResetPasswordPage() {
               <div
                 className="flex h-16 w-16 items-center justify-center rounded-2xl"
                 style={{
-                  background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
-                  boxShadow: `0 0 40px -10px ${KURSUS.purple}`,
+                  background: `linear-gradient(135deg, ${KURSUS.coral}, #ff7070)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.coral}`,
                 }}
               >
                 <Shield className="h-8 w-8 text-white" />
@@ -333,7 +333,7 @@ export default function ResetPasswordPage() {
 
             <h2 className="text-4xl font-black tracking-tight text-white">
               Sécurisez votre{" "}
-              <span style={{ color: KURSUS.purple }}>compte</span>
+              <span style={{ color: KURSUS.coral }}>compte</span>
             </h2>
             <p className="mt-4 text-lg text-gray-400">
               Un mot de passe fort est essentiel pour protéger votre compte et
@@ -346,17 +346,17 @@ export default function ResetPasswordPage() {
                 {
                   icon: Lock,
                   text: "Minimum 8 caractères requis",
-                  color: KURSUS.orange,
+                  color: KURSUS.coral,
                 },
                 {
                   icon: Key,
                   text: "Mélangez lettres, chiffres et symboles",
-                  color: KURSUS.purple,
+                  color: KURSUS.coral,
                 },
                 {
                   icon: Shield,
                   text: "Ne réutilisez pas d'anciens mots de passe",
-                  color: KURSUS.purple,
+                  color: KURSUS.coral,
                 },
               ].map((feature, i) => (
                 <motion.div
@@ -396,7 +396,7 @@ export default function ResetPasswordPage() {
             <Link href="/" className="flex items-center gap-3">
               <div
                 className="flex h-10 w-10 items-center justify-center rounded-xl"
-                style={{ background: KURSUS.orange }}
+                style={{ background: KURSUS.coral }}
               >
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
@@ -411,7 +411,7 @@ export default function ResetPasswordPage() {
               <div className="flex items-center justify-center py-12">
                 <Loader2
                   className="h-8 w-8 animate-spin"
-                  style={{ color: KURSUS.orange }}
+                  style={{ color: KURSUS.coral }}
                 />
               </div>
             }

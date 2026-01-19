@@ -20,7 +20,7 @@ export function TeacherOnboardingProgress({
       {/* Progress Line */}
       <div className="absolute left-0 right-0 top-4 h-0.5 bg-gray-200">
         <motion.div
-          className="h-full bg-[#7a78ff]"
+          className="h-full bg-[#ff9494]"
           initial={{ width: 0 }}
           animate={{
             width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%`,
@@ -42,9 +42,9 @@ export function TeacherOnboardingProgress({
                 className={cn(
                   "relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 text-sm font-medium transition-colors",
                   isCompleted
-                    ? "border-[#7a78ff] bg-[#7a78ff] text-white"
+                    ? "border-[#ff9494] bg-[#ff9494] text-white"
                     : isCurrent
-                      ? "border-[#7a78ff] bg-white text-[#7a78ff]"
+                      ? "border-[#ff9494] bg-white text-[#ff9494]"
                       : "border-gray-200 bg-white text-gray-400",
                 )}
                 initial={false}
@@ -57,7 +57,7 @@ export function TeacherOnboardingProgress({
               <span
                 className={cn(
                   "mt-2 text-xs font-medium",
-                  isCurrent ? "text-[#7a78ff]" : "text-gray-400",
+                  isCurrent ? "text-[#ff9494]" : "text-gray-400",
                 )}
               >
                 {label}

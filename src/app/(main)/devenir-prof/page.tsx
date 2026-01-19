@@ -22,7 +22,7 @@ import {
 // ============================================================================
 const KURSUS = {
   orange: "#ff9494",
-  purple: "#7a78ff",
+  purple: "#ff9494",
 };
 
 const COMMISSION_RATE = 0.7; // 70% pour les profs

@@ -55,7 +55,7 @@ function CourseMockup() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <span className="rounded-full bg-[#c7ff69]/10 border border-[#c7ff69]/20 px-2 py-1 text-xs font-medium text-[#c7ff69]">
+          <span className="rounded-full bg-[#ff9494]/10 border border-[#ff9494]/20 px-2 py-1 text-xs font-medium text-[#ff9494]">
             75% complété
           </span>
         </div>
@@ -87,7 +87,7 @@ function CourseMockup() {
                 }`}
               >
                 {item.done ? (
-                  <CheckCircle2 className="h-4 w-4 text-[#c7ff69]" />
+                  <CheckCircle2 className="h-4 w-4 text-[#ff9494]" />
                 ) : item.current ? (
                   <Play className="h-4 w-4" />
                 ) : (
@@ -144,7 +144,7 @@ function CourseMockup() {
       <div className="border-t border-[#2a2a2a] bg-[#141414] px-4 py-3">
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1 text-[#c7ff69]">
+            <div className="flex items-center gap-1 text-[#ff9494]">
               <Trophy className="h-4 w-4" />
               <span className="font-medium">+50 XP</span>
             </div>
@@ -165,7 +165,7 @@ function AIMockup() {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-[#2a2a2a] bg-[#1a1a1a] shadow-2xl">
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-[#2a2a2a] bg-gradient-to-r from-[#7a78ff] to-[#9997ff] px-4 py-3">
+      <div className="flex items-center gap-3 border-b border-[#2a2a2a] bg-gradient-to-r from-[#ff9494] to-[#9997ff] px-4 py-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
           <Sparkles className="h-5 w-5 text-white" />
         </div>
@@ -188,8 +188,8 @@ function AIMockup() {
 
         {/* Réponse IA */}
         <div className="flex gap-3">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#7a78ff]/20">
-            <Sparkles className="h-4 w-4 text-[#7a78ff]" />
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#ff9494]/20">
+            <Sparkles className="h-4 w-4 text-[#ff9494]" />
           </div>
           <div className="space-y-2">
             <div className="rounded-2xl rounded-tl-sm border border-[#2a2a2a] bg-[#141414] px-4 py-3 text-sm text-gray-300">
@@ -205,13 +205,13 @@ function AIMockup() {
               <div className="my-3 rounded-lg border border-[#2a2a2a] bg-[#0a0a0a] p-3 font-mono text-center">
                 <p className="text-gray-400">1/3 = 4/12</p>
                 <p className="text-gray-400">1/4 = 3/12</p>
-                <p className="mt-2 border-t border-[#2a2a2a] pt-2 text-[#c7ff69]">
+                <p className="mt-2 border-t border-[#2a2a2a] pt-2 text-[#ff9494]">
                   4/12 + 3/12 = <strong>7/12</strong>
                 </p>
               </div>
               <p>
                 La réponse est donc{" "}
-                <strong className="text-[#c7ff69]">7/12</strong> !
+                <strong className="text-[#ff9494]">7/12</strong> !
               </p>
             </div>
             <div className="flex gap-2">
@@ -234,8 +234,8 @@ function AIMockup() {
 
         {/* Typing indicator */}
         <div className="flex gap-3">
-          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#7a78ff]/20">
-            <Sparkles className="h-4 w-4 text-[#7a78ff]" />
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#ff9494]/20">
+            <Sparkles className="h-4 w-4 text-[#ff9494]" />
           </div>
           <div className="flex items-center gap-1 rounded-2xl rounded-tl-sm border border-[#2a2a2a] bg-[#141414] px-4 py-3">
             <div
@@ -290,7 +290,7 @@ export function ProductPreview() {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#7a78ff]/20 bg-[#7a78ff]/10 px-4 py-2 text-sm font-medium text-[#7a78ff]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]">
               <Play className="h-4 w-4" />
               Découvrez l&apos;expérience Kursus
             </span>
@@ -333,8 +333,8 @@ export function ProductPreview() {
             {/* AI Preview */}
             <motion.div variants={itemVariants}>
               <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#7a78ff]/10 border border-[#7a78ff]/20">
-                  <Sparkles className="h-6 w-6 text-[#7a78ff]" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#ff9494]/10 border border-[#ff9494]/20">
+                  <Sparkles className="h-6 w-6 text-[#ff9494]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-white">
@@ -365,13 +365,13 @@ export function ProductPreview() {
                 icon: MessageSquare,
                 title: "IA pédagogique",
                 description: "Guide sans donner les réponses",
-                color: "#7a78ff",
+                color: "#ff9494",
               },
               {
                 icon: Trophy,
                 title: "Gamification",
                 description: "XP, badges et classements",
-                color: "#c7ff69",
+                color: "#ff9494",
               },
               {
                 icon: CheckCircle2,

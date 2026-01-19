@@ -46,8 +46,8 @@ const sampleCourses: Course[] = [
     price: 39,
     level: "Collège",
     subject: "Français",
-    subjectColor: "#7a78ff",
-    gradientFrom: "#7a78ff",
+    subjectColor: "#ff9494",
+    gradientFrom: "#ff9494",
     gradientTo: "#9997ff",
   },
   {
@@ -59,8 +59,8 @@ const sampleCourses: Course[] = [
     price: "Gratuit",
     level: "Lycée",
     subject: "Anglais",
-    subjectColor: "#c7ff69",
-    gradientFrom: "#c7ff69",
+    subjectColor: "#ff9494",
+    gradientFrom: "#ff9494",
     gradientTo: "#a8e550",
   },
   {
@@ -84,9 +84,9 @@ function LevelBadge({ level }: { level: CourseLevel }) {
     { bg: string; text: string; border: string }
   > = {
     Primaire: {
-      bg: "bg-[#c7ff69]/10",
-      text: "text-[#c7ff69]",
-      border: "border-[#c7ff69]/20",
+      bg: "bg-[#ff9494]/10",
+      text: "text-[#ff9494]",
+      border: "border-[#ff9494]/20",
     },
     Collège: {
       bg: "bg-[#ff9494]/10",
@@ -94,9 +94,9 @@ function LevelBadge({ level }: { level: CourseLevel }) {
       border: "border-[#ff9494]/20",
     },
     Lycée: {
-      bg: "bg-[#7a78ff]/10",
-      text: "text-[#7a78ff]",
-      border: "border-[#7a78ff]/20",
+      bg: "bg-[#ff9494]/10",
+      text: "text-[#ff9494]",
+      border: "border-[#ff9494]/20",
     },
   };
   const style = levelStyles[level];
@@ -207,7 +207,7 @@ function CourseCard({ course }: { course: Course }) {
               {typeof course.price === "number" ? (
                 `${course.price}€`
               ) : (
-                <span className="text-[#c7ff69]">{course.price}</span>
+                <span className="text-[#ff9494]">{course.price}</span>
               )}
             </span>
             <span className="text-xs text-gray-500">Accès à vie</span>

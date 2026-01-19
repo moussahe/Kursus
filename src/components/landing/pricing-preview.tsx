@@ -51,14 +51,14 @@ const coursExamples = [
     subject: "Français",
     level: "CM2",
     price: "2,99€",
-    color: "#7a78ff",
+    color: "#ff9494",
   },
   {
     title: "Équations 1er degré",
     subject: "Maths",
     level: "4ème",
     price: "4,99€",
-    color: "#c7ff69",
+    color: "#ff9494",
   },
   {
     title: "Révisions Brevet Français",
@@ -184,8 +184,8 @@ function CarnetCard({
       <p className="mt-2 text-base text-gray-500">
         Valeur <span className="line-through">{credits}</span>
       </p>
-      <p className="mt-4 text-4xl font-bold text-[#c7ff69]">{price}</p>
-      <span className="mt-3 inline-block rounded-full border border-[#c7ff69]/20 bg-[#c7ff69]/10 px-3 py-1 text-sm font-semibold text-[#c7ff69]">
+      <p className="mt-4 text-4xl font-bold text-[#ff9494]">{price}</p>
+      <span className="mt-3 inline-block rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-3 py-1 text-sm font-semibold text-[#ff9494]">
         {discount}
       </span>
       <p className="mt-4 text-sm text-gray-500">Validité 2 ans</p>
@@ -207,7 +207,7 @@ export function PricingPreview() {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center">
-            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[#c7ff69]/20 bg-[#c7ff69]/10 px-4 py-2 text-sm font-medium text-[#c7ff69]">
+            <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]">
               <ShoppingBag className="h-4 w-4" />
               Achetez uniquement ce dont vous avez besoin
             </div>
@@ -251,7 +251,7 @@ export function PricingPreview() {
               "Satisfait ou remboursé 14j",
             ].map((text) => (
               <div key={text} className="flex items-center gap-3 text-gray-400">
-                <Check className="h-6 w-6 flex-shrink-0 text-[#c7ff69]" />
+                <Check className="h-6 w-6 flex-shrink-0 text-[#ff9494]" />
                 <span>{text}</span>
               </div>
             ))}
@@ -291,9 +291,9 @@ export function PricingPreview() {
           {/* Pack Fratrie teaser */}
           <motion.div
             variants={itemVariants}
-            className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 rounded-2xl border border-[#7a78ff]/20 bg-[#7a78ff]/5 p-6 sm:flex-row sm:gap-6"
+            className="mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-4 rounded-2xl border border-[#ff9494]/20 bg-[#ff9494]/5 p-6 sm:flex-row sm:gap-6"
           >
-            <Users className="h-10 w-10 flex-shrink-0 text-[#7a78ff]" />
+            <Users className="h-10 w-10 flex-shrink-0 text-[#ff9494]" />
             <div className="text-center sm:text-left">
               <p className="text-lg font-semibold text-white">
                 Plusieurs enfants ?

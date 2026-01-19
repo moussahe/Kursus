@@ -93,7 +93,7 @@ export function weeklyReportEmail(data: WeeklyReportData): string {
           <td style="padding: 8px 0;">
             <span style="color: #6b7280;">XP gagnes</span>
           </td>
-          <td style="padding: 8px 0; text-align: right; font-weight: 600; color: #8b5cf6;">
+          <td style="padding: 8px 0; text-align: right; font-weight: 600; color: #ff7070;">
             +${data.stats.xpEarned} XP
           </td>
         </tr>

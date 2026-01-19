@@ -39,7 +39,7 @@ const subjects: Subject[] = [
     slug: "francais",
     Icon: BookText,
     courseCount: 35,
-    color: "#7a78ff",
+    color: "#ff9494",
     size: "medium",
   },
   {
@@ -47,7 +47,7 @@ const subjects: Subject[] = [
     slug: "anglais",
     Icon: Globe,
     courseCount: 28,
-    color: "#c7ff69",
+    color: "#ff9494",
     size: "small",
   },
   {
@@ -63,7 +63,7 @@ const subjects: Subject[] = [
     slug: "svt",
     Icon: Leaf,
     courseCount: 18,
-    color: "#c7ff69",
+    color: "#ff9494",
     size: "medium",
   },
   {
@@ -71,7 +71,7 @@ const subjects: Subject[] = [
     slug: "physique-chimie",
     Icon: FlaskConical,
     courseCount: 25,
-    color: "#7a78ff",
+    color: "#ff9494",
     size: "small",
   },
   {
@@ -79,7 +79,7 @@ const subjects: Subject[] = [
     slug: "philosophie",
     Icon: BrainCircuit,
     courseCount: 15,
-    color: "#7a78ff",
+    color: "#ff9494",
     size: "small",
   },
   {
@@ -213,7 +213,7 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
         {/* Decorative Elements for Large Cards */}
         {isLarge && (
           <div className="absolute bottom-4 right-4 flex items-center gap-1 rounded-full border border-[#2a2a2a] bg-[#141414] px-3 py-1.5 text-xs font-medium text-gray-400">
-            <Sparkles className="h-3 w-3 text-[#c7ff69]" />
+            <Sparkles className="h-3 w-3 text-[#ff9494]" />
             IA disponible
           </div>
         )}
@@ -228,7 +228,7 @@ export function Categories() {
       {/* Background Decorations */}
       <div className="absolute left-0 top-0 h-full w-full">
         <div className="absolute left-1/4 top-10 h-72 w-72 rounded-full bg-[#ff9494]/5 blur-3xl" />
-        <div className="absolute bottom-10 right-1/4 h-96 w-96 rounded-full bg-[#7a78ff]/5 blur-3xl" />
+        <div className="absolute bottom-10 right-1/4 h-96 w-96 rounded-full bg-[#ff9494]/5 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
@@ -240,7 +240,7 @@ export function Categories() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-[#c7ff69]/20 bg-[#c7ff69]/10 px-4 py-1.5 text-sm font-semibold text-[#c7ff69]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-1.5 text-sm font-semibold text-[#ff9494]">
             <Sparkles className="h-4 w-4" />
             Explorez par Matière
           </span>

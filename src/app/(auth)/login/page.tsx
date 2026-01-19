@@ -9,14 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import {
-  Sparkles,
-  Loader2,
-  CheckCircle,
-  BookOpen,
-  Users,
-  Trophy,
-} from "lucide-react";
+import { Loader2, CheckCircle, BookOpen, Users, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
@@ -24,8 +17,8 @@ import { Label } from "@/components/ui/label";
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 
 const KURSUS = {
-  orange: "#ff9494",
-  purple: "#7a78ff",
+  coral: "#ff9494",
+  coralDark: "#ff7070",
 };
 
 const loginSchema = z.object({
@@ -95,11 +88,11 @@ function LoginForm() {
         {/* Decorative elements */}
         <div
           className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
-          style={{ background: `${KURSUS.orange}20` }}
+          style={{ background: `${KURSUS.coral}20` }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
-          style={{ background: `${KURSUS.purple}15` }}
+          style={{ background: `${KURSUS.coralDark}15` }}
         />
 
         {/* Content */}
@@ -112,19 +105,16 @@ function LoginForm() {
           >
             {/* Logo */}
             <div className="mb-8 flex justify-center">
-              <div
-                className="flex h-16 w-16 items-center justify-center rounded-2xl"
-                style={{
-                  background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
-                  boxShadow: `0 0 40px -10px ${KURSUS.orange}`,
-                }}
+              <span
+                className="text-3xl font-black"
+                style={{ color: KURSUS.coral }}
               >
-                <Sparkles className="h-8 w-8 text-white" />
-              </div>
+                Kursus.
+              </span>
             </div>
 
             <h2 className="text-4xl font-black tracking-tight text-white">
-              Bienvenue sur <span style={{ color: KURSUS.orange }}>Kursus</span>
+              Bienvenue sur <span style={{ color: KURSUS.coral }}>Kursus</span>
             </h2>
             <p className="mt-4 text-lg text-gray-400">
               La marketplace EdTech premium. Des cours créés par de vrais
@@ -137,17 +127,17 @@ function LoginForm() {
                 {
                   icon: BookOpen,
                   text: "Cours de qualité par des enseignants certifiés",
-                  color: KURSUS.orange,
+                  color: KURSUS.coral,
                 },
                 {
                   icon: Users,
                   text: "Du CP à la Terminale, toutes les matières",
-                  color: KURSUS.purple,
+                  color: KURSUS.coralDark,
                 },
                 {
                   icon: Trophy,
                   text: "Paiement unique, accès à vie",
-                  color: KURSUS.purple,
+                  color: KURSUS.coral,
                 },
               ].map((feature, i) => (
                 <motion.div
@@ -181,7 +171,7 @@ function LoginForm() {
                 <div key={stat.label}>
                   <div
                     className="text-2xl font-black"
-                    style={{ color: KURSUS.orange }}
+                    style={{ color: KURSUS.coral }}
                   >
                     {stat.value}
                   </div>
@@ -203,15 +193,12 @@ function LoginForm() {
         >
           {/* Logo mobile */}
           <div className="mb-8">
-            <Link href="/" className="flex items-center gap-3">
-              <div
-                className="flex h-10 w-10 items-center justify-center rounded-xl"
-                style={{ background: KURSUS.orange }}
+            <Link href="/">
+              <span
+                className="text-2xl font-black"
+                style={{ color: KURSUS.coral }}
               >
-                <Sparkles className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-[var(--kursus-text)]">
-                Kursus
+                Kursus.
               </span>
             </Link>
             <h1 className="mt-8 text-2xl font-bold text-[var(--kursus-text)]">
@@ -227,18 +214,15 @@ function LoginForm() {
             <div
               className="mb-6 flex items-center gap-3 rounded-xl p-4"
               style={{
-                background: `${KURSUS.purple}15`,
-                border: `1px solid ${KURSUS.purple}30`,
+                background: `${KURSUS.coral}15`,
+                border: `1px solid ${KURSUS.coral}30`,
               }}
             >
               <CheckCircle
                 className="h-5 w-5"
-                style={{ color: "var(--kursus-purple-text)" }}
+                style={{ color: KURSUS.coral }}
               />
-              <span
-                className="text-sm"
-                style={{ color: "var(--kursus-purple-text)" }}
-              >
+              <span className="text-sm" style={{ color: KURSUS.coral }}>
                 Compte créé avec succès ! Vous pouvez vous connecter.
               </span>
             </div>
@@ -281,7 +265,7 @@ function LoginForm() {
                 <Link
                   href={"/forgot-password" as Route}
                   className="text-xs transition-colors hover:opacity-80"
-                  style={{ color: KURSUS.orange }}
+                  style={{ color: KURSUS.coral }}
                 >
                   Mot de passe oublié ?
                 </Link>
@@ -303,8 +287,8 @@ function LoginForm() {
               type="submit"
               className="h-12 w-full rounded-xl text-base font-semibold text-white transition-all hover:opacity-90"
               style={{
-                background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
-                boxShadow: `0 0 20px -5px ${KURSUS.orange}50`,
+                background: `linear-gradient(135deg, ${KURSUS.coral}, ${KURSUS.coralDark})`,
+                boxShadow: `0 0 20px -5px ${KURSUS.coral}50`,
               }}
               disabled={isLoading}
             >
@@ -340,7 +324,7 @@ function LoginForm() {
             <Link
               href="/register"
               className="font-medium transition-colors hover:opacity-80"
-              style={{ color: KURSUS.orange }}
+              style={{ color: KURSUS.coral }}
             >
               Créer un compte
             </Link>

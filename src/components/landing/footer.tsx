@@ -98,10 +98,10 @@ export function Footer() {
                   key="success"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex items-center gap-3 rounded-full bg-[#c7ff69]/10 px-6 py-3 border border-[#c7ff69]/20"
+                  className="flex items-center gap-3 rounded-full bg-[#ff9494]/10 px-6 py-3 border border-[#ff9494]/20"
                 >
-                  <CheckCircle className="h-5 w-5 text-[#c7ff69]" />
-                  <span className="text-sm font-medium text-[#c7ff69]">
+                  <CheckCircle className="h-5 w-5 text-[#ff9494]" />
+                  <span className="text-sm font-medium text-[#ff9494]">
                     Merci ! Vous êtes inscrit à notre newsletter.
                   </span>
                 </motion.div>

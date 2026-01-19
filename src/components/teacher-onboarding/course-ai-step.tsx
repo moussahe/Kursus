@@ -658,7 +658,7 @@ export function CourseAIStep({
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7a78ff] to-[#6366f1]"
+          className="mx-auto mb-3 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff9494] to-[#ff7070]"
         >
           <Sparkles className="h-7 w-7 text-white" />
         </motion.div>
@@ -683,10 +683,10 @@ export function CourseAIStep({
             {/* Template Option */}
             <button
               onClick={() => setCreationMode("template")}
-              className="group rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-6 text-left transition-all hover:border-[#7a78ff] hover:shadow-lg"
+              className="group rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-6 text-left transition-all hover:border-[#ff9494] hover:shadow-lg"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#7a78ff]/20 to-[#6366f1]/20">
-                <Layers className="h-6 w-6 text-[#7a78ff]" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff9494]/20 to-[#ff7070]/20">
+                <Layers className="h-6 w-6 text-[#ff9494]" />
               </div>
               <h3 className="mb-2 font-bold text-[var(--kursus-text)]">
                 Utiliser un template
@@ -695,7 +695,7 @@ export function CourseAIStep({
                 Cours pre-structures par matiere. Personnalisez et publiez en
                 quelques clics.
               </p>
-              <div className="mt-4 flex items-center gap-2 text-sm font-medium text-[#7a78ff]">
+              <div className="mt-4 flex items-center gap-2 text-sm font-medium text-[#ff9494]">
                 <Zap className="h-4 w-4" />
                 Le plus rapide
               </div>
@@ -704,10 +704,10 @@ export function CourseAIStep({
             {/* AI Option */}
             <button
               onClick={() => setCreationMode("ai")}
-              className="group rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-6 text-left transition-all hover:border-[#7a78ff] hover:shadow-lg"
+              className="group rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-6 text-left transition-all hover:border-[#ff9494] hover:shadow-lg"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#7a78ff]/20 to-[#6366f1]/20">
-                <Sparkles className="h-6 w-6 text-[#7a78ff]" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff9494]/20 to-[#ff7070]/20">
+                <Sparkles className="h-6 w-6 text-[#ff9494]" />
               </div>
               <h3 className="mb-2 font-bold text-[var(--kursus-text)]">
                 Generation IA
@@ -716,7 +716,7 @@ export function CourseAIStep({
                 Decrivez votre sujet et notre IA cree une structure complete
                 pour vous.
               </p>
-              <div className="mt-4 flex items-center gap-2 text-sm font-medium text-[#7a78ff]">
+              <div className="mt-4 flex items-center gap-2 text-sm font-medium text-[#ff9494]">
                 <Lightbulb className="h-4 w-4" />
                 Plus de flexibilite
               </div>
@@ -834,7 +834,7 @@ export function CourseAIStep({
                 <Button
                   onClick={() => setCreationMode("ai")}
                   variant="link"
-                  className="mt-2 text-[#7a78ff]"
+                  className="mt-2 text-[#ff9494]"
                 >
                   Utiliser la generation IA a la place
                 </Button>
@@ -944,7 +944,7 @@ export function CourseAIStep({
             <Button
               onClick={handleGenerate}
               disabled={isGenerating || !topic.trim()}
-              className="w-full rounded-xl bg-gradient-to-r from-[#7a78ff] to-[#6366f1] py-6 text-lg font-semibold hover:from-[#6966ff] hover:to-[#5558e8]"
+              className="w-full rounded-xl bg-gradient-to-r from-[#ff9494] to-[#ff7070] py-6 text-lg font-semibold hover:from-[#6966ff] hover:to-[#5558e8]"
             >
               {isGenerating ? (
                 <>
@@ -963,9 +963,9 @@ export function CourseAIStep({
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="rounded-xl border border-[#7a78ff]/20 bg-[#7a78ff]/10 p-4 text-center"
+                className="rounded-xl border border-[#ff9494]/20 bg-[#ff9494]/10 p-4 text-center"
               >
-                <p className="text-sm text-[#7a78ff]">
+                <p className="text-sm text-[#ff9494]">
                   L&apos;IA analyse votre sujet et cree une structure
                   pedagogique optimale...
                 </p>
@@ -983,7 +983,7 @@ export function CourseAIStep({
             className="space-y-5"
           >
             {/* Course Summary */}
-            <Card className="overflow-hidden rounded-2xl border-[#7a78ff]/30 bg-gradient-to-br from-[#7a78ff]/10 to-[#6366f1]/10">
+            <Card className="overflow-hidden rounded-2xl border-[#ff9494]/30 bg-gradient-to-br from-[#ff9494]/10 to-[#ff7070]/10">
               <CardContent className="p-5">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -1107,7 +1107,7 @@ export function CourseAIStep({
                   </h3>
                   <p className="mt-1 text-sm text-[var(--kursus-text-muted)]">
                     Vous gardez{" "}
-                    <span className="font-bold text-[#7a78ff]">70%</span> de
+                    <span className="font-bold text-[#ff9494]">70%</span> de
                     chaque vente.
                   </p>
                   <div className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
@@ -1139,7 +1139,7 @@ export function CourseAIStep({
                     ))}
                   </div>
                   {course.price > 0 && (
-                    <p className="mt-3 text-sm text-[#7a78ff]">
+                    <p className="mt-3 text-sm text-[#ff9494]">
                       <Check className="mr-1 inline h-4 w-4" />
                       Vous gagnez{" "}
                       <strong>

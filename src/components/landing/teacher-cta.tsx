@@ -16,8 +16,8 @@ export function TeacherCta() {
   return (
     <section className="bg-[#0a0a0a] py-16 border-t border-[#2a2a2a]">
       <div
-        className="mx-4 max-w-6xl rounded-3xl border border-[#7a78ff]/20 bg-gradient-to-br from-[#7a78ff]/10 to-[#7a78ff]/5 p-8 md:mx-auto md:p-12 lg:p-16"
-        style={{ boxShadow: "0 0 80px -20px rgba(122,120,255,0.3)" }}
+        className="mx-4 max-w-6xl rounded-3xl border border-[#ff9494]/20 bg-gradient-to-br from-[#ff9494]/10 to-[#ff9494]/5 p-8 md:mx-auto md:p-12 lg:p-16"
+        style={{ boxShadow: "0 0 80px -20px rgba(255,148,148,0.3)" }}
       >
         <div className="flex flex-col items-center justify-between gap-10 lg:flex-row">
           {/* Left Section - Text Content */}
@@ -28,7 +28,7 @@ export function TeacherCta() {
             transition={{ duration: 0.6 }}
             className="space-y-6 text-center lg:w-1/2 lg:text-left"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#c7ff69]/20 bg-[#c7ff69]/10 px-4 py-2 text-sm font-medium text-[#c7ff69]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]">
               <Sparkles className="h-4 w-4" />
               Espace Enseignant
             </span>
@@ -37,7 +37,7 @@ export function TeacherCta() {
               className="text-4xl font-black leading-tight text-white md:text-5xl"
               style={{ letterSpacing: "-0.04em" }}
             >
-              Gardez <span className="text-[#c7ff69]">70%</span> de vos ventes
+              Gardez <span className="text-[#ff9494]">70%</span> de vos ventes
             </h2>
             <p className="text-lg text-gray-400 md:text-xl">
               Créez vos cours une fois, vendez-les à des milliers d&apos;élèves.
@@ -52,7 +52,7 @@ export function TeacherCta() {
                   key={benefit}
                   className="flex items-center justify-center gap-3 lg:justify-start"
                 >
-                  <CheckCircle className="h-6 w-6 text-[#c7ff69]" />
+                  <CheckCircle className="h-6 w-6 text-[#ff9494]" />
                   <span className="text-gray-300">{benefit}</span>
                 </li>
               ))}
@@ -85,7 +85,7 @@ export function TeacherCta() {
               <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">
                 Exemple de revenus
               </p>
-              <p className="mt-4 text-6xl font-black text-[#c7ff69]">1 400€</p>
+              <p className="mt-4 text-6xl font-black text-[#ff9494]">1 400€</p>
               <p className="mt-4 text-lg font-medium text-gray-300">
                 pour un cours à{" "}
                 <span className="font-bold text-white">29€</span> vendu à{" "}
@@ -96,7 +96,7 @@ export function TeacherCta() {
                   Prix cours : 29€ x 70 ventes = 2 030€
                   <br />
                   Votre part (70%) ={" "}
-                  <span className="font-bold text-[#c7ff69]">1 421€</span>
+                  <span className="font-bold text-[#ff9494]">1 421€</span>
                 </p>
               </div>
             </div>

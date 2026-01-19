@@ -17,14 +17,14 @@ const steps = [
     title: "Apprenez à votre rythme",
     description:
       "Progressez selon votre emploi du temps avec nos tuteurs experts.",
-    color: "#c7ff69",
+    color: "#ff9494",
   },
   {
     icon: GraduationCap,
     title: "Réussissez vos examens",
     description:
       "Atteignez vos objectifs académiques et excellez dans vos examens.",
-    color: "#7a78ff",
+    color: "#ff9494",
   },
 ];
 
@@ -66,7 +66,7 @@ export function HowItWorks() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#7a78ff]/20 bg-[#7a78ff]/10 px-4 py-2 text-sm font-medium text-[#7a78ff]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]">
               Simple et efficace
             </span>
           </motion.div>

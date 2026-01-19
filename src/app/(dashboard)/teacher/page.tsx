@@ -24,8 +24,8 @@ import { Badge } from "@/components/ui/badge";
 // Kursus Brand Colors
 const KURSUS = {
   orange: "#ff9494",
-  lime: "#c7ff69",
-  purple: "#7a78ff",
+  lime: "#ff9494",
+  purple: "#ff9494",
 };
 
 function formatCurrency(cents: number): string {

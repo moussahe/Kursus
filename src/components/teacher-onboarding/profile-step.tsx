@@ -127,9 +127,9 @@ export function ProfileStep({
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="mx-auto mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#7a78ff]/10"
+          className="mx-auto mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#ff9494]/10"
         >
-          <User className="h-6 w-6 text-[#7a78ff]" />
+          <User className="h-6 w-6 text-[#ff9494]" />
         </motion.div>
         <h2 className="text-xl font-bold text-gray-900">
           Votre profil professeur
@@ -198,7 +198,7 @@ export function ProfileStep({
                   className={cn(
                     "rounded-full px-3 py-1.5 text-sm font-medium transition-all",
                     isSelected
-                      ? "bg-[#7a78ff] text-white"
+                      ? "bg-[#ff9494] text-white"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200",
                   )}
                 >
@@ -251,9 +251,9 @@ export function ProfileStep({
               </p>
 
               {data.stripeConnected ? (
-                <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#7a78ff]/10 px-3 py-2">
-                  <Check className="h-4 w-4 text-[#7a78ff]" />
-                  <span className="text-sm font-medium text-[#7a78ff]">
+                <div className="mt-3 flex items-center gap-2 rounded-lg bg-[#ff9494]/10 px-3 py-2">
+                  <Check className="h-4 w-4 text-[#ff9494]" />
+                  <span className="text-sm font-medium text-[#ff9494]">
                     Stripe connecte
                   </span>
                 </div>
@@ -294,7 +294,7 @@ export function ProfileStep({
       <div className="rounded-xl bg-gray-50 p-4">
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-600">Profil complete a</span>
-          <span className="font-semibold text-[#7a78ff]">
+          <span className="font-semibold text-[#ff9494]">
             {Math.round(
               (profile.headline.length >= 10 ? 25 : 0) +
                 (profile.bio.length >= 50 ? 25 : 0) +
@@ -306,7 +306,7 @@ export function ProfileStep({
         </div>
         <div className="mt-2 h-2 overflow-hidden rounded-full bg-gray-200">
           <motion.div
-            className="h-full bg-[#7a78ff]"
+            className="h-full bg-[#ff9494]"
             initial={{ width: 0 }}
             animate={{
               width: `${
@@ -334,7 +334,7 @@ export function ProfileStep({
         <Button
           onClick={onNext}
           disabled={!canContinue}
-          className="flex-1 rounded-xl bg-[#7a78ff] hover:bg-[#6966ff]"
+          className="flex-1 rounded-xl bg-[#ff9494] hover:bg-[#6966ff]"
         >
           Continuer
           <ArrowRight className="ml-2 h-4 w-4" />

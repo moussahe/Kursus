@@ -49,8 +49,8 @@ export function Hero() {
       <div className="absolute inset-0">
         {/* Gradient orbs */}
         <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff9494] opacity-[0.08] blur-[120px]" />
-        <div className="absolute right-1/4 top-1/2 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-[#c7ff69] opacity-[0.06] blur-[100px]" />
-        <div className="absolute bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-[#7a78ff] opacity-[0.05] blur-[100px]" />
+        <div className="absolute right-1/4 top-1/2 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-[#ff9494] opacity-[0.06] blur-[100px]" />
+        <div className="absolute bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-[#ff9494] opacity-[0.05] blur-[100px]" />
 
         {/* Grid pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
@@ -109,7 +109,7 @@ export function Hero() {
               href="/demo"
               className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-4 text-base font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/10"
             >
-              <Play className="h-5 w-5 text-[#c7ff69]" />
+              <Play className="h-5 w-5 text-[#ff9494]" />
               Voir la démo
             </Link>
           </motion.div>
@@ -120,7 +120,7 @@ export function Hero() {
             className="mt-8 text-sm text-gray-500"
           >
             À partir de{" "}
-            <span className="font-semibold text-[#c7ff69]">2,99€</span> le cours
+            <span className="font-semibold text-[#ff9494]">2,99€</span> le cours
             {" • "}
             <span className="text-gray-400">70% reversés au professeur</span>
           </motion.p>
@@ -135,8 +135,8 @@ export function Hero() {
               <div className="flex -space-x-2">
                 {[
                   "bg-[#ff9494]",
-                  "bg-[#7a78ff]",
-                  "bg-[#c7ff69]",
+                  "bg-[#ff9494]",
+                  "bg-[#ff9494]",
                   "bg-[#ff9494]",
                 ].map((color, i) => (
                   <div
@@ -175,8 +175,8 @@ export function Hero() {
 
             {/* Teachers */}
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#c7ff69]/10">
-                <Users className="h-5 w-5 text-[#c7ff69]" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ff9494]/10">
+                <Users className="h-5 w-5 text-[#ff9494]" />
               </div>
               <div className="text-left">
                 <p className="text-lg font-bold text-white">300+</p>
@@ -188,8 +188,8 @@ export function Hero() {
 
             {/* Courses */}
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#7a78ff]/10">
-                <BookOpen className="h-5 w-5 text-[#7a78ff]" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ff9494]/10">
+                <BookOpen className="h-5 w-5 text-[#ff9494]" />
               </div>
               <div className="text-left">
                 <p className="text-lg font-bold text-white">1 200+</p>

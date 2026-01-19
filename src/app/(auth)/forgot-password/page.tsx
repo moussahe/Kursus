@@ -7,22 +7,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import {
-  Sparkles,
   ArrowLeft,
   Mail,
   CheckCircle,
   Loader2,
   Shield,
   Clock,
-  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const KURSUS = {
-  orange: "#ff9494",
-  purple: "#7a78ff",
+  coral: "#ff9494",
+  coralDark: "#ff7070",
 };
 
 const forgotPasswordSchema = z.object({
@@ -78,11 +76,11 @@ export default function ForgotPasswordPage() {
         {/* Decorative elements */}
         <div
           className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
-          style={{ background: `${KURSUS.purple}20` }}
+          style={{ background: `${KURSUS.coral}20` }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
-          style={{ background: `${KURSUS.orange}15` }}
+          style={{ background: `${KURSUS.coralDark}15` }}
         />
 
         {/* Content */}
@@ -95,19 +93,16 @@ export default function ForgotPasswordPage() {
           >
             {/* Logo */}
             <div className="mb-8 flex justify-center">
-              <div
-                className="flex h-16 w-16 items-center justify-center rounded-2xl"
-                style={{
-                  background: `linear-gradient(135deg, ${KURSUS.purple}, ${KURSUS.purple}dd)`,
-                  boxShadow: `0 0 40px -10px ${KURSUS.purple}`,
-                }}
+              <span
+                className="text-3xl font-black"
+                style={{ color: KURSUS.coral }}
               >
-                <HelpCircle className="h-8 w-8 text-white" />
-              </div>
+                Kursus.
+              </span>
             </div>
 
             <h2 className="text-4xl font-black tracking-tight text-white">
-              Pas de <span style={{ color: KURSUS.purple }}>panique</span> !
+              Pas de <span style={{ color: KURSUS.coral }}>panique</span> !
             </h2>
             <p className="mt-4 text-lg text-gray-400">
               Nous allons vous aider à récupérer l&apos;accès à votre compte en
@@ -120,17 +115,17 @@ export default function ForgotPasswordPage() {
                 {
                   icon: Mail,
                   text: "Recevez un lien sécurisé par email",
-                  color: KURSUS.orange,
+                  color: KURSUS.coral,
                 },
                 {
                   icon: Clock,
                   text: "Lien valide pendant 1 heure",
-                  color: KURSUS.purple,
+                  color: KURSUS.coralDark,
                 },
                 {
                   icon: Shield,
                   text: "Processus 100% sécurisé",
-                  color: KURSUS.purple,
+                  color: KURSUS.coral,
                 },
               ].map((feature, i) => (
                 <motion.div
@@ -167,15 +162,12 @@ export default function ForgotPasswordPage() {
         >
           {/* Logo mobile */}
           <div className="mb-8">
-            <Link href="/" className="flex items-center gap-3">
-              <div
-                className="flex h-10 w-10 items-center justify-center rounded-xl"
-                style={{ background: KURSUS.orange }}
+            <Link href="/">
+              <span
+                className="text-2xl font-black"
+                style={{ color: KURSUS.coral }}
               >
-                <Sparkles className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-[var(--kursus-text)]">
-                Kursus
+                Kursus.
               </span>
             </Link>
           </div>
@@ -220,8 +212,8 @@ export default function ForgotPasswordPage() {
                   type="submit"
                   className="h-12 w-full rounded-xl text-base font-semibold text-white transition-all hover:opacity-90"
                   style={{
-                    background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
-                    boxShadow: `0 0 20px -5px ${KURSUS.orange}50`,
+                    background: `linear-gradient(135deg, ${KURSUS.coral}, ${KURSUS.coralDark})`,
+                    boxShadow: `0 0 20px -5px ${KURSUS.coral}50`,
                   }}
                   disabled={isSubmitting}
                 >
@@ -276,7 +268,7 @@ export default function ForgotPasswordPage() {
             <Link
               href="/login"
               className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-80"
-              style={{ color: KURSUS.orange }}
+              style={{ color: KURSUS.coral }}
             >
               <ArrowLeft className="h-4 w-4" />
               Retour à la connexion
