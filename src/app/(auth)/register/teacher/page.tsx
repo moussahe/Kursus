@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { motion } from "framer-motion";
 import {
-  GraduationCap,
+  Sparkles,
   Loader2,
   ArrowLeft,
   ArrowRight,
@@ -16,6 +17,10 @@ import {
   User,
   Briefcase,
   CheckCircle,
+  TrendingUp,
+  Zap,
+  Shield,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,14 +28,19 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+
+const KURSUS = {
+  orange: "#ff6d38",
+  lime: "#c7ff69",
+  purple: "#7a78ff",
+};
 
 // Subject enum values with French labels
 const SUBJECTS = [
-  { value: "MATHEMATIQUES", label: "Mathematiques" },
-  { value: "FRANCAIS", label: "Francais" },
-  { value: "HISTOIRE_GEO", label: "Histoire-Geographie" },
+  { value: "MATHEMATIQUES", label: "Mathématiques" },
+  { value: "FRANCAIS", label: "Français" },
+  { value: "HISTOIRE_GEO", label: "Histoire-Géographie" },
   { value: "SCIENCES", label: "Sciences" },
   { value: "ANGLAIS", label: "Anglais" },
   { value: "PHYSIQUE_CHIMIE", label: "Physique-Chimie" },
@@ -46,11 +56,11 @@ type SubjectValue = (typeof SUBJECTS)[number]["value"];
 
 // Step 1 schema: Basic info
 const step1Schema = z.object({
-  name: z.string().min(2, "Minimum 2 caracteres"),
+  name: z.string().min(2, "Minimum 2 caractères"),
   email: z.string().email("Email invalide"),
   password: z
     .string()
-    .min(8, "Minimum 8 caracteres")
+    .min(8, "Minimum 8 caractères")
     .regex(/[A-Z]/, "Au moins une majuscule")
     .regex(/[a-z]/, "Au moins une minuscule")
     .regex(/[0-9]/, "Au moins un chiffre"),
@@ -60,17 +70,17 @@ const step1Schema = z.object({
 const step2Schema = z.object({
   headline: z
     .string()
-    .min(10, "Minimum 10 caracteres")
-    .max(100, "Maximum 100 caracteres"),
+    .min(10, "Minimum 10 caractères")
+    .max(100, "Maximum 100 caractères"),
   bio: z
     .string()
-    .min(50, "Minimum 50 caracteres")
-    .max(1000, "Maximum 1000 caracteres"),
-  specialties: z.array(z.string()).min(1, "Selectionnez au moins une matiere"),
+    .min(50, "Minimum 50 caractères")
+    .max(1000, "Maximum 1000 caractères"),
+  specialties: z.array(z.string()).min(1, "Sélectionnez au moins une matière"),
   yearsExperience: z
     .number({ message: "Entrez un nombre valide" })
-    .min(0, "L'experience ne peut pas etre negative")
-    .max(50, "Maximum 50 ans d'experience"),
+    .min(0, "L'expérience ne peut pas être négative")
+    .max(50, "Maximum 50 ans d'expérience"),
 });
 
 // Combined schema
@@ -82,6 +92,14 @@ const STEPS = [
   { id: 1, name: "Informations", icon: User },
   { id: 2, name: "Profil enseignant", icon: Briefcase },
   { id: 3, name: "Confirmation", icon: CheckCircle },
+];
+
+// Password requirements for visual feedback
+const PASSWORD_REQUIREMENTS = [
+  { regex: /.{8,}/, label: "8 caractères minimum" },
+  { regex: /[A-Z]/, label: "Une majuscule" },
+  { regex: /[a-z]/, label: "Une minuscule" },
+  { regex: /[0-9]/, label: "Un chiffre" },
 ];
 
 export default function TeacherRegisterPage() {
@@ -115,6 +133,7 @@ export default function TeacherRegisterPage() {
   });
 
   const formValues = watch();
+  const passwordValue = watch("password", "");
 
   const handleSpecialtyToggle = useCallback(
     (subject: SubjectValue) => {
@@ -180,22 +199,143 @@ export default function TeacherRegisterPage() {
   const progressValue = (currentStep / 3) * 100;
 
   return (
-    <div className="flex min-h-screen">
-      {/* Left side - Form */}
-      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-lg">
-          <div className="mb-8">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600">
-                <GraduationCap className="h-5 w-5 text-white" />
+    <div className="flex min-h-screen bg-[var(--kursus-bg)]">
+      {/* Left side - Branding */}
+      <div className="relative hidden flex-1 overflow-hidden lg:block">
+        {/* Background gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, #0a0a0a 0%, #141414 100%)`,
+          }}
+        />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
+          style={{ background: `${KURSUS.lime}20` }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
+          style={{ background: `${KURSUS.orange}15` }}
+        />
+
+        {/* Content */}
+        <div className="relative flex h-full flex-col items-center justify-center p-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md text-center"
+          >
+            {/* Logo */}
+            <div className="mb-8 flex justify-center">
+              <div
+                className="flex h-16 w-16 items-center justify-center rounded-2xl"
+                style={{
+                  background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.lime}`,
+                }}
+              >
+                <Sparkles className="h-8 w-8 text-white" />
               </div>
-              <span className="text-xl font-bold">Kursus</span>
-            </Link>
-            <h2 className="mt-8 text-2xl font-bold text-gray-900">
-              Devenir enseignant
+            </div>
+
+            <h2 className="text-4xl font-black tracking-tight text-white">
+              Partagez votre <span style={{ color: KURSUS.lime }}>savoir</span>
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Partagez votre savoir et generez des revenus
+            <p className="mt-4 text-lg text-gray-400">
+              Créez des cours de qualité et générez des revenus complémentaires.
+            </p>
+
+            {/* Features */}
+            <div className="mt-12 space-y-4 text-left">
+              {[
+                {
+                  icon: TrendingUp,
+                  text: "Gardez 70% de chaque vente",
+                  color: KURSUS.lime,
+                },
+                {
+                  icon: Zap,
+                  text: "Outils de création intuitifs avec IA",
+                  color: KURSUS.orange,
+                },
+                {
+                  icon: Shield,
+                  text: "Support dédié aux enseignants",
+                  color: KURSUS.purple,
+                },
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4"
+                >
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ background: `${feature.color}20` }}
+                  >
+                    <feature.icon
+                      className="h-5 w-5"
+                      style={{ color: feature.color }}
+                    />
+                  </div>
+                  <span className="text-sm text-gray-300">{feature.text}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
+              {[
+                { value: "350€", label: "/mois moyen" },
+                { value: "300+", label: "Profs actifs" },
+                { value: "70%", label: "Commission" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div
+                    className="text-2xl font-black"
+                    style={{ color: KURSUS.lime }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-gray-500">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Right side - Form */}
+      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:px-20 xl:px-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mx-auto w-full max-w-lg"
+        >
+          {/* Logo mobile */}
+          <div className="mb-8">
+            <Link href="/" className="flex items-center gap-3">
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-xl"
+                style={{ background: KURSUS.orange }}
+              >
+                <Sparkles className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-[var(--kursus-text)]">
+                Kursus
+              </span>
+            </Link>
+            <h1 className="mt-8 text-2xl font-bold text-[var(--kursus-text)]">
+              Devenir enseignant
+            </h1>
+            <p className="mt-2 text-sm text-[var(--kursus-text-muted)]">
+              Partagez votre savoir et générez des revenus
             </p>
           </div>
 
@@ -211,13 +351,23 @@ export default function TeacherRegisterPage() {
                   <div key={step.id} className="flex flex-1 items-center">
                     <div className="flex flex-col items-center">
                       <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all ${
-                          isCompleted
-                            ? "border-emerald-600 bg-emerald-600 text-white"
+                        className="flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all"
+                        style={{
+                          borderColor:
+                            isCompleted || isCurrent
+                              ? KURSUS.lime
+                              : "var(--kursus-border)",
+                          background: isCompleted
+                            ? KURSUS.lime
                             : isCurrent
-                              ? "border-emerald-600 bg-emerald-50 text-emerald-600"
-                              : "border-gray-300 bg-white text-gray-400"
-                        }`}
+                              ? "var(--kursus-lime-bg)"
+                              : "transparent",
+                          color: isCompleted
+                            ? "#0a0a0a"
+                            : isCurrent
+                              ? "var(--kursus-lime-text)"
+                              : "var(--kursus-text-muted)",
+                        }}
                       >
                         {isCompleted ? (
                           <Check className="h-5 w-5" />
@@ -226,31 +376,44 @@ export default function TeacherRegisterPage() {
                         )}
                       </div>
                       <span
-                        className={`mt-2 text-xs font-medium ${
-                          isCurrent || isCompleted
-                            ? "text-emerald-600"
-                            : "text-gray-400"
-                        }`}
+                        className="mt-2 text-xs font-medium"
+                        style={{
+                          color:
+                            isCurrent || isCompleted
+                              ? "var(--kursus-lime-text)"
+                              : "var(--kursus-text-muted)",
+                        }}
                       >
                         {step.name}
                       </span>
                     </div>
                     {index < STEPS.length - 1 && (
                       <div
-                        className={`mx-2 h-0.5 flex-1 ${
-                          isCompleted ? "bg-emerald-600" : "bg-gray-200"
-                        }`}
+                        className="mx-2 h-0.5 flex-1"
+                        style={{
+                          background: isCompleted
+                            ? KURSUS.lime
+                            : "var(--kursus-border)",
+                        }}
                       />
                     )}
                   </div>
                 );
               })}
             </div>
-            <Progress value={progressValue} className="mt-4 h-1 bg-gray-200" />
+            <div className="mt-4 h-1 overflow-hidden rounded-full bg-[var(--kursus-border)]">
+              <motion.div
+                className="h-full rounded-full"
+                style={{ background: KURSUS.lime }}
+                initial={{ width: 0 }}
+                animate={{ width: `${progressValue}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
           </div>
 
           {error && (
-            <div className="mb-6 rounded-lg bg-red-50 p-3 text-sm text-red-600">
+            <div className="mb-6 rounded-xl bg-red-500/10 p-4 text-sm text-red-500">
               {error}
             </div>
           )}
@@ -260,53 +423,89 @@ export default function TeacherRegisterPage() {
             {currentStep === 1 && (
               <div className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Nom complet</Label>
+                  <Label
+                    htmlFor="name"
+                    className="text-[var(--kursus-text-muted)]"
+                  >
+                    Nom complet
+                  </Label>
                   <Input
                     id="name"
                     type="text"
                     placeholder="Jean Dupont"
-                    className="h-11"
+                    className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                     {...register("name")}
                   />
                   {errors.name && (
-                    <p className="text-sm text-red-600">
+                    <p className="text-sm text-red-500">
                       {errors.name.message}
                     </p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label
+                    htmlFor="email"
+                    className="text-[var(--kursus-text-muted)]"
+                  >
+                    Email
+                  </Label>
                   <Input
                     id="email"
                     type="email"
                     placeholder="votre@email.com"
-                    className="h-11"
+                    className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                     {...register("email")}
                   />
                   {errors.email && (
-                    <p className="text-sm text-red-600">
+                    <p className="text-sm text-red-500">
                       {errors.email.message}
                     </p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password">Mot de passe</Label>
+                  <Label
+                    htmlFor="password"
+                    className="text-[var(--kursus-text-muted)]"
+                  >
+                    Mot de passe
+                  </Label>
                   <PasswordInput
                     id="password"
                     placeholder="••••••••"
-                    className="h-11"
+                    className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                     {...register("password")}
                   />
                   {errors.password && (
-                    <p className="text-sm text-red-600">
+                    <p className="text-sm text-red-500">
                       {errors.password.message}
                     </p>
                   )}
-                  <p className="text-xs text-gray-500">
-                    8 caracteres minimum avec majuscule, minuscule et chiffre
-                  </p>
+                  {/* Password requirements */}
+                  <div className="mt-2 space-y-1">
+                    {PASSWORD_REQUIREMENTS.map((req, index) => {
+                      const isValid = req.regex.test(passwordValue);
+                      return (
+                        <div
+                          key={index}
+                          className="flex items-center gap-2 text-xs"
+                          style={{
+                            color: isValid
+                              ? "var(--kursus-lime-text)"
+                              : "var(--kursus-text-muted)",
+                          }}
+                        >
+                          {isValid ? (
+                            <Check className="h-3 w-3" />
+                          ) : (
+                            <X className="h-3 w-3" />
+                          )}
+                          <span>{req.label}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             )}
@@ -315,40 +514,54 @@ export default function TeacherRegisterPage() {
             {currentStep === 2 && (
               <div className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="headline">Titre professionnel</Label>
+                  <Label
+                    htmlFor="headline"
+                    className="text-[var(--kursus-text-muted)]"
+                  >
+                    Titre professionnel
+                  </Label>
                   <Input
                     id="headline"
                     type="text"
-                    placeholder="Professeur de Mathematiques - 10 ans d'experience"
-                    className="h-11"
+                    placeholder="Professeur de Mathématiques - 10 ans d'expérience"
+                    className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                     {...register("headline")}
                   />
                   {errors.headline && (
-                    <p className="text-sm text-red-600">
+                    <p className="text-sm text-red-500">
                       {errors.headline.message}
                     </p>
                   )}
-                  <p className="text-xs text-gray-500">
-                    Ce titre apparaitra sur votre profil public
+                  <p className="text-xs text-[var(--kursus-text-muted)]">
+                    Ce titre apparaîtra sur votre profil public
                   </p>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="bio">Biographie</Label>
+                  <Label
+                    htmlFor="bio"
+                    className="text-[var(--kursus-text-muted)]"
+                  >
+                    Biographie
+                  </Label>
                   <Textarea
                     id="bio"
-                    placeholder="Decrivez votre parcours, vos methodes pedagogiques et ce qui vous motive..."
-                    className="min-h-[120px]"
+                    placeholder="Décrivez votre parcours, vos méthodes pédagogiques et ce qui vous motive..."
+                    className="min-h-[120px] rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                     {...register("bio")}
                   />
                   {errors.bio && (
-                    <p className="text-sm text-red-600">{errors.bio.message}</p>
+                    <p className="text-sm text-red-500">{errors.bio.message}</p>
                   )}
-                  <p className="text-xs text-gray-500">Minimum 50 caracteres</p>
+                  <p className="text-xs text-[var(--kursus-text-muted)]">
+                    Minimum 50 caractères
+                  </p>
                 </div>
 
                 <div className="space-y-3">
-                  <Label>Matieres enseignees</Label>
+                  <Label className="text-[var(--kursus-text-muted)]">
+                    Matières enseignées
+                  </Label>
                   <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                     {SUBJECTS.map((subject) => {
                       const isSelected = selectedSpecialties.includes(
@@ -357,11 +570,15 @@ export default function TeacherRegisterPage() {
                       return (
                         <div
                           key={subject.value}
-                          className={`flex cursor-pointer items-center gap-2 rounded-lg border-2 p-3 transition-all ${
-                            isSelected
-                              ? "border-emerald-500 bg-emerald-50"
-                              : "border-gray-200 hover:border-gray-300"
-                          }`}
+                          className="flex cursor-pointer items-center gap-2 rounded-xl border-2 p-3 transition-all"
+                          style={{
+                            borderColor: isSelected
+                              ? KURSUS.lime
+                              : "var(--kursus-border)",
+                            background: isSelected
+                              ? "var(--kursus-lime-bg)"
+                              : "transparent",
+                          }}
                           onClick={() => handleSpecialtyToggle(subject.value)}
                         >
                           <Checkbox
@@ -369,14 +586,23 @@ export default function TeacherRegisterPage() {
                             onCheckedChange={() =>
                               handleSpecialtyToggle(subject.value)
                             }
-                            className="data-[state=checked]:bg-emerald-600 data-[state=checked]:border-emerald-600"
+                            style={{
+                              borderColor: isSelected
+                                ? KURSUS.lime
+                                : "var(--kursus-border)",
+                              background: isSelected
+                                ? KURSUS.lime
+                                : "transparent",
+                            }}
                           />
                           <span
-                            className={`text-sm ${
-                              isSelected
-                                ? "font-medium text-emerald-700"
-                                : "text-gray-600"
-                            }`}
+                            className="text-sm"
+                            style={{
+                              color: isSelected
+                                ? "var(--kursus-lime-text)"
+                                : "var(--kursus-text-muted)",
+                              fontWeight: isSelected ? 500 : 400,
+                            }}
                           >
                             {subject.label}
                           </span>
@@ -385,15 +611,18 @@ export default function TeacherRegisterPage() {
                     })}
                   </div>
                   {errors.specialties && (
-                    <p className="text-sm text-red-600">
+                    <p className="text-sm text-red-500">
                       {errors.specialties.message}
                     </p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="yearsExperience">
-                    Annees d&apos;experience
+                  <Label
+                    htmlFor="yearsExperience"
+                    className="text-[var(--kursus-text-muted)]"
+                  >
+                    Années d&apos;expérience
                   </Label>
                   <Input
                     id="yearsExperience"
@@ -401,11 +630,11 @@ export default function TeacherRegisterPage() {
                     min="0"
                     max="50"
                     placeholder="5"
-                    className="h-11 w-32"
+                    className="h-12 w-32 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                     {...register("yearsExperience", { valueAsNumber: true })}
                   />
                   {errors.yearsExperience && (
-                    <p className="text-sm text-red-600">
+                    <p className="text-sm text-red-500">
                       {errors.yearsExperience.message}
                     </p>
                   )}
@@ -416,42 +645,61 @@ export default function TeacherRegisterPage() {
             {/* Step 3: Confirmation */}
             {currentStep === 3 && (
               <div className="space-y-6">
-                <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-6">
-                  <h3 className="flex items-center gap-2 text-lg font-semibold text-emerald-800">
+                <div
+                  className="rounded-xl p-6"
+                  style={{
+                    background: "var(--kursus-lime-bg)",
+                    border: "1px solid var(--kursus-lime-border)",
+                  }}
+                >
+                  <h3
+                    className="flex items-center gap-2 text-lg font-semibold"
+                    style={{ color: "var(--kursus-lime-text)" }}
+                  >
                     <CheckCircle className="h-5 w-5" />
-                    Recapitulatif de votre inscription
+                    Récapitulatif de votre inscription
                   </h3>
 
                   <div className="mt-4 space-y-4">
                     <div>
-                      <p className="text-sm font-medium text-gray-500">
+                      <p className="text-sm font-medium text-[var(--kursus-text-muted)]">
                         Nom complet
                       </p>
-                      <p className="text-gray-900">{formValues.name}</p>
+                      <p className="text-[var(--kursus-text)]">
+                        {formValues.name}
+                      </p>
                     </div>
 
                     <div>
-                      <p className="text-sm font-medium text-gray-500">Email</p>
-                      <p className="text-gray-900">{formValues.email}</p>
+                      <p className="text-sm font-medium text-[var(--kursus-text-muted)]">
+                        Email
+                      </p>
+                      <p className="text-[var(--kursus-text)]">
+                        {formValues.email}
+                      </p>
                     </div>
 
                     <div>
-                      <p className="text-sm font-medium text-gray-500">
+                      <p className="text-sm font-medium text-[var(--kursus-text-muted)]">
                         Titre professionnel
                       </p>
-                      <p className="text-gray-900">{formValues.headline}</p>
+                      <p className="text-[var(--kursus-text)]">
+                        {formValues.headline}
+                      </p>
                     </div>
 
                     <div>
-                      <p className="text-sm font-medium text-gray-500">
+                      <p className="text-sm font-medium text-[var(--kursus-text-muted)]">
                         Biographie
                       </p>
-                      <p className="text-sm text-gray-900">{formValues.bio}</p>
+                      <p className="text-sm text-[var(--kursus-text)]">
+                        {formValues.bio}
+                      </p>
                     </div>
 
                     <div>
-                      <p className="text-sm font-medium text-gray-500">
-                        Matieres
+                      <p className="text-sm font-medium text-[var(--kursus-text-muted)]">
+                        Matières
                       </p>
                       <div className="mt-1 flex flex-wrap gap-2">
                         {selectedSpecialties.map((specialty) => {
@@ -461,7 +709,10 @@ export default function TeacherRegisterPage() {
                           return (
                             <Badge
                               key={specialty}
-                              className="bg-emerald-600 text-white"
+                              style={{
+                                background: KURSUS.lime,
+                                color: "#0a0a0a",
+                              }}
                             >
                               {subject?.label || specialty}
                             </Badge>
@@ -471,10 +722,10 @@ export default function TeacherRegisterPage() {
                     </div>
 
                     <div>
-                      <p className="text-sm font-medium text-gray-500">
-                        Experience
+                      <p className="text-sm font-medium text-[var(--kursus-text-muted)]">
+                        Expérience
                       </p>
-                      <p className="text-gray-900">
+                      <p className="text-[var(--kursus-text)]">
                         {formValues.yearsExperience} an
                         {formValues.yearsExperience > 1 ? "s" : ""}
                       </p>
@@ -482,22 +733,24 @@ export default function TeacherRegisterPage() {
                   </div>
                 </div>
 
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <p className="text-sm text-gray-600">
-                    En cliquant sur &quot;Creer mon compte&quot;, vous acceptez
+                <div className="rounded-xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-4">
+                  <p className="text-sm text-[var(--kursus-text-muted)]">
+                    En cliquant sur &quot;Créer mon compte&quot;, vous acceptez
                     nos{" "}
                     <Link
                       href={"/conditions" as Route}
-                      className="font-medium text-emerald-600 hover:underline"
+                      className="font-medium transition-colors hover:opacity-80"
+                      style={{ color: KURSUS.orange }}
                     >
                       conditions d&apos;utilisation
                     </Link>{" "}
                     et notre{" "}
                     <Link
                       href={"/confidentialite" as Route}
-                      className="font-medium text-emerald-600 hover:underline"
+                      className="font-medium transition-colors hover:opacity-80"
+                      style={{ color: KURSUS.orange }}
                     >
-                      politique de confidentialite
+                      politique de confidentialité
                     </Link>
                     .
                   </p>
@@ -512,7 +765,7 @@ export default function TeacherRegisterPage() {
                   type="button"
                   variant="outline"
                   onClick={prevStep}
-                  className="h-11 flex-1"
+                  className="h-12 flex-1 rounded-xl border-[var(--kursus-border)] bg-transparent text-[var(--kursus-text)] hover:bg-[var(--kursus-bg-elevated)]"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Retour
@@ -523,7 +776,11 @@ export default function TeacherRegisterPage() {
                 <Button
                   type="button"
                   onClick={nextStep}
-                  className="h-11 flex-1 bg-emerald-600 hover:bg-emerald-700"
+                  className="h-12 flex-1 rounded-xl text-base font-semibold transition-all hover:opacity-90"
+                  style={{
+                    background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
+                    color: "#0a0a0a",
+                  }}
                 >
                   Continuer
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -532,17 +789,21 @@ export default function TeacherRegisterPage() {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="h-11 flex-1 bg-emerald-600 hover:bg-emerald-700"
+                  className="h-12 flex-1 rounded-xl text-base font-semibold transition-all hover:opacity-90"
+                  style={{
+                    background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
+                    color: "#0a0a0a",
+                  }}
                 >
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creation en cours...
+                      Création en cours...
                     </>
                   ) : (
                     <>
                       <Check className="mr-2 h-4 w-4" />
-                      Creer mon compte
+                      Créer mon compte
                     </>
                   )}
                 </Button>
@@ -550,62 +811,28 @@ export default function TeacherRegisterPage() {
             </div>
           </form>
 
-          <p className="mt-6 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-[var(--kursus-text-muted)]">
             Déjà un compte ?{" "}
             <Link
               href="/login"
-              className="font-medium text-emerald-600 hover:text-emerald-500"
+              className="font-medium transition-colors hover:opacity-80"
+              style={{ color: KURSUS.orange }}
             >
               Se connecter
             </Link>
           </p>
 
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Vous etes parent ?{" "}
+          <p className="mt-2 text-center text-sm text-[var(--kursus-text-muted)]">
+            Vous êtes parent ?{" "}
             <Link
               href="/register"
-              className="font-medium text-emerald-600 hover:text-emerald-500"
+              className="font-medium transition-colors hover:opacity-80"
+              style={{ color: KURSUS.orange }}
             >
               Inscription parent
             </Link>
           </p>
-        </div>
-      </div>
-
-      {/* Right side - Image/Gradient */}
-      <div className="relative hidden flex-1 lg:block">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600">
-          <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        </div>
-        <div className="relative flex h-full items-center justify-center p-12">
-          <div className="max-w-md text-white">
-            <h3 className="text-3xl font-bold">Partagez votre savoir</h3>
-            <p className="mt-4 text-lg text-emerald-100">
-              Creez des cours de qualité et generez des revenus complementaires.
-              Gardez 70% de chaque vente.
-            </p>
-            <ul className="mt-8 space-y-4 text-emerald-100">
-              <li className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400/30">
-                  <Check className="h-4 w-4 text-white" />
-                </div>
-                Creez des cours en toute liberte
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400/30">
-                  <Check className="h-4 w-4 text-white" />
-                </div>
-                Touchez des milliers d&apos;élèves
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400/30">
-                  <Check className="h-4 w-4 text-white" />
-                </div>
-                Generez des revenus passifs
-              </li>
-            </ul>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
