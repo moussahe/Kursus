@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Search, Menu, X, GraduationCap } from "lucide-react";
+import {
+  Sparkles,
+  Search,
+  Menu,
+  X,
+  GraduationCap,
+  Sun,
+  Moon,
+} from "lucide-react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -16,6 +25,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +52,7 @@ export function Header() {
         className={cn(
           "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5"
+            ? "backdrop-blur-xl border-b bg-background/80 border-border"
             : "bg-transparent",
         )}
       >
@@ -57,7 +67,7 @@ export function Header() {
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6d38] to-[#ff8c5a]">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-white">Kursus</span>
+              <span className="text-xl font-bold text-foreground">Kursus</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -67,7 +77,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="group relative text-sm font-medium text-gray-400 transition-colors hover:text-white"
+                    className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
                     <span className="absolute bottom-[-4px] left-0 h-0.5 w-full origin-center scale-x-0 bg-gradient-to-r from-[#ff6d38] to-[#c7ff69] transition-transform duration-300 ease-out group-hover:scale-x-100" />
@@ -91,7 +101,7 @@ export function Header() {
                       <input
                         type="text"
                         placeholder="Rechercher un cours..."
-                        className="w-48 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-gray-500 focus:border-[#ff6d38]/50 focus:bg-white/10 focus:outline-none focus:ring-1 focus:ring-[#ff6d38]/50"
+                        className="w-48 rounded-xl border border-border bg-muted px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-[#ff6d38]/50 focus:bg-background focus:outline-none focus:ring-1 focus:ring-[#ff6d38]/50"
                         autoFocus
                       />
                     </motion.div>
@@ -100,7 +110,7 @@ export function Header() {
                 <button
                   onClick={toggleSearch}
                   aria-label="Toggle Search"
-                  className="rounded-xl p-2 text-gray-400 transition-colors hover:bg-white/5 hover:text-[#ff6d38]"
+                  className="rounded-xl p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-[#ff6d38]"
                 >
                   {isSearchOpen ? (
                     <X className="h-5 w-5" />
@@ -109,6 +119,19 @@ export function Header() {
                   )}
                 </button>
               </div>
+
+              {/* Theme Toggle */}
+              <button
+                onClick={() =>
+                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                }
+                aria-label="Basculer le theme"
+                className="relative rounded-xl p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-[#ff6d38]"
+                suppressHydrationWarning
+              >
+                <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute left-2 top-2 h-5 w-5 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
+              </button>
 
               {/* Auth Buttons - Desktop */}
               <div className="hidden items-center gap-3 lg:flex">
@@ -131,7 +154,7 @@ export function Header() {
                 >
                   <Link
                     href="/login"
-                    className="rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-all hover:border-white/20 hover:bg-white/10"
+                    className="rounded-full border border-border bg-muted px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-accent"
                   >
                     Connexion
                   </Link>
@@ -154,7 +177,7 @@ export function Header() {
                 <button
                   onClick={toggleMenu}
                   aria-label="Open menu"
-                  className="rounded-xl p-2 text-white hover:bg-white/5"
+                  className="rounded-xl p-2 text-foreground hover:bg-muted"
                 >
                   <Menu className="h-6 w-6" />
                 </button>
@@ -172,11 +195,11 @@ export function Header() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-50 bg-[#0a0a0a] lg:hidden"
+            className="fixed inset-0 z-50 bg-background lg:hidden"
           >
             <div className="flex h-full flex-col">
               {/* Mobile Header */}
-              <div className="flex items-center justify-between border-b border-white/5 p-4">
+              <div className="flex items-center justify-between border-b border-border p-4">
                 <Link
                   href="/"
                   className="flex items-center gap-3"
@@ -185,12 +208,14 @@ export function Header() {
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6d38] to-[#ff8c5a]">
                     <Sparkles className="h-5 w-5 text-white" />
                   </div>
-                  <span className="text-xl font-bold text-white">Kursus</span>
+                  <span className="text-xl font-bold text-foreground">
+                    Kursus
+                  </span>
                 </Link>
                 <button
                   onClick={toggleMenu}
                   aria-label="Close menu"
-                  className="rounded-xl p-2 text-white hover:bg-white/5"
+                  className="rounded-xl p-2 text-foreground hover:bg-muted"
                 >
                   <X className="h-6 w-6" />
                 </button>
@@ -208,7 +233,7 @@ export function Header() {
                     <Link
                       href={link.href}
                       onClick={toggleMenu}
-                      className="text-2xl font-medium text-white transition-colors hover:text-[#ff6d38]"
+                      className="text-2xl font-medium text-foreground transition-colors hover:text-[#ff6d38]"
                     >
                       {link.label}
                     </Link>
@@ -217,11 +242,11 @@ export function Header() {
               </nav>
 
               {/* Mobile Auth Buttons */}
-              <div className="flex flex-col gap-3 border-t border-white/5 p-6">
+              <div className="flex flex-col gap-3 border-t border-border p-6">
                 <Link
                   href="/devenir-prof"
                   onClick={toggleMenu}
-                  className="flex w-full items-center justify-center gap-2 rounded-full border border-[#c7ff69]/30 bg-[#c7ff69]/10 px-6 py-3.5 text-base font-medium text-[#c7ff69] transition-all hover:bg-[#c7ff69]/20"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border border-[#c7ff69]/30 bg-[#c7ff69]/10 px-6 py-3.5 text-base font-medium text-[var(--kursus-lime-text)] transition-all hover:bg-[#c7ff69]/20"
                 >
                   <GraduationCap className="h-5 w-5" />
                   Devenir Prof
@@ -229,14 +254,14 @@ export function Header() {
                 <Link
                   href="/login"
                   onClick={toggleMenu}
-                  className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-3.5 text-center text-base font-medium text-white transition-all hover:bg-white/10"
+                  className="w-full rounded-full border border-border bg-muted px-6 py-3.5 text-center text-base font-medium text-foreground transition-all hover:bg-accent"
                 >
                   Connexion
                 </Link>
                 <Link
                   href="/register"
                   onClick={toggleMenu}
-                  className="w-full rounded-full bg-[#ff6d38] px-6 py-3.5 text-center text-base font-semibold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a]"
+                  className="w-full rounded-full bg-[#ff6d38] px-6 py-3.5 text-center text-base font-semibold text-white transition-all hover:bg-[#ff8c5a]"
                 >
                   Commencer gratuitement
                 </Link>

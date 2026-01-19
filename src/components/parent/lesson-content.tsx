@@ -2,6 +2,7 @@
 
 import { QuizPlayer } from "@/components/quiz";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { getVideoEmbedUrl } from "@/lib/utils";
 import type {
   Quiz as QuizType,
   QuizQuestion as QuizQuestionType,
@@ -67,28 +68,13 @@ export function LessonContent({
       {/* Video Content */}
       {lesson.contentType === "VIDEO" && lesson.videoUrl && (
         <div className="aspect-video w-full overflow-hidden rounded-xl bg-black">
-          {lesson.videoUrl.includes("youtube.com") ||
-          lesson.videoUrl.includes("youtu.be") ? (
-            <iframe
-              src={getYouTubeEmbedUrl(lesson.videoUrl)}
-              title={lesson.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="h-full w-full"
-            />
-          ) : lesson.videoUrl.includes("vimeo.com") ? (
-            <iframe
-              src={getVimeoEmbedUrl(lesson.videoUrl)}
-              title={lesson.title}
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              className="h-full w-full"
-            />
-          ) : (
-            <video src={lesson.videoUrl} controls className="h-full w-full">
-              Votre navigateur ne supporte pas la lecture de videos.
-            </video>
-          )}
+          <iframe
+            src={getVideoEmbedUrl(lesson.videoUrl) ?? undefined}
+            title={lesson.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="h-full w-full"
+          />
         </div>
       )}
 
@@ -142,18 +128,4 @@ export function LessonContent({
         )}
     </div>
   );
-}
-
-function getYouTubeEmbedUrl(url: string): string {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-  const match = url.match(regExp);
-  const videoId = match && match[2].length === 11 ? match[2] : null;
-  return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
-}
-
-function getVimeoEmbedUrl(url: string): string {
-  const regExp = /vimeo\.com\/(?:video\/)?(\d+)/;
-  const match = url.match(regExp);
-  const videoId = match ? match[1] : null;
-  return videoId ? `https://player.vimeo.com/video/${videoId}` : url;
 }

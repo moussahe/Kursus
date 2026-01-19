@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { markLessonComplete } from "@/app/(dashboard)/student/actions";
 import { XP_REWARDS } from "@/lib/gamification";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { getVideoEmbedUrl } from "@/lib/utils";
 
 interface LessonContentProps {
   lesson: {
@@ -48,7 +49,7 @@ export function LessonContent({
         <div className="rounded-2xl bg-white p-6 shadow-sm">
           <div className="aspect-video w-full overflow-hidden rounded-xl bg-black">
             <iframe
-              src={lesson.videoUrl}
+              src={getVideoEmbedUrl(lesson.videoUrl) ?? undefined}
               className="h-full w-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
