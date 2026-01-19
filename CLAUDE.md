@@ -23,9 +23,9 @@ Objectif Y1: 10K utilisateurs, 500K EUR CA.
 
 ### Direction
 
-- **Style** : Dark premium, futuristic, refined
+- **Style** : Premium, futuristic, refined
 - **Inspiration** : nvg8.io, linear.app, vercel.com, raycast.com
-- **Mode par défaut** : Dark
+- **Mode par défaut** : Light
 - **Toggle** : Bouton dark/light mode dans le header
 
 ### Couleurs
@@ -162,6 +162,6 @@ pnpm lint && pnpm type-check && pnpm build
 
 ## Rappels
 
-- Dark mode par défaut, light disponible
+- Light mode par défaut, dark disponible
 - Mobile responsive obligatoire
 - Tester les 2 thèmes avant merge

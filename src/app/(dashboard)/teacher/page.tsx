@@ -12,6 +12,9 @@ import {
   ArrowUpRight,
   TrendingUp,
   Sparkles,
+  Rocket,
+  Target,
+  Zap,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -229,6 +232,108 @@ export default async function TeacherDashboardPage() {
           </Card>
         ))}
       </div>
+
+      {/* Revenue Potential Banner - Show when no/low revenue */}
+      {totalRevenue < 10000 && (
+        <Card
+          className="overflow-hidden rounded-2xl border-0"
+          style={{
+            background: `linear-gradient(135deg, ${KURSUS.purple}15, ${KURSUS.orange}10)`,
+            boxShadow: `0 0 60px -20px ${KURSUS.purple}40`,
+          }}
+        >
+          <CardContent className="p-6">
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="flex items-start gap-4">
+                <div
+                  className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl"
+                  style={{ background: `${KURSUS.orange}20` }}
+                >
+                  <Rocket
+                    className="h-7 w-7"
+                    style={{ color: KURSUS.orange }}
+                  />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-[var(--kursus-text)]">
+                    Votre potentiel de revenus
+                  </h3>
+                  <p className="mt-1 text-sm text-[var(--kursus-text-muted)]">
+                    Avec {Math.max(3, totalCourses)} cours a 5€ et 100
+                    ventes/mois, vous pourriez gagner :
+                  </p>
+                  <div className="mt-3 flex items-baseline gap-2">
+                    <span
+                      className="text-3xl font-black"
+                      style={{ color: "var(--kursus-lime-text)" }}
+                    >
+                      350€
+                    </span>
+                    <span className="text-[var(--kursus-text-muted)]">
+                      /mois
+                    </span>
+                    <span className="text-[var(--kursus-text-muted)]">·</span>
+                    <span
+                      className="font-bold"
+                      style={{ color: KURSUS.orange }}
+                    >
+                      4 200€/an
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] hover:bg-[var(--kursus-bg)]"
+                >
+                  <Link href="/devenir-prof#calculator">
+                    <Target className="mr-2 h-4 w-4" />
+                    Simuler mes revenus
+                  </Link>
+                </Button>
+                {totalCourses === 0 && (
+                  <Button
+                    asChild
+                    className="rounded-xl text-black"
+                    style={{ background: KURSUS.orange }}
+                  >
+                    <Link href="/teacher/courses/new">
+                      <Zap className="mr-2 h-4 w-4" />
+                      Creer mon premier cours
+                    </Link>
+                  </Button>
+                )}
+              </div>
+            </div>
+
+            {/* Quick tips */}
+            <div className="mt-6 grid gap-3 border-t border-[var(--kursus-border)] pt-6 sm:grid-cols-3">
+              {[
+                { icon: BookOpen, text: "Plus de cours = plus de revenus" },
+                { icon: Star, text: "Les bonnes notes attirent les eleves" },
+                {
+                  icon: TrendingUp,
+                  text: "70% de commission sur chaque vente",
+                },
+              ].map((tip, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-2 text-sm text-[var(--kursus-text-muted)]"
+                >
+                  <tip.icon
+                    className="h-4 w-4 flex-shrink-0"
+                    style={{ color: KURSUS.purple }}
+                  />
+                  <span>{tip.text}</span>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Recent Sales */}
