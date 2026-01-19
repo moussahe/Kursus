@@ -6,14 +6,18 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { motion } from "framer-motion";
 import {
-  GraduationCap,
+  Sparkles,
   Loader2,
   Users,
   BookOpen,
   Check,
   X,
   Gift,
+  TrendingUp,
+  Shield,
+  Zap,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,6 +28,12 @@ import {
   passwordSchema,
   PASSWORD_REQUIREMENTS,
 } from "@/lib/validations/password";
+
+const KURSUS = {
+  orange: "#ff6d38",
+  lime: "#c7ff69",
+  purple: "#7a78ff",
+};
 
 const registerSchema = z
   .object({
@@ -115,42 +125,206 @@ function RegisterForm() {
   };
 
   return (
-    <div className="flex min-h-screen">
-      {/* Left side - Form */}
-      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm lg:w-96">
-          <div className="mb-8">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-600">
-                <GraduationCap className="h-5 w-5 text-white" />
+    <div className="flex min-h-screen bg-[var(--kursus-bg)]">
+      {/* Left side - Branding */}
+      <div className="relative hidden flex-1 overflow-hidden lg:block">
+        {/* Background gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, #0a0a0a 0%, #141414 100%)`,
+          }}
+        />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
+          style={{ background: `${KURSUS.purple}20` }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
+          style={{ background: `${KURSUS.orange}15` }}
+        />
+
+        {/* Content */}
+        <div className="relative flex h-full flex-col items-center justify-center p-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md text-center"
+          >
+            {/* Logo */}
+            <div className="mb-8 flex justify-center">
+              <div
+                className="flex h-16 w-16 items-center justify-center rounded-2xl"
+                style={{
+                  background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.orange}`,
+                }}
+              >
+                <Sparkles className="h-8 w-8 text-white" />
               </div>
-              <span className="text-xl font-bold">Kursus</span>
-            </Link>
-            <h2 className="mt-8 text-2xl font-bold text-gray-900">
-              Creer votre compte
+            </div>
+
+            <h2 className="text-4xl font-black tracking-tight text-white">
+              {selectedRole === "TEACHER" ? (
+                <>
+                  Partagez votre{" "}
+                  <span style={{ color: KURSUS.lime }}>savoir</span>
+                </>
+              ) : (
+                <>
+                  Rejoignez <span style={{ color: KURSUS.orange }}>Kursus</span>
+                </>
+              )}
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-4 text-lg text-gray-400">
+              {selectedRole === "TEACHER"
+                ? "Créez des cours de qualité et générez des revenus complémentaires."
+                : "Des cours créés par de vrais professeurs. Paiement unique, accès à vie."}
+            </p>
+
+            {/* Features */}
+            <div className="mt-12 space-y-4 text-left">
+              {(selectedRole === "TEACHER"
+                ? [
+                    {
+                      icon: TrendingUp,
+                      text: "Gardez 70% de chaque vente",
+                      color: KURSUS.lime,
+                    },
+                    {
+                      icon: Zap,
+                      text: "Outils de création intuitifs avec IA",
+                      color: KURSUS.orange,
+                    },
+                    {
+                      icon: Shield,
+                      text: "Support dédié aux enseignants",
+                      color: KURSUS.purple,
+                    },
+                  ]
+                : [
+                    {
+                      icon: BookOpen,
+                      text: "Cours de qualité par des enseignants certifiés",
+                      color: KURSUS.orange,
+                    },
+                    {
+                      icon: Users,
+                      text: "Du CP à la Terminale, toutes les matières",
+                      color: KURSUS.purple,
+                    },
+                    {
+                      icon: Shield,
+                      text: "Paiement sécurisé, satisfait ou remboursé",
+                      color: KURSUS.lime,
+                    },
+                  ]
+              ).map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4"
+                >
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ background: `${feature.color}20` }}
+                  >
+                    <feature.icon
+                      className="h-5 w-5"
+                      style={{ color: feature.color }}
+                    />
+                  </div>
+                  <span className="text-sm text-gray-300">{feature.text}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="mt-12 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
+              {[
+                { value: "15K+", label: "Élèves" },
+                { value: "300+", label: "Profs" },
+                { value: "98%", label: "Satisfaction" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <div
+                    className="text-2xl font-black"
+                    style={{ color: KURSUS.orange }}
+                  >
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-gray-500">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Right side - Form */}
+      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:px-20 xl:px-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mx-auto w-full max-w-sm lg:w-96"
+        >
+          {/* Logo mobile */}
+          <div className="mb-8">
+            <Link href="/" className="flex items-center gap-3">
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-xl"
+                style={{ background: KURSUS.orange }}
+              >
+                <Sparkles className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-[var(--kursus-text)]">
+                Kursus
+              </span>
+            </Link>
+            <h1 className="mt-8 text-2xl font-bold text-[var(--kursus-text)]">
+              Créer votre compte
+            </h1>
+            <p className="mt-2 text-sm text-[var(--kursus-text-muted)]">
               Rejoignez Kursus gratuitement
             </p>
           </div>
 
           {/* Referral Banner */}
           {referralCode && referralDiscount && (
-            <div className="mb-6 rounded-xl border border-orange-200 bg-gradient-to-r from-orange-50 to-rose-50 p-4">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-orange-100">
-                  <Gift className="h-5 w-5 text-orange-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {referralFrom
-                      ? `${decodeURIComponent(referralFrom)} vous offre ${referralDiscount}€ !`
-                      : `${referralDiscount}€ de reduction offerts !`}
-                  </p>
-                  <p className="text-xs text-gray-600">
-                    Credits utilisables sur votre premier achat
-                  </p>
-                </div>
+            <div
+              className="mb-6 flex items-center gap-3 rounded-xl p-4"
+              style={{
+                background: `${KURSUS.lime}15`,
+                border: `1px solid ${KURSUS.lime}30`,
+              }}
+            >
+              <div
+                className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
+                style={{ background: `${KURSUS.lime}20` }}
+              >
+                <Gift
+                  className="h-5 w-5"
+                  style={{ color: "var(--kursus-lime-text)" }}
+                />
+              </div>
+              <div>
+                <p
+                  className="text-sm font-medium"
+                  style={{ color: "var(--kursus-lime-text)" }}
+                >
+                  {referralFrom
+                    ? `${decodeURIComponent(referralFrom)} vous offre ${referralDiscount}€ !`
+                    : `${referralDiscount}€ de réduction offerts !`}
+                </p>
+                <p className="text-xs text-[var(--kursus-text-muted)]">
+                  Crédits utilisables sur votre premier achat
+                </p>
               </div>
             </div>
           )}
@@ -160,17 +334,35 @@ function RegisterForm() {
             <button
               type="button"
               onClick={() => handleRoleSelect("PARENT")}
-              className={`flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all ${
-                selectedRole === "PARENT"
-                  ? "border-emerald-500 bg-emerald-50"
-                  : "border-gray-200 hover:border-gray-300"
-              }`}
+              className="flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all"
+              style={{
+                borderColor:
+                  selectedRole === "PARENT"
+                    ? KURSUS.orange
+                    : "var(--kursus-border)",
+                background:
+                  selectedRole === "PARENT"
+                    ? `${KURSUS.orange}10`
+                    : "transparent",
+              }}
             >
               <Users
-                className={`h-6 w-6 ${selectedRole === "PARENT" ? "text-emerald-600" : "text-gray-400"}`}
+                className="h-6 w-6"
+                style={{
+                  color:
+                    selectedRole === "PARENT"
+                      ? KURSUS.orange
+                      : "var(--kursus-text-muted)",
+                }}
               />
               <span
-                className={`text-sm font-medium ${selectedRole === "PARENT" ? "text-emerald-700" : "text-gray-600"}`}
+                className="text-sm font-medium"
+                style={{
+                  color:
+                    selectedRole === "PARENT"
+                      ? KURSUS.orange
+                      : "var(--kursus-text-muted)",
+                }}
               >
                 Parent
               </span>
@@ -178,17 +370,35 @@ function RegisterForm() {
             <button
               type="button"
               onClick={() => handleRoleSelect("TEACHER")}
-              className={`flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all ${
-                selectedRole === "TEACHER"
-                  ? "border-emerald-500 bg-emerald-50"
-                  : "border-gray-200 hover:border-gray-300"
-              }`}
+              className="flex flex-col items-center gap-2 rounded-xl border-2 p-4 transition-all"
+              style={{
+                borderColor:
+                  selectedRole === "TEACHER"
+                    ? KURSUS.lime
+                    : "var(--kursus-border)",
+                background:
+                  selectedRole === "TEACHER"
+                    ? "var(--kursus-lime-bg)"
+                    : "transparent",
+              }}
             >
               <BookOpen
-                className={`h-6 w-6 ${selectedRole === "TEACHER" ? "text-emerald-600" : "text-gray-400"}`}
+                className="h-6 w-6"
+                style={{
+                  color:
+                    selectedRole === "TEACHER"
+                      ? "var(--kursus-lime-text)"
+                      : "var(--kursus-text-muted)",
+                }}
               />
               <span
-                className={`text-sm font-medium ${selectedRole === "TEACHER" ? "text-emerald-700" : "text-gray-600"}`}
+                className="text-sm font-medium"
+                style={{
+                  color:
+                    selectedRole === "TEACHER"
+                      ? "var(--kursus-lime-text)"
+                      : "var(--kursus-text-muted)",
+                }}
               >
                 Professeur
               </span>
@@ -197,51 +407,63 @@ function RegisterForm() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {error && (
-              <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+              <div className="rounded-xl bg-red-500/10 p-4 text-sm text-red-500">
                 {error}
               </div>
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="name">Nom complet</Label>
+              <Label htmlFor="name" className="text-[var(--kursus-text-muted)]">
+                Nom complet
+              </Label>
               <Input
                 id="name"
                 type="text"
                 placeholder="Marie Dupont"
-                className="h-11"
+                className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                 {...register("name")}
               />
               {errors.name && (
-                <p className="text-sm text-red-600">{errors.name.message}</p>
+                <p className="text-sm text-red-500">{errors.name.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label
+                htmlFor="email"
+                className="text-[var(--kursus-text-muted)]"
+              >
+                Email
+              </Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="votre@email.com"
-                className="h-11"
+                className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                 {...register("email")}
               />
               {errors.email && (
-                <p className="text-sm text-red-600">{errors.email.message}</p>
+                <p className="text-sm text-red-500">{errors.email.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password">Mot de passe</Label>
+              <Label
+                htmlFor="password"
+                className="text-[var(--kursus-text-muted)]"
+              >
+                Mot de passe
+              </Label>
               <PasswordInput
                 id="password"
                 placeholder="••••••••"
-                className="h-11"
+                className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                 {...register("password", {
                   onChange: (e) => setPasswordValue(e.target.value),
                 })}
               />
               {errors.password && (
-                <p className="text-sm text-red-600">
+                <p className="text-sm text-red-500">
                   {errors.password.message}
                 </p>
               )}
@@ -252,9 +474,12 @@ function RegisterForm() {
                   return (
                     <div
                       key={index}
-                      className={`flex items-center gap-2 text-xs ${
-                        isValid ? "text-emerald-600" : "text-gray-400"
-                      }`}
+                      className="flex items-center gap-2 text-xs"
+                      style={{
+                        color: isValid
+                          ? "var(--kursus-lime-text)"
+                          : "var(--kursus-text-muted)",
+                      }}
                     >
                       {isValid ? (
                         <Check className="h-3 w-3" />
@@ -269,15 +494,20 @@ function RegisterForm() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
+              <Label
+                htmlFor="confirmPassword"
+                className="text-[var(--kursus-text-muted)]"
+              >
+                Confirmer le mot de passe
+              </Label>
               <PasswordInput
                 id="confirmPassword"
                 placeholder="••••••••"
-                className="h-11"
+                className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                 {...register("confirmPassword")}
               />
               {errors.confirmPassword && (
-                <p className="text-sm text-red-600">
+                <p className="text-sm text-red-500">
                   {errors.confirmPassword.message}
                 </p>
               )}
@@ -287,17 +517,19 @@ function RegisterForm() {
               <input
                 type="checkbox"
                 id="acceptCGU"
-                className="mt-1 h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                className="mt-1 h-4 w-4 rounded border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)]"
+                style={{ accentColor: KURSUS.orange }}
                 {...register("acceptCGU")}
               />
               <Label
                 htmlFor="acceptCGU"
-                className="text-sm text-gray-600 font-normal cursor-pointer"
+                className="cursor-pointer text-sm font-normal text-[var(--kursus-text-muted)]"
               >
                 J&apos;accepte les{" "}
                 <Link
                   href="/conditions"
-                  className="text-emerald-600 hover:text-emerald-500 underline"
+                  className="underline transition-colors hover:opacity-80"
+                  style={{ color: KURSUS.orange }}
                   target="_blank"
                 >
                   conditions d&apos;utilisation
@@ -305,111 +537,66 @@ function RegisterForm() {
                 et la{" "}
                 <Link
                   href="/confidentialite"
-                  className="text-emerald-600 hover:text-emerald-500 underline"
+                  className="underline transition-colors hover:opacity-80"
+                  style={{ color: KURSUS.orange }}
                   target="_blank"
                 >
-                  politique de confidentialite
+                  politique de confidentialité
                 </Link>
               </Label>
             </div>
             {errors.acceptCGU && (
-              <p className="text-sm text-red-600">{errors.acceptCGU.message}</p>
+              <p className="text-sm text-red-500">{errors.acceptCGU.message}</p>
             )}
 
             <Button
               type="submit"
-              className="h-11 w-full bg-emerald-600 hover:bg-emerald-700"
+              className="h-12 w-full rounded-xl text-base font-semibold text-white transition-all hover:opacity-90"
+              style={{
+                background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
+                boxShadow: `0 0 20px -5px ${KURSUS.orange}50`,
+              }}
               disabled={isLoading}
             >
               {isLoading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Creation...
+                  Création...
                 </>
               ) : (
-                "Creer mon compte"
+                "Créer mon compte"
               )}
             </Button>
           </form>
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200" />
+              <div className="w-full border-t border-[var(--kursus-border)]" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-4 text-gray-500">ou</span>
+              <span className="bg-[var(--kursus-bg)] px-4 text-[var(--kursus-text-muted)]">
+                ou
+              </span>
             </div>
           </div>
 
           <GoogleSignInButton
             callbackUrl="/onboarding"
-            className="h-11 w-full"
+            className="h-12 w-full rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] hover:bg-[var(--kursus-border)]"
             text="S'inscrire avec Google"
           />
 
-          <p className="mt-6 text-center text-sm text-gray-600">
+          <p className="mt-6 text-center text-sm text-[var(--kursus-text-muted)]">
             Déjà un compte ?{" "}
             <Link
               href="/login"
-              className="font-medium text-emerald-600 hover:text-emerald-500"
+              className="font-medium transition-colors hover:opacity-80"
+              style={{ color: KURSUS.orange }}
             >
               Se connecter
             </Link>
           </p>
-        </div>
-      </div>
-
-      {/* Right side - Image/Gradient with Social Proof */}
-      <div className="relative hidden flex-1 lg:block">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600">
-          <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-        </div>
-        <div className="relative flex h-full flex-col items-center justify-center p-12">
-          <div className="max-w-md text-white">
-            <h3 className="text-3xl font-bold">
-              {selectedRole === "TEACHER"
-                ? "Partagez votre savoir"
-                : "Accompagnez la réussite de vos enfants"}
-            </h3>
-            <p className="mt-4 text-lg text-emerald-100">
-              {selectedRole === "TEACHER"
-                ? "Creez des cours de qualité et generez des revenus complementaires. Gardez 70% de chaque vente."
-                : "Achetez des cours crees par de vrais professeurs. Un paiement unique, un acces a vie."}
-            </p>
-
-            {/* Social proof stats */}
-            <div className="mt-8 grid grid-cols-3 gap-4">
-              <div className="text-center">
-                <p className="text-2xl font-bold">15K+</p>
-                <p className="text-xs text-emerald-100">Élèves</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold">300+</p>
-                <p className="text-xs text-emerald-100">Professeurs</p>
-              </div>
-              <div className="text-center">
-                <p className="text-2xl font-bold">98%</p>
-                <p className="text-xs text-emerald-100">Satisfaction</p>
-              </div>
-            </div>
-
-            {/* Testimonial */}
-            <div className="mt-8 rounded-xl bg-white/10 p-4 backdrop-blur-sm">
-              <p className="text-sm italic text-emerald-50">
-                &quot;
-                {selectedRole === "TEACHER"
-                  ? "J'ai pu partager mes cours avec des centaines d'élèves. La plateforme est intuitive et le support excellent."
-                  : "Mon fils a fait des progres incroyables en maths grace aux cours sur Kursus. Je recommande !"}
-                &quot;
-              </p>
-              <p className="mt-2 text-xs text-emerald-200">
-                {selectedRole === "TEACHER"
-                  ? "- Marie D., Professeur de Mathematiques"
-                  : "- Sophie L., Maman de Lucas (CM2)"}
-              </p>
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -419,8 +606,11 @@ export default function RegisterPage() {
   return (
     <Suspense
       fallback={
-        <div className="flex min-h-screen items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-emerald-600" />
+        <div className="flex min-h-screen items-center justify-center bg-[var(--kursus-bg)]">
+          <Loader2
+            className="h-8 w-8 animate-spin"
+            style={{ color: "#ff6d38" }}
+          />
         </div>
       }
     >

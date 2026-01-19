@@ -5,10 +5,26 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { GraduationCap, ArrowLeft, Mail, CheckCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  Sparkles,
+  ArrowLeft,
+  Mail,
+  CheckCircle,
+  Loader2,
+  Shield,
+  Clock,
+  HelpCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+const KURSUS = {
+  orange: "#ff6d38",
+  lime: "#c7ff69",
+  purple: "#7a78ff",
+};
 
 const forgotPasswordSchema = z.object({
   email: z.string().email("Email invalide"),
@@ -49,42 +65,149 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="flex min-h-screen">
-      {/* Left Panel - Form */}
-      <div className="flex w-full flex-col justify-center px-4 py-12 sm:px-6 lg:w-1/2 lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm">
-          {/* Logo */}
-          <Link href="/" className="mb-8 flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30">
-              <GraduationCap className="h-5 w-5 text-white" />
+    <div className="flex min-h-screen bg-[var(--kursus-bg)]">
+      {/* Left Panel - Branding */}
+      <div className="relative hidden flex-1 overflow-hidden lg:block">
+        {/* Background gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, #0a0a0a 0%, #141414 100%)`,
+          }}
+        />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
+          style={{ background: `${KURSUS.purple}20` }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
+          style={{ background: `${KURSUS.orange}15` }}
+        />
+
+        {/* Content */}
+        <div className="relative flex h-full flex-col items-center justify-center p-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md text-center"
+          >
+            {/* Logo */}
+            <div className="mb-8 flex justify-center">
+              <div
+                className="flex h-16 w-16 items-center justify-center rounded-2xl"
+                style={{
+                  background: `linear-gradient(135deg, ${KURSUS.purple}, ${KURSUS.purple}dd)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.purple}`,
+                }}
+              >
+                <HelpCircle className="h-8 w-8 text-white" />
+              </div>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Kursus
-            </span>
-          </Link>
+
+            <h2 className="text-4xl font-black tracking-tight text-white">
+              Pas de <span style={{ color: KURSUS.purple }}>panique</span> !
+            </h2>
+            <p className="mt-4 text-lg text-gray-400">
+              Nous allons vous aider à récupérer l&apos;accès à votre compte en
+              quelques minutes.
+            </p>
+
+            {/* Features */}
+            <div className="mt-12 space-y-4 text-left">
+              {[
+                {
+                  icon: Mail,
+                  text: "Recevez un lien sécurisé par email",
+                  color: KURSUS.orange,
+                },
+                {
+                  icon: Clock,
+                  text: "Lien valide pendant 1 heure",
+                  color: KURSUS.purple,
+                },
+                {
+                  icon: Shield,
+                  text: "Processus 100% sécurisé",
+                  color: KURSUS.lime,
+                },
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4"
+                >
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ background: `${feature.color}20` }}
+                  >
+                    <feature.icon
+                      className="h-5 w-5"
+                      style={{ color: feature.color }}
+                    />
+                  </div>
+                  <span className="text-sm text-gray-300">{feature.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Right Panel - Form */}
+      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:px-20 xl:px-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mx-auto w-full max-w-sm lg:w-96"
+        >
+          {/* Logo mobile */}
+          <div className="mb-8">
+            <Link href="/" className="flex items-center gap-3">
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-xl"
+                style={{ background: KURSUS.orange }}
+              >
+                <Sparkles className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-[var(--kursus-text)]">
+                Kursus
+              </span>
+            </Link>
+          </div>
 
           {!isSubmitted ? (
             <>
               {/* Header */}
               <div className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-900">
-                  Mot de passe oublie ?
+                <h1 className="text-2xl font-bold text-[var(--kursus-text)]">
+                  Mot de passe oublié ?
                 </h1>
-                <p className="mt-2 text-gray-600">
+                <p className="mt-2 text-sm text-[var(--kursus-text-muted)]">
                   Entrez votre adresse email et nous vous enverrons un lien pour
-                  reinitialiser votre mot de passe.
+                  réinitialiser votre mot de passe.
                 </p>
               </div>
 
               {/* Form */}
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Adresse email</Label>
+                  <Label
+                    htmlFor="email"
+                    className="text-[var(--kursus-text-muted)]"
+                  >
+                    Adresse email
+                  </Label>
                   <Input
                     id="email"
                     type="email"
                     placeholder="vous@exemple.com"
-                    className="h-11"
+                    className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
                     {...register("email")}
                   />
                   {errors.email && (
@@ -96,12 +219,16 @@ export default function ForgotPasswordPage() {
 
                 <Button
                   type="submit"
-                  className="w-full h-11 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
+                  className="h-12 w-full rounded-xl text-base font-semibold text-white transition-all hover:opacity-90"
+                  style={{
+                    background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
+                    boxShadow: `0 0 20px -5px ${KURSUS.orange}50`,
+                  }}
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
                     <span className="flex items-center gap-2">
-                      <Mail className="h-4 w-4 animate-pulse" />
+                      <Loader2 className="h-4 w-4 animate-spin" />
                       Envoi en cours...
                     </span>
                   ) : (
@@ -115,46 +242,48 @@ export default function ForgotPasswordPage() {
             </>
           ) : (
             /* Success State */
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-                <CheckCircle className="h-8 w-8 text-emerald-600" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center"
+            >
+              <div
+                className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+                style={{
+                  background: "var(--kursus-lime-bg)",
+                  border: "1px solid var(--kursus-lime-border)",
+                }}
+              >
+                <CheckCircle
+                  className="h-8 w-8"
+                  style={{ color: "var(--kursus-lime-text)" }}
+                />
               </div>
-              <h2 className="text-xl font-semibold text-gray-900">
-                Email envoye !
+              <h2 className="text-xl font-bold text-[var(--kursus-text)]">
+                Email envoyé !
               </h2>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-3 text-[var(--kursus-text-muted)]">
                 Si un compte existe avec cette adresse email, vous recevrez un
-                lien pour reinitialiser votre mot de passe.
+                lien pour réinitialiser votre mot de passe.
               </p>
-              <p className="mt-4 text-sm text-gray-500">
-                N&apos;oubliez pas de verifier vos spams.
+              <p className="mt-4 text-sm text-[var(--kursus-text-muted)]">
+                N&apos;oubliez pas de vérifier vos spams.
               </p>
-            </div>
+            </motion.div>
           )}
 
           {/* Back to login */}
           <div className="mt-8 text-center">
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 hover:text-emerald-500"
+              className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-80"
+              style={{ color: KURSUS.orange }}
             >
               <ArrowLeft className="h-4 w-4" />
-              Retour a la connexion
+              Retour à la connexion
             </Link>
           </div>
-        </div>
-      </div>
-
-      {/* Right Panel - Visual */}
-      <div className="hidden lg:flex lg:w-1/2 lg:items-center lg:justify-center bg-gradient-to-br from-emerald-500 to-teal-600 p-12">
-        <div className="max-w-md text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Pas de panique !</h2>
-          <p className="text-emerald-100 text-lg">
-            Ca arrive a tout le monde d&apos;oublier son mot de passe. Nous
-            allons vous aider a recuperer l&apos;acces a votre compte en
-            quelques minutes.
-          </p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

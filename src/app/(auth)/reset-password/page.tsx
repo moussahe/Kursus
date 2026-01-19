@@ -6,22 +6,32 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { motion } from "framer-motion";
 import {
-  GraduationCap,
+  Sparkles,
   ArrowLeft,
   Lock,
   CheckCircle,
   AlertCircle,
-  Eye,
-  EyeOff,
+  Loader2,
+  Shield,
+  Key,
+  Check,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { PasswordInput } from "@/components/ui/password-input";
 import {
   passwordSchema,
   PASSWORD_REQUIREMENTS,
 } from "@/lib/validations/password";
+
+const KURSUS = {
+  orange: "#ff6d38",
+  lime: "#c7ff69",
+  purple: "#7a78ff",
+};
 
 const resetPasswordSchema = z
   .object({
@@ -43,8 +53,6 @@ function ResetPasswordForm() {
 
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     register,
@@ -60,7 +68,7 @@ function ResetPasswordForm() {
   useEffect(() => {
     if (!token || !email) {
       setError(
-        "Lien invalide. Veuillez demander un nouveau lien de reinitialisation.",
+        "Lien invalide. Veuillez demander un nouveau lien de réinitialisation.",
       );
     }
   }, [token, email]);
@@ -93,27 +101,37 @@ function ResetPasswordForm() {
         router.push("/login");
       }, 3000);
     } catch {
-      setError("Une erreur est survenue. Veuillez reessayer.");
+      setError("Une erreur est survenue. Veuillez réessayer.");
     }
   };
 
   if (!token || !email) {
     return (
-      <div className="text-center">
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-100">
-          <AlertCircle className="h-8 w-8 text-red-600" />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="text-center"
+      >
+        <div
+          className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+          style={{ background: `rgba(239, 68, 68, 0.1)` }}
+        >
+          <AlertCircle className="h-8 w-8 text-red-500" />
         </div>
-        <h2 className="text-xl font-semibold text-gray-900">Lien invalide</h2>
-        <p className="mt-2 text-gray-600">
-          Ce lien de reinitialisation est invalide ou a expire.
+        <h2 className="text-xl font-bold text-[var(--kursus-text)]">
+          Lien invalide
+        </h2>
+        <p className="mt-3 text-[var(--kursus-text-muted)]">
+          Ce lien de réinitialisation est invalide ou a expiré.
         </p>
         <Link
           href="/forgot-password"
-          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-emerald-600 hover:text-emerald-500"
+          className="mt-6 inline-flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-80"
+          style={{ color: KURSUS.orange }}
         >
           Demander un nouveau lien
         </Link>
-      </div>
+      </motion.div>
     );
   }
 
@@ -122,16 +140,16 @@ function ResetPasswordForm() {
       {!isSuccess ? (
         <>
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-[var(--kursus-text)]">
               Nouveau mot de passe
             </h1>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-2 text-sm text-[var(--kursus-text-muted)]">
               Choisissez un nouveau mot de passe sécurisé pour votre compte.
             </p>
           </div>
 
           {error && (
-            <div className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-600">
+            <div className="mb-4 rounded-xl bg-red-500/10 p-4 text-sm text-red-500">
               <div className="flex items-center gap-2">
                 <AlertCircle className="h-4 w-4" />
                 {error}
@@ -141,26 +159,18 @@ function ResetPasswordForm() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="password">Nouveau mot de passe</Label>
-              <div className="relative">
-                <Input
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  className="h-11 pr-10"
-                  {...register("password")}
-                />
-                <button
-                  type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  onClick={() => setShowPassword(!showPassword)}
-                >
-                  {showPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
-              </div>
+              <Label
+                htmlFor="password"
+                className="text-[var(--kursus-text-muted)]"
+              >
+                Nouveau mot de passe
+              </Label>
+              <PasswordInput
+                id="password"
+                placeholder="••••••••"
+                className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
+                {...register("password")}
+              />
               {errors.password && (
                 <p className="text-sm text-red-500">
                   {errors.password.message}
@@ -168,50 +178,44 @@ function ResetPasswordForm() {
               )}
 
               {/* Password requirements */}
-              <div className="mt-2 space-y-1">
-                <p className="text-xs text-gray-500">
-                  Votre mot de passe doit contenir :
-                </p>
-                <div className="space-y-1">
-                  {PASSWORD_REQUIREMENTS.map((req, index) => {
-                    const isValid = req.regex.test(password);
-                    return (
-                      <div
-                        key={index}
-                        className={`flex items-center gap-1 text-xs ${
-                          isValid ? "text-emerald-600" : "text-gray-400"
-                        }`}
-                      >
-                        <CheckCircle className="h-3 w-3" />
-                        {req.label}
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className="mt-3 space-y-1">
+                {PASSWORD_REQUIREMENTS.map((req, index) => {
+                  const isValid = req.regex.test(password);
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 text-xs"
+                      style={{
+                        color: isValid
+                          ? "var(--kursus-lime-text)"
+                          : "var(--kursus-text-muted)",
+                      }}
+                    >
+                      {isValid ? (
+                        <Check className="h-3 w-3" />
+                      ) : (
+                        <X className="h-3 w-3" />
+                      )}
+                      <span>{req.label}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirmer le mot de passe</Label>
-              <div className="relative">
-                <Input
-                  id="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  className="h-11 pr-10"
-                  {...register("confirmPassword")}
-                />
-                <button
-                  type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff className="h-4 w-4" />
-                  ) : (
-                    <Eye className="h-4 w-4" />
-                  )}
-                </button>
-              </div>
+              <Label
+                htmlFor="confirmPassword"
+                className="text-[var(--kursus-text-muted)]"
+              >
+                Confirmer le mot de passe
+              </Label>
+              <PasswordInput
+                id="confirmPassword"
+                placeholder="••••••••"
+                className="h-12 rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] placeholder:text-[var(--kursus-text-muted)]"
+                {...register("confirmPassword")}
+              />
               {errors.confirmPassword && (
                 <p className="text-sm text-red-500">
                   {errors.confirmPassword.message}
@@ -221,12 +225,16 @@ function ResetPasswordForm() {
 
             <Button
               type="submit"
-              className="w-full h-11 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
+              className="h-12 w-full rounded-xl text-base font-semibold text-white transition-all hover:opacity-90"
+              style={{
+                background: `linear-gradient(135deg, ${KURSUS.orange}, ${KURSUS.orange}dd)`,
+                boxShadow: `0 0 20px -5px ${KURSUS.orange}50`,
+              }}
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 <span className="flex items-center gap-2">
-                  <Lock className="h-4 w-4 animate-pulse" />
+                  <Loader2 className="h-4 w-4 animate-spin" />
                   Modification en cours...
                 </span>
               ) : (
@@ -239,27 +247,41 @@ function ResetPasswordForm() {
           </form>
         </>
       ) : (
-        <div className="text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
-            <CheckCircle className="h-8 w-8 text-emerald-600" />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center"
+        >
+          <div
+            className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
+            style={{
+              background: "var(--kursus-lime-bg)",
+              border: "1px solid var(--kursus-lime-border)",
+            }}
+          >
+            <CheckCircle
+              className="h-8 w-8"
+              style={{ color: "var(--kursus-lime-text)" }}
+            />
           </div>
-          <h2 className="text-xl font-semibold text-gray-900">
-            Mot de passe modifie !
+          <h2 className="text-xl font-bold text-[var(--kursus-text)]">
+            Mot de passe modifié !
           </h2>
-          <p className="mt-2 text-gray-600">
-            Votre mot de passe a ete reinitialise avec succes. Vous allez etre
-            redirige vers la page de connexion.
+          <p className="mt-3 text-[var(--kursus-text-muted)]">
+            Votre mot de passe a été réinitialisé avec succès. Vous allez être
+            redirigé vers la page de connexion.
           </p>
-        </div>
+        </motion.div>
       )}
 
       <div className="mt-8 text-center">
         <Link
           href="/login"
-          className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 hover:text-emerald-500"
+          className="inline-flex items-center gap-2 text-sm font-medium transition-colors hover:opacity-80"
+          style={{ color: KURSUS.orange }}
         >
           <ArrowLeft className="h-4 w-4" />
-          Retour a la connexion
+          Retour à la connexion
         </Link>
       </div>
     </>
@@ -268,40 +290,135 @@ function ResetPasswordForm() {
 
 export default function ResetPasswordPage() {
   return (
-    <div className="flex min-h-screen">
-      <div className="flex w-full flex-col justify-center px-4 py-12 sm:px-6 lg:w-1/2 lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm">
-          <Link href="/" className="mb-8 flex items-center gap-2">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30">
-              <GraduationCap className="h-5 w-5 text-white" />
+    <div className="flex min-h-screen bg-[var(--kursus-bg)]">
+      {/* Left Panel - Branding */}
+      <div className="relative hidden flex-1 overflow-hidden lg:block">
+        {/* Background gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(135deg, #0a0a0a 0%, #141414 100%)`,
+          }}
+        />
+
+        {/* Decorative elements */}
+        <div
+          className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
+          style={{ background: `${KURSUS.lime}20` }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
+          style={{ background: `${KURSUS.orange}15` }}
+        />
+
+        {/* Content */}
+        <div className="relative flex h-full flex-col items-center justify-center p-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-md text-center"
+          >
+            {/* Logo */}
+            <div className="mb-8 flex justify-center">
+              <div
+                className="flex h-16 w-16 items-center justify-center rounded-2xl"
+                style={{
+                  background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.lime}`,
+                }}
+              >
+                <Shield className="h-8 w-8 text-white" />
+              </div>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Kursus
-            </span>
-          </Link>
+
+            <h2 className="text-4xl font-black tracking-tight text-white">
+              Sécurisez votre <span style={{ color: KURSUS.lime }}>compte</span>
+            </h2>
+            <p className="mt-4 text-lg text-gray-400">
+              Un mot de passe fort est essentiel pour protéger votre compte et
+              les données de vos enfants.
+            </p>
+
+            {/* Features */}
+            <div className="mt-12 space-y-4 text-left">
+              {[
+                {
+                  icon: Lock,
+                  text: "Minimum 8 caractères requis",
+                  color: KURSUS.orange,
+                },
+                {
+                  icon: Key,
+                  text: "Mélangez lettres, chiffres et symboles",
+                  color: KURSUS.purple,
+                },
+                {
+                  icon: Shield,
+                  text: "Ne réutilisez pas d'anciens mots de passe",
+                  color: KURSUS.lime,
+                },
+              ].map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                  className="flex items-center gap-4 rounded-xl border border-white/10 bg-white/5 p-4"
+                >
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ background: `${feature.color}20` }}
+                  >
+                    <feature.icon
+                      className="h-5 w-5"
+                      style={{ color: feature.color }}
+                    />
+                  </div>
+                  <span className="text-sm text-gray-300">{feature.text}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Right Panel - Form */}
+      <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:px-20 xl:px-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mx-auto w-full max-w-sm lg:w-96"
+        >
+          {/* Logo mobile */}
+          <div className="mb-8">
+            <Link href="/" className="flex items-center gap-3">
+              <div
+                className="flex h-10 w-10 items-center justify-center rounded-xl"
+                style={{ background: KURSUS.orange }}
+              >
+                <Sparkles className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-[var(--kursus-text)]">
+                Kursus
+              </span>
+            </Link>
+          </div>
 
           <Suspense
             fallback={
-              <div className="animate-pulse space-y-4">
-                <div className="h-8 bg-gray-200 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 rounded w-full"></div>
-                <div className="h-12 bg-gray-200 rounded w-full"></div>
+              <div className="flex items-center justify-center py-12">
+                <Loader2
+                  className="h-8 w-8 animate-spin"
+                  style={{ color: KURSUS.orange }}
+                />
               </div>
             }
           >
             <ResetPasswordForm />
           </Suspense>
-        </div>
-      </div>
-
-      <div className="hidden lg:flex lg:w-1/2 lg:items-center lg:justify-center bg-gradient-to-br from-emerald-500 to-teal-600 p-12">
-        <div className="max-w-md text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">Securisez votre compte</h2>
-          <p className="text-emerald-100 text-lg">
-            Un mot de passe fort est essentiel pour proteger votre compte et les
-            donnees de vos enfants.
-          </p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
