@@ -24,7 +24,7 @@ import { Label } from "@/components/ui/label";
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 
 const KURSUS = {
-  orange: "#ff6d38",
+  orange: "#ff9494",
   purple: "#7a78ff",
 };
 
@@ -358,7 +358,7 @@ export default function LoginPage() {
         <div className="flex min-h-screen items-center justify-center bg-[var(--kursus-bg)]">
           <Loader2
             className="h-8 w-8 animate-spin"
-            style={{ color: "#ff6d38" }}
+            style={{ color: "#ff9494" }}
           />
         </div>
       }

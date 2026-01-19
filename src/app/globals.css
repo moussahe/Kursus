@@ -2,8 +2,8 @@
 @import "tw-animate-css";
 
 /* =============================================================================
-   KURSUS DESIGN SYSTEM - Premium Dark/Light Mode
-   Inspired by: nvg8.io, linear.app, vercel.com
+   KURSUS DESIGN SYSTEM - Soft Coral Palette
+   Palette: #FFF5E4 #FFE3E1 #FFD1D1 #FF9494
 ============================================================================= */
 
 @theme inline {
@@ -15,121 +15,166 @@
     var(--font-geist-mono), "JetBrains Mono", "Fira Code", Consolas, monospace;
 
   /* Kursus Brand Colors */
-  --color-kursus-orange: #ff6d38;
-  --color-kursus-lime: #c7ff69;
-  --color-kursus-purple: #7a78ff;
+  --color-kursus-cream: #fff5e4;
+  --color-kursus-blush: #ffe3e1;
+  --color-kursus-rose: #ffd1d1;
+  --color-kursus-coral: #ff9494;
 
   /* Shadows */
-  --shadow-glow-orange: 0 0 60px -15px rgba(255, 109, 56, 0.4);
-  --shadow-glow-purple: 0 0 60px -15px rgba(122, 120, 255, 0.4);
-  --shadow-glow-lime: 0 0 60px -15px rgba(199, 255, 105, 0.4);
+  --shadow-glow-coral: 0 0 60px -15px rgba(255, 148, 148, 0.4);
+  --shadow-soft: 0 4px 24px -8px rgba(0, 0, 0, 0.08);
 }
 
 /* =============================================================================
-   ROOT - Dark Mode Default
+   ROOT - Light Mode Default (Soft Coral Palette)
 ============================================================================= */
 :root {
   --radius: 0.75rem;
 
-  /* Kursus Dark Theme */
-  --kursus-bg: #0a0a0a;
-  --kursus-bg-elevated: #141414;
-  --kursus-border: #2a2a2a;
-  --kursus-text: #ffffff;
-  --kursus-text-muted: #a1a1a1;
+  /* Kursus Soft Theme - Light */
+  --kursus-bg: #fff5e4;
+  --kursus-bg-elevated: #ffffff;
+  --kursus-bg-card: #ffe3e1;
+  --kursus-bg-accent: #ffd1d1;
+  --kursus-border: #f5d5d0;
+  --kursus-text: #2d2d2d;
+  --kursus-text-muted: #6b6b6b;
 
-  /* Brand colors - may vary by theme */
-  --kursus-orange: #ff6d38;
-  --kursus-purple: #7a78ff;
-  --kursus-purple-text: #7a78ff;
-  --kursus-purple-bg: rgba(122, 120, 255, 0.1);
-  --kursus-purple-border: rgba(122, 120, 255, 0.3);
-  /* Legacy lime - kept for success states only */
-  --kursus-lime: #22c55e;
-  --kursus-lime-text: #22c55e;
-  --kursus-lime-bg: rgba(34, 197, 94, 0.1);
-  --kursus-lime-border: rgba(34, 197, 94, 0.3);
+  /* Primary coral accent */
+  --kursus-primary: #ff9494;
+  --kursus-primary-dark: #ff7070;
+  --kursus-primary-text: #ff7070;
+  --kursus-primary-bg: rgba(255, 148, 148, 0.15);
+  --kursus-primary-border: rgba(255, 148, 148, 0.4);
 
-  /* Shadcn compatible variables */
-  --background: 0 0% 4%;
-  --foreground: 0 0% 98%;
-  --card: 0 0% 8%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 8%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 15 100% 61%;
-  --primary-foreground: 0 0% 0%;
-  --secondary: 0 0% 10%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 0 0% 10%;
-  --muted-foreground: 0 0% 63%;
-  --accent: 242 100% 74%;
-  --accent-foreground: 0 0% 98%;
+  /* Secondary rose accent */
+  --kursus-secondary: #ffd1d1;
+  --kursus-secondary-text: #e88a8a;
+  --kursus-secondary-bg: rgba(255, 209, 209, 0.5);
+  --kursus-secondary-border: rgba(255, 209, 209, 0.8);
+
+  /* Legacy orange - for compatibility */
+  --kursus-orange: #ff9494;
+  --kursus-orange-text: #ff7070;
+  --kursus-orange-bg: rgba(255, 148, 148, 0.15);
+  --kursus-orange-border: rgba(255, 148, 148, 0.4);
+
+  /* Success green */
+  --kursus-success: #16a34a;
+  --kursus-success-text: #16a34a;
+  --kursus-success-bg: rgba(22, 163, 74, 0.1);
+  --kursus-success-border: rgba(22, 163, 74, 0.3);
+
+  /* Purple for teacher elements */
+  --kursus-purple: #a78bfa;
+  --kursus-purple-text: #8b5cf6;
+  --kursus-purple-bg: rgba(139, 92, 246, 0.1);
+  --kursus-purple-border: rgba(139, 92, 246, 0.3);
+
+  /* Shadcn compatible variables - Light theme */
+  --background: 30 100% 95%;
+  --foreground: 0 0% 18%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 18%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 18%;
+  --primary: 0 100% 79%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 5 100% 91%;
+  --secondary-foreground: 0 0% 18%;
+  --muted: 10 60% 94%;
+  --muted-foreground: 0 0% 42%;
+  --accent: 0 100% 79%;
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
-  --border: 0 0% 16%;
-  --input: 0 0% 16%;
-  --ring: 15 100% 61%;
-  --chart-1: 15 100% 61%;
-  --chart-2: 83 100% 70%;
-  --chart-3: 242 100% 74%;
-  --chart-4: 47 95% 55%;
-  --chart-5: 200 95% 55%;
-  --sidebar: 0 0% 5%;
-  --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 15 100% 61%;
-  --sidebar-primary-foreground: 0 0% 0%;
-  --sidebar-accent: 0 0% 10%;
-  --sidebar-accent-foreground: 0 0% 98%;
-  --sidebar-border: 0 0% 16%;
-  --sidebar-ring: 15 100% 61%;
+  --border: 10 50% 90%;
+  --input: 10 50% 90%;
+  --ring: 0 100% 79%;
+  --chart-1: 0 100% 79%;
+  --chart-2: 5 100% 91%;
+  --chart-3: 10 100% 85%;
+  --chart-4: 340 80% 70%;
+  --chart-5: 20 90% 75%;
+  --sidebar: 30 100% 97%;
+  --sidebar-foreground: 0 0% 18%;
+  --sidebar-primary: 0 100% 79%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 10 60% 94%;
+  --sidebar-accent-foreground: 0 0% 18%;
+  --sidebar-border: 10 50% 90%;
+  --sidebar-ring: 0 100% 79%;
 }
 
 /* =============================================================================
-   LIGHT MODE
+   DARK MODE
 ============================================================================= */
-.light {
-  --kursus-bg: #fafafa;
-  --kursus-bg-elevated: #ffffff;
-  --kursus-border: #e5e5e5;
-  --kursus-text: #0a0a0a;
-  --kursus-text-muted: #6b7280;
+.dark {
+  --kursus-bg: #1a1a1a;
+  --kursus-bg-elevated: #252525;
+  --kursus-bg-card: #2d2d2d;
+  --kursus-bg-accent: #3a2d2d;
+  --kursus-border: #404040;
+  --kursus-text: #fff5e4;
+  --kursus-text-muted: #a8a8a8;
 
-  /* Purple for light mode */
-  --kursus-purple-text: #6366f1;
-  --kursus-purple-bg: rgba(99, 102, 241, 0.1);
-  --kursus-purple-border: rgba(99, 102, 241, 0.3);
-  /* Success green for light mode */
-  --kursus-lime: #16a34a;
-  --kursus-lime-text: #16a34a;
-  --kursus-lime-bg: rgba(22, 163, 74, 0.1);
-  --kursus-lime-border: rgba(22, 163, 74, 0.3);
+  /* Primary coral - adjusted for dark */
+  --kursus-primary: #ff9494;
+  --kursus-primary-dark: #ff7070;
+  --kursus-primary-text: #ffb8b8;
+  --kursus-primary-bg: rgba(255, 148, 148, 0.15);
+  --kursus-primary-border: rgba(255, 148, 148, 0.4);
 
-  --background: 0 0% 98%;
-  --foreground: 0 0% 4%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 4%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 4%;
-  --primary: 15 100% 61%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 4%;
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 42%;
-  --accent: 242 100% 74%;
-  --accent-foreground: 0 0% 100%;
+  /* Secondary rose - adjusted for dark */
+  --kursus-secondary: #ffd1d1;
+  --kursus-secondary-text: #ffb8b8;
+  --kursus-secondary-bg: rgba(255, 209, 209, 0.1);
+  --kursus-secondary-border: rgba(255, 209, 209, 0.3);
+
+  /* Legacy orange */
+  --kursus-orange: #ff9494;
+  --kursus-orange-text: #ffb8b8;
+  --kursus-orange-bg: rgba(255, 148, 148, 0.15);
+  --kursus-orange-border: rgba(255, 148, 148, 0.4);
+
+  /* Success green - adjusted for dark */
+  --kursus-success: #22c55e;
+  --kursus-success-text: #4ade80;
+  --kursus-success-bg: rgba(34, 197, 94, 0.15);
+  --kursus-success-border: rgba(34, 197, 94, 0.4);
+
+  /* Purple for dark mode */
+  --kursus-purple: #a78bfa;
+  --kursus-purple-text: #c4b5fd;
+  --kursus-purple-bg: rgba(167, 139, 250, 0.15);
+  --kursus-purple-border: rgba(167, 139, 250, 0.4);
+
+  /* Shadcn compatible variables - Dark theme */
+  --background: 0 0% 10%;
+  --foreground: 30 100% 95%;
+  --card: 0 0% 15%;
+  --card-foreground: 30 100% 95%;
+  --popover: 0 0% 15%;
+  --popover-foreground: 30 100% 95%;
+  --primary: 0 100% 79%;
+  --primary-foreground: 0 0% 10%;
+  --secondary: 0 0% 18%;
+  --secondary-foreground: 30 100% 95%;
+  --muted: 0 0% 18%;
+  --muted-foreground: 0 0% 66%;
+  --accent: 0 100% 79%;
+  --accent-foreground: 0 0% 10%;
   --destructive: 0 84% 60%;
-  --border: 0 0% 90%;
-  --input: 0 0% 90%;
-  --ring: 15 100% 61%;
-  --sidebar: 0 0% 98%;
-  --sidebar-foreground: 0 0% 4%;
-  --sidebar-primary: 15 100% 61%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 0 0% 96%;
-  --sidebar-accent-foreground: 0 0% 4%;
-  --sidebar-border: 0 0% 90%;
-  --sidebar-ring: 15 100% 61%;
+  --border: 0 0% 25%;
+  --input: 0 0% 25%;
+  --ring: 0 100% 79%;
+  --sidebar: 0 0% 8%;
+  --sidebar-foreground: 30 100% 95%;
+  --sidebar-primary: 0 100% 79%;
+  --sidebar-primary-foreground: 0 0% 10%;
+  --sidebar-accent: 0 0% 15%;
+  --sidebar-accent-foreground: 30 100% 95%;
+  --sidebar-border: 0 0% 25%;
+  --sidebar-ring: 0 100% 79%;
 }
 
 /* =============================================================================
@@ -166,6 +211,7 @@
   h6 {
     font-weight: 900;
     letter-spacing: -0.04em;
+    color: var(--kursus-text);
   }
 
   h1 {
@@ -183,69 +229,86 @@
    UTILITIES
 ============================================================================= */
 @layer utilities {
-  /* Kursus lime color - adapts to theme */
-  .text-kursus-lime {
-    color: var(--kursus-lime-text);
+  /* Kursus primary utilities */
+  .text-kursus-primary {
+    color: var(--kursus-primary-text);
   }
 
-  .bg-kursus-lime {
-    background-color: var(--kursus-lime-bg);
+  .bg-kursus-primary {
+    background-color: var(--kursus-primary-bg);
   }
 
-  .border-kursus-lime {
-    border-color: var(--kursus-lime-border);
+  .border-kursus-primary {
+    border-color: var(--kursus-primary-border);
+  }
+
+  /* Kursus success utilities */
+  .text-kursus-success {
+    color: var(--kursus-success-text);
+  }
+
+  .bg-kursus-success {
+    background-color: var(--kursus-success-bg);
+  }
+
+  .border-kursus-success {
+    border-color: var(--kursus-success-border);
   }
 
   /* Text gradients with Kursus colors */
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, #ff6d38, #fbbf24);
+    background-image: linear-gradient(to right, #ff9494, #ff7070);
   }
 
-  .text-gradient-lime {
+  .text-gradient-soft {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, #c7ff69, #22c55e);
-  }
-
-  .light .text-gradient-lime {
-    background-image: linear-gradient(to right, #16a34a, #059669);
+    background-image: linear-gradient(to right, #ff9494, #ffd1d1);
   }
 
   .text-gradient-purple {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(to right, #7a78ff, #6366f1);
+    background-image: linear-gradient(to right, #a78bfa, #8b5cf6);
   }
 
-  /* Glass effect */
+  /* Glass effect - soft version */
   .glass {
     @apply backdrop-blur-xl;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 245, 228, 0.85);
+    border: 1px solid rgba(255, 148, 148, 0.2);
   }
 
-  .light .glass {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+  .dark .glass {
+    background: rgba(26, 26, 26, 0.85);
+    border: 1px solid rgba(255, 148, 148, 0.15);
   }
 
-  /* Glow effects with Kursus colors */
-  .glow-orange {
-    box-shadow: 0 0 60px -15px rgba(255, 109, 56, 0.4);
+  /* Glow effects with Kursus coral */
+  .glow-coral {
+    box-shadow: 0 0 60px -15px rgba(255, 148, 148, 0.4);
   }
 
-  .glow-purple {
-    box-shadow: 0 0 60px -15px rgba(122, 120, 255, 0.4);
+  .glow-soft {
+    box-shadow: 0 4px 24px -8px rgba(255, 148, 148, 0.25);
   }
 
-  .glow-lime {
-    box-shadow: 0 0 60px -15px rgba(199, 255, 105, 0.4);
+  /* Card styles */
+  .card-soft {
+    background-color: var(--kursus-bg-elevated);
+    border: 1px solid var(--kursus-border);
+    border-radius: var(--radius);
   }
 
-  /* Light mode shadows instead of glows */
-  .light .glow-orange,
-  .light .glow-purple,
-  .light .glow-lime {
-    box-shadow: 0 4px 24px -8px rgba(0, 0, 0, 0.15);
+  .card-blush {
+    background-color: var(--kursus-bg-card);
+    border: 1px solid var(--kursus-border);
+    border-radius: var(--radius);
+  }
+
+  .card-rose {
+    background-color: var(--kursus-bg-accent);
+    border: 1px solid var(--kursus-border);
+    border-radius: var(--radius);
   }
 }
 
@@ -262,27 +325,27 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 148, 148, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 148, 148, 0.5);
 }
 
-.light::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.1);
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 148, 148, 0.2);
 }
 
-.light::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.2);
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 148, 148, 0.35);
 }
 
 /* =============================================================================
    SELECTION
 ============================================================================= */
 ::selection {
-  background-color: rgba(255, 109, 56, 0.3);
+  background-color: rgba(255, 148, 148, 0.3);
   color: inherit;
 }
 
@@ -290,7 +353,7 @@
    FOCUS
 ============================================================================= */
 :focus-visible {
-  outline: 2px solid #ff6d38;
+  outline: 2px solid #ff9494;
   outline-offset: 2px;
 }
 

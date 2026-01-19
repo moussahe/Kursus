@@ -21,7 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const KURSUS = {
-  orange: "#ff6d38",
+  orange: "#ff9494",
   purple: "#7a78ff",
 };
 

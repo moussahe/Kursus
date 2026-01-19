@@ -131,10 +131,10 @@ export function UrgencyBanner() {
             {/* Exam Countdown */}
             {examInfo.daysLeft <= 90 && (
               <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-[#ff6d38]" />
+                <Calendar className="h-4 w-4 text-[#ff9494]" />
                 <span className="text-gray-300">
                   <strong className="text-white">{examInfo.name}</strong> dans{" "}
-                  <span className="font-bold text-[#ff6d38]">
+                  <span className="font-bold text-[#ff9494]">
                     {examInfo.daysLeft}
                   </span>{" "}
                   jours
@@ -159,7 +159,7 @@ export function UrgencyBanner() {
             {/* CTA */}
             <Link
               href="/courses"
-              className="rounded-full bg-[#ff6d38] px-4 py-1.5 text-xs font-bold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_20px_-5px_rgba(255,109,56,0.5)]"
+              className="rounded-full bg-[#ff9494] px-4 py-1.5 text-xs font-bold text-[#0a0a0a] transition-all hover:bg-[#ffb8b8] hover:shadow-[0_0_20px_-5px_rgba(255,109,56,0.5)]"
             >
               Découvrir les cours
             </Link>
@@ -189,7 +189,7 @@ export function LimitedSpotsBadge({ spotsLeft }: { spotsLeft: number }) {
         initial={{ scale: 0.9 }}
         animate={{ scale: [0.9, 1, 0.9] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="flex items-center gap-1 rounded-full bg-[#ff6d38] px-2.5 py-1 text-xs font-bold text-[#0a0a0a] shadow-lg"
+        className="flex items-center gap-1 rounded-full bg-[#ff9494] px-2.5 py-1 text-xs font-bold text-[#0a0a0a] shadow-lg"
       >
         <Clock className="h-3 w-3" />
         Plus que {spotsLeft} places !

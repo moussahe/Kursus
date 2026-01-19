@@ -66,7 +66,7 @@ export function TeacherCta() {
             >
               <Link
                 href="/register/teacher"
-                className="inline-block rounded-full bg-[#ff6d38] px-8 py-4 text-lg font-bold text-[#0a0a0a] transition-all duration-300 hover:bg-[#ff8c5a] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
+                className="inline-block rounded-full bg-[#ff9494] px-8 py-4 text-lg font-bold text-[#0a0a0a] transition-all duration-300 hover:bg-[#ffb8b8] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
               >
                 Devenir enseignant
               </Link>

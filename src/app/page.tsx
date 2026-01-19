@@ -27,7 +27,7 @@ import {
 
 // Brand Colors
 const KURSUS = {
-  orange: "#ff6d38",
+  orange: "#ff9494",
   lime: "#c7ff69",
   purple: "#7a78ff",
 };
@@ -55,7 +55,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] transition-all hover:border-[#ff6d38]/50"
+      className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] transition-all hover:border-[#ff9494]/50"
       aria-label="Toggle theme"
     >
       {isDark ? (
@@ -78,7 +78,7 @@ function Header() {
           <div
             className="flex h-8 w-8 items-center justify-center rounded-lg"
             style={{
-              background: `linear-gradient(135deg, ${KURSUS.orange}, #ff8c5a)`,
+              background: `linear-gradient(135deg, ${KURSUS.orange}, #ffb8b8)`,
             }}
           >
             <Sparkles className="h-4 w-4 text-white" />
@@ -762,7 +762,7 @@ function Footer() {
             <div
               className="flex h-8 w-8 items-center justify-center rounded-lg"
               style={{
-                background: `linear-gradient(135deg, ${KURSUS.orange}, #ff8c5a)`,
+                background: `linear-gradient(135deg, ${KURSUS.orange}, #ffb8b8)`,
               }}
             >
               <Sparkles className="h-4 w-4 text-white" />

@@ -44,7 +44,7 @@ const coursExamples = [
     subject: "Maths",
     level: "6ème",
     price: "3,49€",
-    color: "#ff6d38",
+    color: "#ff9494",
   },
   {
     title: "Conjugaison passé simple",
@@ -65,7 +65,7 @@ const coursExamples = [
     subject: "Français",
     level: "3ème",
     price: "9,99€",
-    color: "#ff6d38",
+    color: "#ff9494",
   },
 ];
 
@@ -165,7 +165,7 @@ function CarnetCard({
       variants={itemVariants}
       className={`relative min-h-[220px] rounded-2xl border p-8 text-center transition-all duration-300 ${
         popular
-          ? "border-[#ff6d38]/30 bg-[#ff6d38]/5"
+          ? "border-[#ff9494]/30 bg-[#ff9494]/5"
           : "border-[#2a2a2a] bg-[#1a1a1a] hover:border-white/10"
       }`}
       style={{
@@ -174,7 +174,7 @@ function CarnetCard({
     >
       {popular && (
         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[#ff6d38] px-4 py-1.5 text-sm font-bold text-[#0a0a0a]">
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-[#ff9494] px-4 py-1.5 text-sm font-bold text-[#0a0a0a]">
             <Sparkles className="h-4 w-4" />
             Meilleur choix
           </span>
@@ -263,8 +263,8 @@ export function PricingPreview() {
             className="mx-auto mt-20 rounded-3xl border border-[#2a2a2a] bg-[#141414] p-8 lg:p-12"
           >
             <div className="mb-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#ff6d38]/20 bg-[#ff6d38]/10">
-                <GraduationCap className="h-7 w-7 text-[#ff6d38]" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#ff9494]/20 bg-[#ff9494]/10">
+                <GraduationCap className="h-7 w-7 text-[#ff9494]" />
               </div>
               <div className="text-center sm:text-left">
                 <h3 className="text-2xl font-bold text-white">
@@ -309,7 +309,7 @@ export function PricingPreview() {
           <motion.div variants={itemVariants} className="mt-12 text-center">
             <Link
               href="/courses"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ff6d38] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ff9494] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all hover:bg-[#ffb8b8] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
             >
               Découvrir les cours
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

@@ -12,7 +12,7 @@ export default function NotFound() {
     <div className="flex min-h-screen items-center justify-center bg-[var(--kursus-bg)] px-4">
       <div className="w-full max-w-md text-center">
         <div className="mb-8">
-          <span className="bg-gradient-to-r from-[#ff6d38] to-[#fbbf24] bg-clip-text text-8xl font-black text-transparent">
+          <span className="bg-gradient-to-r from-[#ff9494] to-[#fbbf24] bg-clip-text text-8xl font-black text-transparent">
             404
           </span>
         </div>
@@ -27,7 +27,7 @@ export default function NotFound() {
           <Link href="/">
             <Button
               className="w-full gap-2 sm:w-auto"
-              style={{ background: "#ff6d38" }}
+              style={{ background: "#ff9494" }}
             >
               <Home className="h-4 w-4" />
               Accueil
@@ -46,7 +46,7 @@ export default function NotFound() {
         <div className="mt-8">
           <button
             onClick={() => router.back()}
-            className="inline-flex items-center gap-2 text-sm text-[var(--kursus-text-muted)] hover:text-[#ff6d38]"
+            className="inline-flex items-center gap-2 text-sm text-[var(--kursus-text-muted)] hover:text-[#ff9494]"
           >
             <ArrowLeft className="h-4 w-4" />
             Retour a la page precedente

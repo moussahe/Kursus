@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 
 // Kursus Brand Colors
 const KURSUS = {
-  orange: "#ff6d38",
+  orange: "#ff9494",
   lime: "#c7ff69",
   purple: "#7a78ff",
 };
@@ -151,7 +151,7 @@ export default async function TeacherDashboardPage() {
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-[var(--kursus-bg-elevated)] px-3 py-1">
-            <Sparkles className="h-4 w-4 text-[#ff6d38]" />
+            <Sparkles className="h-4 w-4 text-[#ff9494]" />
             <span className="text-sm text-[var(--kursus-text-muted)]">
               Dashboard Enseignant
             </span>
@@ -345,7 +345,7 @@ export default async function TeacherDashboardPage() {
             <Button variant="ghost" size="sm" asChild>
               <Link
                 href="/teacher/analytics"
-                className="text-[#ff6d38] hover:text-[#ff5722]"
+                className="text-[#ff9494] hover:text-[#ff7070]"
               >
                 Voir tout
                 <ArrowUpRight className="ml-1 h-4 w-4" />
@@ -414,7 +414,7 @@ export default async function TeacherDashboardPage() {
             <Button variant="ghost" size="sm" asChild>
               <Link
                 href="/teacher/courses"
-                className="text-[#ff6d38] hover:text-[#ff5722]"
+                className="text-[#ff9494] hover:text-[#ff7070]"
               >
                 Voir tout
                 <ArrowUpRight className="ml-1 h-4 w-4" />

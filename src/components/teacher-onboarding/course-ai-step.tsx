@@ -767,9 +767,9 @@ export function CourseAIStep({
                         className={cn(
                           "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all",
                           selectedSubject === subject.value
-                            ? "bg-[#ff6d38] text-white"
+                            ? "bg-[#ff9494] text-white"
                             : hasTemplates
-                              ? "bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text-muted)] hover:bg-[#ff6d38]/10 hover:text-[#ff6d38]"
+                              ? "bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text-muted)] hover:bg-[#ff9494]/10 hover:text-[#ff9494]"
                               : "cursor-not-allowed bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text-muted)] opacity-50",
                         )}
                       >
@@ -790,7 +790,7 @@ export function CourseAIStep({
                 {availableTemplates.map((template, idx) => (
                   <Card
                     key={idx}
-                    className="cursor-pointer overflow-hidden rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] transition-all hover:border-[#ff6d38]"
+                    className="cursor-pointer overflow-hidden rounded-xl border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] transition-all hover:border-[#ff9494]"
                     onClick={() => handleSelectTemplate(template)}
                   >
                     <CardContent className="p-4">
@@ -803,7 +803,7 @@ export function CourseAIStep({
                             {template.description}
                           </p>
                         </div>
-                        <Badge className="shrink-0 bg-[#ff6d38]/10 text-[#ff6d38]">
+                        <Badge className="shrink-0 bg-[#ff9494]/10 text-[#ff9494]">
                           {template.chapters.length} chapitres
                         </Badge>
                       </div>
@@ -1041,7 +1041,7 @@ export function CourseAIStep({
                         className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-[var(--kursus-border)]/30"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#ff6d38]/20 text-sm font-medium text-[#ff6d38]">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#ff9494]/20 text-sm font-medium text-[#ff9494]">
                             {chapterIndex + 1}
                           </div>
                           <div>
@@ -1096,10 +1096,10 @@ export function CourseAIStep({
             </div>
 
             {/* Pricing */}
-            <div className="rounded-2xl border border-[#ff6d38]/30 bg-[#ff6d38]/10 p-4">
+            <div className="rounded-2xl border border-[#ff9494]/30 bg-[#ff9494]/10 p-4">
               <div className="flex items-start gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#ff6d38]/20">
-                  <DollarSign className="h-5 w-5 text-[#ff6d38]" />
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#ff9494]/20">
+                  <DollarSign className="h-5 w-5 text-[#ff9494]" />
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-[var(--kursus-text)]">
@@ -1118,8 +1118,8 @@ export function CourseAIStep({
                         className={cn(
                           "flex flex-col items-center rounded-xl px-4 py-3 text-sm font-medium transition-all",
                           course.price === price.value
-                            ? "bg-[#ff6d38] text-white"
-                            : "bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] hover:bg-[#ff6d38]/20",
+                            ? "bg-[#ff9494] text-white"
+                            : "bg-[var(--kursus-bg-elevated)] text-[var(--kursus-text)] hover:bg-[#ff9494]/20",
                         )}
                       >
                         <span className="text-base font-bold">
@@ -1168,7 +1168,7 @@ export function CourseAIStep({
         <Button
           onClick={onNext}
           disabled={!canContinue}
-          className="flex-1 rounded-xl bg-[#ff6d38] text-white hover:bg-[#ff5722]"
+          className="flex-1 rounded-xl bg-[#ff9494] text-white hover:bg-[#ff7070]"
         >
           Apercu et publication
           <ArrowRight className="ml-2 h-4 w-4" />

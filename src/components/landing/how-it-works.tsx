@@ -10,7 +10,7 @@ const steps = [
     title: "Choisissez votre cours",
     description:
       "Parcourez notre catalogue et trouvez le cours parfait pour vos besoins.",
-    color: "#ff6d38",
+    color: "#ff9494",
   },
   {
     icon: Users,

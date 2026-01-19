@@ -44,7 +44,7 @@ function CourseMockup() {
       {/* Header du cours */}
       <div className="flex items-center justify-between border-b border-[#2a2a2a] bg-[#141414] px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#ff6d38] text-white">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#ff9494] text-white">
             <BookOpen className="h-4 w-4" />
           </div>
           <div>
@@ -80,7 +80,7 @@ function CourseMockup() {
                 key={i}
                 className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm ${
                   item.current
-                    ? "bg-[#ff6d38]/10 border border-[#ff6d38]/20 text-[#ff6d38] font-medium"
+                    ? "bg-[#ff9494]/10 border border-[#ff9494]/20 text-[#ff9494] font-medium"
                     : item.done
                       ? "text-gray-500"
                       : "text-gray-600"
@@ -102,7 +102,7 @@ function CourseMockup() {
         {/* Zone vidéo/contenu */}
         <div className="col-span-2 p-6">
           {/* Fausse vidéo */}
-          <div className="relative mb-4 aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-[#ff6d38] to-[#ff8c5a]">
+          <div className="relative mb-4 aspect-video overflow-hidden rounded-xl bg-gradient-to-br from-[#ff9494] to-[#ffb8b8]">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-transform hover:scale-110">
                 <Play className="h-8 w-8 text-white" fill="white" />
@@ -129,7 +129,7 @@ function CourseMockup() {
               <strong className="text-white">même dénominateur</strong>. Une
               fois les fractions réduites au même dénominateur...
             </p>
-            <div className="flex items-center gap-2 rounded-lg border border-[#ff6d38]/20 bg-[#ff6d38]/10 p-3 text-sm text-[#ff6d38]">
+            <div className="flex items-center gap-2 rounded-lg border border-[#ff9494]/20 bg-[#ff9494]/10 p-3 text-sm text-[#ff9494]">
               <Sparkles className="h-4 w-4 shrink-0" />
               <span>
                 Astuce : Utilise les tables de multiplication pour trouver le
@@ -150,7 +150,7 @@ function CourseMockup() {
             </div>
             <span className="text-gray-500">3 leçons terminées sur 5</span>
           </div>
-          <button className="flex items-center gap-1 rounded-full bg-[#ff6d38] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_20px_-5px_rgba(255,109,56,0.5)]">
+          <button className="flex items-center gap-1 rounded-full bg-[#ff9494] px-4 py-2 text-sm font-medium text-[#0a0a0a] transition-all hover:bg-[#ffb8b8] hover:shadow-[0_0_20px_-5px_rgba(255,109,56,0.5)]">
             Continuer
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -181,7 +181,7 @@ function AIMockup() {
       <div className="h-[320px] space-y-4 overflow-y-auto p-4">
         {/* Message utilisateur */}
         <div className="flex justify-end">
-          <div className="max-w-[80%] rounded-2xl rounded-tr-sm bg-[#ff6d38] px-4 py-2 text-sm text-white">
+          <div className="max-w-[80%] rounded-2xl rounded-tr-sm bg-[#ff9494] px-4 py-2 text-sm text-white">
             Je ne comprends pas comment additionner 1/3 + 1/4
           </div>
         </div>
@@ -227,7 +227,7 @@ function AIMockup() {
 
         {/* Message utilisateur */}
         <div className="flex justify-end">
-          <div className="max-w-[80%] rounded-2xl rounded-tr-sm bg-[#ff6d38] px-4 py-2 text-sm text-white">
+          <div className="max-w-[80%] rounded-2xl rounded-tr-sm bg-[#ff9494] px-4 py-2 text-sm text-white">
             Merci ! Et pour 2/5 + 1/3 ?
           </div>
         </div>
@@ -264,7 +264,7 @@ function AIMockup() {
             className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-500"
             disabled
           />
-          <button className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#ff6d38] text-[#0a0a0a] transition-all hover:bg-[#ff8c5a]">
+          <button className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#ff9494] text-[#0a0a0a] transition-all hover:bg-[#ffb8b8]">
             <Send className="h-4 w-4" />
           </button>
         </div>
@@ -315,8 +315,8 @@ export function ProductPreview() {
             {/* Course Preview */}
             <motion.div variants={itemVariants}>
               <div className="mb-6 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#ff6d38]/10 border border-[#ff6d38]/20">
-                  <BookOpen className="h-6 w-6 text-[#ff6d38]" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#ff9494]/10 border border-[#ff9494]/20">
+                  <BookOpen className="h-6 w-6 text-[#ff9494]" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-white">
@@ -359,7 +359,7 @@ export function ProductPreview() {
                 icon: Play,
                 title: "Vidéos HD",
                 description: "Cours filmés par des profs certifiés",
-                color: "#ff6d38",
+                color: "#ff9494",
               },
               {
                 icon: MessageSquare,
@@ -377,7 +377,7 @@ export function ProductPreview() {
                 icon: CheckCircle2,
                 title: "Suivi détaillé",
                 description: "Progression visible par les parents",
-                color: "#ff6d38",
+                color: "#ff9494",
               },
             ].map((feature) => (
               <div

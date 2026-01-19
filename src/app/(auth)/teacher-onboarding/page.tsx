@@ -85,7 +85,7 @@ const INITIAL_DATA: TeacherOnboardingData = {
 function LoadingFallback() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[var(--kursus-bg)]">
-      <Loader2 className="h-8 w-8 animate-spin text-[#ff6d38]" />
+      <Loader2 className="h-8 w-8 animate-spin text-[#ff9494]" />
     </div>
   );
 }
@@ -213,7 +213,7 @@ function TeacherOnboardingContent() {
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full bg-[#ff6d38]/10 px-4 py-2 text-sm font-medium text-[#ff6d38]"
+              className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]"
             >
               <GraduationCap className="h-4 w-4" />
               Devenir Professeur Kursus

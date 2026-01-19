@@ -64,7 +64,7 @@ export function Header() {
               className="flex items-center gap-3"
               aria-label="Kursus Home"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6d38] to-[#ff8c5a]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff9494] to-[#ffb8b8]">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold text-foreground">Kursus</span>
@@ -80,7 +80,7 @@ export function Header() {
                     className="group relative text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.label}
-                    <span className="absolute bottom-[-4px] left-0 h-0.5 w-full origin-center scale-x-0 bg-gradient-to-r from-[#ff6d38] to-[#c7ff69] transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                    <span className="absolute bottom-[-4px] left-0 h-0.5 w-full origin-center scale-x-0 bg-gradient-to-r from-[#ff9494] to-[#c7ff69] transition-transform duration-300 ease-out group-hover:scale-x-100" />
                   </Link>
                 ))}
             </nav>
@@ -101,7 +101,7 @@ export function Header() {
                       <input
                         type="text"
                         placeholder="Rechercher un cours..."
-                        className="w-48 rounded-xl border border-border bg-muted px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-[#ff6d38]/50 focus:bg-background focus:outline-none focus:ring-1 focus:ring-[#ff6d38]/50"
+                        className="w-48 rounded-xl border border-border bg-muted px-4 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-[#ff9494]/50 focus:bg-background focus:outline-none focus:ring-1 focus:ring-[#ff9494]/50"
                         autoFocus
                       />
                     </motion.div>
@@ -110,7 +110,7 @@ export function Header() {
                 <button
                   onClick={toggleSearch}
                   aria-label="Toggle Search"
-                  className="rounded-xl p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-[#ff6d38]"
+                  className="rounded-xl p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-[#ff9494]"
                 >
                   {isSearchOpen ? (
                     <X className="h-5 w-5" />
@@ -126,7 +126,7 @@ export function Header() {
                   setTheme(resolvedTheme === "dark" ? "light" : "dark")
                 }
                 aria-label="Basculer le theme"
-                className="relative rounded-xl p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-[#ff6d38]"
+                className="relative rounded-xl p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-[#ff9494]"
                 suppressHydrationWarning
               >
                 <Sun className="h-5 w-5 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
@@ -165,7 +165,7 @@ export function Header() {
                 >
                   <Link
                     href="/register"
-                    className="rounded-full bg-[#ff6d38] px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_30px_-5px_rgba(255,109,56,0.4)]"
+                    className="rounded-full bg-[#ff9494] px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-all hover:bg-[#ffb8b8] hover:shadow-[0_0_30px_-5px_rgba(255,109,56,0.4)]"
                   >
                     Commencer
                   </Link>
@@ -205,7 +205,7 @@ export function Header() {
                   className="flex items-center gap-3"
                   onClick={toggleMenu}
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6d38] to-[#ff8c5a]">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff9494] to-[#ffb8b8]">
                     <Sparkles className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-xl font-bold text-foreground">
@@ -233,7 +233,7 @@ export function Header() {
                     <Link
                       href={link.href}
                       onClick={toggleMenu}
-                      className="text-2xl font-medium text-foreground transition-colors hover:text-[#ff6d38]"
+                      className="text-2xl font-medium text-foreground transition-colors hover:text-[#ff9494]"
                     >
                       {link.label}
                     </Link>
@@ -261,7 +261,7 @@ export function Header() {
                 <Link
                   href="/register"
                   onClick={toggleMenu}
-                  className="w-full rounded-full bg-[#ff6d38] px-6 py-3.5 text-center text-base font-semibold text-white transition-all hover:bg-[#ff8c5a]"
+                  className="w-full rounded-full bg-[#ff9494] px-6 py-3.5 text-center text-base font-semibold text-white transition-all hover:bg-[#ffb8b8]"
                 >
                   Commencer gratuitement
                 </Link>

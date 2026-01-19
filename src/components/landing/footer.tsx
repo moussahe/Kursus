@@ -119,14 +119,14 @@ export function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Votre adresse email"
                     required
-                    className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white placeholder:text-gray-500 focus:border-[#ff6d38]/50 focus:outline-none focus:ring-1 focus:ring-[#ff6d38]/50"
+                    className="flex-1 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm text-white placeholder:text-gray-500 focus:border-[#ff9494]/50 focus:outline-none focus:ring-1 focus:ring-[#ff9494]/50"
                   />
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="rounded-full bg-[#ff6d38] px-6 py-3 text-sm font-semibold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_30px_-5px_rgba(255,109,56,0.4)] disabled:opacity-70"
+                    className="rounded-full bg-[#ff9494] px-6 py-3 text-sm font-semibold text-[#0a0a0a] transition-all hover:bg-[#ffb8b8] hover:shadow-[0_0_30px_-5px_rgba(255,109,56,0.4)] disabled:opacity-70"
                   >
                     {isLoading ? "..." : "S'inscrire"}
                   </motion.button>
@@ -143,7 +143,7 @@ export function Footer() {
           {/* Logo & Description */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff6d38] to-[#ff8c5a]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#ff9494] to-[#ffb8b8]">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <span className="text-xl font-bold text-white">Kursus</span>
@@ -156,15 +156,15 @@ export function Footer() {
             {/* Contact Info */}
             <div className="mt-6 space-y-3">
               <div className="flex items-center gap-3 text-sm text-gray-400">
-                <Mail className="h-4 w-4 text-[#ff6d38]" />
+                <Mail className="h-4 w-4 text-[#ff9494]" />
                 contact@kursus.fr
               </div>
               <div className="flex items-center gap-3 text-sm text-gray-400">
-                <Phone className="h-4 w-4 text-[#ff6d38]" />
+                <Phone className="h-4 w-4 text-[#ff9494]" />
                 01 23 45 67 89
               </div>
               <div className="flex items-center gap-3 text-sm text-gray-400">
-                <MapPin className="h-4 w-4 text-[#ff6d38]" />
+                <MapPin className="h-4 w-4 text-[#ff9494]" />
                 Paris, France
               </div>
             </div>
@@ -175,7 +175,7 @@ export function Footer() {
                 <Link
                   key={social.label}
                   href={social.href}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-[#ff6d38]/50 hover:bg-[#ff6d38]/10 hover:text-[#ff6d38]"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-gray-400 transition-all hover:border-[#ff9494]/50 hover:bg-[#ff9494]/10 hover:text-[#ff9494]"
                   aria-label={social.label}
                 >
                   <social.icon className="h-5 w-5" />
@@ -195,7 +195,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-gray-400 transition-colors hover:text-[#ff6d38]"
+                      className="text-sm text-gray-400 transition-colors hover:text-[#ff9494]"
                     >
                       {link.label}
                     </Link>

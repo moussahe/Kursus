@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Kursus Brand Colors
 const KURSUS = {
-  orange: "#ff6d38",
+  orange: "#ff9494",
   lime: "#c7ff69",
   purple: "#7a78ff",
 };
@@ -74,14 +74,14 @@ export function ParentSidebar({ user }: ParentSidebarProps) {
               className={cn(
                 "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
                 active
-                  ? "bg-[#ff6d38]/10 text-[#ff6d38]"
+                  ? "bg-[#ff9494]/10 text-[#ff9494]"
                   : "text-[var(--kursus-text-muted)] hover:bg-[var(--kursus-bg)] hover:text-[var(--kursus-text)]",
               )}
             >
               <item.icon
                 className={cn(
                   "h-5 w-5",
-                  active ? "text-[#ff6d38]" : "text-[var(--kursus-text-muted)]",
+                  active ? "text-[#ff9494]" : "text-[var(--kursus-text-muted)]",
                 )}
               />
               {item.name}

@@ -44,7 +44,7 @@ const testimonials: Testimonial[] = [
     name: "Sophie Martin",
     role: "Maman de Lucas, 3ème",
     type: "parent",
-    color: "#ff6d38",
+    color: "#ff9494",
     stats: "+4 points en maths",
   },
   {
@@ -71,7 +71,7 @@ const testimonials: Testimonial[] = [
     name: "Thomas Bernard",
     role: "Papa d'Élodie et Maxime",
     type: "parent",
-    color: "#ff6d38",
+    color: "#ff9494",
     stats: "2 enfants inscrits",
   },
   {
@@ -156,7 +156,7 @@ function TestimonialCard({
       {/* Star Rating */}
       <div className="mb-5 mt-3 flex gap-1">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className="h-5 w-5 fill-[#ff6d38] text-[#ff6d38]" />
+          <Star key={i} className="h-5 w-5 fill-[#ff9494] text-[#ff9494]" />
         ))}
       </div>
 
@@ -214,8 +214,8 @@ export function Testimonials() {
         >
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff6d38]/20 bg-[#ff6d38]/10 px-4 py-2 text-sm font-medium text-[#ff6d38]">
-              <Star className="h-4 w-4 fill-[#ff6d38]" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]">
+              <Star className="h-4 w-4 fill-[#ff9494]" />
               4.9/5 basé sur 2000+ avis
             </span>
 
@@ -247,8 +247,8 @@ export function Testimonials() {
             className="mt-20 flex flex-wrap items-center justify-center gap-10 lg:gap-16"
           >
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#ff6d38]/20 bg-[#ff6d38]/10">
-                <Users className="h-7 w-7 text-[#ff6d38]" />
+              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[#ff9494]/20 bg-[#ff9494]/10">
+                <Users className="h-7 w-7 text-[#ff9494]" />
               </div>
               <div>
                 <p className="text-3xl font-bold text-white">15 000+</p>

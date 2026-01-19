@@ -31,7 +31,7 @@ const subjects: Subject[] = [
     slug: "mathematiques",
     Icon: Calculator,
     courseCount: 42,
-    color: "#ff6d38",
+    color: "#ff9494",
     size: "large",
   },
   {
@@ -55,7 +55,7 @@ const subjects: Subject[] = [
     slug: "histoire-geographie",
     Icon: Landmark,
     courseCount: 22,
-    color: "#ff6d38",
+    color: "#ff9494",
     size: "small",
   },
   {
@@ -87,7 +87,7 @@ const subjects: Subject[] = [
     slug: "langues",
     Icon: Languages,
     courseCount: 31,
-    color: "#ff6d38",
+    color: "#ff9494",
     size: "medium",
   },
 ];
@@ -197,14 +197,14 @@ function SubjectCard({ subject, index }: { subject: Subject; index: number }) {
               {courseCount} cours
             </span>
             {isLarge && (
-              <span className="rounded-full bg-[#ff6d38]/10 border border-[#ff6d38]/20 px-2.5 py-1 text-xs font-medium text-[#ff6d38]">
+              <span className="rounded-full bg-[#ff9494]/10 border border-[#ff9494]/20 px-2.5 py-1 text-xs font-medium text-[#ff9494]">
                 Populaire
               </span>
             )}
           </div>
 
           {/* Arrow indicator */}
-          <div className="mt-4 flex items-center gap-1.5 text-base font-medium text-gray-500 transition-colors group-hover:text-[#ff6d38]">
+          <div className="mt-4 flex items-center gap-1.5 text-base font-medium text-gray-500 transition-colors group-hover:text-[#ff9494]">
             <span>Explorer</span>
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
           </div>
@@ -227,7 +227,7 @@ export function Categories() {
     <section className="relative overflow-hidden bg-[#0a0a0a] px-4 py-24 sm:px-6 lg:px-8 border-t border-[#2a2a2a]">
       {/* Background Decorations */}
       <div className="absolute left-0 top-0 h-full w-full">
-        <div className="absolute left-1/4 top-10 h-72 w-72 rounded-full bg-[#ff6d38]/5 blur-3xl" />
+        <div className="absolute left-1/4 top-10 h-72 w-72 rounded-full bg-[#ff9494]/5 blur-3xl" />
         <div className="absolute bottom-10 right-1/4 h-96 w-96 rounded-full bg-[#7a78ff]/5 blur-3xl" />
       </div>
 
@@ -281,7 +281,7 @@ export function Categories() {
         >
           <Link
             href="/courses"
-            className="group inline-flex items-center gap-2 rounded-full bg-[#ff6d38] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all hover:bg-[#ff8c5a] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#ff9494] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all hover:bg-[#ffb8b8] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
           >
             Voir tous les cours
             <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />

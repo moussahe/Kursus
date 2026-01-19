@@ -48,7 +48,7 @@ export function Hero() {
       {/* Background Effects */}
       <div className="absolute inset-0">
         {/* Gradient orbs */}
-        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff6d38] opacity-[0.08] blur-[120px]" />
+        <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff9494] opacity-[0.08] blur-[120px]" />
         <div className="absolute right-1/4 top-1/2 h-[400px] w-[400px] translate-x-1/2 rounded-full bg-[#c7ff69] opacity-[0.06] blur-[100px]" />
         <div className="absolute bottom-0 left-1/2 h-[300px] w-[600px] -translate-x-1/2 rounded-full bg-[#7a78ff] opacity-[0.05] blur-[100px]" />
 
@@ -66,7 +66,7 @@ export function Hero() {
         >
           {/* Badge */}
           <motion.div variants={itemVariants}>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff6d38]/20 bg-[#ff6d38]/10 px-4 py-2 text-sm font-medium text-[#ff6d38]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff9494]/20 bg-[#ff9494]/10 px-4 py-2 text-sm font-medium text-[#ff9494]">
               <Sparkles className="h-4 w-4" />
               +15 000 élèves nous font confiance
             </span>
@@ -100,7 +100,7 @@ export function Hero() {
           >
             <Link
               href="/courses"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ff6d38] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all duration-300 hover:bg-[#ff8c5a] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#ff9494] px-8 py-4 text-base font-semibold text-[#0a0a0a] transition-all duration-300 hover:bg-[#ffb8b8] hover:shadow-[0_0_40px_-10px_rgba(255,109,56,0.5)]"
             >
               Découvrir les cours
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -134,10 +134,10 @@ export function Hero() {
             <div className="flex items-center gap-3">
               <div className="flex -space-x-2">
                 {[
-                  "bg-[#ff6d38]",
+                  "bg-[#ff9494]",
                   "bg-[#7a78ff]",
                   "bg-[#c7ff69]",
-                  "bg-[#ff6d38]",
+                  "bg-[#ff9494]",
                 ].map((color, i) => (
                   <div
                     key={i}
@@ -161,7 +161,7 @@ export function Hero() {
                 {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className="h-5 w-5 fill-[#ff6d38] text-[#ff6d38]"
+                    className="h-5 w-5 fill-[#ff9494] text-[#ff9494]"
                   />
                 ))}
               </div>

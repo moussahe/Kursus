@@ -37,9 +37,9 @@ const stats = [
 
 const colorClasses = {
   orange: {
-    bg: "bg-[#ff6d38]/10",
-    icon: "text-[#ff6d38]",
-    border: "border-[#ff6d38]/20",
+    bg: "bg-[#ff9494]/10",
+    icon: "text-[#ff9494]",
+    border: "border-[#ff9494]/20",
   },
   lime: {
     bg: "bg-[#c7ff69]/10",
