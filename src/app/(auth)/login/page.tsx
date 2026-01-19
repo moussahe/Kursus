@@ -25,7 +25,6 @@ import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
 
 const KURSUS = {
   orange: "#ff6d38",
-  lime: "#c7ff69",
   purple: "#7a78ff",
 };
 
@@ -148,7 +147,7 @@ function LoginForm() {
                 {
                   icon: Trophy,
                   text: "Paiement unique, accès à vie",
-                  color: KURSUS.lime,
+                  color: KURSUS.purple,
                 },
               ].map((feature, i) => (
                 <motion.div
@@ -228,17 +227,17 @@ function LoginForm() {
             <div
               className="mb-6 flex items-center gap-3 rounded-xl p-4"
               style={{
-                background: `${KURSUS.lime}15`,
-                border: `1px solid ${KURSUS.lime}30`,
+                background: `${KURSUS.purple}15`,
+                border: `1px solid ${KURSUS.purple}30`,
               }}
             >
               <CheckCircle
                 className="h-5 w-5"
-                style={{ color: "var(--kursus-lime-text)" }}
+                style={{ color: "var(--kursus-purple-text)" }}
               />
               <span
                 className="text-sm"
-                style={{ color: "var(--kursus-lime-text)" }}
+                style={{ color: "var(--kursus-purple-text)" }}
               >
                 Compte créé avec succès ! Vous pouvez vous connecter.
               </span>

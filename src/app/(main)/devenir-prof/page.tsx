@@ -22,7 +22,6 @@ import {
 // ============================================================================
 const KURSUS = {
   orange: "#ff6d38",
-  lime: "#c7ff69",
   purple: "#7a78ff",
 };
 
@@ -33,7 +32,7 @@ const BENEFITS = [
     icon: DollarSign,
     title: "70% de commission",
     description: "La meilleure rémunération du marché. Pas de frais cachés.",
-    color: KURSUS.lime,
+    color: KURSUS.purple,
   },
   {
     icon: Zap,
@@ -51,7 +50,7 @@ const BENEFITS = [
     icon: Shield,
     title: "Paiements sécurisés",
     description: "Paiements via Stripe, versements chaque semaine.",
-    color: KURSUS.lime,
+    color: KURSUS.purple,
   },
   {
     icon: Clock,
@@ -142,9 +141,9 @@ function RevenueCalculator() {
       <div className="mb-6 flex items-center gap-3">
         <div
           className="flex h-12 w-12 items-center justify-center rounded-2xl"
-          style={{ background: `${KURSUS.lime}15` }}
+          style={{ background: `${KURSUS.purple}15` }}
         >
-          <Calculator className="h-6 w-6" style={{ color: KURSUS.lime }} />
+          <Calculator className="h-6 w-6" style={{ color: KURSUS.purple }} />
         </div>
         <div>
           <h3 className="text-xl font-bold text-[var(--kursus-text)]">
@@ -241,8 +240,8 @@ function RevenueCalculator() {
             <span
               className="rounded-lg px-3 py-1 text-xl font-black"
               style={{
-                background: `${KURSUS.lime}20`,
-                color: "var(--kursus-lime-text)",
+                background: `${KURSUS.purple}20`,
+                color: "var(--kursus-purple-text)",
               }}
             >
               {totalSalesPerMonth}
@@ -257,7 +256,7 @@ function RevenueCalculator() {
             onChange={(e) => setTotalSalesPerMonth(Number(e.target.value))}
             className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-[var(--kursus-border)]"
             style={{
-              accentColor: KURSUS.lime,
+              accentColor: KURSUS.purple,
             }}
           />
           <div className="mt-1 flex justify-between text-xs text-[var(--kursus-text-muted)]">
@@ -270,8 +269,8 @@ function RevenueCalculator() {
         <div
           className="rounded-xl p-4"
           style={{
-            background: `${KURSUS.lime}10`,
-            border: `1px solid ${KURSUS.lime}30`,
+            background: `${KURSUS.purple}10`,
+            border: `1px solid ${KURSUS.purple}30`,
           }}
         >
           <div className="space-y-2 text-sm">
@@ -281,7 +280,7 @@ function RevenueCalculator() {
               </span>
               <span
                 className="font-bold"
-                style={{ color: "var(--kursus-lime-text)" }}
+                style={{ color: "var(--kursus-purple-text)" }}
               >
                 {avgCoursePrice}€ × 70% = {revenuePerSale.toFixed(1)}€
               </span>
@@ -304,7 +303,7 @@ function RevenueCalculator() {
             <div className="rounded-xl bg-[var(--kursus-bg-elevated)] p-4 text-center">
               <p
                 className="text-3xl font-black"
-                style={{ color: "var(--kursus-lime-text)" }}
+                style={{ color: "var(--kursus-purple-text)" }}
               >
                 {Math.round(monthlyRevenue).toLocaleString("fr-FR")}€
               </p>
@@ -402,7 +401,7 @@ export default function DevenirProfPage() {
         <div className="pointer-events-none absolute inset-0">
           <div
             className="absolute left-1/4 top-1/4 h-[600px] w-[600px] -translate-x-1/2 rounded-full blur-[128px]"
-            style={{ background: `${KURSUS.lime}15` }}
+            style={{ background: `${KURSUS.purple}15` }}
           />
           <div
             className="absolute right-1/4 top-1/2 h-[400px] w-[400px] rounded-full blur-[128px]"
@@ -421,9 +420,9 @@ export default function DevenirProfPage() {
               <span
                 className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium"
                 style={{
-                  borderColor: `${KURSUS.lime}30`,
-                  background: `${KURSUS.lime}10`,
-                  color: "var(--kursus-lime-text)",
+                  borderColor: `${KURSUS.purple}30`,
+                  background: `${KURSUS.purple}10`,
+                  color: "var(--kursus-purple-text)",
                 }}
               >
                 <GraduationCap className="h-4 w-4" />
@@ -431,7 +430,7 @@ export default function DevenirProfPage() {
               </span>
 
               <h1 className="mt-6 text-4xl leading-[1.1] text-[var(--kursus-text)] sm:text-5xl md:text-6xl">
-                Gardez <span className="text-gradient-lime">70%</span> de vos
+                Gardez <span className="text-gradient-purple">70%</span> de vos
                 ventes
               </h1>
 
@@ -578,7 +577,7 @@ export default function DevenirProfPage() {
                 title: "Recevez vos revenus",
                 description:
                   "Publiez, vendez et recevez 70% de chaque vente chaque semaine.",
-                color: KURSUS.lime,
+                color: KURSUS.purple,
               },
             ].map((item, i) => (
               <motion.div
@@ -656,8 +655,8 @@ export default function DevenirProfPage() {
                   <div
                     className="rounded-lg px-3 py-1 text-sm font-bold"
                     style={{
-                      background: `${KURSUS.lime}15`,
-                      color: "var(--kursus-lime-text)",
+                      background: `${KURSUS.purple}15`,
+                      color: "var(--kursus-purple-text)",
                     }}
                   >
                     {t.revenue}

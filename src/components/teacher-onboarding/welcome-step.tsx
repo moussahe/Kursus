@@ -74,7 +74,7 @@ export function WelcomeStep({ onNext, userName }: WelcomeStepProps) {
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600"
+          className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#7a78ff] to-[#6366f1]"
         >
           <Rocket className="h-8 w-8 text-white" />
         </motion.div>
@@ -107,19 +107,19 @@ export function WelcomeStep({ onNext, userName }: WelcomeStepProps) {
         {VALUE_PROPS.map((prop) => (
           <Card
             key={prop.title}
-            className="group overflow-hidden rounded-2xl border-0 bg-gray-50 transition-all hover:bg-emerald-50 hover:shadow-md"
+            className="group overflow-hidden rounded-2xl border-0 bg-gray-50 transition-all hover:bg-[#7a78ff]/10 hover:shadow-md"
           >
             <CardContent className="p-4">
               <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm group-hover:bg-emerald-100">
-                  <prop.icon className="h-6 w-6 text-emerald-600" />
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm group-hover:bg-[#7a78ff]/20">
+                  <prop.icon className="h-6 w-6 text-[#7a78ff]" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
                     <h3 className="font-semibold text-gray-900">
                       {prop.title}
                     </h3>
-                    <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700">
+                    <span className="rounded-full bg-[#7a78ff]/10 px-2 py-0.5 text-xs font-bold text-[#7a78ff]">
                       {prop.highlight}
                     </span>
                   </div>
@@ -160,7 +160,7 @@ export function WelcomeStep({ onNext, userName }: WelcomeStepProps) {
                   <p className="text-xs text-gray-500">{testimonial.role}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-bold text-emerald-600">
+                  <p className="text-sm font-bold text-[#7a78ff]">
                     +{testimonial.revenue} EUR
                   </p>
                   <p className="text-xs text-gray-500">ce mois</p>
@@ -188,7 +188,7 @@ export function WelcomeStep({ onNext, userName }: WelcomeStepProps) {
             "Publiez et commencez a vendre",
           ].map((step, idx) => (
             <div key={step} className="flex items-center gap-3">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-white">
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#7a78ff] text-xs font-bold text-white">
                 {idx + 1}
               </div>
               <span className="text-sm text-gray-700">{step}</span>
@@ -196,7 +196,7 @@ export function WelcomeStep({ onNext, userName }: WelcomeStepProps) {
           ))}
         </div>
         <p className="mt-3 flex items-center gap-1 text-xs text-gray-500">
-          <CheckCircle2 className="h-3 w-3 text-emerald-500" />
+          <CheckCircle2 className="h-3 w-3 text-[#7a78ff]" />
           Temps estime : 10 minutes
         </p>
       </motion.div>
@@ -210,7 +210,7 @@ export function WelcomeStep({ onNext, userName }: WelcomeStepProps) {
         <Button
           onClick={onNext}
           size="lg"
-          className="w-full rounded-xl bg-emerald-600 py-6 text-lg font-semibold hover:bg-emerald-700"
+          className="w-full rounded-xl bg-[#7a78ff] py-6 text-lg font-semibold hover:bg-[#6966ff]"
         >
           Commencer maintenant
           <ArrowRight className="ml-2 h-5 w-5" />

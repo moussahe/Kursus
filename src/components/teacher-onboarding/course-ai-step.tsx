@@ -683,10 +683,10 @@ export function CourseAIStep({
             {/* Template Option */}
             <button
               onClick={() => setCreationMode("template")}
-              className="group rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-6 text-left transition-all hover:border-[#c7ff69] hover:shadow-lg"
+              className="group rounded-2xl border border-[var(--kursus-border)] bg-[var(--kursus-bg-elevated)] p-6 text-left transition-all hover:border-[#7a78ff] hover:shadow-lg"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#c7ff69]/20 to-[#22c55e]/20">
-                <Layers className="h-6 w-6 text-[var(--kursus-lime-text)]" />
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#7a78ff]/20 to-[#6366f1]/20">
+                <Layers className="h-6 w-6 text-[#7a78ff]" />
               </div>
               <h3 className="mb-2 font-bold text-[var(--kursus-text)]">
                 Utiliser un template
@@ -695,7 +695,7 @@ export function CourseAIStep({
                 Cours pre-structures par matiere. Personnalisez et publiez en
                 quelques clics.
               </p>
-              <div className="mt-4 flex items-center gap-2 text-sm font-medium text-[var(--kursus-lime-text)]">
+              <div className="mt-4 flex items-center gap-2 text-sm font-medium text-[#7a78ff]">
                 <Zap className="h-4 w-4" />
                 Le plus rapide
               </div>
@@ -983,7 +983,7 @@ export function CourseAIStep({
             className="space-y-5"
           >
             {/* Course Summary */}
-            <Card className="overflow-hidden rounded-2xl border-[#c7ff69]/30 bg-gradient-to-br from-[#c7ff69]/10 to-[#22c55e]/10">
+            <Card className="overflow-hidden rounded-2xl border-[#7a78ff]/30 bg-gradient-to-br from-[#7a78ff]/10 to-[#6366f1]/10">
               <CardContent className="p-5">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -1107,10 +1107,8 @@ export function CourseAIStep({
                   </h3>
                   <p className="mt-1 text-sm text-[var(--kursus-text-muted)]">
                     Vous gardez{" "}
-                    <span className="font-bold text-[var(--kursus-lime-text)]">
-                      70%
-                    </span>{" "}
-                    de chaque vente.
+                    <span className="font-bold text-[#7a78ff]">70%</span> de
+                    chaque vente.
                   </p>
                   <div className="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
                     {PRICE_SUGGESTIONS.map((price) => (
@@ -1141,7 +1139,7 @@ export function CourseAIStep({
                     ))}
                   </div>
                   {course.price > 0 && (
-                    <p className="mt-3 text-sm text-[var(--kursus-lime-text)]">
+                    <p className="mt-3 text-sm text-[#7a78ff]">
                       <Check className="mr-1 inline h-4 w-4" />
                       Vous gagnez{" "}
                       <strong>

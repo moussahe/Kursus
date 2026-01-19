@@ -142,7 +142,7 @@ export function Header() {
                 >
                   <Link
                     href="/devenir-prof"
-                    className="flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-all border-[var(--kursus-lime-border)] bg-[var(--kursus-lime-bg)] text-[var(--kursus-lime-text)] hover:opacity-80"
+                    className="flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-all border-[var(--kursus-purple-border)] bg-[var(--kursus-purple-bg)] text-[var(--kursus-purple-text)] hover:opacity-80"
                   >
                     <GraduationCap className="h-4 w-4" />
                     Devenir Prof
@@ -246,7 +246,7 @@ export function Header() {
                 <Link
                   href="/devenir-prof"
                   onClick={toggleMenu}
-                  className="flex w-full items-center justify-center gap-2 rounded-full border px-6 py-3.5 text-base font-medium transition-all border-[var(--kursus-lime-border)] bg-[var(--kursus-lime-bg)] text-[var(--kursus-lime-text)] hover:opacity-80"
+                  className="flex w-full items-center justify-center gap-2 rounded-full border px-6 py-3.5 text-base font-medium transition-all border-[var(--kursus-purple-border)] bg-[var(--kursus-purple-bg)] text-[var(--kursus-purple-text)] hover:opacity-80"
                 >
                   <GraduationCap className="h-5 w-5" />
                   Devenir Prof

@@ -9,7 +9,7 @@
 @theme inline {
   /* Typography */
   --font-sans:
-    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    var(--font-teachers), -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   --font-mono:
     var(--font-geist-mono), "JetBrains Mono", "Fira Code", Consolas, monospace;
@@ -40,11 +40,15 @@
 
   /* Brand colors - may vary by theme */
   --kursus-orange: #ff6d38;
-  --kursus-lime: #c7ff69;
-  --kursus-lime-text: #c7ff69;
-  --kursus-lime-bg: rgba(199, 255, 105, 0.1);
-  --kursus-lime-border: rgba(199, 255, 105, 0.3);
   --kursus-purple: #7a78ff;
+  --kursus-purple-text: #7a78ff;
+  --kursus-purple-bg: rgba(122, 120, 255, 0.1);
+  --kursus-purple-border: rgba(122, 120, 255, 0.3);
+  /* Legacy lime - kept for success states only */
+  --kursus-lime: #22c55e;
+  --kursus-lime-text: #22c55e;
+  --kursus-lime-bg: rgba(34, 197, 94, 0.1);
+  --kursus-lime-border: rgba(34, 197, 94, 0.3);
 
   /* Shadcn compatible variables */
   --background: 0 0% 4%;
@@ -90,11 +94,15 @@
   --kursus-text: #0a0a0a;
   --kursus-text-muted: #6b7280;
 
-  /* Darker lime for better contrast on light backgrounds */
-  --kursus-lime: #22c55e;
+  /* Purple for light mode */
+  --kursus-purple-text: #6366f1;
+  --kursus-purple-bg: rgba(99, 102, 241, 0.1);
+  --kursus-purple-border: rgba(99, 102, 241, 0.3);
+  /* Success green for light mode */
+  --kursus-lime: #16a34a;
   --kursus-lime-text: #16a34a;
-  --kursus-lime-bg: rgba(34, 197, 94, 0.1);
-  --kursus-lime-border: rgba(34, 197, 94, 0.3);
+  --kursus-lime-bg: rgba(22, 163, 74, 0.1);
+  --kursus-lime-border: rgba(22, 163, 74, 0.3);
 
   --background: 0 0% 98%;
   --foreground: 0 0% 4%;

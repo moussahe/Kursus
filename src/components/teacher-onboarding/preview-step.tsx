@@ -83,9 +83,9 @@ export function PreviewStep({
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="mx-auto mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100"
+          className="mx-auto mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#7a78ff]/10"
         >
-          <Eye className="h-6 w-6 text-emerald-600" />
+          <Eye className="h-6 w-6 text-[#7a78ff]" />
         </motion.div>
         <h2 className="text-xl font-bold text-gray-900">
           Apercu avant publication
@@ -103,7 +103,7 @@ export function PreviewStep({
       >
         <Card className="overflow-hidden rounded-2xl border-0 shadow-lg">
           {/* Course Header with gradient */}
-          <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-6 text-white">
+          <div className="bg-gradient-to-br from-[#7a78ff] to-[#6366f1] p-6 text-white">
             <div className="flex items-start justify-between">
               <div>
                 <div className="flex gap-2">
@@ -140,7 +140,7 @@ export function PreviewStep({
           <CardContent className="p-6">
             {/* Teacher Profile Preview */}
             <div className="flex items-center gap-4 rounded-xl bg-gray-50 p-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-xl font-bold text-emerald-600">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7a78ff]/10 text-xl font-bold text-[#7a78ff]">
                 {data.profile.headline.charAt(0).toUpperCase()}
               </div>
               <div className="flex-1">
@@ -154,7 +154,7 @@ export function PreviewStep({
             </div>
 
             {/* Revenue Breakdown */}
-            <div className="mt-4 rounded-xl border border-emerald-100 bg-emerald-50 p-4">
+            <div className="mt-4 rounded-xl border border-[#7a78ff]/20 bg-[#7a78ff]/10 p-4">
               <h4 className="font-semibold text-gray-900">
                 Repartition des revenus
               </h4>
@@ -166,10 +166,10 @@ export function PreviewStep({
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-emerald-600">
+                  <span className="text-sm text-[#7a78ff]">
                     Votre part (70%)
                   </span>
-                  <span className="font-bold text-emerald-600">
+                  <span className="font-bold text-[#7a78ff]">
                     +{teacherRevenue.toFixed(2)} EUR
                   </span>
                 </div>
@@ -191,7 +191,7 @@ export function PreviewStep({
                     key={index}
                     className="flex items-center gap-3 rounded-lg bg-gray-50 p-3"
                   >
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-100 text-xs font-medium text-emerald-700">
+                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#7a78ff]/10 text-xs font-medium text-[#7a78ff]">
                       {index + 1}
                     </div>
                     <div className="flex-1">
@@ -248,11 +248,11 @@ export function PreviewStep({
             className="text-sm leading-relaxed text-gray-700"
           >
             J&apos;accepte les{" "}
-            <a href="/terms" className="text-emerald-600 underline">
+            <a href="/terms" className="text-[#7a78ff] underline">
               conditions d&apos;utilisation
             </a>{" "}
             et la{" "}
-            <a href="/privacy" className="text-emerald-600 underline">
+            <a href="/privacy" className="text-[#7a78ff] underline">
               politique de confidentialite
             </a>
           </Label>
@@ -288,7 +288,7 @@ export function PreviewStep({
         <Button
           onClick={onPublish}
           disabled={!canPublish}
-          className="flex-1 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 py-6 text-lg font-semibold hover:from-emerald-700 hover:to-teal-700"
+          className="flex-1 rounded-xl bg-gradient-to-r from-[#7a78ff] to-[#6366f1] py-6 text-lg font-semibold hover:from-[#6966ff] hover:to-[#5558e8]"
         >
           {isLoading ? (
             <>
@@ -327,7 +327,7 @@ export function CompleteStep({
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-teal-600"
+        className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#7a78ff] to-[#6366f1]"
       >
         <PartyPopper className="h-10 w-10 text-white" />
       </motion.div>
@@ -347,7 +347,7 @@ export function CompleteStep({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 p-6"
+        className="rounded-2xl bg-gradient-to-br from-[#7a78ff]/5 to-[#6366f1]/5 p-6"
       >
         <h3 className="font-semibold text-gray-900">Prochaines etapes</h3>
         <div className="mt-4 space-y-3 text-left">
@@ -358,7 +358,7 @@ export function CompleteStep({
             "Analysez vos statistiques de vente",
           ].map((step, index) => (
             <div key={step} className="flex items-center gap-3">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-white">
+              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#7a78ff] text-xs font-bold text-white">
                 {index + 1}
               </div>
               <span className="text-sm text-gray-700">{step}</span>
@@ -375,7 +375,7 @@ export function CompleteStep({
       >
         <Button
           asChild
-          className="flex-1 rounded-xl bg-emerald-600 hover:bg-emerald-700"
+          className="flex-1 rounded-xl bg-[#7a78ff] hover:bg-[#6966ff]"
         >
           <a href={`/teacher/courses/${courseId}`}>Modifier mon cours</a>
         </Button>
@@ -391,7 +391,7 @@ export function CompleteStep({
         className="text-sm text-gray-500"
       >
         Besoin d&apos;aide ? Consultez notre{" "}
-        <a href="/help/teachers" className="text-emerald-600 underline">
+        <a href="/help/teachers" className="text-[#7a78ff] underline">
           guide du professeur
         </a>
       </motion.p>

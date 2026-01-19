@@ -29,7 +29,6 @@ import {
 
 const KURSUS = {
   orange: "#ff6d38",
-  lime: "#c7ff69",
   purple: "#7a78ff",
 };
 
@@ -187,7 +186,7 @@ function ResetPasswordForm() {
                       className="flex items-center gap-2 text-xs"
                       style={{
                         color: isValid
-                          ? "var(--kursus-lime-text)"
+                          ? "var(--kursus-purple-text)"
                           : "var(--kursus-text-muted)",
                       }}
                     >
@@ -255,13 +254,13 @@ function ResetPasswordForm() {
           <div
             className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
             style={{
-              background: "var(--kursus-lime-bg)",
-              border: "1px solid var(--kursus-lime-border)",
+              background: "var(--kursus-purple-bg)",
+              border: "1px solid var(--kursus-purple-border)",
             }}
           >
             <CheckCircle
               className="h-8 w-8"
-              style={{ color: "var(--kursus-lime-text)" }}
+              style={{ color: "var(--kursus-purple-text)" }}
             />
           </div>
           <h2 className="text-xl font-bold text-[var(--kursus-text)]">
@@ -304,7 +303,7 @@ export default function ResetPasswordPage() {
         {/* Decorative elements */}
         <div
           className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
-          style={{ background: `${KURSUS.lime}20` }}
+          style={{ background: `${KURSUS.purple}20` }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
@@ -324,8 +323,8 @@ export default function ResetPasswordPage() {
               <div
                 className="flex h-16 w-16 items-center justify-center rounded-2xl"
                 style={{
-                  background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
-                  boxShadow: `0 0 40px -10px ${KURSUS.lime}`,
+                  background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.purple}`,
                 }}
               >
                 <Shield className="h-8 w-8 text-white" />
@@ -333,7 +332,8 @@ export default function ResetPasswordPage() {
             </div>
 
             <h2 className="text-4xl font-black tracking-tight text-white">
-              Sécurisez votre <span style={{ color: KURSUS.lime }}>compte</span>
+              Sécurisez votre{" "}
+              <span style={{ color: KURSUS.purple }}>compte</span>
             </h2>
             <p className="mt-4 text-lg text-gray-400">
               Un mot de passe fort est essentiel pour protéger votre compte et
@@ -356,7 +356,7 @@ export default function ResetPasswordPage() {
                 {
                   icon: Shield,
                   text: "Ne réutilisez pas d'anciens mots de passe",
-                  color: KURSUS.lime,
+                  color: KURSUS.purple,
                 },
               ].map((feature, i) => (
                 <motion.div

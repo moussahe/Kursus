@@ -31,7 +31,6 @@ import {
 
 const KURSUS = {
   orange: "#ff6d38",
-  lime: "#c7ff69",
   purple: "#7a78ff",
 };
 
@@ -171,7 +170,7 @@ function RegisterForm() {
               {selectedRole === "TEACHER" ? (
                 <>
                   Partagez votre{" "}
-                  <span style={{ color: KURSUS.lime }}>savoir</span>
+                  <span style={{ color: KURSUS.purple }}>savoir</span>
                 </>
               ) : (
                 <>
@@ -192,7 +191,7 @@ function RegisterForm() {
                     {
                       icon: TrendingUp,
                       text: "Gardez 70% de chaque vente",
-                      color: KURSUS.lime,
+                      color: KURSUS.purple,
                     },
                     {
                       icon: Zap,
@@ -219,7 +218,7 @@ function RegisterForm() {
                     {
                       icon: Shield,
                       text: "Paiement sécurisé, satisfait ou remboursé",
-                      color: KURSUS.lime,
+                      color: KURSUS.orange,
                     },
                   ]
               ).map((feature, i) => (
@@ -300,23 +299,23 @@ function RegisterForm() {
             <div
               className="mb-6 flex items-center gap-3 rounded-xl p-4"
               style={{
-                background: `${KURSUS.lime}15`,
-                border: `1px solid ${KURSUS.lime}30`,
+                background: `${KURSUS.purple}15`,
+                border: `1px solid ${KURSUS.purple}30`,
               }}
             >
               <div
                 className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full"
-                style={{ background: `${KURSUS.lime}20` }}
+                style={{ background: `${KURSUS.purple}20` }}
               >
                 <Gift
                   className="h-5 w-5"
-                  style={{ color: "var(--kursus-lime-text)" }}
+                  style={{ color: "var(--kursus-purple-text)" }}
                 />
               </div>
               <div>
                 <p
                   className="text-sm font-medium"
-                  style={{ color: "var(--kursus-lime-text)" }}
+                  style={{ color: "var(--kursus-purple-text)" }}
                 >
                   {referralFrom
                     ? `${decodeURIComponent(referralFrom)} vous offre ${referralDiscount}€ !`
@@ -374,11 +373,11 @@ function RegisterForm() {
               style={{
                 borderColor:
                   selectedRole === "TEACHER"
-                    ? KURSUS.lime
+                    ? KURSUS.purple
                     : "var(--kursus-border)",
                 background:
                   selectedRole === "TEACHER"
-                    ? "var(--kursus-lime-bg)"
+                    ? "var(--kursus-purple-bg)"
                     : "transparent",
               }}
             >
@@ -387,7 +386,7 @@ function RegisterForm() {
                 style={{
                   color:
                     selectedRole === "TEACHER"
-                      ? "var(--kursus-lime-text)"
+                      ? "var(--kursus-purple-text)"
                       : "var(--kursus-text-muted)",
                 }}
               />
@@ -396,7 +395,7 @@ function RegisterForm() {
                 style={{
                   color:
                     selectedRole === "TEACHER"
-                      ? "var(--kursus-lime-text)"
+                      ? "var(--kursus-purple-text)"
                       : "var(--kursus-text-muted)",
                 }}
               >
@@ -477,7 +476,7 @@ function RegisterForm() {
                       className="flex items-center gap-2 text-xs"
                       style={{
                         color: isValid
-                          ? "var(--kursus-lime-text)"
+                          ? "var(--kursus-purple-text)"
                           : "var(--kursus-text-muted)",
                       }}
                     >

@@ -32,7 +32,6 @@ import { Badge } from "@/components/ui/badge";
 
 const KURSUS = {
   orange: "#ff6d38",
-  lime: "#c7ff69",
   purple: "#7a78ff",
 };
 
@@ -213,7 +212,7 @@ export default function TeacherRegisterPage() {
         {/* Decorative elements */}
         <div
           className="absolute left-1/4 top-1/4 h-[500px] w-[500px] -translate-x-1/2 rounded-full blur-[120px]"
-          style={{ background: `${KURSUS.lime}20` }}
+          style={{ background: `${KURSUS.purple}20` }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full blur-[100px]"
@@ -233,8 +232,8 @@ export default function TeacherRegisterPage() {
               <div
                 className="flex h-16 w-16 items-center justify-center rounded-2xl"
                 style={{
-                  background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
-                  boxShadow: `0 0 40px -10px ${KURSUS.lime}`,
+                  background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
+                  boxShadow: `0 0 40px -10px ${KURSUS.purple}`,
                 }}
               >
                 <Sparkles className="h-8 w-8 text-white" />
@@ -242,7 +241,8 @@ export default function TeacherRegisterPage() {
             </div>
 
             <h2 className="text-4xl font-black tracking-tight text-white">
-              Partagez votre <span style={{ color: KURSUS.lime }}>savoir</span>
+              Partagez votre{" "}
+              <span style={{ color: KURSUS.purple }}>savoir</span>
             </h2>
             <p className="mt-4 text-lg text-gray-400">
               Créez des cours de qualité et générez des revenus complémentaires.
@@ -254,7 +254,7 @@ export default function TeacherRegisterPage() {
                 {
                   icon: TrendingUp,
                   text: "Gardez 70% de chaque vente",
-                  color: KURSUS.lime,
+                  color: KURSUS.purple,
                 },
                 {
                   icon: Zap,
@@ -298,7 +298,7 @@ export default function TeacherRegisterPage() {
                 <div key={stat.label}>
                   <div
                     className="text-2xl font-black"
-                    style={{ color: KURSUS.lime }}
+                    style={{ color: KURSUS.purple }}
                   >
                     {stat.value}
                   </div>
@@ -355,17 +355,17 @@ export default function TeacherRegisterPage() {
                         style={{
                           borderColor:
                             isCompleted || isCurrent
-                              ? KURSUS.lime
+                              ? KURSUS.purple
                               : "var(--kursus-border)",
                           background: isCompleted
-                            ? KURSUS.lime
+                            ? KURSUS.purple
                             : isCurrent
-                              ? "var(--kursus-lime-bg)"
+                              ? "var(--kursus-purple-bg)"
                               : "transparent",
                           color: isCompleted
                             ? "#0a0a0a"
                             : isCurrent
-                              ? "var(--kursus-lime-text)"
+                              ? "var(--kursus-purple-text)"
                               : "var(--kursus-text-muted)",
                         }}
                       >
@@ -380,7 +380,7 @@ export default function TeacherRegisterPage() {
                         style={{
                           color:
                             isCurrent || isCompleted
-                              ? "var(--kursus-lime-text)"
+                              ? "var(--kursus-purple-text)"
                               : "var(--kursus-text-muted)",
                         }}
                       >
@@ -392,7 +392,7 @@ export default function TeacherRegisterPage() {
                         className="mx-2 h-0.5 flex-1"
                         style={{
                           background: isCompleted
-                            ? KURSUS.lime
+                            ? KURSUS.purple
                             : "var(--kursus-border)",
                         }}
                       />
@@ -404,7 +404,7 @@ export default function TeacherRegisterPage() {
             <div className="mt-4 h-1 overflow-hidden rounded-full bg-[var(--kursus-border)]">
               <motion.div
                 className="h-full rounded-full"
-                style={{ background: KURSUS.lime }}
+                style={{ background: KURSUS.purple }}
                 initial={{ width: 0 }}
                 animate={{ width: `${progressValue}%` }}
                 transition={{ duration: 0.3 }}
@@ -492,7 +492,7 @@ export default function TeacherRegisterPage() {
                           className="flex items-center gap-2 text-xs"
                           style={{
                             color: isValid
-                              ? "var(--kursus-lime-text)"
+                              ? "var(--kursus-purple-text)"
                               : "var(--kursus-text-muted)",
                           }}
                         >
@@ -573,10 +573,10 @@ export default function TeacherRegisterPage() {
                           className="flex cursor-pointer items-center gap-2 rounded-xl border-2 p-3 transition-all"
                           style={{
                             borderColor: isSelected
-                              ? KURSUS.lime
+                              ? KURSUS.purple
                               : "var(--kursus-border)",
                             background: isSelected
-                              ? "var(--kursus-lime-bg)"
+                              ? "var(--kursus-purple-bg)"
                               : "transparent",
                           }}
                           onClick={() => handleSpecialtyToggle(subject.value)}
@@ -588,10 +588,10 @@ export default function TeacherRegisterPage() {
                             }
                             style={{
                               borderColor: isSelected
-                                ? KURSUS.lime
+                                ? KURSUS.purple
                                 : "var(--kursus-border)",
                               background: isSelected
-                                ? KURSUS.lime
+                                ? KURSUS.purple
                                 : "transparent",
                             }}
                           />
@@ -599,7 +599,7 @@ export default function TeacherRegisterPage() {
                             className="text-sm"
                             style={{
                               color: isSelected
-                                ? "var(--kursus-lime-text)"
+                                ? "var(--kursus-purple-text)"
                                 : "var(--kursus-text-muted)",
                               fontWeight: isSelected ? 500 : 400,
                             }}
@@ -648,13 +648,13 @@ export default function TeacherRegisterPage() {
                 <div
                   className="rounded-xl p-6"
                   style={{
-                    background: "var(--kursus-lime-bg)",
-                    border: "1px solid var(--kursus-lime-border)",
+                    background: "var(--kursus-purple-bg)",
+                    border: "1px solid var(--kursus-purple-border)",
                   }}
                 >
                   <h3
                     className="flex items-center gap-2 text-lg font-semibold"
-                    style={{ color: "var(--kursus-lime-text)" }}
+                    style={{ color: "var(--kursus-purple-text)" }}
                   >
                     <CheckCircle className="h-5 w-5" />
                     Récapitulatif de votre inscription
@@ -710,7 +710,7 @@ export default function TeacherRegisterPage() {
                             <Badge
                               key={specialty}
                               style={{
-                                background: KURSUS.lime,
+                                background: KURSUS.purple,
                                 color: "#0a0a0a",
                               }}
                             >
@@ -778,7 +778,7 @@ export default function TeacherRegisterPage() {
                   onClick={nextStep}
                   className="h-12 flex-1 rounded-xl text-base font-semibold transition-all hover:opacity-90"
                   style={{
-                    background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
+                    background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
                     color: "#0a0a0a",
                   }}
                 >
@@ -791,7 +791,7 @@ export default function TeacherRegisterPage() {
                   disabled={isLoading}
                   className="h-12 flex-1 rounded-xl text-base font-semibold transition-all hover:opacity-90"
                   style={{
-                    background: `linear-gradient(135deg, ${KURSUS.lime}, #22c55e)`,
+                    background: `linear-gradient(135deg, ${KURSUS.purple}, #6366f1)`,
                     color: "#0a0a0a",
                   }}
                 >

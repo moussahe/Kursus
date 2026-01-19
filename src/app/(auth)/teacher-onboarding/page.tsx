@@ -293,12 +293,12 @@ function TeacherOnboardingContent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-6 rounded-xl border border-[#c7ff69]/30 bg-[#c7ff69]/10 p-4 text-center"
+            className="mt-6 rounded-xl border border-[#7a78ff]/30 bg-[#7a78ff]/10 p-4 text-center"
           >
             <p className="text-sm text-[var(--kursus-text)]">
               <strong>Astuce :</strong> Les professeurs qui publient leur
               premier cours aujourd&apos;hui gagnent en moyenne{" "}
-              <span className="font-bold text-[var(--kursus-lime-text)]">
+              <span className="font-bold text-[var(--kursus-purple-text)]">
                 3x plus
               </span>{" "}
               le premier mois.

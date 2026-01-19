@@ -22,7 +22,6 @@ import { Label } from "@/components/ui/label";
 
 const KURSUS = {
   orange: "#ff6d38",
-  lime: "#c7ff69",
   purple: "#7a78ff",
 };
 
@@ -131,7 +130,7 @@ export default function ForgotPasswordPage() {
                 {
                   icon: Shield,
                   text: "Processus 100% sécurisé",
-                  color: KURSUS.lime,
+                  color: KURSUS.purple,
                 },
               ].map((feature, i) => (
                 <motion.div
@@ -250,13 +249,13 @@ export default function ForgotPasswordPage() {
               <div
                 className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl"
                 style={{
-                  background: "var(--kursus-lime-bg)",
-                  border: "1px solid var(--kursus-lime-border)",
+                  background: "var(--kursus-purple-bg)",
+                  border: "1px solid var(--kursus-purple-border)",
                 }}
               >
                 <CheckCircle
                   className="h-8 w-8"
-                  style={{ color: "var(--kursus-lime-text)" }}
+                  style={{ color: "var(--kursus-purple-text)" }}
                 />
               </div>
               <h2 className="text-xl font-bold text-[var(--kursus-text)]">
