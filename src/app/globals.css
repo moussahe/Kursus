@@ -42,6 +42,8 @@
   --kursus-orange: #ff6d38;
   --kursus-lime: #c7ff69;
   --kursus-lime-text: #c7ff69;
+  --kursus-lime-bg: rgba(199, 255, 105, 0.1);
+  --kursus-lime-border: rgba(199, 255, 105, 0.3);
   --kursus-purple: #7a78ff;
 
   /* Shadcn compatible variables */
@@ -89,8 +91,10 @@
   --kursus-text-muted: #6b7280;
 
   /* Darker lime for better contrast on light backgrounds */
-  --kursus-lime: #c7ff69;
+  --kursus-lime: #22c55e;
   --kursus-lime-text: #16a34a;
+  --kursus-lime-bg: rgba(34, 197, 94, 0.1);
+  --kursus-lime-border: rgba(34, 197, 94, 0.3);
 
   --background: 0 0% 98%;
   --foreground: 0 0% 4%;
@@ -171,6 +175,19 @@
    UTILITIES
 ============================================================================= */
 @layer utilities {
+  /* Kursus lime color - adapts to theme */
+  .text-kursus-lime {
+    color: var(--kursus-lime-text);
+  }
+
+  .bg-kursus-lime {
+    background-color: var(--kursus-lime-bg);
+  }
+
+  .border-kursus-lime {
+    border-color: var(--kursus-lime-border);
+  }
+
   /* Text gradients with Kursus colors */
   .text-gradient {
     @apply bg-clip-text text-transparent;
